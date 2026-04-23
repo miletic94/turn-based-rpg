@@ -1,7 +1,329 @@
 {
     "0": {
         "name": "Slash",
-        "type": "Physical",
-        "value": 10
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 20
+            }
+        ]
+    },
+    "1": {
+        "name": "Shield Up",
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "defense",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "2": {
+        "name": "Battle Cry",
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "attack",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "3": {
+        "name": "Second Wind",
+        "effects": {
+            "category": "magic",
+            "type": "heal",
+            "target": "self",
+            "value": 20
+        }
+    },
+    "4": {
+        "name": "Shadow Bolt",
+        "effects": [
+            {
+                "category": "magic",
+                "type": "damage",
+                "target": "enemy",
+                "value": 30
+            }
+        ]
+    },
+    "5": {
+        "name": "Drain Life",
+        "effects": [
+            {
+                "id": "dmg1",
+                "category": "magic",
+                "type": "damage",
+                "target": "enemy",
+                "value": 10
+            },
+            {
+                "type": "heal",
+                "target": "self",
+                "ref": "dmg1"
+            }
+        ]
+    },
+    "6": {
+        "name": "Curse",
+        "effects": [
+            {
+                "type": "debuff",
+                "target": "enemy",
+                "stat": "attack",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "7": {
+        "name": "Dark Pact",
+        "cost": {
+            "type": "health",
+            "amount": 5
+        },
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "magic",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "8": {
+        "name": "Bite",
+        "cost": {
+            "type": "mana",
+            "amount": 3
+        },
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 20
+            }
+        ]
+    },
+    "9": {
+        "name": "Web Throw",
+        "cost": {
+            "type": "mana",
+            "amount": 6
+        },
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 10
+            },
+            {
+                "type": "debuff",
+                "target": "enemy",
+                "stat": "defense",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "10": {
+        "name": "Pounce",
+        "cost": {
+            "type": "mana",
+            "amount": 6
+        },
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 30
+            }
+        ]
+    },
+    "11": {
+        "name": "Skitter",
+        "cost": {
+            "type": "mana",
+            "amount": 3
+        },
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "defense",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "12": {
+        "name": "Flame Breath",
+        "cost": {
+            "type": "mana",
+            "amount": 6
+        },
+        "effects": [
+            {
+                "category": "magic",
+                "type": "damage",
+                "target": "enemy",
+                "value": 30
+            }
+        ]
+    },
+    "13": {
+        "name": "Claw Swipe",
+        "cost": {
+            "type": "mana",
+            "amount": 3
+        },
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 20
+            }
+        ]
+    },
+    "14": {
+        "name": "Intimidate",
+        "effects": [
+            {
+                "type": "debuff",
+                "target": "enemy",
+                "stat": "attack",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "15": {
+        "name": "Dragon Scales",
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "defense",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "16": {
+        "name": "Rusty Blade",
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 20
+            }
+        ]
+    },
+    "17": {
+        "name": "Dirty Kick",
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 10
+            },
+            {
+                "type": "debuff",
+                "target": "enemy",
+                "stat": "defense",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "18": {
+        "name": "Frenzy",
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "attack",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "19": {
+        "name": "Headbutt",
+        "effects": [
+            {
+                "category": "physical",
+                "type": "damage",
+                "target": "enemy",
+                "value": 30
+            }
+        ]
+    },
+    "20": {
+        "name": "Firebolt",
+        "effects": [
+            {
+                "category": "magic",
+                "type": "damage",
+                "target": "enemy",
+                "value": 20
+            }
+        ]
+    },
+    "21": {
+        "name": "Arcane Surge",
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "magic",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "22": {
+        "name": "Mana Drain",
+        "effects": [
+            {
+                "category": "magic",
+                "type": "damage",
+                "target": "enemy",
+                "value": 10
+            },
+            {
+                "type": "debuff",
+                "target": "enemy",
+                "stat": "magic",
+                "value": 10,
+                "duration": 2
+            }
+        ]
+    },
+    "23": {
+        "name": "Hex Shield",
+        "effects": [
+            {
+                "type": "buff",
+                "target": "self",
+                "stat": "defense",
+                "value": 10,
+                "duration": 2
+            }
+        ]
     }
 }
