@@ -5,14 +5,14 @@ using System.Linq;
 public class Character
 {
     public string Name { get; private set; }
-    private int _baseHealth;
-    public int Health { get; private set; }
-    private int _baseAttack;
-    public int Attack => GetStat(StatType.Attack);
-    private int _baseDefense;
-    public int Defense => GetStat(StatType.Defense);
-    private int _baseMagic;
-    public int Magic => GetStat(StatType.Magic);
+    private float _baseHealth;
+    public float Health { get; private set; }
+    private float _baseAttack;
+    public float Attack => GetStat(StatType.Attack);
+    private float _baseDefense;
+    public float Defense => GetStat(StatType.Defense);
+    private float _baseMagic;
+    public float Magic => GetStat(StatType.Magic);
     public Move[] Moves { get; private set; }
     private List<ActiveModifier> _modifiers;
     public Character(string name, int health, int attack, int defense, int magic, Move[] moves)
@@ -26,31 +26,31 @@ public class Character
         Moves = moves;
     }
 
-    public void ApplyDamage(int damage)
+    public void ApplyDamage(float damage)
     {
         Health = Math.Max(0, Health - damage);
     }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         Health = Math.Min(Health + amount, _baseHealth);
     }
 
-    public void ApplyModifier(ModifierType type, StatType stat, int value, int duration)
+    public void ApplyModifier(ModifierType type, StatType stat, float value, int duration)
     {
         _modifiers.Add(new ActiveModifier(type, stat, value, duration));
     }
 
-    public int GetStat(StatType statType)
+    public float GetStat(StatType statType)
     {
-        int baseValue = statType switch
+        float baseValue = statType switch
         {
             StatType.Attack => _baseAttack,
             StatType.Defense => _baseDefense,
             StatType.Magic => _baseMagic,
             _ => 0
         };
-        int modifierSum =
+        float modifierSum =
         _modifiers
             .Where(m => m.Stat == statType)
             .Sum(m => m.Value);

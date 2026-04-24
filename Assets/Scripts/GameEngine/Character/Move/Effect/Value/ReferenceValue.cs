@@ -7,7 +7,7 @@ public class ReferenceValue : IValue
         Reference = reference;
     }
 
-    public int GetValue(EffectContext context)
+    public float GetValue(EffectContext context)
     {
         return context.GetResult(Reference);
     }

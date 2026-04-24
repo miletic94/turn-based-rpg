@@ -1,10 +1,10 @@
 {
     "0": {
         "name": "Knight",
-        "halth": "100",
-        "attack": "60",
-        "defense": "60",
-        "magic": "40",
+        "halth": 100,
+        "attack": 0.6,
+        "defense": 0.6,
+        "magic": 0.4,
         "moves": [
             0,
             1,
@@ -14,10 +14,10 @@
     },
     "!": {
         "name": "Knight",
-        "halth": "100",
-        "attack": "50",
-        "defense": "30",
-        "magic": "70",
+        "halth": 100,
+        "attack": 0.5,
+        "defense": 0.3,
+        "magic": 0.7,
         "moves": [
             4,
             5,

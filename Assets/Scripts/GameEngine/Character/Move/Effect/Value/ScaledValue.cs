@@ -11,7 +11,7 @@ public class ScaledValue : IValue
         ReducedBy = reducedBy;
     }
 
-    public int GetValue(EffectContext context)
+    public float GetValue(EffectContext context)
     {
         // TODO: Abstract this so we don't have to add new switch case if we add StatType
         var scalar = ScalseOff switch

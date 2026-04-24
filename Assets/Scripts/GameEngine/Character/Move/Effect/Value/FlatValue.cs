@@ -7,7 +7,7 @@ public class FlatValue : IValue
         BaseValue = baseValue;
     }
 
-    public int GetValue(EffectContext context)
+    public float GetValue(EffectContext context)
     {
         return BaseValue;
     }

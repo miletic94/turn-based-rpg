@@ -17,7 +17,7 @@ public class HealEffect : IEffect
 
     public void Execute(EffectContext context)
     {
-        int value = Value.GetValue(context);
+        float value = Value.GetValue(context);
         var target = context.ResolveTarget(Target);
 
         if (IsSource)
