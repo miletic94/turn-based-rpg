@@ -1,0 +1,27 @@
+{
+effect: damage | heal | status;
+}
+{
+damage:
+    {
+    type: physical | magic;
+    mode: scale | reference;
+    target: enemy;
+    value: someFloat | reference;
+    }
+heal:
+    {
+    type: magic;
+    mode: scale | reference;
+    target: self | enemy;
+    value: someFloat | reference;
+    }
+statusEffect:
+    {
+    type: buff | debuff;
+    target: self | enemy;
+    stat: attack | defense | magic;
+    value: someFloat;
+    duration: someInt;
+    }
+}

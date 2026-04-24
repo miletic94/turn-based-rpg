@@ -1,0 +1,23 @@
+public class EffectValueConverter : JsonConverter<EffectValue>
+{
+    public override EffectValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        using var doc = JsonDocument.ParseValue(ref reader);
+        var root = doc.RootElement;
+
+        string type = root.GetProperty("type").GetString();
+
+        return type switch
+        {
+            "scaled" => JsonSerializer.Deserialize<ScaledValue>(root.GetRawText(), options),
+            "flat" => JsonSerializer.Deserialize<FlatValue>(root.GetRawText(), options),
+            "reference" => JsonSerializer.Deserialize<ReferenceValue>(root.GetRawText(), options),
+            _ => throw new Exception($"Unknown value type: {type}")
+        };
+    }
+
+    public override void Write(Utf8JsonWriter writer, EffectValue value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(writer, value, value.GetType(), options);
+    }
+}
