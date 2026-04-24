@@ -5,17 +5,17 @@ public class StatModifierEffect : IEffect
     public TargetType Target { get; }
     public StatType Stat { get; }
     public IValue Value { get; }
-    public ModifierOccurrence Occurrence { get; }
+    public ModifierTickBehavior TickBehavior { get; }
     public int Duration { get; }
     public bool IsSource { get; }
 
-    public StatModifierEffect(string id, TargetType target, StatType stat, IValue value, ModifierOccurrence occurrence, int duration, bool isSource)
+    public StatModifierEffect(string id, TargetType target, StatType stat, IValue value, ModifierTickBehavior tickBehavior, int duration, bool isSource)
     {
         Id = id;
         Target = target;
         Stat = stat;
         Value = value;
-        Occurrence = occurrence;
+        TickBehavior = tickBehavior;
         Duration = duration;
         IsSource = isSource;
     }
@@ -28,6 +28,6 @@ public class StatModifierEffect : IEffect
         if (IsSource)
             context.StoreResult(Id, value);
 
-        target.ApplyModifier(Type, Stat, value, Duration);
+        target.ApplyModifier(Type, Stat, value, TickBehavior, Duration);
     }
 }

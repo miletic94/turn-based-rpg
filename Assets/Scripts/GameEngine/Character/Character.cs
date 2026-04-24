@@ -36,9 +36,9 @@ public class Character
         Health = Math.Min(Health + amount, _baseHealth);
     }
 
-    public void ApplyModifier(ModifierType type, StatType stat, float value, int duration)
+    public void ApplyModifier(ModifierType type, StatType stat, float value, ModifierTickBehavior tickBehavior, int duration)
     {
-        _modifiers.Add(new ActiveModifier(type, stat, value, duration));
+        _modifiers.Add(new ActiveModifier(type, stat, value, tickBehavior, duration));
     }
 
     public float GetStat(StatType statType)
