@@ -18,11 +18,11 @@ public class DamageEffect : IEffect
     public void Execute(EffectContext context)
     {
         var target = context.ResolveTarget(Target);
-        var value = Value.GetValue(context);
+        var damage = Value.GetValue(context);
 
         if (IsSource)
-            context.StoreResult(Id, value);
+            context.StoreResult(Id, damage);
 
-        target.ApplyDamage(value);
+        target.ApplyDamage(damage);
     }
 }

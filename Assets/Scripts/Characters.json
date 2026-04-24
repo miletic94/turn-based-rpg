@@ -1,0 +1,28 @@
+{
+    "0": {
+        "name": "Knight",
+        "halth": "100",
+        "attack": "60",
+        "defense": "60",
+        "magic": "40",
+        "moves": [
+            0,
+            1,
+            2,
+            3
+        ]
+    },
+    "!": {
+        "name": "Knight",
+        "halth": "100",
+        "attack": "50",
+        "defense": "30",
+        "magic": "70",
+        "moves": [
+            4,
+            5,
+            6,
+            7
+        ]
+    }
+}

@@ -24,7 +24,7 @@
                 "stat": "defense",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -40,7 +40,7 @@
                 "stat": "attack",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -56,7 +56,8 @@
             "value": {
                 "type": "scaled",
                 "baseValue": 20,
-                "scalesOff": "magic"
+                "scalesOff": "magic",
+                "reducedBy": "none"
             }
         }
     },
@@ -70,7 +71,8 @@
                 "value": {
                     "type": "scaled",
                     "baseValue": 30,
-                    "scalesOff": "magic"
+                    "scalesOff": "magic",
+                    "reducedBy": "none"
                 }
             }
         ]
@@ -86,7 +88,8 @@
                 "value": {
                     "type": "scaled",
                     "baseValue": 10,
-                    "scalesOff": "magic"
+                    "scalesOff": "magic",
+                    "reducedBy": "none"
                 },
                 "isSource": true
             },
@@ -109,7 +112,7 @@
                 "stat": "attack",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -129,7 +132,7 @@
                 "stat": "magic",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -180,7 +183,7 @@
                 "stat": "defense",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -220,7 +223,7 @@
                 "stat": "defense",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -241,7 +244,8 @@
                 "value": {
                     "type": "scaled",
                     "baseValue": 30,
-                    "scalesOff": "magic"
+                    "scalesOff": "magic",
+                    "reducedBy": "none"
                 }
             }
         ]
@@ -275,7 +279,7 @@
                 "stat": "attack",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -291,7 +295,7 @@
                 "stat": "defense",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -334,7 +338,7 @@
                 "stat": "defense",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -350,7 +354,7 @@
                 "stat": "attack",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -383,7 +387,8 @@
                 "value": {
                     "type": "scaled",
                     "baseValue": 20,
-                    "scalesOff": "magic"
+                    "scalesOff": "magic",
+                    "reducedBy": "none"
                 }
             }
         ]
@@ -397,7 +402,7 @@
                 "stat": "magic",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -414,7 +419,8 @@
                 "value": {
                     "type": "scaled",
                     "baseValue": 20,
-                    "scalesOff": "magic"
+                    "scalesOff": "magic",
+                    "reducedBy": "none"
                 }
             },
             {
@@ -423,7 +429,7 @@
                 "stat": "magic",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
@@ -439,7 +445,7 @@
                 "stat": "defense",
                 "value": {
                     "type": "flat",
-                    "baseValue": 10
+                    "baseValue": 0.1
                 },
                 "occurance": "once",
                 "duration": 2
