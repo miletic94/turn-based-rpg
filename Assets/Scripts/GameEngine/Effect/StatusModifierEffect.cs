@@ -1,23 +1,31 @@
 public class StatModifierEffect : IEffect
 {
-    public string? Id => null;
+    public string Id { get; }
     public ModifierType Type;
     public TargetType Target { get; }
     public StatType Stat { get; }
-    public int Value { get; }
+    public IValue Value { get; }
     public int Duration { get; }
+    public bool IsSource { get; }
 
-    public StatModifierEffect(TargetType target, StatType stat, int value, int duration)
+    public StatModifierEffect(string id, TargetType target, StatType stat, IValue value, int duration, bool isSource)
     {
+        Id = id;
         Target = target;
         Stat = stat;
         Value = value;
         Duration = duration;
+        IsSource = isSource;
     }
 
     public void Execute(EffectContext context)
     {
         var target = context.ResolveTarget(Target);
-        target.ApplyModifier(Type, Stat, Value, Duration);
+        var value = Value.GetValue(context);
+
+        if (IsSource)
+            context.StoreResult(Id, value);
+
+        target.ApplyModifier(Type, Stat, value, Duration);
     }
 }

@@ -1,23 +1,28 @@
 public class HealEffect : IEffect
 {
-    public string? Id => null;
+    public string Id { get; }
     public TargetType Target { get; }
 
-    public int? Value { get; }
-    public string? RefId { get; }
+    public IValue Value { get; }
+    public bool IsSource { get; }
 
-    public HealEffect(TargetType target, int? value, string? refId)
+
+    public HealEffect(string id, TargetType target, IValue value, bool isSource)
     {
+        Id = id;
         Target = target;
         Value = value;
-        RefId = refId;
+        IsSource = isSource;
     }
 
     public void Execute(EffectContext context)
     {
-        int amount = Value ?? context.GetResult(RefId);
-
+        int value = Value.GetValue(context);
         var target = context.ResolveTarget(Target);
-        target.Heal(amount);
+
+        if (IsSource)
+            context.StoreResult(Id, value);
+
+        target.Heal(value);
     }
 }

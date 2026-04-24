@@ -6,7 +6,12 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 20
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             }
         ]
     },
@@ -17,7 +22,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -29,7 +37,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "attack",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -40,7 +51,11 @@
             "category": "magic",
             "type": "heal",
             "target": "self",
-            "value": 20
+            "value": {
+                "type": "scaled",
+                "baseValue": 20,
+                "scalesOff": "magic"
+            }
         }
     },
     "4": {
@@ -50,7 +65,11 @@
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
-                "value": 30
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 30,
+                    "scalesOff": "magic"
+                }
             }
         ]
     },
@@ -62,12 +81,20 @@
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
-                "value": 10
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 10,
+                    "scalesOff": "magic"
+                },
+                "isSource": true
             },
             {
                 "type": "heal",
                 "target": "self",
-                "ref": "dmg1"
+                "value": {
+                    "type": "reference",
+                    "source": "dmg1"
+                }
             }
         ]
     },
@@ -78,7 +105,10 @@
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "attack",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -94,7 +124,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "magic",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -110,7 +143,12 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 20
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             }
         ]
     },
@@ -125,13 +163,21 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 10
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 10,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             },
             {
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "defense",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -147,7 +193,12 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 30
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 30,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             }
         ]
     },
@@ -162,7 +213,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -178,7 +232,11 @@
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
-                "value": 30
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 30,
+                    "scalesOff": "magic"
+                }
             }
         ]
     },
@@ -193,7 +251,12 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 20
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             }
         ]
     },
@@ -204,7 +267,10 @@
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "attack",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -216,7 +282,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -228,7 +297,12 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 20
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             }
         ]
     },
@@ -239,13 +313,21 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 10
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 10,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             },
             {
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "defense",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -257,7 +339,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "attack",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -269,7 +354,12 @@
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
-                "value": 30
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 30,
+                    "scalesOff": "attack",
+                    "reducedBy": "defense"
+                }
             }
         ]
     },
@@ -280,7 +370,11 @@
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
-                "value": 20
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "magic"
+                }
             }
         ]
     },
@@ -291,7 +385,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "magic",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -303,13 +400,20 @@
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
-                "value": 10
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "magic"
+                }
             },
             {
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "magic",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]
@@ -321,7 +425,10 @@
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
-                "value": 10,
+                "value": {
+                    "type": "flat",
+                    "baseValue": 10
+                },
                 "duration": 2
             }
         ]

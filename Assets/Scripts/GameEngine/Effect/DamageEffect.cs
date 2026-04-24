@@ -1,31 +1,28 @@
 public class DamageEffect : IEffect
 {
-    public string? Id { get; }
+    public string Id { get; }
     public TargetType Target { get; }
     public EffectCategory Category { get; }
-    public int Value { get; }
+    public IValue Value { get; }
+    public bool IsSource { get; }
 
-    public DamageEffect(string? id, TargetType target, EffectCategory category, int value)
+    public DamageEffect(string id, TargetType target, EffectCategory category, IValue value, bool isSource)
     {
         Id = id;
         Target = target;
         Category = category;
         Value = value;
+        IsSource = isSource;
     }
 
     public void Execute(EffectContext context)
     {
-        var source = context.Source;
         var target = context.ResolveTarget(Target);
+        var value = Value.GetValue(context);
 
-        int scaled = Category switch
-        {
-            EffectCategory.Physical => Value + source.Attack - target.Defense,
-            EffectCategory.Magic => Value + source.Magic,
-            _ => Value
-        };
+        if (IsSource)
+            context.StoreResult(Id, value);
 
-        context.StoreResult(Id, scaled);
-        target.ApplyDamage(scaled);
+        target.ApplyDamage(value);
     }
 }
