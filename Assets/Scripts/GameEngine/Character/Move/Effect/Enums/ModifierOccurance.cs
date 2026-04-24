@@ -1,4 +1,4 @@
-public enum ModifierOccurance
+public enum ModifierOccurrence
 {
     Once,
     Recurring

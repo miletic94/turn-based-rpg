@@ -3,7 +3,7 @@ public class ActiveModifier
     public ModifierType Type { get; }
     public StatType Stat { get; }
     public float Value { get; }
-    public ModifierOccurance Occurance { get; }
+    public ModifierOccurrence Occurrence { get; }
     public bool HasOccured { get; private set; }
     public int RemainingDuration { get; private set; }
 

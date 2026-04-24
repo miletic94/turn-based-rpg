@@ -5,17 +5,17 @@ public class StatModifierEffect : IEffect
     public TargetType Target { get; }
     public StatType Stat { get; }
     public IValue Value { get; }
-    public ModifierOccurance Occurance { get; }
+    public ModifierOccurrence Occurrence { get; }
     public int Duration { get; }
     public bool IsSource { get; }
 
-    public StatModifierEffect(string id, TargetType target, StatType stat, IValue value, ModifierOccurance occurance, int duration, bool isSource)
+    public StatModifierEffect(string id, TargetType target, StatType stat, IValue value, ModifierOccurrence occurrence, int duration, bool isSource)
     {
         Id = id;
         Target = target;
         Stat = stat;
         Value = value;
-        Occurance = occurance;
+        Occurrence = occurrence;
         Duration = duration;
         IsSource = isSource;
     }
