@@ -1,17 +1,22 @@
+using Newtonsoft.Json;
+
 public class StatModifierEffect : IEffect
 {
     public string Id { get; }
     public ModifierType Type;
     public TargetType Target { get; }
     public StatType Stat { get; }
+    [JsonConverter(typeof(ValueConverter))]
     public IValue Value { get; }
     public ModifierTickBehavior TickBehavior { get; }
     public int Duration { get; }
     public bool IsSource { get; }
 
-    public StatModifierEffect(string id, TargetType target, StatType stat, IValue value, ModifierTickBehavior tickBehavior, int duration, bool isSource)
+    [JsonConstructor]
+    public StatModifierEffect(string id, ModifierType type, TargetType target, StatType stat, IValue value, ModifierTickBehavior tickBehavior, int duration, bool isSource)
     {
         Id = id;
+        Type = type;
         Target = target;
         Stat = stat;
         Value = value;

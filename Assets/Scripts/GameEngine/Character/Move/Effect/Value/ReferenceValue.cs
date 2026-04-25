@@ -1,14 +1,17 @@
+using Newtonsoft.Json;
+
 public class ReferenceValue : IValue
 {
-    public string Reference { get; }
+    public string SourceId { get; }
 
-    public ReferenceValue(string reference)
+    [JsonConstructor]
+    public ReferenceValue(string sourceId)
     {
-        Reference = reference;
+        SourceId = sourceId;
     }
 
     public float GetValue(EffectContext context)
     {
-        return context.GetResult(Reference);
+        return context.GetResult(SourceId);
     }
 }

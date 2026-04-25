@@ -1,9 +1,11 @@
+using Newtonsoft.Json;
+
 public class ScaledValue : IValue
 {
     public int BaseValue { get; }
     public StatType ScalseOff { get; }
     public StatType ReducedBy { get; }
-
+    [JsonConstructor]
     public ScaledValue(int baseValue, StatType scalesOff, StatType reducedBy)
     {
         BaseValue = baseValue;

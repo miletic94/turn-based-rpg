@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class Move
 {
     public int Id { get; }
     public string Name { get; }
     public Cost Cost { get; }
-    public IReadOnlyList<IEffect> Effects { get; }
+    [JsonConverter(typeof(EffectConverter))]
+    public List<IEffect> Effects { get; }
 
-    public Move(int id, string name, Cost cost, IReadOnlyList<IEffect> effects)
+    public Move(int id, string name, Cost cost, List<IEffect> effects)
     {
         Id = id;
         Name = name;

@@ -1,12 +1,14 @@
+using Newtonsoft.Json;
+
 public class HealEffect : IEffect
 {
     public string Id { get; }
     public TargetType Target { get; }
-
+    [JsonConverter(typeof(ValueConverter))]
     public IValue Value { get; }
     public bool IsSource { get; }
 
-
+    [JsonConstructor]
     public HealEffect(string id, TargetType target, IValue value, bool isSource)
     {
         Id = id;

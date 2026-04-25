@@ -1,11 +1,15 @@
+using Newtonsoft.Json;
+
 public class DamageEffect : IEffect
 {
     public string Id { get; }
     public TargetType Target { get; }
     public EffectCategory Category { get; }
+    [JsonConverter(typeof(ValueConverter))]
     public IValue Value { get; }
     public bool IsSource { get; }
 
+    [JsonConstructor]
     public DamageEffect(string id, TargetType target, EffectCategory category, IValue value, bool isSource)
     {
         Id = id;

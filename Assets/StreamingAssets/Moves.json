@@ -1,8 +1,10 @@
-{
-    "0": {
+[
+    {
+        "id": "0",
         "name": "Slash",
         "effects": [
             {
+                "id": "0",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -11,14 +13,17 @@
                     "baseValue": 20,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "1": {
+    {
+        "id": "1",
         "name": "Shield Up",
         "effects": [
             {
+                "id": "1",
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
@@ -27,14 +32,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "2": {
+    {
+        "id": "2",
         "name": "Battle Cry",
         "effects": [
             {
+                "id": "2",
                 "type": "buff",
                 "target": "self",
                 "stat": "attack",
@@ -43,28 +51,36 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "3": {
+    {
+        "id": "3",
         "name": "Second Wind",
-        "effects": {
-            "category": "magic",
-            "type": "heal",
-            "target": "self",
-            "value": {
-                "type": "scaled",
-                "baseValue": 20,
-                "scalesOff": "magic",
-                "reducedBy": "none"
+        "effects": [
+            {
+                "id": "3",
+                "category": "magic",
+                "type": "heal",
+                "target": "self",
+                "value": {
+                    "type": "scaled",
+                    "baseValue": 20,
+                    "scalesOff": "magic",
+                    "reducedBy": "none"
+                },
+                "isSource": false
             }
-        }
+        ]
     },
-    "4": {
+    {
+        "id": "4",
         "name": "Shadow Bolt",
         "effects": [
             {
+                "id": "4",
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
@@ -73,15 +89,17 @@
                     "baseValue": 30,
                     "scalesOff": "magic",
                     "reducedBy": "none"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "5": {
+    {
+        "id": "5",
         "name": "Drain Life",
         "effects": [
             {
-                "id": "dmg1",
+                "id": "5",
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
@@ -94,19 +112,23 @@
                 "isSource": true
             },
             {
+                "id": "6",
                 "type": "heal",
                 "target": "self",
                 "value": {
                     "type": "reference",
-                    "source": "dmg1"
-                }
+                    "sourceId": "5"
+                },
+                "isSource": false
             }
         ]
     },
-    "6": {
+    {
+        "id": "6",
         "name": "Curse",
         "effects": [
             {
+                "id": "7",
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "attack",
@@ -115,11 +137,13 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "7": {
+    {
+        "id": "7",
         "name": "Dark Pact",
         "cost": {
             "type": "health",
@@ -127,6 +151,7 @@
         },
         "effects": [
             {
+                "id": "8",
                 "type": "buff",
                 "target": "self",
                 "stat": "magic",
@@ -135,11 +160,13 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "8": {
+    {
+        "id": "8",
         "name": "Bite",
         "cost": {
             "type": "mana",
@@ -147,6 +174,7 @@
         },
         "effects": [
             {
+                "id": "9",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -155,11 +183,13 @@
                     "baseValue": 20,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "9": {
+    {
+        "id": "9",
         "name": "Web Throw",
         "cost": {
             "type": "mana",
@@ -167,6 +197,7 @@
         },
         "effects": [
             {
+                "id": "10",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -175,9 +206,11 @@
                     "baseValue": 10,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             },
             {
+                "id": "11",
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "defense",
@@ -186,11 +219,13 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "10": {
+    {
+        "id": "10",
         "name": "Pounce",
         "cost": {
             "type": "mana",
@@ -198,6 +233,7 @@
         },
         "effects": [
             {
+                "id": "12",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -206,11 +242,13 @@
                     "baseValue": 30,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "11": {
+    {
+        "id": "11",
         "name": "Skitter",
         "cost": {
             "type": "mana",
@@ -218,6 +256,7 @@
         },
         "effects": [
             {
+                "id": "13",
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
@@ -226,11 +265,13 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "12": {
+    {
+        "id": "12",
         "name": "Flame Breath",
         "cost": {
             "type": "mana",
@@ -238,6 +279,7 @@
         },
         "effects": [
             {
+                "id": "14",
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
@@ -246,11 +288,13 @@
                     "baseValue": 30,
                     "scalesOff": "magic",
                     "reducedBy": "none"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "13": {
+    {
+        "id": "13",
         "name": "Claw Swipe",
         "cost": {
             "type": "mana",
@@ -258,6 +302,7 @@
         },
         "effects": [
             {
+                "id": "15",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -266,14 +311,17 @@
                     "baseValue": 20,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "14": {
+    {
+        "id": "14",
         "name": "Intimidate",
         "effects": [
             {
+                "id": "16",
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "attack",
@@ -282,14 +330,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "15": {
+    {
+        "id": "15",
         "name": "Dragon Scales",
         "effects": [
             {
+                "id": "17",
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
@@ -298,14 +349,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "16": {
+    {
+        "id": "16",
         "name": "Rusty Blade",
         "effects": [
             {
+                "id": "18",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -314,14 +368,17 @@
                     "baseValue": 20,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "17": {
+    {
+        "id": "17",
         "name": "Dirty Kick",
         "effects": [
             {
+                "id": "19",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -330,9 +387,11 @@
                     "baseValue": 10,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             },
             {
+                "id": "20",
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "defense",
@@ -341,14 +400,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "18": {
+    {
+        "id": "18",
         "name": "Frenzy",
         "effects": [
             {
+                "id": "21",
                 "type": "buff",
                 "target": "self",
                 "stat": "attack",
@@ -357,14 +419,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "19": {
+    {
+        "id": "19",
         "name": "Headbutt",
         "effects": [
             {
+                "id": "22",
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
@@ -373,14 +438,17 @@
                     "baseValue": 30,
                     "scalesOff": "attack",
                     "reducedBy": "defense"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "20": {
+    {
+        "id": "20",
         "name": "Firebolt",
         "effects": [
             {
+                "id": "23",
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
@@ -389,14 +457,17 @@
                     "baseValue": 20,
                     "scalesOff": "magic",
                     "reducedBy": "none"
-                }
+                },
+                "isSource": false
             }
         ]
     },
-    "21": {
+    {
+        "id": "21",
         "name": "Arcane Surge",
         "effects": [
             {
+                "id": "24",
                 "type": "buff",
                 "target": "self",
                 "stat": "magic",
@@ -405,14 +476,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "22": {
+    {
+        "id": "22",
         "name": "Mana Drain",
         "effects": [
             {
+                "id": "25",
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
@@ -421,9 +495,11 @@
                     "baseValue": 20,
                     "scalesOff": "magic",
                     "reducedBy": "none"
-                }
+                },
+                "isSource": false
             },
             {
+                "id": "26",
                 "type": "debuff",
                 "target": "enemy",
                 "stat": "magic",
@@ -432,14 +508,17 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     },
-    "23": {
+    {
+        "id": "23",
         "name": "Hex Shield",
         "effects": [
             {
+                "id": "27",
                 "type": "buff",
                 "target": "self",
                 "stat": "defense",
@@ -448,8 +527,9 @@
                     "baseValue": 0.1
                 },
                 "tickBehavior": "once",
-                "duration": 2
+                "duration": 2,
+                "isSource": false
             }
         ]
     }
-}
+]
