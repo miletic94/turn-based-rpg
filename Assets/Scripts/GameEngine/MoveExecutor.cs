@@ -6,6 +6,8 @@ public class MoveExecutor
     {
         if (!source.HasMove(move))
             throw new Exception($"{source.Name} doesn't have move {move.Name}");
+        if (!source.HasEnoughResource(move))
+            throw new Exception($"{source.Name} doesn't have enough resources. Needs: {move.Cost.Amount} {move.Cost.Type}");
 
         source.TickModifiers();
 
@@ -14,6 +16,7 @@ public class MoveExecutor
         {
             effect.Execute(ctx);
         }
+        source.ReduceResource(move.Cost);
 
         source.ClearInactiveModifiers();
     }

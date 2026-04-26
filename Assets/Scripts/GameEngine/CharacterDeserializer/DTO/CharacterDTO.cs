@@ -7,5 +7,6 @@ public class CharacterDTO
     public float Attack;
     public float Defense;
     public float Magic;
+    public int Mana;
     public List<MoveDTO> Moves;
 }

@@ -9,6 +9,7 @@ public static class CharacterFactory
             dto.Attack,
             dto.Defense,
             dto.Magic,
+            dto.Mana,
             (dto.Moves ?? Enumerable.Empty<MoveDTO>())
                 .Select(MoveFactory.Create)
                 .ToList()

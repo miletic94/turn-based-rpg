@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class Character
 {
@@ -14,9 +15,10 @@ public class Character
     public float Defense => GetStat(StatType.Defense);
     private float _baseMagic;
     public float Magic => GetStat(StatType.Magic);
+    public int Mana { get; private set; }
     public List<Move> Moves { get; private set; }
     private List<ActiveModifier> _modifiers;
-    public Character(string name, float health, float attack, float defense, float magic, List<Move> moves)
+    public Character(string name, float health, float attack, float defense, float magic, int mana, List<Move> moves)
     {
         Name = name;
         Health = health;
@@ -24,6 +26,7 @@ public class Character
         _baseAttack = attack;
         _baseDefense = defense;
         _baseMagic = magic;
+        Mana = mana;
         Moves = moves;
         _modifiers = new List<ActiveModifier>();
     }
@@ -80,6 +83,34 @@ public class Character
     {
         if (Moves.Find(m => m.Id == move.Id) == null) return false;
         return true;
+    }
+
+    public bool HasEnoughResource(Move move)
+    {
+        var costType = move.Cost.Type;
+        var resource = costType switch
+        {
+            ResourceType.Mana => Mana,
+            ResourceType.Health => Health,
+            ResourceType.None => float.PositiveInfinity,
+            _ => throw new Exception($"Unkonw resource type {costType}")
+        };
+
+        if (resource < move.Cost.Amount) return false;
+        return true;
+    }
+
+    public void ReduceResource(Cost cost)
+    {
+        switch (cost.Type)
+        {
+            case ResourceType.Mana:
+                Mana -= cost.Amount;
+                break;
+            case ResourceType.Health:
+                Health -= cost.Amount;
+                break;
+        }
     }
 
 

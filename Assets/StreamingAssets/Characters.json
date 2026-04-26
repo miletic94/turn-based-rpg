@@ -5,6 +5,7 @@
         "attack": 1.2,
         "defense": 0.2,
         "magic": 0.4,
+        "mana": 4,
         "moves": [
             {
                 "id": "0",
@@ -90,6 +91,7 @@
         "attack": 0.5,
         "defense": 0.1,
         "magic": 1.2,
+        "mana": 4,
         "moves": [
             {
                 "id": "4",
