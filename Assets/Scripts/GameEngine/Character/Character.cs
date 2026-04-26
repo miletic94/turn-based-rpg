@@ -13,9 +13,9 @@ public class Character
     public float Defense => GetStat(StatType.Defense);
     private float _baseMagic;
     public float Magic => GetStat(StatType.Magic);
-    public Move[] Moves { get; private set; }
+    public List<Move> Moves { get; private set; }
     private List<ActiveModifier> _modifiers;
-    public Character(string name, int health, int attack, int defense, int magic, Move[] moves)
+    public Character(string name, float health, float attack, float defense, float magic, List<Move> moves)
     {
         Name = name;
         Health = health;

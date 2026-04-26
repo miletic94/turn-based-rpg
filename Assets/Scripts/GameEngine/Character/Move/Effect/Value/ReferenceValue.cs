@@ -4,7 +4,6 @@ public class ReferenceValue : IValue
 {
     public string SourceId { get; }
 
-    [JsonConstructor]
     public ReferenceValue(string sourceId)
     {
         SourceId = sourceId;

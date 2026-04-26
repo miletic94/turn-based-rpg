@@ -1,28 +1,186 @@
-{
-    "0": {
+[
+    {
         "name": "Knight",
         "halth": 100,
         "attack": 0.6,
         "defense": 0.6,
         "magic": 0.4,
         "moves": [
-            0,
-            1,
-            2,
-            3
+            {
+                "id": "0",
+                "name": "Slash",
+                "effects": [
+                    {
+                        "id": "0",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "name": "Shield Up",
+                "effects": [
+                    {
+                        "id": "1",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.1
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Battle Cry",
+                "effects": [
+                    {
+                        "id": "2",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "attack",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.1
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "name": "Second Wind",
+                "effects": [
+                    {
+                        "id": "3",
+                        "category": "magic",
+                        "type": "heal",
+                        "target": "self",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": false
+                    }
+                ]
+            }
         ]
     },
-    "!": {
+    {
         "name": "Knight",
         "halth": 100,
         "attack": 0.5,
         "defense": 0.3,
         "magic": 0.7,
         "moves": [
-            4,
-            5,
-            6,
-            7
+            {
+                "id": "4",
+                "name": "Shadow Bolt",
+                "effects": [
+                    {
+                        "id": "4",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 30,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "5",
+                "name": "Drain Life",
+                "effects": [
+                    {
+                        "id": "5",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 10,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": true
+                    },
+                    {
+                        "id": "6",
+                        "type": "heal",
+                        "target": "self",
+                        "value": {
+                            "type": "reference",
+                            "sourceId": "5"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "6",
+                "name": "Curse",
+                "effects": [
+                    {
+                        "id": "7",
+                        "type": "debuff",
+                        "target": "enemy",
+                        "stat": "attack",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.1
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "7",
+                "name": "Dark Pact",
+                "cost": {
+                    "type": "health",
+                    "amount": 5
+                },
+                "effects": [
+                    {
+                        "id": "8",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "magic",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.1
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            }
         ]
     }
-}
+]

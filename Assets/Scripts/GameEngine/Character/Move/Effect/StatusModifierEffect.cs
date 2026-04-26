@@ -6,13 +6,10 @@ public class StatModifierEffect : IEffect
     public ModifierType Type;
     public TargetType Target { get; }
     public StatType Stat { get; }
-    [JsonConverter(typeof(ValueConverter))]
     public IValue Value { get; }
     public ModifierTickBehavior TickBehavior { get; }
     public int Duration { get; }
     public bool IsSource { get; }
-
-    [JsonConstructor]
     public StatModifierEffect(string id, ModifierType type, TargetType target, StatType stat, IValue value, ModifierTickBehavior tickBehavior, int duration, bool isSource)
     {
         Id = id;
