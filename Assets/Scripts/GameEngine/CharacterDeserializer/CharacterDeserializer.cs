@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CharacterDeserializer
 {
-    public void Deserialize()
+    public List<Character> Deserialize()
     {
         RegisterEffects();
         RegisterValues();
@@ -17,10 +17,8 @@ public class CharacterDeserializer
 
         List<CharacterDTO> characterDTOs = JsonConvert.DeserializeObject<List<CharacterDTO>>(charactersJson);
 
-        foreach (var move in characterDTOs[0].Moves)
-        {
-            Debug.Log(move.Name);
-        }
+        List<Character> characters = characterDTOs.Select(dto => CharacterFactory.Create(dto)).ToList();
+        return characters;
     }
 
     private static void RegisterEffects()
@@ -46,7 +44,7 @@ public class CharacterDeserializer
 
     private static void RegisterValues()
     {
-        ValueFactory.Register("flat", dto => new FlatValue((int)dto.BaseValue));
+        ValueFactory.Register("flat", dto => new FlatValue(dto.BaseValue));
 
         ValueFactory.Register("scaled", dto => new ScaledValue(
             (int)dto.BaseValue,

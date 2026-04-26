@@ -1,5 +1,4 @@
 using System.Linq;
-
 public static class CharacterFactory
 {
     public static Character Create(CharacterDTO dto)

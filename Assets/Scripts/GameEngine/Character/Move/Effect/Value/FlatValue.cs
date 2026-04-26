@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 public class FlatValue : IValue
 {
     public float BaseValue { get; }

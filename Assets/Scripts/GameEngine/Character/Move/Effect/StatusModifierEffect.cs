@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 public class StatModifierEffect : IEffect
 {
     public string Id { get; }

@@ -8,6 +8,7 @@ public class Character
     private float _baseHealth;
     public float Health { get; private set; }
     private float _baseAttack;
+    // TODO: Maybe make a dictionary out of stat getters, so we can remove switch from GetStat as part of making stats extensible
     public float Attack => GetStat(StatType.Attack);
     private float _baseDefense;
     public float Defense => GetStat(StatType.Defense);
@@ -24,6 +25,7 @@ public class Character
         _baseDefense = defense;
         _baseMagic = magic;
         Moves = moves;
+        _modifiers = new List<ActiveModifier>();
     }
 
     public void ApplyDamage(float damage)
@@ -41,6 +43,19 @@ public class Character
         _modifiers.Add(new ActiveModifier(type, stat, value, tickBehavior, duration));
     }
 
+    public void TickModifiers()
+    {
+        foreach (var m in _modifiers)
+        {
+            m.Tick();
+        }
+    }
+
+    public void ClearInactiveModifiers()
+    {
+        _modifiers.RemoveAll(m => m.RemainingDuration <= 0);
+    }
+
     public float GetStat(StatType statType)
     {
         float baseValue = statType switch
@@ -53,8 +68,29 @@ public class Character
         float modifierSum =
         _modifiers
             .Where(m => m.Stat == statType)
-            .Sum(m => m.Value);
+            .Sum(m =>
+            {
+                return m.Value * (m.TickBehavior == ModifierTickBehavior.Once ? 1 : m.DurationDelta);
+            });
 
         return baseValue + modifierSum;
+    }
+
+    public bool HasMove(Move move)
+    {
+        if (Moves.Find(m => m.Id == move.Id) == null) return false;
+        return true;
+    }
+
+
+    // TODO: This is debug helper. Not for final build
+    public override string ToString()
+    {
+        return $@"[{Name}]
+        health: {Health}
+        attack: {Attack},
+        defense: {Defense},
+        magic: {Magic}
+        ";
     }
 }

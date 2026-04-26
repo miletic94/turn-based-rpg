@@ -1,5 +1,3 @@
-using Newtonsoft.Json;
-
 public class DamageEffect : IEffect
 {
     public string Id { get; }

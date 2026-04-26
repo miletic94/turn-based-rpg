@@ -1,9 +1,9 @@
 [
     {
         "name": "Knight",
-        "halth": 100,
-        "attack": 0.6,
-        "defense": 0.6,
+        "health": 100,
+        "attack": 1.2,
+        "defense": 0.2,
         "magic": 0.4,
         "moves": [
             {
@@ -85,11 +85,11 @@
         ]
     },
     {
-        "name": "Knight",
-        "halth": 100,
+        "name": "Witch",
+        "health": 100,
         "attack": 0.5,
-        "defense": 0.3,
-        "magic": 0.7,
+        "defense": 0.1,
+        "magic": 1.2,
         "moves": [
             {
                 "id": "4",

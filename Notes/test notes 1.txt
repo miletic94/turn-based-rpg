@@ -1,0 +1,130 @@
+"name": "Knight",
+        "health": 100,
+                "attack": 1.2,
+                        "defense": 0.2,
+                                "magic": 0.4,
+
+                                        "name": "Witch",
+                                                "health": 100,
+                                                        "attack": 0.5,
+                                                                "defense": 0.1,
+                                                                        "magic": 1.2,
+
+                                                                                // first
+                                                                                "type": "damage",
+                                                                                        "value": 21.6
+
+"type": "damage",
+        "value": 36
+
+"name": "Knight",
+        "health": 64,
+                "attack": 1.2,
+                        "defense": 0.2,
+                                "magic": 0.4,
+
+                                        "name": "Witch",
+                                                "health": 78.4,
+                                                        "attack": 0.5,
+                                                                "defense": 0.1,
+                                                                        "magic": 1.2,
+
+                                                                                // second
+                                                                                "type": "buff",
+                                                                                        "target": "self",
+                                                                                                "stat": "attack",
+                                                                                                        "value": 0.1
+"duration": 2,
+
+
+        "category": "magic",
+                "type": "damage",
+                        "value": 12
+
+"type": "heal",
+        "target": "self",
+                "value": 12
+
+"name": "Knight",
+        "health": 52,
+                "attack": 1.3,
+                        "defense": 0.2,
+                                "magic": 0.4,
+
+                                        "name": "Witch",
+                                                "health": 90.4,
+                                                        "attack": 0.5,
+                                                                "defense": 0.1,
+                                                                        "magic": 1.2,
+
+                                                                                // third
+                                                                                "type": "damage",
+                                                                                        "value": 23.4
+
+
+"category": "magic",
+        "type": "damage",
+                "value": 12
+
+"type": "heal",
+        "target": "self",
+                "value": 12
+
+"name": "Knight",
+        "health": 40,
+                "attack": 1.3,
+                        "defense": 0.2,
+                                "magic": 0.4,
+
+                                        "name": "Witch",
+                                                "health": 79,
+                                                        "attack": 0.5,
+                                                                "defense": 0.1,
+                                                                        "magic": 1.2,
+
+                                                                                // fourth
+                                                                                "type": "damage",
+                                                                                        "value": 23.4
+
+
+"category": "magic",
+        "type": "damage",
+                "value": 12
+
+"type": "heal",
+        "target": "self",
+                "value": 12
+
+"name": "Knight",
+        "health": 28,
+                "attack": 1.3,
+                        "defense": 0.2,
+                                "magic": 0.4,
+
+                                        "name": "Witch",
+                                                "health": 67.6,
+                                                        "attack": 0.5,
+                                                                "defense": 0.1,
+                                                                        "magic": 1.2,
+
+                                                                                // fifth
+                                                                                "type": "damage",
+                                                                                        "value": 21.6
+
+"type": "damage",
+        "value": 36
+
+"name": "Knight",
+        "health": 0,
+                "attack": 1.2,
+                        "defense": 0.2,
+                                "magic": 0.4,
+
+                                        "name": "Witch",
+                                                "health": 46,
+                                                        "attack": 0.5,
+                                                                "defense": 0.1,
+                                                                        "magic": 1.2,
+
+
+
