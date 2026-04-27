@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
-public class Character
+public class Character : IBattleCombatant
 {
     public string Name { get; private set; }
     private float _baseHealth;
@@ -18,6 +17,8 @@ public class Character
     public int Mana { get; private set; }
     public List<Move> Moves { get; private set; }
     private List<ActiveModifier> _modifiers;
+    public CombatantRole Role { get; set; }
+    public IBattleInput Input { get; set; }
     public Character(string name, float health, float attack, float defense, float magic, int mana, List<Move> moves)
     {
         Name = name;
