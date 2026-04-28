@@ -23,6 +23,9 @@ public class BattleController
             var move = await sourceCombatant.Input.GetMoveAsync(_battleState);
             var moveExecutedEvents = _moveExecutor.Execute(sourceCombatant, targetCombatant, move);
 
+            // TODO: Instead of events we can use Commands. See TUAT
+            // Instead of MoveExecutedEvent we can just use Character data
+
             foreach (var moveExecutedEvent in moveExecutedEvents)
             {
                 _bus.Publish(moveExecutedEvent);

@@ -84,6 +84,14 @@ public class Character
         return baseValue + modifierSum;
     }
 
+    public IEnumerable<(StatType type, float baseValue, float currentValue)> GetStats()
+    {
+        yield return (StatType.Health, _baseHealth, Health);
+        yield return (StatType.Attack, _baseAttack, GetStat(StatType.Attack));
+        yield return (StatType.Defense, _baseDefense, GetStat(StatType.Defense));
+        yield return (StatType.Magic, _baseMagic, GetStat(StatType.Magic));
+    }
+
     public bool HasMove(Move move)
     {
         if (Moves.Find(m => m.Id == move.Id) == null) return false;

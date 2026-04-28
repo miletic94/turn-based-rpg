@@ -30,8 +30,6 @@ public class CombatantView : MonoBehaviour
 
     private void UpdateHealth(float currentHealth)
     {
-        Debug.Log($"currentHealth: {currentHealth}, baseHealth: {_character.BaseHealth}, ");
-        Debug.Log(currentHealth / _character.BaseHealth);
         _healthBar.SetImmediate(currentHealth / _character.BaseHealth);
     }
 }

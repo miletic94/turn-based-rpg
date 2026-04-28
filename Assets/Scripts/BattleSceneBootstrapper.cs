@@ -6,6 +6,7 @@ public class BattleSceneBootstrapper : MonoBehaviour
 {
     [SerializeField] MoveView _moveView;
     [SerializeField] CombatantViewFactory _combatantViewFactory;
+    [SerializeField] StatView _statView;
 
     private async void Start()
     {
@@ -17,6 +18,7 @@ public class BattleSceneBootstrapper : MonoBehaviour
         var knight = characters[0];
         combatantFactory.CreatePlayer(knight);
         _combatantViewFactory.CreateView(knight, eventBus);
+        _statView.ShowStat(knight);
 
 
         var witch = characters[1];
