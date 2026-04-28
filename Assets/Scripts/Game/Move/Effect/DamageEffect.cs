@@ -25,7 +25,7 @@ public class DamageEffect : IEffect
 
         target.ApplyDamage(damage);
 
-        context.Changes.Add(new StatChange
+        context.Events.Add(new MoveExecutedEvent
         {
             Target = target,
             Stat = StatType.Health,

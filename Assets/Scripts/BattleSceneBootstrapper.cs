@@ -10,21 +10,22 @@ public class BattleSceneBootstrapper : MonoBehaviour
     private async void Start()
     {
         var combatantFactory = new CombatantFactory(_moveView);
+        var eventBus = new BattleEventBus();
 
         var characters = new CharacterDeserializer().Deserialize();
 
         var knight = characters[0];
         combatantFactory.CreatePlayer(knight);
-        _combatantViewFactory.CreateView(knight);
+        _combatantViewFactory.CreateView(knight, eventBus);
 
 
         var witch = characters[1];
         combatantFactory.CreateEnemy(witch);
-        _combatantViewFactory.CreateView(witch);
+        _combatantViewFactory.CreateView(witch, eventBus);
 
         BattleState battleState = new BattleState(new List<Character>() { knight, witch });
         MoveExecutor moveExecutor = new MoveExecutor();
-        BattleController battleController = new BattleController(battleState, moveExecutor);
+        BattleController battleController = new BattleController(battleState, moveExecutor, eventBus);
 
         _moveView.SetMoves(knight.Moves);
 

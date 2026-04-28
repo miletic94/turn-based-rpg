@@ -1,9 +1,9 @@
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 
 public class MoveExecutor
 {
-    public void Execute(Character source, Character target, Move move)
+    public List<MoveExecutedEvent> Execute(Character source, Character target, Move move)
     {
         if (!source.HasMove(move))
             throw new Exception($"{source.Name} doesn't have move {move.Name}");
@@ -21,14 +21,6 @@ public class MoveExecutor
 
         source.ClearInactiveModifiers();
 
-        foreach (var change in ctx.Changes)
-        {
-            Debug.Log($@"
-                Target: {change.Target};
-                Stat: {change.Stat};
-                Before: {change.Before};
-                After: {change.After};
-            ");
-        }
+        return ctx.Events;
     }
 }

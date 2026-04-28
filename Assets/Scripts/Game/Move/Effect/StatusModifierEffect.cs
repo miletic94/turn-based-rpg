@@ -31,7 +31,7 @@ public class StatModifierEffect : IEffect
             context.StoreResult(Id, value);
 
         target.ApplyModifier(Type, Stat, value, TickBehavior, Duration);
-        context.Changes.Add(new StatChange
+        context.Events.Add(new MoveExecutedEvent
         {
             Target = target,
             Stat = Stat,

@@ -1,4 +1,4 @@
-public class StatChange
+public class MoveExecutedEvent
 {
     public Character Target;
     public StatType Stat;

@@ -26,7 +26,7 @@ public class HealEffect : IEffect
 
         target.Heal(value);
 
-        context.Changes.Add(new StatChange
+        context.Events.Add(new MoveExecutedEvent
         {
             Target = target,
             Stat = StatType.Health,
