@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 
 public class BattleState
 {
@@ -20,7 +21,7 @@ public class BattleState
             throw new Exception("No combantants");
 
         _currentCombatantIndex = (_currentCombatantIndex + 1) % _combatants.Count;
-        TurnNumber++;
+        if (_currentCombatantIndex == 0) TurnNumber++;
     }
 
     public Character GetSourceCombatant()
@@ -30,6 +31,12 @@ public class BattleState
     public Character GetTargetCombatant()
     {
         return _combatants[(_currentCombatantIndex + 1) % _combatants.Count];
+    }
+    public Character GetPlayer()
+    {
+        var player = _combatants.Find(c => c.Role == CombatantRole.Player);
+        if (player == null) throw new Exception("No character is player");
+        return player;
     }
 
     public bool TryEnd(out Character winner)

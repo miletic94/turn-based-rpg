@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Character : IBattleCombatant
+public class Character
 {
     public string Name { get; private set; }
     private float _baseHealth;

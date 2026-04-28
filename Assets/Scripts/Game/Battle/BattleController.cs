@@ -11,7 +11,7 @@ public class BattleController
         _moveExecutor = moveExecutor;
     }
 
-    private async Awaitable BattleLoop()
+    public async Awaitable BattleLoop()
     {
         Character winner;
         while (!_battleState.TryEnd(out winner))
@@ -20,6 +20,12 @@ public class BattleController
             var targetCombatant = _battleState.GetTargetCombatant();
             var move = await sourceCombatant.Input.GetMoveAsync(_battleState);
             _moveExecutor.Execute(sourceCombatant, targetCombatant, move);
+            Debug.Log($@"[MOVE {_battleState.TurnNumber}]
+            move:  {move.Name}
+            {sourceCombatant}
+            {targetCombatant}
+            ");
+            _battleState.NextTurn();
         }
         Debug.Log(winner.Name);
     }
