@@ -23,11 +23,21 @@ public class StatModifierEffect : IEffect
     public void Execute(EffectContext context)
     {
         var target = context.ResolveTarget(Target);
+        var before = target.GetStat(Stat);
+
         var value = Value.GetValue(context);
 
         if (IsSource)
             context.StoreResult(Id, value);
 
         target.ApplyModifier(Type, Stat, value, TickBehavior, Duration);
+        context.Changes.Add(new StatChange
+        {
+            Target = target,
+            Stat = Stat,
+            Before = before,
+            After = target.GetStat(Stat),
+            Source = this
+        });
     }
 }

@@ -64,6 +64,7 @@ public class Character
     {
         float baseValue = statType switch
         {
+            StatType.Health => Health,
             StatType.Attack => _baseAttack,
             StatType.Defense => _baseDefense,
             StatType.Magic => _baseMagic,
@@ -74,7 +75,9 @@ public class Character
             .Where(m => m.Stat == statType)
             .Sum(m =>
             {
-                return m.Value * (m.TickBehavior == ModifierTickBehavior.Once ? 1 : m.DurationDelta);
+                return m.Value
+                    * (m.Type == ModifierType.Debuff ? -1 : 1)
+                    * (m.TickBehavior == ModifierTickBehavior.Once ? 1 : m.DurationDelta);
             });
 
         return baseValue + modifierSum;

@@ -27,6 +27,6 @@ public class BattleController
             ");
             _battleState.NextTurn();
         }
-        Debug.Log(winner.Name);
+        Debug.Log($"winner: {winner.Name}");
     }
 }

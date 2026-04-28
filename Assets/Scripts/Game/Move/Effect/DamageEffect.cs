@@ -17,11 +17,21 @@ public class DamageEffect : IEffect
     public void Execute(EffectContext context)
     {
         var target = context.ResolveTarget(Target);
+        var before = target.Health;
         var damage = Value.GetValue(context);
 
         if (IsSource)
             context.StoreResult(Id, damage);
 
         target.ApplyDamage(damage);
+
+        context.Changes.Add(new StatChange
+        {
+            Target = target,
+            Stat = StatType.Health,
+            Before = before,
+            After = target.Health,
+            Source = this
+        });
     }
 }

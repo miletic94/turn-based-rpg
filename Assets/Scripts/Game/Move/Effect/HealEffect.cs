@@ -19,10 +19,20 @@ public class HealEffect : IEffect
     {
         float value = Value.GetValue(context);
         var target = context.ResolveTarget(Target);
+        var before = target.Health;
 
         if (IsSource)
             context.StoreResult(Id, value);
 
         target.Heal(value);
+
+        context.Changes.Add(new StatChange
+        {
+            Target = target,
+            Stat = StatType.Health,
+            Before = before,
+            After = target.Health,
+            Source = this
+        });
     }
 }

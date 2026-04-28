@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class MoveExecutor
 {
@@ -19,5 +20,15 @@ public class MoveExecutor
         source.ReduceResource(move.Cost);
 
         source.ClearInactiveModifiers();
+
+        foreach (var change in ctx.Changes)
+        {
+            Debug.Log($@"
+                Target: {change.Target};
+                Stat: {change.Stat};
+                Before: {change.Before};
+                After: {change.After};
+            ");
+        }
     }
 }
