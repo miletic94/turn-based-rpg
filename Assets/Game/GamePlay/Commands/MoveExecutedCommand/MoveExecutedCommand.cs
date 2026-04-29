@@ -4,7 +4,7 @@ using System.Diagnostics;
 public class MoveExecutedCommand : BaseCommand, ICommandVoid
 {
     private MoveExecutedCommandData _commandData;
-    private StatView _statView;
+    private StatController _statController;
     private CombatantController _combatantController;
     public MoveExecutedCommand SetData(MoveExecutedCommandData commandData)
     {
@@ -13,13 +13,13 @@ public class MoveExecutedCommand : BaseCommand, ICommandVoid
     }
     public override void ResolveDependencies()
     {
-        _statView = _diContainer.ResolveMonoBehaviourDependency<StatView>();
+        _statController = _diContainer.Resolve<StatController>();
         _combatantController = _diContainer.Resolve<CombatantController>();
     }
 
     public void Execute()
     {
-        _statView.UpdateStat(_commandData.Player);
+        _statController.Update(_commandData.Player);
         _combatantController.UpdateAll(new List<Character> { _commandData.Player, _commandData.Enemy });
     }
 

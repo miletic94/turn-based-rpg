@@ -1,11 +1,19 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CombatantController
 {
+    private readonly CombatantViewFactory _viewFactory;
     private readonly Dictionary<Character, CombatantView> _combatantViews = new();
 
-    public void Register(Character character, CombatantView view)
+    public CombatantController(CombatantViewFactory viewFactory)
     {
+        _viewFactory = viewFactory;
+    }
+
+    public void Create(Character character)
+    {
+        var view = _viewFactory.CreateView(character);
         _combatantViews[character] = view;
     }
 
@@ -21,7 +29,11 @@ public class CombatantController
     {
         foreach (var character in characters)
         {
-            UpdateHealth(character);
+
+            if (_combatantViews.TryGetValue(character, out var view))
+            {
+                view.UpdateHealthBar(character);
+            }
         }
     }
 }

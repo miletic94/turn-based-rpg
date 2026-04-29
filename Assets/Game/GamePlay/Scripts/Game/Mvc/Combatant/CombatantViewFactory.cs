@@ -25,7 +25,6 @@ public class CombatantViewFactory : MonoBehaviour
         }
 
         var view = Instantiate(prefab, spawn.position, Quaternion.identity, spawn);
-        view.Bind(character);
 
         return view;
     }

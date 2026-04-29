@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class BattleController
+public class BattleExecutor
 {
     private BattleState _battleState;
     private MoveExecutor _moveExecutor;
     private ICommandFactory _commandFactory;
 
-    public BattleController(ICommandFactory commandFactory, BattleState battleState, MoveExecutor moveExecutor)
+    public BattleExecutor(ICommandFactory commandFactory, BattleState battleState, MoveExecutor moveExecutor)
     {
         _battleState = battleState;
         _moveExecutor = moveExecutor;
@@ -20,7 +20,7 @@ public class BattleController
         {
             var sourceCombatant = _battleState.GetSourceCombatant();
             var targetCombatant = _battleState.GetTargetCombatant();
-            var move = await sourceCombatant.Input.GetMoveAsync(_battleState);
+            var move = await sourceCombatant.MoveProvider.GetMoveAsync(_battleState);
             _moveExecutor.Execute(sourceCombatant, targetCombatant, move);
 
             _commandFactory.CreateCommandVoid<MoveExecutedCommand>()

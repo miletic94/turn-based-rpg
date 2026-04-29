@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AIBattleInput : IBattleInput
+public class AIBattleMoveProvider : IBattleMoveProvider
 {
     public async Awaitable<Move> GetMoveAsync(BattleState state)
     {

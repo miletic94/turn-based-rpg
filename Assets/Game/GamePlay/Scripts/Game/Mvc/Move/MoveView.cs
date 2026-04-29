@@ -11,7 +11,7 @@ public class MoveView : MonoBehaviour, IMoveView
     private Action<Move> _onMoveSelected;
     private bool _isActive;
 
-    public void SetMoves(List<Move> moves)
+    public void ShowMoves(List<Move> moves)
     {
         // Clear old buttons
         foreach (Transform child in content)
@@ -25,7 +25,7 @@ public class MoveView : MonoBehaviour, IMoveView
             var text = buttonObj.GetComponentInChildren<TMP_Text>();
             text.text = move.Name;
 
-            button.onClick.AddListener(() => _onMoveSelected?.Invoke(move));
+            button.onClick.AddListener(() => OnMoveButtonClicked(move));
         }
     }
 

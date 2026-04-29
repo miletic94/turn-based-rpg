@@ -19,7 +19,7 @@ public class Character
     public List<Move> Moves { get; private set; }
     private List<ActiveModifier> _modifiers;
     public CombatantRole Role { get; set; }
-    public IBattleInput Input { get; set; }
+    public IBattleMoveProvider MoveProvider { get; set; }
     public Character(string name, float health, float attack, float defense, float magic, int mana, List<Move> moves)
     {
         Name = name;
