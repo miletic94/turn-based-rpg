@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class MoveExecutor
 {
-    public List<MoveExecutedEvent> Execute(Character source, Character target, Move move)
+    public void Execute(Character source, Character target, Move move)
     {
         if (!source.HasMove(move))
             throw new Exception($"{source.Name} doesn't have move {move.Name}");
@@ -20,7 +20,5 @@ public class MoveExecutor
         source.ReduceResource(move.Cost);
 
         source.ClearInactiveModifiers();
-
-        return ctx.Events;
     }
 }

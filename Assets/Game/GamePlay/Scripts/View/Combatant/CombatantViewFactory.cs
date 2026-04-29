@@ -7,7 +7,7 @@ public class CombatantViewFactory : MonoBehaviour
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private Transform enemySpawn;
 
-    public CombatantView CreateView(Character character, BattleEventBus eventBus)
+    public CombatantView CreateView(Character character)
     {
         CombatantView prefab;
         Transform spawn;
@@ -25,7 +25,7 @@ public class CombatantViewFactory : MonoBehaviour
         }
 
         var view = Instantiate(prefab, spawn.position, Quaternion.identity, spawn);
-        view.Bind(character, eventBus);
+        view.Bind(character);
 
         return view;
     }

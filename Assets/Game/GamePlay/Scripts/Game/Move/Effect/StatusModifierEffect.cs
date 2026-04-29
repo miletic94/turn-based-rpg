@@ -31,13 +31,5 @@ public class StatModifierEffect : IEffect
             context.StoreResult(Id, value);
 
         target.ApplyModifier(Type, Stat, value, TickBehavior, Duration);
-        context.Events.Add(new MoveExecutedEvent
-        {
-            Target = target,
-            Stat = Stat,
-            Before = before,
-            After = target.GetStat(Stat),
-            Source = this
-        });
     }
 }

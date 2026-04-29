@@ -25,14 +25,5 @@ public class HealEffect : IEffect
             context.StoreResult(Id, value);
 
         target.Heal(value);
-
-        context.Events.Add(new MoveExecutedEvent
-        {
-            Target = target,
-            Stat = StatType.Health,
-            Before = before,
-            After = target.Health,
-            Source = this
-        });
     }
 }

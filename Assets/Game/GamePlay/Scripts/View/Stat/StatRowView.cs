@@ -13,4 +13,9 @@ public class StatRowView : MonoBehaviour
     {
         _valueTextHolder.text = text;
     }
+
+    public void SetColor(Color color)
+    {
+        _valueTextHolder.color = color;
+    }
 }

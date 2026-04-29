@@ -39,6 +39,13 @@ public class BattleState
         return player;
     }
 
+    public Character GetEnemy()
+    {
+        var enemy = _combatants.Find(c => c.Role == CombatantRole.Enemy);
+        if (enemy == null) throw new Exception("No character is ENEMY");
+        return enemy;
+    }
+
     public bool TryEnd(out Character winner)
     {
         int deadIndex = _combatants.FindIndex(comb => comb.Health <= 0);

@@ -4,13 +4,13 @@ public class BattleController
 {
     private BattleState _battleState;
     private MoveExecutor _moveExecutor;
-    private BattleEventBus _bus;
+    private ICommandFactory _commandFactory;
 
-    public BattleController(BattleState battleState, MoveExecutor moveExecutor, BattleEventBus bus)
+    public BattleController(ICommandFactory commandFactory, BattleState battleState, MoveExecutor moveExecutor)
     {
         _battleState = battleState;
         _moveExecutor = moveExecutor;
-        _bus = bus;
+        _commandFactory = commandFactory;
     }
 
     public async Awaitable BattleLoop()
@@ -21,15 +21,16 @@ public class BattleController
             var sourceCombatant = _battleState.GetSourceCombatant();
             var targetCombatant = _battleState.GetTargetCombatant();
             var move = await sourceCombatant.Input.GetMoveAsync(_battleState);
-            var moveExecutedEvents = _moveExecutor.Execute(sourceCombatant, targetCombatant, move);
+            _moveExecutor.Execute(sourceCombatant, targetCombatant, move);
 
             // TODO: Instead of events we can use Commands. See TUAT
             // Instead of MoveExecutedEvent we can just use Character data
 
-            foreach (var moveExecutedEvent in moveExecutedEvents)
-            {
-                _bus.Publish(moveExecutedEvent);
-            }
+            _commandFactory.CreateCommandVoid<MoveExecutedCommand>()
+            .SetData(new MoveExecutedCommandData(
+                _battleState.GetPlayer(), _battleState.GetEnemy()))
+                .Execute();
+
             // Debug.Log($@"[MOVE {_battleState.TurnNumber}]
             // move:  {move.Name}
             // {sourceCombatant}

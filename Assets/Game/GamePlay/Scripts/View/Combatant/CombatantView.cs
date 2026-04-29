@@ -5,11 +5,9 @@ public class CombatantView : MonoBehaviour
     [SerializeField] private HealthBarView _healthBar;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public void Bind(Character character, BattleEventBus bus)
+    public void Bind(Character character)
     {
         _character = character;
-
-        bus.Subscribe<MoveExecutedEvent>(OnMoveExecuted);
     }
 
     public void FlipSpriteX(bool flip)
@@ -17,19 +15,11 @@ public class CombatantView : MonoBehaviour
         _spriteRenderer.flipX = flip;
     }
 
-    private void OnMoveExecuted(MoveExecutedEvent moveExecutedEvent)
+    public void UpdateHealthBar(Character character)
     {
-        if (moveExecutedEvent.Target == _character)
+        if (character.Name == _character.Name)
         {
-            if (moveExecutedEvent.Stat == StatType.Health)
-            {
-                UpdateHealth(moveExecutedEvent.After);
-            }
+            _healthBar.SetImmediate(character.Health / _character.BaseHealth);
         }
-    }
-
-    private void UpdateHealth(float currentHealth)
-    {
-        _healthBar.SetImmediate(currentHealth / _character.BaseHealth);
     }
 }

@@ -7,8 +7,6 @@ public class EffectContext
 {
     public Character Source { get; }
     public Character Target { get; }
-    public List<MoveExecutedEvent> Events = new();
-
     private readonly Dictionary<string, float> _results = new();
 
     public EffectContext(Character source, Character target)

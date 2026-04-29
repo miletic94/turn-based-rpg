@@ -24,14 +24,5 @@ public class DamageEffect : IEffect
             context.StoreResult(Id, damage);
 
         target.ApplyDamage(damage);
-
-        context.Events.Add(new MoveExecutedEvent
-        {
-            Target = target,
-            Stat = StatType.Health,
-            Before = before,
-            After = target.Health,
-            Source = this
-        });
     }
 }
