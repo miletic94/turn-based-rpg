@@ -9,28 +9,28 @@ public class BattleSceneDIContainer : MonoBehaviour, IDiContainer
     [SerializeField] CombatantViewFactory _combatantViewFactory;
     [SerializeField] StatView _statView;
     private Dictionary<Type, object> _dependencies;
-    private ICommandFactory _commandFactory;
-    private CombatantController _combatantController;
+    private CombatantViewBinder _combatantViewBinder;
     private StatController _statController;
     private MoveController _moveController;
+    private EventBus _eventBus;
 
     private void Awake()
     {
-        _commandFactory = new CommandFactory(this);
-        _combatantController = new CombatantController(_combatantViewFactory);
+        _eventBus = new EventBus();
+        _combatantViewBinder = new CombatantViewBinder(_combatantViewFactory, _eventBus);
         _statController = new StatController(_statView);
         _moveController = new MoveController(_moveView);
         _dependencies = new Dictionary<Type, object>
         {
             {typeof(StatController), _statController},
-            {typeof(CombatantController), _combatantController}
+            {typeof(CombatantViewBinder), _combatantViewBinder}
         };
     }
     private async void Start()
     {
         var battleController = new BattleController(
-            _commandFactory,
-            _combatantController,
+            _eventBus,
+            _combatantViewBinder,
             _moveController,
             _statController
         );

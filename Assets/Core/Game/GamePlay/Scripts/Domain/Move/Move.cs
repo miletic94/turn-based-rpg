@@ -1,0 +1,18 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
+public class Move
+{
+    public int Id { get; }
+    public string Name { get; }
+    public Cost Cost { get; }
+    public List<IMoveEffect> Effects { get; }
+
+    public Move(int id, string name, Cost cost, List<IMoveEffect> effects)
+    {
+        Id = id;
+        Name = name;
+        Cost = cost;
+        Effects = effects;
+    }
+}
