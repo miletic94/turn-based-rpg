@@ -14,6 +14,8 @@ public class AppBootstrapper : MonoBehaviour
         _appStateMachine =
             new ApplicationStateMachine();
 
+        AppContext.Initialize(_appStateMachine);
+
         await _appStateMachine.EnterMainMenu();
     }
 }

@@ -16,6 +16,6 @@ public class MainMenuState : IAsyncState
 
     public Awaitable Exit()
     {
-        return default;
+        return AwaitableUtils.CompletedTask;
     }
 }
