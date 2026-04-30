@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AICombatMoveSelector : ICombatMoveSelector
+public class AIBattleMoveSelector : IBattleMoveSelector
 {
     public async Awaitable<Move> SelectMoveAsync(
            Character actor,

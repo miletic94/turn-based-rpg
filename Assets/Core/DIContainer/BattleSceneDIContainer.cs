@@ -10,19 +10,19 @@ public class BattleSceneDIContainer : MonoBehaviour, IDiContainer
     [SerializeField] StatView _statView;
     private Dictionary<Type, object> _dependencies;
     private CombatantViewBinder _combatantViewBinder;
-    private StatController _statController;
-    private MoveController _moveController;
+    private StatViewBinder _statViewBinder;
+    private MoveViewBinder _moveViewBinder;
     private EventBus _eventBus;
 
     private void Awake()
     {
         _eventBus = new EventBus();
         _combatantViewBinder = new CombatantViewBinder(_combatantViewFactory, _eventBus);
-        _statController = new StatController(_statView);
-        _moveController = new MoveController(_moveView);
+        _statViewBinder = new StatViewBinder(_eventBus, _statView);
+        _moveViewBinder = new MoveViewBinder(_eventBus, _moveView);
         _dependencies = new Dictionary<Type, object>
         {
-            {typeof(StatController), _statController},
+            {typeof(StatViewBinder), _statViewBinder},
             {typeof(CombatantViewBinder), _combatantViewBinder}
         };
     }
@@ -31,8 +31,8 @@ public class BattleSceneDIContainer : MonoBehaviour, IDiContainer
         var battleController = new BattleController(
             _eventBus,
             _combatantViewBinder,
-            _moveController,
-            _statController
+            _moveViewBinder,
+            _statViewBinder
         );
 
         try

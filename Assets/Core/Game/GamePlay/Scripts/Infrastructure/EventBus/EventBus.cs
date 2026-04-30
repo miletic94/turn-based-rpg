@@ -35,10 +35,14 @@ public class EventBus : IEventBus
     {
         var type = gameEvent.GetType();
 
-        if (_handlers.TryGetValue(type, out var handlers))
+        if (!_handlers.TryGetValue(type, out var handlers))
+            return;
+
+        var handlersCopy = handlers.ToArray();
+
+        foreach (var handler in handlersCopy)
         {
-            foreach (var handler in handlers)
-                ((Action<T>)handler)(gameEvent);
+            ((Action<T>)handler)(gameEvent);
         }
     }
 }

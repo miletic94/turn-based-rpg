@@ -13,9 +13,9 @@ public class ScaledValue : IMoveEffectValue
         ReducedBy = reducedBy;
     }
 
+    // TODO: Maybe move this out to service making the class just as a data structure
     public float GetValue(EffectContext context)
     {
-        // TODO: Abstract this so we don't have to add new switch case if we add StatType
         var scalar = ScalesOff switch
         {
             StatType.Attack => context.Source.Attack,

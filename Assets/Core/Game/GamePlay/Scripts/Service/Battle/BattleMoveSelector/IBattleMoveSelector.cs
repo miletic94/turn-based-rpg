@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface ICombatMoveSelector
+public interface IBattleMoveSelector
 {
     Awaitable<Move> SelectMoveAsync(Character actor, BattleState state);
 }

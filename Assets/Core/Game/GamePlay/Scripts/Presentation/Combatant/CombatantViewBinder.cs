@@ -1,16 +1,17 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CombatantViewBinder
 {
     private readonly CombatantViewFactory _factory;
     private readonly Dictionary<Character, CombatantView> _views = new();
+    private readonly EventBus _bus;
 
     public CombatantViewBinder(
         CombatantViewFactory factory,
         EventBus bus)
     {
         _factory = factory;
+        _bus = bus;
     }
 
     public void Register(Character character)
@@ -19,9 +20,9 @@ public class CombatantViewBinder
         _views[character] = view;
     }
 
-    public void Bind(EventBus bus)
+    public void Bind()
     {
-        bus.Subscribe<MoveExecutedEvent>(OnMoveExecuted);
+        _bus.Subscribe<MoveExecutedEvent>(OnMoveExecuted);
     }
 
     public void Unbind(EventBus bus)

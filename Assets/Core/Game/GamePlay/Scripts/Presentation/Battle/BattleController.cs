@@ -11,20 +11,20 @@ using UnityEngine;
 public class BattleController
 {
     private readonly CombatantViewBinder _combatantViewBinder;
-    private readonly MoveController _moveController;
-    private readonly StatController _statController;
+    private readonly MoveViewBinder _moveViewBinder;
+    private readonly StatViewBinder _statViewBinder;
     private readonly EventBus _eventBus;
 
     public BattleController(
         EventBus eventBus,
         CombatantViewBinder combatantViewBinder,
-        MoveController moveController,
-        StatController statController)
+        MoveViewBinder moveViewBinder,
+        StatViewBinder statViewBinder)
     {
         _eventBus = eventBus;
         _combatantViewBinder = combatantViewBinder;
-        _moveController = moveController;
-        _statController = statController;
+        _moveViewBinder = moveViewBinder;
+        _statViewBinder = statViewBinder;
     }
 
     public async Awaitable Run()
@@ -82,10 +82,10 @@ public class BattleController
         enemy.Role = CombatantRole.Enemy;
 
         player.MoveSelector =
-            new PlayerCombatMoveSelector(_moveController);
+            new PlayerBattleMoveSelector(_eventBus);
 
         enemy.MoveSelector =
-            new AICombatMoveSelector();
+            new AIBattleMoveSelector();
     }
 
     // ======================================================
@@ -98,11 +98,12 @@ public class BattleController
     {
         _combatantViewBinder.Register(player);
         _combatantViewBinder.Register(enemy);
-        _combatantViewBinder.Bind(_eventBus);
+        _combatantViewBinder.Bind();
 
-        _moveController.ShowMoves(player.Moves);
+        _moveViewBinder.Bind();
 
-        _statController.Show(player);
+        _statViewBinder.Show(player);
+        _statViewBinder.Bind();
     }
 
     // ======================================================
