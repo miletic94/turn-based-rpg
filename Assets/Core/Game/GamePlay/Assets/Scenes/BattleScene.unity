@@ -344,11 +344,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 492794681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a53ba83572811a14899a6a3d46b3b4f2, type: 3}
+  m_Script: {fileID: 11500000, guid: a2b13c67f29d34e4eb9661cf98653a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveView: {fileID: 1418024986}
   _combatantViewFactory: {fileID: 158200082}
+  _moveView: {fileID: 1418024986}
   _statView: {fileID: 950749754}
 --- !u!1 &519420028
 GameObject:

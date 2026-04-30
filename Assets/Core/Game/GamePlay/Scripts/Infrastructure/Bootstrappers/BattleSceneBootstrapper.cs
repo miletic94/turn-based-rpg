@@ -1,36 +1,45 @@
-// ======================================================
-// BATTLE CONTROLLER
-// Composition root for battle feature.
-// Sets up characters, selectors, services, UI wiring.
-// Then hands execution off to BattleService.
-// ======================================================
-
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleController
+public class BattleSceneBootstrapper : MonoBehaviour
 {
-    private readonly CombatantViewBinder _combatantViewBinder;
-    private readonly MoveViewBinder _moveViewBinder;
-    private readonly StatViewBinder _statViewBinder;
-    private readonly EventBus _eventBus;
+    [SerializeField] private CombatantViewFactory _combatantViewFactory;
+    [SerializeField] private MoveView _moveView;
+    [SerializeField] private StatView _statView;
+    CombatantViewBinder _combatantViewBinder;
+    StatViewBinder _statViewBinder;
+    MoveViewBinder _moveViewBinder;
+    private EventBus _eventBus;
 
-    public BattleController(
-        EventBus eventBus,
-        CombatantViewBinder combatantViewBinder,
-        MoveViewBinder moveViewBinder,
-        StatViewBinder statViewBinder)
+    private void Awake()
     {
-        _eventBus = eventBus;
-        _combatantViewBinder = combatantViewBinder;
-        _moveViewBinder = moveViewBinder;
-        _statViewBinder = statViewBinder;
+        _eventBus = new EventBus();
+        _combatantViewBinder = new CombatantViewBinder(_combatantViewFactory, _eventBus);
+        _statViewBinder = new StatViewBinder(_eventBus, _statView);
+        _moveViewBinder = new MoveViewBinder(_eventBus, _moveView);
     }
 
-    public async Awaitable Run()
+    private async void Start()
+    {
+        await InitializeAndRun();
+    }
+
+    private async Awaitable InitializeAndRun()
     {
         // ==================================================
-        // 1. LOAD DOMAIN DATA
+        // 1. EVENT SYSTEM
+        // ==================================================
+        _eventBus = new EventBus();
+
+        // ==================================================
+        // 2. BINDERS
+        // ==================================================
+        _combatantViewBinder = new CombatantViewBinder(_combatantViewFactory, _eventBus);
+        _statViewBinder = new StatViewBinder(_eventBus, _statView);
+        _moveViewBinder = new MoveViewBinder(_eventBus, _moveView);
+
+        // ==================================================
+        // 3. LOAD DOMAIN
         // ==================================================
         var characters = LoadCharacters();
 
@@ -38,25 +47,28 @@ public class BattleController
         var enemy = characters[1];
 
         // ==================================================
-        // 2. CONFIGURE BATTLE PARTICIPANTS
+        // 4. CONFIGURE DOMAIN
         // ==================================================
         ConfigureCombatants(player, enemy);
 
         // ==================================================
-        // 3. CREATE VISUALS / UI
+        // 5. PRESENTATION SETUP
         // ==================================================
         SetupPresentation(player, enemy);
 
         // ==================================================
-        // 4. BUILD APPLICATION LAYER
+        // 6. BATTLE STATE
         // ==================================================
         var battleState = new BattleState(
             new List<Character> { player, enemy });
 
+        // ==================================================
+        // 7. SERVICE LAYER
+        // ==================================================
         var battleService = BuildBattleService(battleState);
 
         // ==================================================
-        // 5. RUN
+        // 8. RUN GAME
         // ==================================================
         await battleService.RunBattle();
     }
