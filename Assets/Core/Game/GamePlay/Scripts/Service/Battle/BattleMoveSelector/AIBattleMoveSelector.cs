@@ -4,7 +4,7 @@ public class AIBattleMoveSelector : IBattleMoveSelector
 {
     public async Awaitable<Move> SelectMoveAsync(
            Character actor,
-           BattleState battleState)
+           BattleData battleState)
     {
         await Awaitable.WaitForSecondsAsync(0.1f);
 

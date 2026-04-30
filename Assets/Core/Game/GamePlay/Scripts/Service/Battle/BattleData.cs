@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-public class BattleState
+public class BattleData
 {
     private readonly List<Character> _combatants;
 
@@ -11,7 +11,7 @@ public class BattleState
 
     public int TurnNumber { get; private set; }
 
-    public BattleState(List<Character> combatants)
+    public BattleData(List<Character> combatants)
     {
         if (combatants == null || combatants.Count == 0)
             throw new Exception("Battle requires at least one combatant");

@@ -2,18 +2,18 @@ using System;
 
 public class BattleTurnService
 {
-    public Character GetCurrentCombatant(BattleState state)
+    public Character GetCurrentCombatant(BattleData state)
     {
         return state.Combatants[state.CurrentCombatantIndex];
     }
 
-    public Character GetNextCombatant(BattleState state)
+    public Character GetNextCombatant(BattleData state)
     {
         int nextIndex = (state.CurrentCombatantIndex + 1) % state.Combatants.Count;
         return state.Combatants[nextIndex];
     }
 
-    public void AdvanceTurn(BattleState state)
+    public void AdvanceTurn(BattleData state)
     {
         if (state.Combatants.Count == 0)
             throw new Exception("No combatants");

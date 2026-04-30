@@ -2,7 +2,7 @@
 public class BattleTargetService
 {
     public Character ResolveTarget(
-        BattleState state,
+        BattleData state,
         Character source,
         TargetType targetType)
     {
@@ -15,7 +15,7 @@ public class BattleTargetService
     }
 
     public Character ResolveDefaultEnemy(
-        BattleState state,
+        BattleData state,
         Character source)
     {
         foreach (var combatant in state.Combatants)

@@ -9,7 +9,7 @@ public class PlayerBattleMoveSelector : IBattleMoveSelector
         _bus = bus;
     }
 
-    public Awaitable<Move> SelectMoveAsync(Character actor, BattleState state)
+    public Awaitable<Move> SelectMoveAsync(Character actor, BattleData state)
     {
         _bus.Publish(new MoveSelectionRequestedEvent(actor));
 

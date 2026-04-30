@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleSceneBootstrapper : MonoBehaviour
+public class BattleBootstrapper : MonoBehaviour
 {
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
     [SerializeField] private MoveView _moveView;
@@ -19,12 +19,9 @@ public class BattleSceneBootstrapper : MonoBehaviour
         _moveViewBinder = new MoveViewBinder(_eventBus, _moveView);
     }
 
-    private async void Start()
-    {
-        await InitializeAndRun();
-    }
 
-    private async Awaitable InitializeAndRun()
+
+    public async Awaitable<Character> InitializeAndRun()
     {
         // ==================================================
         // 1. EVENT SYSTEM
@@ -59,7 +56,7 @@ public class BattleSceneBootstrapper : MonoBehaviour
         // ==================================================
         // 6. BATTLE STATE
         // ==================================================
-        var battleState = new BattleState(
+        var battleState = new BattleData(
             new List<Character> { player, enemy });
 
         // ==================================================
@@ -70,7 +67,13 @@ public class BattleSceneBootstrapper : MonoBehaviour
         // ==================================================
         // 8. RUN GAME
         // ==================================================
-        await battleService.RunBattle();
+        return await battleService.RunBattle();
+    }
+
+    public void Unload()
+    {
+        // Remove listeners, objects etc. For now just:
+        gameObject.SetActive(false);
     }
 
     // ======================================================
@@ -123,7 +126,7 @@ public class BattleSceneBootstrapper : MonoBehaviour
     // ======================================================
 
     private BattleService BuildBattleService(
-        BattleState battleState)
+        BattleData battleState)
     {
         // Core execution
         var effectExecutionService =

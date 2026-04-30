@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class BattleService
 {
-    private readonly BattleState _battleState;
+    private readonly BattleData _battleState;
     private readonly BattleTurnService _turnService;
     private readonly BattleResolutionService _resolutionService;
     private readonly MoveService _moveService;
 
     public BattleService(
-        BattleState battleState,
+        BattleData battleState,
         BattleTurnService turnService,
         BattleResolutionService resolutionService,
         MoveService moveService)
@@ -19,7 +19,7 @@ public class BattleService
         _moveService = moveService;
     }
 
-    public async Awaitable RunBattle()
+    public async Awaitable<Character> RunBattle()
     {
         Character winner;
 
@@ -36,5 +36,6 @@ public class BattleService
         }
 
         Debug.Log($"Winner: {winner.Name}");
+        return winner;
     }
 }
