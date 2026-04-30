@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class MapState : IState
 {
-    private readonly RunFlowStateMachine _flow;
-    private readonly RunSceneContext _context;
+    private readonly GameplayStateMachine _flow;
+    private readonly GameplaySceneContext _context;
 
     public MapState(
-        RunFlowStateMachine flow,
-        RunSceneContext context)
+        GameplayStateMachine flow,
+        GameplaySceneContext context)
     {
         _flow = flow;
         _context = context;
     }
 
-    public async Awaitable Enter()
+    public void Enter()
     {
         _context.MapBootstrapper.Show();
 
@@ -29,9 +29,8 @@ public class MapState : IState
         // await _flow.EnterBattle(result.SelectedEncounter);
     }
 
-    public Awaitable Exit()
+    public void Exit()
     {
         _context.MapBootstrapper.Hide();
-        return default;
     }
 }

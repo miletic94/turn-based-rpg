@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class StateMachine
+public class AsyncStateMachine
 {
-    private IState _currentState;
+    private IAsyncState _currentState;
 
-    public async Awaitable SwitchState(IState newState)
+    public async Awaitable SwitchState(IAsyncState newState)
     {
         if (_currentState != null)
             await _currentState.Exit();

@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class RewardState : IState
 {
-    private readonly RunFlowStateMachine _flow;
-    private readonly RunSceneContext _context;
+    private readonly GameplayStateMachine _flow;
+    private readonly GameplaySceneContext _context;
     private readonly Move _move;
 
     public RewardState(
-        RunFlowStateMachine flow,
-        RunSceneContext context)
+        GameplayStateMachine flow,
+        GameplaySceneContext context)
     {
         _flow = flow;
         _context = context;
     }
 
-    public async Awaitable Enter()
+    public void Enter()
     {
         _context.RewardBootstrapper.Show();
 
@@ -23,9 +23,8 @@ public class RewardState : IState
         // await _flow.EnterMap();
     }
 
-    public Awaitable Exit()
+    public void Exit()
     {
         _context.RewardBootstrapper.Hide();
-        return default;
     }
 }

@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class MoveManagementState : IState
 {
-    private readonly RunFlowStateMachine _flow;
-    private readonly RunSceneContext _context;
+    private readonly GameplayStateMachine _flow;
+    private readonly GameplaySceneContext _context;
 
     public MoveManagementState(
-        RunFlowStateMachine flow,
-        RunSceneContext context)
+        GameplayStateMachine flow,
+        GameplaySceneContext context)
     {
         _flow = flow;
         _context = context;
     }
 
-    public async Awaitable Enter()
+    public async void Enter()
     {
         _context.MoveManagementBootstrapper.Show();
 
@@ -22,9 +22,8 @@ public class MoveManagementState : IState
         // await _flow.EnterMap();
     }
 
-    public Awaitable Exit()
+    public void Exit()
     {
         _context.MoveManagementBootstrapper.Hide();
-        return default;
     }
 }

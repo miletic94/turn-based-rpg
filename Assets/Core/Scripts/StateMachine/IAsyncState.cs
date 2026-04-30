@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IState
+public interface IAsyncState
 {
     Awaitable Enter();
     Awaitable Exit();
