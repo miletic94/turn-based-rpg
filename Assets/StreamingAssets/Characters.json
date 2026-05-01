@@ -184,5 +184,104 @@
                 ]
             }
         ]
+    },
+    {
+        "name": "Giant Spider",
+        "health": 100,
+        "attack": 1.2,
+        "defense": 0.3,
+        "magic": 0.3,
+        "mana": 4,
+        "moves": [
+            {
+                "id": "8",
+                "name": "Bite",
+                "effects": [
+                    {
+                        "id": "9",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "9",
+                "name": "Web Throw",
+                "effects": [
+                    {
+                        "id": "10",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 10,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    },
+                    {
+                        "id": "11",
+                        "type": "debuff",
+                        "target": "enemy",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.1
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "10",
+                "name": "Pounce",
+                "effects": [
+                    {
+                        "id": "12",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 30,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "11",
+                "name": "Skitter",
+                "effects": [
+                    {
+                        "id": "13",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.1
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            }
+        ]
     }
 ]

@@ -1,5 +1,4 @@
 using System;
-
 public class MoveEffectExecutionService
 {
     public void Execute(IMoveEffect effect, EffectContext context)
@@ -31,7 +30,6 @@ public class MoveEffectExecutionService
         var target = context.ResolveTarget(effect.Target);
 
         float value = effect.Value.GetValue(context);
-
         if (effect.IsSource)
             context.StoreResult(effect.Id, value);
 

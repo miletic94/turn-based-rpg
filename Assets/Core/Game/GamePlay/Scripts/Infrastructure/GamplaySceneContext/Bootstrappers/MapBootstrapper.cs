@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapBootstrapper : MonoBehaviour
@@ -11,14 +12,12 @@ public class MapBootstrapper : MonoBehaviour
     {
         var characters = LoadCharacters();
         var player = characters[0];
-        var enemy = characters[1];
-
 
         _levelTreeViewBinder = new LevelTreeViewBinder(
             _levelTreeView,
             stateMachine,
             player,
-            new LevelProvider(new List<Character> { enemy }));
+            new LevelProvider(characters.Skip(1).ToList()));
         _levelTreeViewBinder.Bind();
 
         MapScreen.Show();

@@ -1,30 +1,34 @@
+using System.Collections.Generic;
 using UnityEngine;
 public class CombatantViewFactory : MonoBehaviour
 {
-    [SerializeField] private CombatantView playerPrefab;
-    [SerializeField] private CombatantView enemyPrefab;
-
+    [SerializeField] private CombatantPrefabDatabase database;
     [SerializeField] private Transform playerSpawn;
     [SerializeField] private Transform enemySpawn;
 
+    private void Awake()
+    {
+        database.Init();
+    }
+
     public CombatantView CreateView(Character character)
     {
-        CombatantView prefab;
-        Transform spawn;
+        var prefab = database.Get(StringUtils.ToNoSpaceLowercase(character.Name));
 
-        if (character.Role == CombatantRole.Player)
+        if (prefab == null)
         {
-            prefab = playerPrefab;
-            spawn = playerSpawn;
-            prefab.FlipSpriteX(true);
+            Debug.LogError($"No prefab found for {character.Name}");
+            return null;
         }
-        else
-        {
-            prefab = enemyPrefab;
-            spawn = enemySpawn;
-        }
+
+        Transform spawn = character.Role == CombatantRole.Player
+            ? playerSpawn
+            : enemySpawn;
 
         var view = Instantiate(prefab, spawn.position, Quaternion.identity, spawn);
+
+        if (character.Role == CombatantRole.Player)
+            view.FlipSpriteX(true);
 
         return view;
     }
