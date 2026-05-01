@@ -9,7 +9,7 @@ public class StatView : MonoBehaviour
 
     private Dictionary<StatType, StatRowView> _rows = new();
 
-    public void ShowStat(Character character)
+    public void ShowStat(Combatant character)
     {
         var header = Instantiate(_statHeaderPrefab, _container);
         header.SetText(character.Name);
@@ -24,7 +24,7 @@ public class StatView : MonoBehaviour
         }
     }
 
-    public void UpdateStat(Character character)
+    public void UpdateStat(Combatant character)
     {
         foreach (var stat in character.GetStats())
         {

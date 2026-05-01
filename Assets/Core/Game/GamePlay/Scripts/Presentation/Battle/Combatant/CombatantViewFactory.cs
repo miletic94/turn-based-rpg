@@ -11,7 +11,7 @@ public class CombatantViewFactory : MonoBehaviour
         database.Init();
     }
 
-    public CombatantView CreateView(Character character)
+    public CombatantView CreateView(Combatant character)
     {
         var prefab = database.Get(StringUtils.ToNoSpaceLowercase(character.Name));
 

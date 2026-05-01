@@ -3,7 +3,7 @@ public class MoveViewBinder
     private readonly IMoveView _view;
     private readonly IEventBus _bus;
 
-    private Character _currentActor;
+    private Combatant _currentActor;
 
     public MoveViewBinder(IEventBus bus, IMoveView view)
     {

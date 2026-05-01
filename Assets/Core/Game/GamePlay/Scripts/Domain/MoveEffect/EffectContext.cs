@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 public class EffectContext
 {
-    public Character Source { get; }
-    public Character Target { get; }
+    public Combatant Source { get; }
+    public Combatant Target { get; }
     private readonly Dictionary<string, float> _results = new();
 
-    public EffectContext(Character source, Character target)
+    public EffectContext(Combatant source, Combatant target)
     {
         Source = source;
         Target = target;
     }
 
-    public Character ResolveTarget(TargetType type)
+    public Combatant ResolveTarget(TargetType type)
         => type == TargetType.Self ? Source : Target;
 
     public void StoreResult(string? id, float value)

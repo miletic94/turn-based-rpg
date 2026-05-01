@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class CombatantViewBinder
 {
     private readonly CombatantViewFactory _factory;
-    private readonly Dictionary<Character, CombatantView> _views = new();
+    private readonly Dictionary<Combatant, CombatantView> _views = new();
     private readonly EventBus _bus;
 
     public CombatantViewBinder(
@@ -14,7 +14,7 @@ public class CombatantViewBinder
         _bus = bus;
     }
 
-    public void Register(Character character)
+    public void Register(Combatant character)
     {
         var view = _factory.CreateView(character);
         _views[character] = view;
@@ -44,7 +44,7 @@ public class CombatantViewBinder
         Update(e.Target);
     }
 
-    private void Update(Character character)
+    private void Update(Combatant character)
     {
         if (_views.TryGetValue(character, out var view))
             view.UpdateHealthBar(character);

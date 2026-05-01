@@ -15,9 +15,8 @@ public class CharacterDeserializer
         string charactersPath = Path.Combine(Application.streamingAssetsPath, "Characters.json");
         string charactersJson = File.ReadAllText(charactersPath);
 
-        List<CharacterDTO> characterDTOs = JsonConvert.DeserializeObject<List<CharacterDTO>>(charactersJson);
+        List<Character> characters = JsonConvert.DeserializeObject<List<Character>>(charactersJson);
 
-        List<Character> characters = characterDTOs.Select(dto => CharacterFactory.Create(dto)).ToList();
         return characters;
     }
 

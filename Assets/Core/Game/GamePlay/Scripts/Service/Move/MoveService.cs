@@ -28,8 +28,8 @@ public class MoveService
     }
 
     public void ExecuteMove(
-        Character source,
-        Character target,
+        Combatant source,
+        Combatant target,
         Move move)
     {
         ValidateMoveOwnership(source, move);
@@ -54,7 +54,7 @@ public class MoveService
     // ======================================================
 
     private void ValidateMoveOwnership(
-        Character source,
+        Combatant source,
         Move move)
     {
         if (!source.HasMove(move))
@@ -65,7 +65,7 @@ public class MoveService
     }
 
     private void ValidateResources(
-        Character source,
+        Combatant source,
         Move move)
     {
         if (!source.HasEnoughResource(move))
@@ -80,12 +80,12 @@ public class MoveService
     // TURN PROCESSING
     // ======================================================
 
-    private void ProcessTurnStart(Character source)
+    private void ProcessTurnStart(Combatant source)
     {
         source.TickModifiers();
     }
 
-    private void ProcessTurnEnd(Character source)
+    private void ProcessTurnEnd(Combatant source)
     {
         source.ClearInactiveModifiers();
     }
@@ -95,8 +95,8 @@ public class MoveService
     // ======================================================
 
     private EffectContext CreateEffectContext(
-        Character source,
-        Character target)
+        Combatant source,
+        Combatant target)
     {
         return new EffectContext(source, target);
     }
@@ -120,7 +120,7 @@ public class MoveService
     // ======================================================
 
     private void SpendMoveCost(
-        Character source,
+        Combatant source,
         Move move)
     {
         source.ReduceResource(move.Cost);

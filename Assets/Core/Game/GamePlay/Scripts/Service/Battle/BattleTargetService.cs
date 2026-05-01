@@ -1,9 +1,9 @@
 
 public class BattleTargetService
 {
-    public Character ResolveTarget(
+    public Combatant ResolveTarget(
         BattleData state,
-        Character source,
+        Combatant source,
         TargetType targetType)
     {
         return targetType switch
@@ -14,9 +14,9 @@ public class BattleTargetService
         };
     }
 
-    public Character ResolveDefaultEnemy(
+    public Combatant ResolveDefaultEnemy(
         BattleData state,
-        Character source)
+        Combatant source)
     {
         foreach (var combatant in state.Combatants)
         {

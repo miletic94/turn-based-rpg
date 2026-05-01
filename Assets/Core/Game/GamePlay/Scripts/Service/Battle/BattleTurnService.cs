@@ -2,12 +2,12 @@ using System;
 
 public class BattleTurnService
 {
-    public Character GetCurrentCombatant(BattleData state)
+    public Combatant GetCurrentCombatant(BattleData state)
     {
         return state.Combatants[state.CurrentCombatantIndex];
     }
 
-    public Character GetNextCombatant(BattleData state)
+    public Combatant GetNextCombatant(BattleData state)
     {
         int nextIndex = (state.CurrentCombatantIndex + 1) % state.Combatants.Count;
         return state.Combatants[nextIndex];

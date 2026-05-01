@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 public class BattleData
 {
-    private readonly List<Character> _combatants;
+    private readonly List<Combatant> _combatants;
 
-    public IReadOnlyList<Character> Combatants => _combatants;
+    public IReadOnlyList<Combatant> Combatants => _combatants;
 
     public int CurrentCombatantIndex { get; private set; }
 
     public int TurnNumber { get; private set; }
 
-    public BattleData(List<Character> combatants)
+    public BattleData(List<Combatant> combatants)
     {
         if (combatants == null || combatants.Count == 0)
             throw new Exception("Battle requires at least one combatant");

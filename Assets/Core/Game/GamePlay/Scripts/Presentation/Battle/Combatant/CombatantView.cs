@@ -9,7 +9,7 @@ public class CombatantView : MonoBehaviour
         _spriteRenderer.flipX = flip;
     }
 
-    public void UpdateHealthBar(Character character)
+    public void UpdateHealthBar(Combatant character)
     {
         _healthBar.SetImmediate(character.Health / character.BaseHealth);
     }

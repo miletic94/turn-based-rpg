@@ -1,12 +1,12 @@
 public class MoveExecutedEvent : IGameEvent
 {
-    public Character Source { get; }
-    public Character Target { get; }
+    public Combatant Source { get; }
+    public Combatant Target { get; }
     public Move Move { get; }
 
     public MoveExecutedEvent(
-        Character source,
-        Character target,
+        Combatant source,
+        Combatant target,
         Move move)
     {
         Source = source;

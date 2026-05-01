@@ -19,9 +19,9 @@ public class BattleService
         _moveService = moveService;
     }
 
-    public async Awaitable<Character> RunBattle()
+    public async Awaitable<Combatant> RunBattle()
     {
-        Character winner;
+        Combatant winner;
 
         while (!_resolutionService.TryGetWinner(_battleState, out winner))
         {

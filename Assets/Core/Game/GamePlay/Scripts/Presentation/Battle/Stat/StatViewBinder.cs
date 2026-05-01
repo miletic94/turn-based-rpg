@@ -4,7 +4,7 @@ public class StatViewBinder
     private readonly StatView _view;
     private readonly IEventBus _bus;
 
-    private Character _currentCharacter;
+    private Combatant _currentCharacter;
 
     public StatViewBinder(IEventBus bus, StatView view)
     {
@@ -22,7 +22,7 @@ public class StatViewBinder
         _bus.Unsubscribe<MoveExecutedEvent>(OnMoveExecuted);
     }
 
-    public void Show(Character character)
+    public void Show(Combatant character)
     {
         _currentCharacter = character;
         _view.ShowStat(character);
@@ -38,7 +38,7 @@ public class StatViewBinder
             Refresh(e.Target);
     }
 
-    private void Refresh(Character character)
+    private void Refresh(Combatant character)
     {
         _view.UpdateStat(character);
     }

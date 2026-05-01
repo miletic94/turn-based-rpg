@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Character
+public class Combatant
 {
     public string Name { get; private set; }
     private float _baseHealth;
@@ -20,7 +20,7 @@ public class Character
     private List<ActiveModifier> _modifiers;
     public CombatantRole Role { get; set; }
     public IBattleMoveSelector MoveSelector { get; set; }
-    public Character(string name, float health, float attack, float defense, float magic, int mana, List<Move> moves)
+    public Combatant(string name, float health, float attack, float defense, float magic, int mana, List<Move> moves)
     {
         Name = name;
         Health = health;

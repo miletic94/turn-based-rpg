@@ -1,6 +1,6 @@
 public class BattleResolutionService
 {
-    public bool TryGetWinner(BattleData state, out Character winner)
+    public bool TryGetWinner(BattleData state, out Combatant winner)
     {
         int deadIndex = -1;
 

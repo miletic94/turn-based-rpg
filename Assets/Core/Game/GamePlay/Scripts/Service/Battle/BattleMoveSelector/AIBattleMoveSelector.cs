@@ -3,7 +3,7 @@ using UnityEngine;
 public class AIBattleMoveSelector : IBattleMoveSelector
 {
     public async Awaitable<Move> SelectMoveAsync(
-           Character actor,
+           Combatant actor,
            BattleData battleState)
     {
         await Awaitable.WaitForSecondsAsync(0.1f);

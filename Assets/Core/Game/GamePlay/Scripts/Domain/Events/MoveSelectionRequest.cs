@@ -1,8 +1,8 @@
 public class MoveSelectionRequestedEvent : IGameEvent
 {
-    public Character Actor { get; }
+    public Combatant Actor { get; }
 
-    public MoveSelectionRequestedEvent(Character actor)
+    public MoveSelectionRequestedEvent(Combatant actor)
     {
         Actor = actor;
     }

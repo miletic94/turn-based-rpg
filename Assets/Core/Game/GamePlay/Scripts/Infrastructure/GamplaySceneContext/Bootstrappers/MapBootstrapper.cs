@@ -11,12 +11,11 @@ public class MapBootstrapper : MonoBehaviour
     public void InitializeAndRun(GameplayStateMachine stateMachine)
     {
         var characters = LoadCharacters();
-        var player = characters[0];
 
         _levelTreeViewBinder = new LevelTreeViewBinder(
             _levelTreeView,
             stateMachine,
-            player,
+            characters[0],
             new LevelProvider(characters.Skip(1).ToList()));
         _levelTreeViewBinder.Bind();
 
