@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class BattleBootstrapper : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class BattleBootstrapper : MonoBehaviour
     CombatantViewBinder _combatantViewBinder;
     StatViewBinder _statViewBinder;
     MoveViewBinder _moveViewBinder;
-
-    public async Awaitable<Combatant> InitializeAndRun(Character playerCharacter, Character enemyCharacter)
+    // TODO: This all sucks, need to refactor how the battle scene is initialized and how the state machine interacts with it. This is just a quick and dirty way to get something working for now.
+    public (Combatant, Combatant ombatant) Initialize(Character playerCharacter, Character enemyCharacter)
     {
         _combatantViewBinder = new CombatantViewBinder(_combatantViewFactory, AppContext.EventBus);
         _statViewBinder = new StatViewBinder(AppContext.EventBus, _statView);
@@ -21,11 +22,15 @@ public class BattleBootstrapper : MonoBehaviour
 
         SetupPresentation(player, enemy);
 
+        BattleScreen.Show();
+        return (player, enemy);
+    }
+
+    public async Awaitable<Combatant> Run(Combatant player, Combatant enemy)
+    {
         var battleState = new BattleData(new List<Combatant> { player, enemy });
 
         var battleService = BuildBattleService(battleState);
-
-        BattleScreen.Show();
 
         return await battleService.RunBattle();
     }

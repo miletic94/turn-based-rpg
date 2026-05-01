@@ -1,3 +1,4 @@
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 public class CombatantView : MonoBehaviour
 {
@@ -9,12 +10,13 @@ public class CombatantView : MonoBehaviour
         _spriteRenderer.flipX = flip;
     }
 
-    public void UpdateHealthBar(Combatant character)
-    {
-        _healthBar.SetImmediate(character.Health / character.BaseHealth);
-    }
     public void Dispose()
     {
         Destroy(gameObject);
+    }
+
+    public void UpdateHealthBar(Combatant character)
+    {
+        _healthBar.SetImmediate(character.Health / character.BaseHealth);
     }
 }

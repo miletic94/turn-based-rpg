@@ -1,9 +1,13 @@
-using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 public class MapState : IState
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
+
+    private Character _player;
+    private List<Character> _enemies;
 
     public MapState(
         GameplayStateMachine gameplayStateMachine,
@@ -15,22 +19,35 @@ public class MapState : IState
 
     public void Enter()
     {
-        _context.MapBootstrapper.InitializeAndRun(_gameplayStateMachine);
+        LoadMapData();
 
-        // var result =
-        //     await _context.MapBootstrapper.WaitForSelection();
-
-        // if (result.OpenMoveManagement)
-        // {
-        //     await _gameplayStateMachine.EnterMoveManagement();
-        //     return;
-        // }
-
-        // await _gameplayStateMachine.EnterBattle(result.SelectedEncounter);
+        _context.MapBootstrapper.Initialize(
+            _enemies,
+            OnEnemySelected
+        );
     }
 
     public void Exit()
     {
         _context.MapBootstrapper.Unload();
+    }
+
+    private void LoadMapData()
+    {
+        var characters = new CharacterDeserializer().Deserialize();
+
+        _player = characters[0];
+
+        _enemies = characters
+            .Skip(1)
+            .ToList();
+    }
+
+    private void OnEnemySelected(Character selectedEnemy)
+    {
+        _gameplayStateMachine.EnterBattle(
+            _player,
+            selectedEnemy
+        );
     }
 }

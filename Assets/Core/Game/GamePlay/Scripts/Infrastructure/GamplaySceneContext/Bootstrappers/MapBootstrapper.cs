@@ -1,35 +1,33 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class MapBootstrapper : MonoBehaviour
 {
-    [SerializeField] MapScreen MapScreen;
-    [SerializeField] LevelTreeView _levelTreeView;
-    private LevelTreeViewBinder _levelTreeViewBinder;
+    [SerializeField] private MapScreen _mapScreen;
+    [SerializeField] private LevelTreeView _levelTreeView;
 
-    public void InitializeAndRun(GameplayStateMachine stateMachine)
+    private LevelTreeViewBinder _binder;
+
+    public void Initialize(
+        List<Character> enemies,
+        Action<Character> onEnemySelected)
     {
-        var characters = LoadCharacters();
-
-        _levelTreeViewBinder = new LevelTreeViewBinder(
+        _binder = new LevelTreeViewBinder(
             _levelTreeView,
-            stateMachine,
-            characters[0],
-            new LevelProvider(characters.Skip(1).ToList()));
-        _levelTreeViewBinder.Bind();
+            new LevelProvider(enemies));
 
-        MapScreen.Show();
-    }
+        _binder.Bind(levelNode =>
+        {
+            onEnemySelected?.Invoke(levelNode.Enemy);
+        });
 
-    private List<Character> LoadCharacters()
-    {
-        return new CharacterDeserializer().Deserialize();
+        _mapScreen.Show();
     }
 
     public void Unload()
     {
-        _levelTreeViewBinder.Unbind();
-        MapScreen.Hide();
+        _binder?.Unbind();
+        _mapScreen.Hide();
     }
 }

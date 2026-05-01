@@ -1,30 +1,29 @@
+using System;
 using System.Collections.Generic;
 
 public class LevelTreeViewBinder
 {
     private readonly ILevelTreeView _view;
-    private readonly GameplayStateMachine _stateMachine;
-    private readonly Character _player;
     private readonly ILevelProvider _levelProvider;
+
+    private Action<LevelNodeData> _onLevelSelected;
 
     public LevelTreeViewBinder(
         ILevelTreeView view,
-        GameplayStateMachine stateMachine,
-        Character player,
         ILevelProvider levelProvider)
     {
         _view = view;
-        _stateMachine = stateMachine;
-        _player = player;
         _levelProvider = levelProvider;
     }
 
-    public void Bind()
+    public void Bind(Action<LevelNodeData> onLevelSelected)
     {
+        _onLevelSelected = onLevelSelected;
+
         List<LevelNodeData> levels = _levelProvider.GetAvailableLevels();
 
         _view.ShowLevels(levels);
-        _view.EnableInput(OnLevelSelected);
+        _view.EnableInput(HandleLevelSelected);
     }
 
     public void Unbind()
@@ -32,12 +31,10 @@ public class LevelTreeViewBinder
         _view.DisableInput();
     }
 
-    private void OnLevelSelected(LevelNodeData selectedLevel)
+    private void HandleLevelSelected(LevelNodeData selectedLevel)
     {
         _view.DisableInput();
 
-        Character enemy = selectedLevel.Enemy;
-
-        _stateMachine.EnterBattle(_player, enemy);
+        _onLevelSelected?.Invoke(selectedLevel);
     }
 }
