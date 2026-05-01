@@ -20,6 +20,14 @@ public class CombatantViewBinder
         _views[character] = view;
     }
 
+    public void UnregisterAll()
+    {
+        foreach (var view in _views.Values)
+            view.Dispose();
+
+        _views.Clear();
+    }
+
     public void Bind()
     {
         _bus.Subscribe<MoveExecutedEvent>(OnMoveExecuted);

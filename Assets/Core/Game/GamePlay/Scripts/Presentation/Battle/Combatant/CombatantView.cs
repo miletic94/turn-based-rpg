@@ -13,4 +13,8 @@ public class CombatantView : MonoBehaviour
     {
         _healthBar.SetImmediate(character.Health / character.BaseHealth);
     }
+    public void Dispose()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -32,6 +32,7 @@ public class BattleBootstrapper : MonoBehaviour
     public void Unload()
     {
         _combatantViewBinder.Unbind(AppContext.EventBus);
+        _combatantViewBinder.UnregisterAll();
         _statViewBinder.Unbind();
         _moveViewBinder.Unbind();
 
