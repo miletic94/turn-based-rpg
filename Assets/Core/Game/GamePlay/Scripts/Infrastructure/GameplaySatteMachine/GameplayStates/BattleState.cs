@@ -2,26 +2,32 @@ using UnityEngine;
 
 public class BattleState : IState
 {
-    private readonly GameplayStateMachine _flow;
+    private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
-
+    private readonly Character _player;
+    private readonly Character _enemy;
     public BattleState(
-        GameplayStateMachine flow,
-        GameplaySceneContext context)
+        GameplayStateMachine gameplayStateMachine,
+        GameplaySceneContext context,
+        Character player,
+        Character enemy
+        )
     {
-        _flow = flow;
+        _gameplayStateMachine = gameplayStateMachine;
         _context = context; ;
+        _player = player;
+        _enemy = enemy;
     }
 
     public async void Enter()
     {
 
-        var result = await _context.BattleBootstrapper.InitializeAndRun();
+        var result = await _context.BattleBootstrapper.InitializeAndRun(_player, _enemy);
 
         if (result.Role == CombatantRole.Player)
-            _flow.EnterReward(); // await _flow.EnterReward(result.LearnedMove)
+            _gameplayStateMachine.EnterReward(); // await _flow.EnterReward(result.LearnedMove)
         else
-            _flow.EnterMap();
+            _gameplayStateMachine.EnterMap();
     }
 
     public void Exit()

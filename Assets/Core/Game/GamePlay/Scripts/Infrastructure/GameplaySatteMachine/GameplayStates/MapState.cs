@@ -2,35 +2,35 @@ using UnityEngine;
 
 public class MapState : IState
 {
-    private readonly GameplayStateMachine _flow;
+    private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
 
     public MapState(
-        GameplayStateMachine flow,
+        GameplayStateMachine gameplayStateMachine,
         GameplaySceneContext context)
     {
-        _flow = flow;
+        _gameplayStateMachine = gameplayStateMachine;
         _context = context;
     }
 
     public void Enter()
     {
-        _context.MapBootstrapper.Show();
+        _context.MapBootstrapper.InitializeAndRun(_gameplayStateMachine);
 
         // var result =
         //     await _context.MapBootstrapper.WaitForSelection();
 
         // if (result.OpenMoveManagement)
         // {
-        //     await _flow.EnterMoveManagement();
+        //     await _gameplayStateMachine.EnterMoveManagement();
         //     return;
         // }
 
-        // await _flow.EnterBattle(result.SelectedEncounter);
+        // await _gameplayStateMachine.EnterBattle(result.SelectedEncounter);
     }
 
     public void Exit()
     {
-        _context.MapBootstrapper.Hide();
+        _context.MapBootstrapper.Unload();
     }
 }

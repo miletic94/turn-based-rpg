@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AppBootstrapper : MonoBehaviour
 {
-    private ApplicationStateMachine _appStateMachine;
     // private SceneLoaderService _sceneLoader;
 
     private async void Awake()
@@ -10,12 +9,12 @@ public class AppBootstrapper : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // _sceneLoader = new SceneLoaderService();
+        var eventBus = new EventBus();
+        var appStateMachine = new ApplicationStateMachine();
 
-        _appStateMachine =
-            new ApplicationStateMachine();
 
-        AppContext.Initialize(_appStateMachine);
+        AppContext.Initialize(eventBus, appStateMachine);
 
-        await _appStateMachine.EnterMainMenu();
+        await appStateMachine.EnterMainMenu();
     }
 }
