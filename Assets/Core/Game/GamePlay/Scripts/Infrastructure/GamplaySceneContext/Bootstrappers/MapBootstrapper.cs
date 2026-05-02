@@ -11,7 +11,8 @@ public class MapBootstrapper : MonoBehaviour
 
     public void Initialize(
         List<Character> enemies,
-        Action<Character> onEnemySelected)
+        Action<Character> onEnemySelected,
+        Action onManageMovesButtonClicked)
     {
         _binder = new LevelTreeViewBinder(
             _levelTreeView,
@@ -21,6 +22,8 @@ public class MapBootstrapper : MonoBehaviour
         {
             onEnemySelected?.Invoke(levelNode.Enemy);
         });
+
+        _mapScreen.SetOnMoveManagementButtonClicked(onManageMovesButtonClicked);
 
         _mapScreen.Show();
     }

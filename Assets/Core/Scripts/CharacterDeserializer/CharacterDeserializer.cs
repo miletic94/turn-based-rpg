@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CharacterDeserializer
 {
-    public List<Character> Deserialize()
+    public List<CharacterDTO> DeserializeCharacter()
     {
         RegisterEffects();
         RegisterValues();
@@ -15,9 +15,21 @@ public class CharacterDeserializer
         string charactersPath = Path.Combine(Application.streamingAssetsPath, "Characters.json");
         string charactersJson = File.ReadAllText(charactersPath);
 
-        List<Character> characters = JsonConvert.DeserializeObject<List<Character>>(charactersJson);
+        List<CharacterDTO> characters = JsonConvert.DeserializeObject<List<CharacterDTO>>(charactersJson);
 
         return characters;
+    }
+    public HeroDTO DeserializeHero()
+    {
+        RegisterEffects();
+        RegisterValues();
+
+        string heroPath = Path.Combine(Application.streamingAssetsPath, "Hero.json");
+        string heroJson = File.ReadAllText(heroPath);
+
+        HeroDTO hero = JsonConvert.DeserializeObject<HeroDTO>(heroJson);
+
+        return hero;
     }
 
     private static void RegisterEffects()

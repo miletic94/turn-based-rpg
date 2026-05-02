@@ -18,7 +18,6 @@ public class GameplayState : IAsyncState
         var gameplaySceneContext = Object.FindFirstObjectByType<GameplaySceneContext>();
 
         _gameplayStateMachine = new GameplayStateMachine(gameplaySceneContext);
-
         _gameplayStateMachine.EnterMap();
     }
 

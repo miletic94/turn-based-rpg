@@ -1,29 +1,50 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 public class MoveManagementState : IState
 {
-    private readonly GameplayStateMachine _flow;
+    private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
 
+
     public MoveManagementState(
-        GameplayStateMachine flow,
+        GameplayStateMachine gameplayStateMachine,
         GameplaySceneContext context)
     {
-        _flow = flow;
+        _gameplayStateMachine = gameplayStateMachine;
         _context = context;
     }
 
-    public async void Enter()
+    public void Enter()
     {
-        _context.MoveManagementBootstrapper.Show();
+        var loadout = new MoveLoadout
+        {
+            AvailableMoves = new List<Move>(_context.RunSession.Hero.AvailableMoves),
+            EquippedMoves = new List<Move>(_context.RunSession.Hero.EquippedMoves),
+            MaxEquipped = 4
+        };
 
-        // await _context.MoveManagementScreen.WaitForClose();
+        foreach (var equipped in loadout.EquippedMoves)
+        {
+            loadout.AvailableMoves.Remove(equipped);
+        }
 
-        // await _flow.EnterMap();
+        var service = new MoveLoadoutService(loadout);
+
+        _context.MoveManagementBootstrapper.Initialize(
+            loadout,
+            service,
+            OnSave
+        );
+    }
+
+    public void OnSave()
+    {
+        _gameplayStateMachine.EnterMap();
     }
 
     public void Exit()
     {
-        _context.MoveManagementBootstrapper.Hide();
+        _context.MoveManagementBootstrapper.Unload();
     }
 }

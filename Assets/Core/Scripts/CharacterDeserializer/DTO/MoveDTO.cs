@@ -6,4 +6,11 @@ public class MoveDTO
     public string Name;
     public Cost Cost;
     public List<EffectDTO> Effects;
+    public Move ToMove() => new Move
+    (
+        Id,
+         Name,
+         Cost,
+         Effects.ConvertAll(e => e.ToEffect())
+    );
 }

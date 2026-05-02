@@ -92,7 +92,7 @@ public class BattleBootstrapper : MonoBehaviour
             playerCharacter.Defense,
             playerCharacter.Magic,
             4,
-            playerCharacter.Moves.ConvertAll(m => MoveFactory.Create(m)));
+            playerCharacter.Moves);
 
         var enemy = new Combatant(
             enemyCharacter.Name,
@@ -101,7 +101,7 @@ public class BattleBootstrapper : MonoBehaviour
             enemyCharacter.Defense,
             enemyCharacter.Magic,
             4,
-            enemyCharacter.Moves.ConvertAll(m => MoveFactory.Create(m)));
+            enemyCharacter.Moves);
 
         player.Role = CombatantRole.Player;
         enemy.Role = CombatantRole.Enemy;

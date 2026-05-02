@@ -1,17 +1,22 @@
 using System.Collections.Generic;
-using System.Linq;
-
 public class MapState : IState
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
-
-    private Character _player;
     private List<Character> _enemies;
 
     public MapState(
         GameplayStateMachine gameplayStateMachine,
-        GameplaySceneContext context)
+        GameplaySceneContext context,
+        Hero hero)
+    {
+        _gameplayStateMachine = gameplayStateMachine;
+        _context = context;
+    }
+    public MapState(
+        GameplayStateMachine gameplayStateMachine,
+        GameplaySceneContext context
+    )
     {
         _gameplayStateMachine = gameplayStateMachine;
         _context = context;
@@ -23,7 +28,8 @@ public class MapState : IState
 
         _context.MapBootstrapper.Initialize(
             _enemies,
-            OnEnemySelected
+            OnEnemySelected,
+            OnManageMovesButtonClicked
         );
     }
 
@@ -34,19 +40,21 @@ public class MapState : IState
 
     private void LoadMapData()
     {
-        var characters = new CharacterDeserializer().Deserialize();
+        var deserializer = new CharacterDeserializer();
+        _enemies = deserializer.DeserializeCharacter().ConvertAll(dto => dto.ToCharacter());
+        // TODO. Move this to where we enter GameplayState
+        _context.InitializeRun(deserializer.DeserializeHero().ToHero());
+    }
 
-        _player = characters[0];
-
-        _enemies = characters
-            .Skip(1)
-            .ToList();
+    private void OnManageMovesButtonClicked()
+    {
+        _gameplayStateMachine.EnterMoveManagement();
     }
 
     private void OnEnemySelected(Character selectedEnemy)
     {
         _gameplayStateMachine.EnterBattle(
-            _player,
+            _context.RunSession.Hero.ToCharacter(),
             selectedEnemy
         );
     }
