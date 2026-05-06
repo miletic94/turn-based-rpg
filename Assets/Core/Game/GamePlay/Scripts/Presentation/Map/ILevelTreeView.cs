@@ -3,7 +3,5 @@ using System.Collections.Generic;
 
 public interface ILevelTreeView
 {
-    void ShowLevels(List<LevelNodeData> levels);
-    void EnableInput(Action<LevelNodeData> onSelected);
-    void DisableInput();
+    void ShowLevels(List<LevelNodeData> levels, Action<Character> onEnemySelected);
 }

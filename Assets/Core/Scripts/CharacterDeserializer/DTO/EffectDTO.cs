@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 public class EffectDTO
 {
     public string Id;
@@ -14,5 +12,6 @@ public class EffectDTO
     public string TickBehavior;
     public int Duration;
     public bool IsSource;
+
     public IMoveEffect ToEffect() => EffectFactory.Create(this);
 }

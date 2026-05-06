@@ -7,4 +7,6 @@ public class ValueDTO
     public string ReducedBy;
 
     public string SourceId;
+
+    public IMoveEffectValue ToValue() => ValueFactory.Create(this);
 }

@@ -11,23 +11,23 @@ public class CombatantViewFactory : MonoBehaviour
         database.Init();
     }
 
-    public CombatantView CreateView(Combatant character)
+    public CombatantView CreateView(Combatant combatant)
     {
-        var prefab = database.Get(StringUtils.ToNoSpaceLowercase(character.Name));
+        var prefab = database.Get(StringUtils.ToNoSpaceLowercase(combatant.Name));
 
         if (prefab == null)
         {
-            Debug.LogError($"No prefab found for {character.Name}");
+            Debug.LogError($"No prefab found for {combatant.Name}");
             return null;
         }
 
-        Transform spawn = character.Role == CombatantRole.Player
+        Transform spawn = combatant.Role == CombatantRole.Player
             ? playerSpawn
             : enemySpawn;
 
         var view = Instantiate(prefab, spawn.position, Quaternion.identity, spawn);
 
-        if (character.Role == CombatantRole.Player)
+        if (combatant.Role == CombatantRole.Player)
             view.FlipSpriteX(true);
 
         return view;

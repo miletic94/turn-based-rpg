@@ -1,21 +1,45 @@
 using System;
-using System.Collections.Generic;
-
 public static class EffectFactory
 {
-    private static readonly Dictionary<string, Func<EffectDTO, IMoveEffect>> map
-        = new();
-
-    public static void Register(string type, Func<EffectDTO, IMoveEffect> factory)
-    {
-        map[type] = factory;
-    }
 
     public static IMoveEffect Create(EffectDTO dto)
     {
-        if (!map.TryGetValue(dto.Type, out var factory))
-            throw new Exception($"Unknown effect type {dto.Type}");
-
-        return factory(dto);
+        switch (dto.Type)
+        {
+            case "damage":
+                return new DamageEffect(
+                            dto.Id,
+                            EnumUtils.ParseEnum<TargetType>(dto.Target),
+                            EnumUtils.ParseEnum<EffectCategory>(dto.Category),
+                            dto.Value.ToValue(),
+                            dto.IsSource
+                        );
+            case "heal":
+                return new HealEffect(
+                dto.Id,
+                EnumUtils.ParseEnum<TargetType>(dto.Target),
+                dto.Value.ToValue(),
+                dto.IsSource
+                );
+            case "buff":
+                return CreateModifier(dto, ModifierType.Buff);
+            case "debuff":
+                return CreateModifier(dto, ModifierType.Debuff);
+            default:
+                throw new Exception($"Unknown effect type: {dto.Type}");
+        }
+    }
+    private static IMoveEffect CreateModifier(EffectDTO dto, ModifierType type)
+    {
+        return new StatModifierEffect(
+            dto.Id,
+            EnumUtils.ParseEnum<ModifierType>(dto.Type),
+            EnumUtils.ParseEnum<TargetType>(dto.Target),
+            EnumUtils.ParseEnum<StatType>(dto.Stat),
+            dto.Value.ToValue(),
+            EnumUtils.ParseEnum<ModifierTickBehavior>(dto.TickBehavior),
+            dto.Duration,
+            dto.IsSource
+        );
     }
 }

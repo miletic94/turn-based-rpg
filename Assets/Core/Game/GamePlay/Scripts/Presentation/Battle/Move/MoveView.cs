@@ -8,10 +8,7 @@ public class MoveView : MonoBehaviour, IMoveView
 {
     [SerializeField] GameObject moveButtonPrefab;
     [SerializeField] Transform content;
-    private Action<Move> _onMoveSelected;
-    private bool _isActive;
-
-    public void ShowMoves(List<Move> moves)
+    public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected)
     {
         // Clear old buttons
         foreach (Transform child in content)
@@ -25,25 +22,7 @@ public class MoveView : MonoBehaviour, IMoveView
             var text = buttonObj.GetComponentInChildren<TMP_Text>();
             text.text = move.Name;
 
-            button.onClick.AddListener(() => OnMoveButtonClicked(move));
+            button.onClick.AddListener(() => onMoveSelected(move));
         }
-    }
-
-    public void EnableInput(Action<Move> onMoveSelected)
-    {
-        _onMoveSelected = onMoveSelected;
-        _isActive = true;
-    }
-
-    public void DisableInput()
-    {
-        _onMoveSelected = null;
-        _isActive = false;
-    }
-
-    public void OnMoveButtonClicked(Move move)
-    {
-        if (!_isActive) return;
-        _onMoveSelected?.Invoke(move);
     }
 }

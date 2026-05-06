@@ -1,41 +1,52 @@
-using UnityEngine;
+public enum BattlePhase
+{
+    NeedMoveSelection,
+    ResolvingTurn,
+    Finished
+}
 
 public class BattleService
 {
-    private readonly BattleData _battleState;
-    private readonly BattleTurnService _turnService;
-    private readonly BattleResolutionService _resolutionService;
+    private readonly BattleData _battleData;
+    private readonly BattleTurnService _battleTurnService;
+    private readonly BattleResolutionService _battleResolutionService;
     private readonly MoveService _moveService;
 
-    public BattleService(
-        BattleData battleState,
-        BattleTurnService turnService,
-        BattleResolutionService resolutionService,
-        MoveService moveService)
+    public BattleService(BattleData battleData, BattleTurnService battleTurnService, BattleResolutionService battleResolutionService, MoveService moveService)
     {
-        _battleState = battleState;
-        _turnService = turnService;
-        _resolutionService = resolutionService;
+        _battleData = battleData;
+        _battleTurnService = battleTurnService;
+        _battleResolutionService = battleResolutionService;
         _moveService = moveService;
     }
 
-    public async Awaitable<Combatant> RunBattle()
+    public BattlePhase Phase { get; private set; } = BattlePhase.NeedMoveSelection;
+    public Combatant Winner { get; private set; }
+
+    public Combatant CurrentActor => _battleTurnService.GetCurrentCombatant(_battleData);
+    public Combatant CurrentTarget => _battleTurnService.GetNextCombatant(_battleData);
+
+    public void SubmitMove(Move move)
     {
-        Combatant winner;
+        if (Phase != BattlePhase.NeedMoveSelection) return;
 
-        while (!_resolutionService.TryGetWinner(_battleState, out winner))
+        _moveService.ExecuteMove(CurrentActor, CurrentTarget, move);
+        Phase = BattlePhase.ResolvingTurn;
+    }
+
+    public void Advance()
+    {
+        if (Phase == BattlePhase.ResolvingTurn)
         {
-            var source = _turnService.GetCurrentCombatant(_battleState);
-            var target = _turnService.GetNextCombatant(_battleState);
+            if (_battleResolutionService.TryGetWinner(_battleData, out var winner))
+            {
+                Winner = winner;
+                Phase = BattlePhase.Finished;
+                return;
+            }
 
-            var move = await source.MoveSelector.SelectMoveAsync(source, _battleState);
-
-            _moveService.ExecuteMove(source, target, move);
-
-            _turnService.AdvanceTurn(_battleState);
+            _battleTurnService.AdvanceTurn(_battleData);
+            Phase = BattlePhase.NeedMoveSelection;
         }
-
-        Debug.Log($"Winner: {winner.Name}");
-        return winner;
     }
 }

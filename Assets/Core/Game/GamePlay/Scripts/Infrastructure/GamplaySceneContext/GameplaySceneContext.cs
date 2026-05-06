@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameplaySceneContext : MonoBehaviour
@@ -9,10 +10,10 @@ public class GameplaySceneContext : MonoBehaviour
     public MoveManagementBootstrapper MoveManagementBootstrapper;
 
     [Header("Run State")]
-    public RunSession RunSession { get; private set; }
+    public GameplayContext GameplayContext { get; private set; }
 
-    public void InitializeRun(Hero hero)
+    public void InitializeRun(Hero hero, List<Character> enemies)
     {
-        RunSession = new RunSession(hero);
+        GameplayContext = new GameplayContext(hero, enemies);
     }
 }

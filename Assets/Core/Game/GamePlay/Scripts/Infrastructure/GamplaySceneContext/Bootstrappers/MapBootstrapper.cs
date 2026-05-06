@@ -5,32 +5,16 @@ using UnityEngine;
 public class MapBootstrapper : MonoBehaviour
 {
     [SerializeField] private MapScreen _mapScreen;
-    [SerializeField] private LevelTreeView _levelTreeView;
-
-    private LevelTreeViewBinder _binder;
-
-    public void Initialize(
-        List<Character> enemies,
-        Action<Character> onEnemySelected,
-        Action onManageMovesButtonClicked)
+    [SerializeField] private MapView _mapView;
+    public MapController Load()
     {
-        _binder = new LevelTreeViewBinder(
-            _levelTreeView,
-            new LevelProvider(enemies));
-
-        _binder.Bind(levelNode =>
-        {
-            onEnemySelected?.Invoke(levelNode.Enemy);
-        });
-
-        _mapScreen.SetOnMoveManagementButtonClicked(onManageMovesButtonClicked);
-
         _mapScreen.Show();
+
+        return new MapController(_mapView);
     }
 
     public void Unload()
     {
-        _binder?.Unbind();
         _mapScreen.Hide();
     }
 }

@@ -18,11 +18,22 @@ public class GameplayState : IAsyncState
         var gameplaySceneContext = Object.FindFirstObjectByType<GameplaySceneContext>();
 
         _gameplayStateMachine = new GameplayStateMachine(gameplaySceneContext);
+
+        LoadGameplayData(gameplaySceneContext);
+
         _gameplayStateMachine.EnterMap();
     }
 
     public Awaitable Exit()
     {
         return default;
+    }
+
+    private void LoadGameplayData(GameplaySceneContext context)
+    {
+        var deserializer = new CharacterDeserializer();
+        var hero = deserializer.DeserializeHero().ToHero();
+        var enemies = deserializer.DeserializeCharacter().ConvertAll(dto => dto.ToCharacter());
+        context.InitializeRun(hero, enemies);
     }
 }

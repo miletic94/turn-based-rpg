@@ -19,13 +19,3 @@ public class CharacterDTO
         Moves = Moves.ConvertAll(m => m.ToMove())
     };
 }
-
-public class Character
-{
-    public string Name;
-    public float Health;
-    public float Attack;
-    public float Defense;
-    public float Magic;
-    public List<Move> Moves;
-}

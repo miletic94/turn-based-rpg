@@ -16,10 +16,10 @@ public class GameplayStateMachine
         new MapState(this, _context));
     }
 
-    public void EnterBattle(Character player, Character enemy)
+    public void EnterBattle()
     {
         _machine.SwitchState(
-            new BattleState(this, _context, player, enemy));
+            new BattleState(this, _context));
     }
 
     public void EnterReward()

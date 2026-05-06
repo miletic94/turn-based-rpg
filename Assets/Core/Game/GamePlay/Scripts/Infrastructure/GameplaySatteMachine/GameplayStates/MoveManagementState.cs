@@ -19,8 +19,8 @@ public class MoveManagementState : IState
     {
         var loadout = new MoveLoadout
         {
-            AvailableMoves = new List<Move>(_context.RunSession.Hero.AvailableMoves),
-            EquippedMoves = new List<Move>(_context.RunSession.Hero.EquippedMoves),
+            AvailableMoves = new List<Move>(_context.GameplayContext.Hero.AvailableMoves),
+            EquippedMoves = new List<Move>(_context.GameplayContext.Hero.EquippedMoves),
             MaxEquipped = 4
         };
 

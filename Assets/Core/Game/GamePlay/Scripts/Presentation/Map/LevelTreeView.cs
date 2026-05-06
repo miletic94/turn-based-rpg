@@ -7,10 +7,7 @@ public class LevelTreeView : MonoBehaviour, ILevelTreeView
     [SerializeField] private LevelTreeNodeView _nodePrefab;
     [SerializeField] private Transform _nodesContainer;
 
-    private Action<LevelNodeData> _onSelected;
-    private bool _isActive;
-
-    public void ShowLevels(List<LevelNodeData> levels)
+    public void ShowLevels(List<LevelNodeData> levels, Action<Character> onEnemySelected)
     {
         foreach (Transform child in _nodesContainer)
             Destroy(child.gameObject);
@@ -23,21 +20,8 @@ public class LevelTreeView : MonoBehaviour, ILevelTreeView
 
             node.SetClickAction(() =>
             {
-                if (!_isActive) return;
-                _onSelected?.Invoke(level);
+                onEnemySelected?.Invoke(level.Enemy);
             });
         }
-    }
-
-    public void EnableInput(Action<LevelNodeData> onSelected)
-    {
-        _onSelected = onSelected;
-        _isActive = true;
-    }
-
-    public void DisableInput()
-    {
-        _onSelected = null;
-        _isActive = false;
     }
 }

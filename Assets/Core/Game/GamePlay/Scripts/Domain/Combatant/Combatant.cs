@@ -15,12 +15,11 @@ public class Combatant
     public float Defense => GetStat(StatType.Defense);
     private float _baseMagic;
     public float Magic => GetStat(StatType.Magic);
-    public int Mana { get; private set; }
+    public int Mana { get; private set; } = 4;
     public List<Move> Moves { get; private set; }
     private List<ActiveModifier> _modifiers;
     public CombatantRole Role { get; set; }
-    public IBattleMoveSelector MoveSelector { get; set; }
-    public Combatant(string name, float health, float attack, float defense, float magic, int mana, List<Move> moves)
+    public Combatant(string name, float health, float attack, float defense, float magic, List<Move> moves)
     {
         Name = name;
         Health = health;
@@ -28,7 +27,6 @@ public class Combatant
         _baseAttack = attack;
         _baseDefense = defense;
         _baseMagic = magic;
-        Mana = mana;
         Moves = moves;
         _modifiers = new List<ActiveModifier>();
     }
@@ -135,6 +133,7 @@ public class Combatant
         attack: {Attack},
         defense: {Defense},
         magic: {Magic}
+        moves: {Moves.Count}
         ";
     }
 }
