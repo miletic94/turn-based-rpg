@@ -4,11 +4,11 @@ public class RewardBootstrapper : MonoBehaviour
 {
     [SerializeField] RewardScreen RewardScreen;
 
-    public void Show()
+    public void Load()
     {
         RewardScreen.Show();
     }
-    public void Hide()
+    public void Unload()
     {
         RewardScreen.Hide();
     }

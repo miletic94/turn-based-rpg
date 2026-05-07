@@ -16,7 +16,7 @@ public class RewardState : IState
 
     public void Enter()
     {
-        _context.RewardBootstrapper.Show();
+        _context.RewardBootstrapper.Load();
 
         // await _context.RewardScreen.WaitForContinue();
 
@@ -25,6 +25,6 @@ public class RewardState : IState
 
     public void Exit()
     {
-        _context.RewardBootstrapper.Hide();
+        _context.RewardBootstrapper.Unload();
     }
 }
