@@ -9,7 +9,7 @@
         "current": 0,
         "toNextLevel": 100
     },
-    "availableStatPoints": 2,
+    "availableStatPoints": 5,
     "availableMoves": [
         {
             "id": "0",

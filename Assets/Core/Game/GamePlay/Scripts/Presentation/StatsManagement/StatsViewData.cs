@@ -2,23 +2,57 @@ using System.Collections.Generic;
 
 public class StatsViewData
 {
-    public float Attack { get; private set; }
-    public float Defense { get; private set; }
-    public float Magic { get; private set; }
+    private readonly Dictionary<StatType, StatData> _stats;
+
     public int AvailablePoints { get; private set; }
+
     public StatsViewData(Hero hero)
     {
-        Attack = hero.Attack;
-        Defense = hero.Defense;
-        Magic = hero.Magic;
+        _stats = new Dictionary<StatType, StatData>
+        {
+            {
+                StatType.Attack,
+                new StatData(
+                    StatType.Attack,
+                    hero.Attack,
+                    hero.Attack)
+            },
+            {
+                StatType.Defense,
+                new StatData(
+                    StatType.Defense,
+                    hero.Defense,
+                    hero.Defense)
+            },
+            {
+                StatType.Magic,
+                new StatData(
+                    StatType.Magic,
+                    hero.Magic,
+                    hero.Magic)
+            }
+        };
+
         AvailablePoints = hero.AvailableStatPoints;
     }
 
-    // TODO: Should this exist? Maybe we should have a separate service that handles leveling up and stat point allocation, and then just pass the updated hero to the view?
-    public IEnumerable<(StatType type, float currentValue)> GetStats()
+    public IEnumerable<StatData> GetStats()
     {
-        yield return (StatType.Attack, Attack);
-        yield return (StatType.Defense, Defense);
-        yield return (StatType.Magic, Magic);
+        return _stats.Values;
+    }
+
+    public StatData GetStat(StatType type)
+    {
+        return _stats[type];
+    }
+
+    public void SetStatValue(StatType type, float value)
+    {
+        _stats[type].SetValue(value);
+    }
+
+    public void SetAvailablePoints(int value)
+    {
+        AvailablePoints = value;
     }
 }

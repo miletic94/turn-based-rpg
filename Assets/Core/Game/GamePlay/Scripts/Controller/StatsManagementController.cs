@@ -1,23 +1,45 @@
-using System.Collections.Generic;
-
 public class StatsManagementController
 {
     private readonly StatsManagementView _view;
-    private Dictionary<StatType, StatItemRowView> _statRows = new();
+    private readonly StatsManagementService _service;
 
-    public StatsManagementController(StatsManagementView view)
+    public StatsManagementController(
+        StatsManagementView view,
+        StatsManagementService service)
     {
         _view = view;
+        _service = service;
     }
 
-    public void Initialize(StatsViewData viewData)
+    public void Initialize()
     {
-        _view.ShowAvailablePoints(viewData.AvailablePoints);
-        _view.SetAvailablePoints(viewData.AvailablePoints);
-        foreach (var stat in viewData.GetStats())
-        {
-            var row = _view.ShowStatItemRow(stat.type.ToString(), stat.currentValue.ToString());
-            _statRows[stat.type] = row;
-        }
+        _view.Initialize(
+            _service.GetStats(),
+            _service.GetAvailablePoints(),
+            OnPlusClicked,
+            OnMinusClicked);
+    }
+
+    private void OnPlusClicked(StatType type)
+    {
+        _service.AddStat(type);
+        _service.SetAvailablePoints(_service.GetAvailablePoints() - 1);
+
+        Refresh();
+    }
+
+    private void OnMinusClicked(StatType type)
+    {
+        _service.SubstractStat(type);
+        _service.SetAvailablePoints(_service.GetAvailablePoints() + 1);
+
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        _view.Refresh(
+            _service.GetStats(),
+            _service.GetAvailablePoints());
     }
 }

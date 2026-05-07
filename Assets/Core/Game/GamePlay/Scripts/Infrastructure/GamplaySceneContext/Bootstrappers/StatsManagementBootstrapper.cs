@@ -7,8 +7,9 @@ public class StatsManagementBootstrapper : MonoBehaviour
 
     public void Load(Hero hero)
     {
-        var statsManagementController = new StatsManagementController(_statsManagementView);
-        statsManagementController.Initialize(new StatsViewData(hero));
+        var statsManagementService = new StatsManagementService(new StatsViewData(hero));
+        var statsManagementController = new StatsManagementController(_statsManagementView, statsManagementService);
+        statsManagementController.Initialize();
         _statsManagementScreen.Show();
     }
     public void Unload()
