@@ -17,29 +17,16 @@ public class MoveManagementState : IState
 
     public void Enter()
     {
-        var loadout = new MoveLoadout
-        {
-            AvailableMoves = new List<Move>(_context.GameplayContext.Hero.AvailableMoves),
-            EquippedMoves = new List<Move>(_context.GameplayContext.Hero.EquippedMoves),
-            MaxEquipped = 4
-        };
-
-        foreach (var equipped in loadout.EquippedMoves)
-        {
-            loadout.AvailableMoves.Remove(equipped);
-        }
-
-        var service = new MoveLoadoutService(loadout);
-
         _context.MoveManagementBootstrapper.Initialize(
-            loadout,
-            service,
+            _context.GameplayContext.Hero,
             OnSave
         );
     }
 
-    public void OnSave()
+    public void OnSave(List<Move> availableMoves, List<Move> equippedMoves)
     {
+        _context.GameplayContext.Hero.AvailableMoves = availableMoves;
+        _context.GameplayContext.Hero.EquippedMoves = equippedMoves;
         _gameplayStateMachine.EnterMap();
     }
 

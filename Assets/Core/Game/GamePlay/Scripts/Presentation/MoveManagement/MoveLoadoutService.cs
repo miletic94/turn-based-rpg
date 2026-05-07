@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 public class MoveLoadoutService
 {
     private readonly MoveLoadout _loadout;
-
+    public List<Move> AvailableMoves => _loadout.AvailableMoves;
+    public List<Move> EquippedMoves => _loadout.EquippedMoves;
     public MoveLoadoutService(
         MoveLoadout loadout)
     {
@@ -18,7 +20,6 @@ public class MoveLoadoutService
             return false;
 
         _loadout.EquippedMoves.Add(move);
-
         return true;
     }
 

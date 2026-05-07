@@ -3,14 +3,12 @@ using System.Collections.Generic;
 
 public interface IMoveManagementView
 {
-    void Show(
-        List<Move> availableMoves,
-        List<Move> equippedMoves);
+    event Action<Move, MoveDropZone.ZoneType> MoveDropped;
+    event Action SaveClicked;
 
-    void BindDropZones(
-        Action<MoveItemView, MoveDropZone.ZoneType> onDropped);
+    void Render(
+        List<Move> available,
+        List<Move> equipped);
 
-    void BindSave(Action onSave);
-
-    void Unbind();
+    void ResetDrag(Move move);
 }

@@ -1,36 +1,52 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveManagementBootstrapper : MonoBehaviour
 {
     [SerializeField]
-    private MoveManagementScreen _screen;
+    private MoveManagementScreen _moveManagementScreen;
 
     [SerializeField]
-    private MoveManagementView _view;
+    private MoveManagementView _moveManagementView;
 
-    private MoveManagementViewBinder _binder;
+    private MoveManagementController _moveManagementController;
 
     public void Initialize(
-        MoveLoadout loadout,
-        MoveLoadoutService service,
-        System.Action onSave)
+        Hero hero,
+        System.Action<List<Move>, List<Move>> onSave)
     {
-        _binder =
-            new MoveManagementViewBinder(
-                _view,
-                loadout,
-                service);
+        var loadout = CreateLoadout(hero);
+        var service = new MoveLoadoutService(loadout);
 
-        _binder.Bind(
+        _moveManagementController = new MoveManagementController(
+            _moveManagementView,
+            service,
             onSave);
 
-        _screen.gameObject.SetActive(true);
+        _moveManagementController.Bind();
+
+        _moveManagementScreen.Show();
     }
 
     public void Unload()
     {
-        _binder?.Unbind();
+        _moveManagementScreen.Hide();
+        _moveManagementController.Unbind();
+    }
 
-        _screen.gameObject.SetActive(false);
+    MoveLoadout CreateLoadout(Hero hero)
+    {
+        var loadout = new MoveLoadout
+        {
+            AvailableMoves = new List<Move>(hero.AvailableMoves),
+            EquippedMoves = new List<Move>(hero.EquippedMoves),
+            MaxEquipped = 4
+        };
+
+        foreach (var equipped in loadout.EquippedMoves)
+        {
+            loadout.AvailableMoves.Remove(equipped);
+        }
+        return loadout;
     }
 }

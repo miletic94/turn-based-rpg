@@ -23,50 +23,50 @@ public class MoveManagementView : MonoBehaviour, IMoveManagementView
     [Header("Controls")]
     [SerializeField] private Button _saveButton;
 
-    private Action _onSave;
+    public event Action<Move, MoveDropZone.ZoneType> MoveDropped;
+    public event Action SaveClicked;
+    private readonly Dictionary<Move, MoveItemView> _items =
+        new Dictionary<Move, MoveItemView>();
 
-    public void Show(
-        List<Move> availableMoves,
-        List<Move> equippedMoves)
+    private void OnEnable()
     {
-        RenderMoves(
-            _availableContainer,
-            availableMoves);
-
-        RenderMoves(
-            _equippedContainer,
-            equippedMoves);
+        _availableZone.OnItemDropped += HandleDrop;
+        _equippedZone.OnItemDropped += HandleDrop;
+        _saveButton.onClick.AddListener(HandleSave);
     }
 
-    public void BindDropZones(
-        Action<MoveItemView, MoveDropZone.ZoneType> onDropped)
+    private void OnDisable()
     {
-        _availableZone.OnItemDropped = onDropped;
-        _equippedZone.OnItemDropped = onDropped;
+        _availableZone.OnItemDropped -= HandleDrop;
+        _equippedZone.OnItemDropped -= HandleDrop;
+        _saveButton.onClick.RemoveListener(HandleSave);
     }
 
-    public void BindSave(Action onSave)
+    public void HandleDrop(
+        MoveItemView item,
+        MoveDropZone.ZoneType zone)
     {
-        _onSave = onSave;
+        Transform targetContainer =
+    zone == MoveDropZone.ZoneType.Available
+        ? _availableContainer
+        : _equippedContainer;
 
-        _saveButton.onClick.RemoveAllListeners();
-        _saveButton.onClick.AddListener(
-            HandleSave);
+        item.transform.SetParent(targetContainer);
+        item.transform.localPosition = Vector3.zero;
+        MoveDropped?.Invoke(item.MoveData, zone);
     }
 
-    public void Unbind()
+    public void HandleSave()
     {
-        _availableZone.OnItemDropped = null;
-        _equippedZone.OnItemDropped = null;
-
-        _onSave = null;
-
-        _saveButton.onClick.RemoveAllListeners();
+        SaveClicked?.Invoke();
     }
 
-    private void HandleSave()
+    public void Render(
+        List<Move> available,
+        List<Move> equipped)
     {
-        _onSave?.Invoke();
+        RenderMoves(_availableContainer, available);
+        RenderMoves(_equippedContainer, equipped);
     }
 
     private void RenderMoves(
@@ -74,7 +74,9 @@ public class MoveManagementView : MonoBehaviour, IMoveManagementView
         List<Move> moves)
     {
         foreach (Transform child in container)
+        {
             Destroy(child.gameObject);
+        }
 
         foreach (var move in moves)
         {
@@ -90,6 +92,16 @@ public class MoveManagementView : MonoBehaviour, IMoveManagementView
             moveItemView.Initialize(
                 move,
                 _canvas);
+
+            _items[move] = moveItemView;
+        }
+    }
+
+    public void ResetDrag(Move move)
+    {
+        if (_items.TryGetValue(move, out var item))
+        {
+            item.ReturnToOriginalParent();
         }
     }
 }

@@ -2528,8 +2528,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36187ce3175711e40a816292cbfde3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _screen: {fileID: 1630632152}
-  _view: {fileID: 1875696937}
+  _moveManagementScreen: {fileID: 1630632152}
+  _moveManagementView: {fileID: 1875696937}
 --- !u!4 &1867243459
 Transform:
   m_ObjectHideFlags: 0
