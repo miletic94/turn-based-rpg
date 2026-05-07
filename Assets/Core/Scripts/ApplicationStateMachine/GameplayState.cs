@@ -21,7 +21,7 @@ public class GameplayState : IAsyncState
 
         LoadGameplayData(gameplaySceneContext);
 
-        _gameplayStateMachine.EnterReward();
+        _gameplayStateMachine.EnterStatsManagement();
     }
 
     public Awaitable Exit()

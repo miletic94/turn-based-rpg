@@ -9,7 +9,7 @@ public class GameplayStateMachine
     {
         _context = context;
     }
-
+    // TODO: Refactor this to be more generic. Just one Enter could be sufficient. 
     public void EnterMap()
     {
         _machine.SwitchState(
@@ -29,4 +29,8 @@ public class GameplayStateMachine
     public void EnterMoveManagement()
         => _machine.SwitchState(
             new MoveManagementState(this, _context));
+
+    public void EnterStatsManagement()
+        => _machine.SwitchState(
+            new StatsManagementState(this, _context));
 }

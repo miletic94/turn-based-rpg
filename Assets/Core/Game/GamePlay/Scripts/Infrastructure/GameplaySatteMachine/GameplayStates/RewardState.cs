@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class RewardState : IState
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
@@ -20,7 +18,6 @@ public class RewardState : IState
     }
     public void HandleRewardSelected(Move move)
     {
-        Debug.Log($"Reward selected: {move.Name}");
         _context.GameplayContext.Hero.AvailableMoves.Add(move);
         _gameplayStateMachine.EnterMap();
     }

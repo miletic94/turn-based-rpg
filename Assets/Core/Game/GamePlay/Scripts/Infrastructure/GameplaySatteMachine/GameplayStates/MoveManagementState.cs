@@ -25,8 +25,8 @@ public class MoveManagementState : IState
 
     public void OnSave(List<Move> availableMoves, List<Move> equippedMoves)
     {
-        _context.GameplayContext.Hero.AvailableMoves = availableMoves;
-        _context.GameplayContext.Hero.EquippedMoves = equippedMoves;
+        _context.GameplayContext.Hero.SetAvailableMoves(availableMoves);
+        _context.GameplayContext.Hero.SetEquippedMoves(equippedMoves);
         _gameplayStateMachine.EnterMap();
     }
 
