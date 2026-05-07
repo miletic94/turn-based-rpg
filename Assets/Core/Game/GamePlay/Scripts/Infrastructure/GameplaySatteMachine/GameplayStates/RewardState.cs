@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RewardState : IState
 {
-    private readonly GameplayStateMachine _flow;
+    private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
     private readonly Move _move;
 
@@ -10,19 +10,20 @@ public class RewardState : IState
         GameplayStateMachine flow,
         GameplaySceneContext context)
     {
-        _flow = flow;
+        _gameplayStateMachine = flow;
         _context = context;
     }
 
     public void Enter()
     {
-        _context.RewardBootstrapper.Load();
-
-        // await _context.RewardScreen.WaitForContinue();
-
-        // await _flow.EnterMap();
+        _context.RewardBootstrapper.Load(_context.GameplayContext.CurrentEnemy, HandleRewardSelected); ;
     }
-
+    public void HandleRewardSelected(Move move)
+    {
+        Debug.Log($"Reward selected: {move.Name}");
+        _context.GameplayContext.Hero.AvailableMoves.Add(move);
+        _gameplayStateMachine.EnterMap();
+    }
     public void Exit()
     {
         _context.RewardBootstrapper.Unload();

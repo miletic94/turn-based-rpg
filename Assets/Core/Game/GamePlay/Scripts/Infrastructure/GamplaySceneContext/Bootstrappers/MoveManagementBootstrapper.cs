@@ -11,7 +11,7 @@ public class MoveManagementBootstrapper : MonoBehaviour
 
     private MoveManagementController _moveManagementController;
 
-    public void Initialize(
+    public void Load(
         Hero hero,
         System.Action<List<Move>, List<Move>> onSave)
     {

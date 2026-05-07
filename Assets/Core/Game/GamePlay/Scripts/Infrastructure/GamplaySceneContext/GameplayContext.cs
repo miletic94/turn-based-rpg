@@ -10,5 +10,6 @@ public class GameplayContext
     {
         Hero = hero;
         Enemies = enemies;
+        CurrentEnemy = Enemies[0];
     }
 }

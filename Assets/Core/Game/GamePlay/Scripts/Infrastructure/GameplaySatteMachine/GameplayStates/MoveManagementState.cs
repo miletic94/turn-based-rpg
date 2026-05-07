@@ -17,7 +17,7 @@ public class MoveManagementState : IState
 
     public void Enter()
     {
-        _context.MoveManagementBootstrapper.Initialize(
+        _context.MoveManagementBootstrapper.Load(
             _context.GameplayContext.Hero,
             OnSave
         );
