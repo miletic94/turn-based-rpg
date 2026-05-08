@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class MoveManagementBootstrapper : MonoBehaviour
 
     public void Load(
         Hero hero,
-        System.Action<List<Move>, List<Move>> onSave)
+        Action<List<Move>, List<Move>> onSave)
     {
         var loadout = CreateLoadout(hero);
         var service = new MoveLoadoutService(loadout);
@@ -43,10 +44,6 @@ public class MoveManagementBootstrapper : MonoBehaviour
             MaxEquipped = 4
         };
 
-        foreach (var equipped in loadout.EquippedMoves)
-        {
-            loadout.AvailableMoves.Remove(equipped);
-        }
         return loadout;
     }
 }
