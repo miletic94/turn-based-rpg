@@ -2,7 +2,6 @@ public class RewardState : IState
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
     private readonly GameplaySceneContext _context;
-    private readonly Move _move;
 
     public RewardState(
         GameplayStateMachine flow,

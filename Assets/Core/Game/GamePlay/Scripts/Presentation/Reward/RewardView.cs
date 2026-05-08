@@ -9,6 +9,11 @@ public class RewardView : MonoBehaviour
 
     public void ShowRewards(List<Move> rewards, Action<Move> onRewardSelected)
     {
+        // TODO: Implement pooling for reward items
+        foreach (Transform child in _rewardContainer)
+        {
+            Destroy(child.gameObject);
+        }
         foreach (var reward in rewards)
         {
             var rewardItem = Instantiate(_rewardItemPrefab, _rewardContainer);

@@ -10,7 +10,7 @@ public class MoveView : MonoBehaviour, IMoveView
     [SerializeField] Transform content;
     public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected)
     {
-        // Clear old buttons
+        // TODO: Implement pooling for move buttons
         foreach (Transform child in content)
             Destroy(child.gameObject);
 
