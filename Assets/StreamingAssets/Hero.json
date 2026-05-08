@@ -7,7 +7,8 @@
     "mana": 4,
     "XP": {
         "current": 0,
-        "toNextLevel": 100
+        "level": 1,
+        "addEachPlaythrough": 100
     },
     "availableStatPoints": 5,
     "availableMoves": [
@@ -88,5 +89,82 @@
             ]
         }
     ],
-    "equippedMoves": []
+    "equippedMoves": [
+        {
+            "id": "0",
+            "name": "Slash",
+            "effects": [
+                {
+                    "id": "0",
+                    "category": "physical",
+                    "type": "damage",
+                    "target": "enemy",
+                    "value": {
+                        "type": "scaled",
+                        "baseValue": 20,
+                        "scalesOff": "attack",
+                        "reducedBy": "defense"
+                    },
+                    "isSource": false
+                }
+            ]
+        },
+        {
+            "id": "1",
+            "name": "Shield Up",
+            "effects": [
+                {
+                    "id": "1",
+                    "type": "buff",
+                    "target": "self",
+                    "stat": "defense",
+                    "value": {
+                        "type": "flat",
+                        "baseValue": 0.1
+                    },
+                    "tickBehavior": "once",
+                    "duration": 2,
+                    "isSource": false
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Battle Cry",
+            "effects": [
+                {
+                    "id": "2",
+                    "type": "buff",
+                    "target": "self",
+                    "stat": "attack",
+                    "value": {
+                        "type": "flat",
+                        "baseValue": 0.1
+                    },
+                    "tickBehavior": "once",
+                    "duration": 2,
+                    "isSource": false
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Second Wind",
+            "effects": [
+                {
+                    "id": "3",
+                    "category": "magic",
+                    "type": "heal",
+                    "target": "self",
+                    "value": {
+                        "type": "scaled",
+                        "baseValue": 20,
+                        "scalesOff": "magic",
+                        "reducedBy": "none"
+                    },
+                    "isSource": false
+                }
+            ]
+        }
+    ]
 }
