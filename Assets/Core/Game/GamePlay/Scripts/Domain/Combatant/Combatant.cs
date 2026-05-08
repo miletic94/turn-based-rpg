@@ -7,6 +7,7 @@ public class Combatant
     public string Name { get; private set; }
     private float _baseHealth;
     public float BaseHealth => _baseHealth;
+    // TODO: Health should be integer
     public float Health { get; private set; }
     private float _baseAttack;
     // TODO: Maybe make a dictionary out of stat getters, so we can remove switch from GetStat as part of making stats extensible

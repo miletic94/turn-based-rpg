@@ -1,0 +1,10 @@
+            
+If player wins two times the bug happens in StatsManagementView on line _rows.Add(stat.Type, row) ArgumentException: An item with the same key has already been added. Key: Attack
+If defense is 1 - combatant doesn't take any damage
+If player passed level - they shouldn't be able to play it again
+SceneLoader and ScreenLoader
+TurnView and TurnService to show who is on turn when
+Battle should be broke down into multiple MVC-s and maybe even have BattleStateMachine
+Move description in tooltip on hover in BattleView in RewardView and in MoveManagementView
+Show how much health each turn removed from enemy
+Server
