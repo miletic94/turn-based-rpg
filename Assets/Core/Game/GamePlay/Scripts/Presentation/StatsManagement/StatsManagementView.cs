@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StatsManagementView : MonoBehaviour
 {
     [SerializeField] private StatAvailablePointsView _availablePointsView;
     [SerializeField] private StatItemRowView _rowPrefab;
     [SerializeField] private Transform _container;
+    [SerializeField] private Button _saveButton;
 
     private readonly Dictionary<StatType, StatItemRowView> _rows = new();
 
@@ -14,7 +16,8 @@ public class StatsManagementView : MonoBehaviour
         IEnumerable<StatData> stats,
         int availablePoints,
         Action<StatType> onPlus,
-        Action<StatType> onMinus)
+        Action<StatType> onMinus,
+        Action onSave)
     {
         _availablePointsView.SetAvailablePoints(availablePoints);
 
@@ -29,6 +32,8 @@ public class StatsManagementView : MonoBehaviour
 
             _rows.Add(stat.Type, row);
         }
+
+        _saveButton.onClick.AddListener(onSave.Invoke);
     }
 
     public void Refresh(IEnumerable<StatData> stats, int availablePoints)

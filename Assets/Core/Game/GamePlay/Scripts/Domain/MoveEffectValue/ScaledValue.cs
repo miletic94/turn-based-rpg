@@ -13,7 +13,6 @@ public class ScaledValue : IMoveEffectValue
         ReducedBy = reducedBy;
     }
 
-    // TODO: Maybe move this out to service making the class just as a data structure
     public float GetValue(EffectContext context)
     {
         var scalar = ScalesOff switch

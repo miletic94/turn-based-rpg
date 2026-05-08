@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-// TODO: Maybe rename to CombatantUIController
 public class CombatantViewController
 {
     private readonly CombatantViewFactory _factory;

@@ -1,5 +1,6 @@
 using System;
 
+// TODO: Make this data structure part of Hero and Combatant
 public class StatData
 {
     public StatType Type { get; }

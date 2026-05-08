@@ -40,4 +40,23 @@ public class Hero
     {
         EquippedMoves = equippedMoves;
     }
+    public void SetStat(StatType statType, float value)
+    {
+        switch (statType)
+        {
+            case StatType.Attack:
+                Attack = value;
+                break;
+            case StatType.Defense:
+                Defense = value;
+                break;
+            case StatType.Magic:
+                Magic = value;
+                break;
+        }
+    }
+    public void SetAvaialbleStatPoints(int value)
+    {
+        AvailableStatPoints = value;
+    }
 }

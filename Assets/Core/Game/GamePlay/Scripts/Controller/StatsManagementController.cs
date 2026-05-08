@@ -1,14 +1,21 @@
+using System;
+using System.Collections.Generic;
+
 public class StatsManagementController
 {
     private readonly StatsManagementView _view;
     private readonly StatsManagementService _service;
+    private readonly Action<IEnumerable<StatData>, int> _onSave;
 
     public StatsManagementController(
         StatsManagementView view,
-        StatsManagementService service)
+        StatsManagementService service,
+        Action<IEnumerable<StatData>, int> onSave
+        )
     {
         _view = view;
         _service = service;
+        _onSave = onSave;
     }
 
     public void Initialize()
@@ -17,7 +24,8 @@ public class StatsManagementController
             _service.GetStats(),
             _service.GetAvailablePoints(),
             OnPlusClicked,
-            OnMinusClicked);
+            OnMinusClicked,
+            OnSaveButtonClicked);
     }
 
     private void OnPlusClicked(StatType type)
@@ -34,6 +42,10 @@ public class StatsManagementController
         _service.SetAvailablePoints(_service.GetAvailablePoints() + 1);
 
         Refresh();
+    }
+    private void OnSaveButtonClicked()
+    {
+        _onSave?.Invoke(_service.GetStats(), _service.GetAvailablePoints());
     }
 
     private void Refresh()
