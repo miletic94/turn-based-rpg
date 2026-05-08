@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,6 @@ public class XpBarView : MonoBehaviour
 
     public void SetFill(float fillAmount)
     {
-        _fillImage.fillAmount = fillAmount;
+        _fillImage.fillAmount = Mathf.Clamp01(fillAmount);
     }
 }

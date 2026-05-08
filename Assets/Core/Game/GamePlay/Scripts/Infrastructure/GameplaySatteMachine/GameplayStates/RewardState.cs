@@ -18,7 +18,7 @@ public class RewardState : IState
     public void HandleRewardSelected(Move move)
     {
         _context.GameplayContext.Hero.AvailableMoves.Add(move);
-        _gameplayStateMachine.EnterMap();
+        _gameplayStateMachine.EnterXp();
     }
     public void Exit()
     {

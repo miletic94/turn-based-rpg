@@ -59,4 +59,8 @@ public class Hero
     {
         AvailableStatPoints = value;
     }
+    public void AddAvailableStatPoints(int amount)
+    {
+        AvailableStatPoints += amount;
+    }
 }

@@ -4,5 +4,7 @@ public struct UpdateXpResult
     public int CurrentXp;
     public int PreviousLevel;
     public int CurrentLevel;
-    public int XpToNextLevel;
+    public int PreviousXpToNextLevel;
+    public int CurrentXpToNextLevel;
+    public int RewardPoints;
 }

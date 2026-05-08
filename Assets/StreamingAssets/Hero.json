@@ -6,11 +6,12 @@
     "magic": 0.4,
     "mana": 4,
     "XP": {
-        "current": 0,
+        "current": 50,
         "level": 1,
-        "addEachPlaythrough": 100
+        "addEachPlaythrough": 100,
+        "rewardPoints": 2
     },
-    "availableStatPoints": 5,
+    "availableStatPoints": 0,
     "availableMoves": [
         {
             "id": "0",

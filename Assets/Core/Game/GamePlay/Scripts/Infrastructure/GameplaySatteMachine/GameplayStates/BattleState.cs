@@ -21,7 +21,7 @@ public class BattleState : IState
         if (result.Role == CombatantRole.Player)
             _gameplayStateMachine.EnterReward();
         else
-            _gameplayStateMachine.EnterMap();
+            _gameplayStateMachine.EnterXp();
     }
     public void Exit()
     {

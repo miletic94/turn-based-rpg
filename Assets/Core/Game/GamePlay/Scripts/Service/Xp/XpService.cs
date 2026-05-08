@@ -11,14 +11,16 @@ public class XpService
     {
         var previousXp = _xp.Current;
         var previousLevel = _xp.Level;
-        var xpToNextLevel = CalculateXpForNextLevel();
+        var previousXpToNextLevel = CalculateXpForNextLevel();
+        var rewardPoints = 0;
 
         _xp.SetCurrent(previousXp + _xp.AddEachPlaythrough);
 
-        if (_xp.Current >= xpToNextLevel)
+        if (_xp.Current >= previousXpToNextLevel)
         {
             _xp.NextLevel();
-            _xp.SetCurrent(_xp.Current % xpToNextLevel);
+            _xp.SetCurrent(_xp.Current % previousXpToNextLevel);
+            rewardPoints = _xp.RewardPoints;
         }
 
         var result = new UpdateXpResult
@@ -27,7 +29,9 @@ public class XpService
             CurrentXp = _xp.Current,
             PreviousLevel = previousLevel,
             CurrentLevel = _xp.Level,
-            XpToNextLevel = CalculateXpForNextLevel()
+            PreviousXpToNextLevel = previousXpToNextLevel,
+            CurrentXpToNextLevel = CalculateXpForNextLevel(),
+            RewardPoints = rewardPoints
         };
 
         return result;

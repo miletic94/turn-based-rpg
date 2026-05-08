@@ -5,8 +5,11 @@ public class XpView : MonoBehaviour
     [SerializeField] XpBarView _xpBarView;
     public int Value { get; private set; }
 
-    public void UpdateXp(UpdateXpResult updateXpData)
+    public async Awaitable UpdateXp(UpdateXpResult updateXpData)
     {
-        _xpBarView.SetFill(updateXpData.CurrentXp / updateXpData.XpToNextLevel);
+        _xpBarView.SetFill((float)updateXpData.PreviousXp / updateXpData.PreviousXpToNextLevel);
+        await Awaitable.WaitForSecondsAsync(1f);
+        _xpBarView.SetFill((float)updateXpData.CurrentXp / updateXpData.CurrentXpToNextLevel);
+        await Awaitable.WaitForSecondsAsync(1f);
     }
 }

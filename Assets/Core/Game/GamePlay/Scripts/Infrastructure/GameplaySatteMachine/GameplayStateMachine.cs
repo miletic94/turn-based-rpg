@@ -33,4 +33,8 @@ public class GameplayStateMachine
     public void EnterStatsManagement()
         => _machine.SwitchState(
             new StatsManagementState(this, _context));
+
+    public void EnterXp()
+        => _machine.SwitchState(
+            new XpState(this, _context));
 }

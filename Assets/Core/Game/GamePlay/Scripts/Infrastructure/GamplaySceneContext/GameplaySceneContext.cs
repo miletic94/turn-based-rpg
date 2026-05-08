@@ -9,6 +9,7 @@ public class GameplaySceneContext : MonoBehaviour
     public RewardBootstrapper RewardBootstrapper;
     public MoveManagementBootstrapper MoveManagementBootstrapper;
     public StatsManagementBootstrapper StatsManagementBootstrapper;
+    public XpBootstrapper XpBootstrapper;
 
     [Header("Run State")]
     public GameplayContext GameplayContext { get; private set; }
