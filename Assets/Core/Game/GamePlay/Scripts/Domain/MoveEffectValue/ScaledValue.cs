@@ -17,16 +17,16 @@ public class ScaledValue : IMoveEffectValue
     {
         var scalar = ScalesOff switch
         {
-            StatType.Attack => context.Source.Attack,
-            StatType.Defense => context.Source.Defense,
-            StatType.Magic => context.Source.Magic,
+            StatType.Attack => context.Source.Stats.GetStat(StatType.Attack).CurrentValue,
+            StatType.Defense => context.Source.Stats.GetStat(StatType.Defense).CurrentValue,
+            StatType.Magic => context.Source.Stats.GetStat(StatType.Magic).CurrentValue,
             _ => 0
         };
         var reducer = ReducedBy switch
         {
-            StatType.Attack => context.Target.Attack,
-            StatType.Defense => context.Target.Defense,
-            StatType.Magic => context.Target.Magic,
+            StatType.Attack => context.Target.Stats.GetStat(StatType.Attack).CurrentValue,
+            StatType.Defense => context.Target.Stats.GetStat(StatType.Defense).CurrentValue,
+            StatType.Magic => context.Target.Stats.GetStat(StatType.Magic).CurrentValue,
             _ => 0
         };
         return BaseValue * scalar * (1 - reducer);

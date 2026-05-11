@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 
-public class StatsViewData
+public class Stats
 {
     private readonly Dictionary<StatType, StatData> _stats;
-
-    public int AvailablePoints { get; private set; }
-
-    public StatsViewData(Hero hero)
+    public Stats(float attack, float defense, float magic)
     {
         _stats = new Dictionary<StatType, StatData>
         {
@@ -14,26 +11,24 @@ public class StatsViewData
                 StatType.Attack,
                 new StatData(
                     StatType.Attack,
-                    hero.Attack,
-                    hero.Attack)
+                    attack,
+                    attack)
             },
             {
                 StatType.Defense,
                 new StatData(
                     StatType.Defense,
-                    hero.Defense,
-                    hero.Defense)
+                    defense,
+                    defense)
             },
             {
                 StatType.Magic,
                 new StatData(
                     StatType.Magic,
-                    hero.Magic,
-                    hero.Magic)
+                    magic,
+                    magic)
             }
         };
-
-        AvailablePoints = hero.AvailableStatPoints;
     }
 
     public IEnumerable<StatData> GetStats()
@@ -49,10 +44,5 @@ public class StatsViewData
     public void SetStatValue(StatType type, float value)
     {
         _stats[type].SetValue(value);
-    }
-
-    public void SetAvailablePoints(int value)
-    {
-        AvailablePoints = value;
     }
 }

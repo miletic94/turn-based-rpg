@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class StatsManagementController
 {
     private readonly StatsManagementView _view;
     private readonly StatsManagementService _service;
-    private readonly Action<IEnumerable<StatData>, int> _onSave;
+    private readonly Action _onSave;
 
     public StatsManagementController(
         StatsManagementView view,
         StatsManagementService service,
-        Action<IEnumerable<StatData>, int> onSave
+        Action onSave
         )
     {
+        Debug.Log($"Controller created {GetHashCode()}");
         _view = view;
         _service = service;
         _onSave = onSave;
@@ -45,11 +47,13 @@ public class StatsManagementController
     }
     private void OnSaveButtonClicked()
     {
-        _onSave?.Invoke(_service.GetStats(), _service.GetAvailablePoints());
+        // TOOD: Save to the database
+        _onSave?.Invoke();
     }
 
     private void Refresh()
     {
+        Debug.Log($"SMController.Refresh - available points: {_service.GetAvailablePoints()}");
         _view.Refresh(
             _service.GetStats(),
             _service.GetAvailablePoints());

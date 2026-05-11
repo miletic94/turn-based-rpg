@@ -70,6 +70,7 @@ public class MoveService
     {
         if (!source.HasEnoughResource(move))
         {
+            // TODO: It shouldn't throw exception but disallow move
             throw new Exception(
                 $"{source.Name} does not have enough resources. " +
                 $"Needs: {move.Cost.Amount} {move.Cost.Type}");

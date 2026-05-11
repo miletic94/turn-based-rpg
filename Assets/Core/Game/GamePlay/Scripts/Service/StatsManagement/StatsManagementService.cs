@@ -1,52 +1,51 @@
 using System.Collections.Generic;
 
+// TODO: Services should be stateless. This one specifically had a bug that shows why
 public class StatsManagementService
 {
-    private readonly StatsViewData _statsViewData;
-
-    public StatsManagementService(StatsViewData statsViewData)
+    private readonly GameplayContext _context;
+    public StatsManagementService(GameplayContext context)
     {
-        _statsViewData = statsViewData;
+        _context = context;
     }
-
     public IEnumerable<StatData> GetStats()
     {
-        return _statsViewData.GetStats();
+        return _context.Hero.Stats.GetStats();
     }
 
     public StatData GetStat(StatType statType)
     {
-        return _statsViewData.GetStat(statType);
+        return _context.Hero.Stats.GetStat(statType);
     }
 
     public int GetAvailablePoints()
     {
-        return _statsViewData.AvailablePoints;
+        return _context.Hero.AvailableStatPoints;
     }
 
     public void SetAvailablePoints(int value)
     {
-        _statsViewData.SetAvailablePoints(value);
+        _context.Hero.SetAvaialbleStatPoints(value);
     }
 
     public float AddStat(StatType statType, float amount = 0.1f)
     {
-        var stat = _statsViewData.GetStat(statType);
+        var stat = _context.Hero.Stats.GetStat(statType);
 
         var newValue = stat.CurrentValue + amount;
 
-        _statsViewData.SetStatValue(statType, newValue);
+        _context.Hero.Stats.SetStatValue(statType, newValue);
 
         return newValue;
     }
 
     public float SubstractStat(StatType statType, float amount = 0.1f)
     {
-        var stat = _statsViewData.GetStat(statType);
+        var stat = _context.Hero.Stats.GetStat(statType);
 
         var newValue = stat.CurrentValue - amount;
 
-        _statsViewData.SetStatValue(statType, newValue);
+        _context.Hero.Stats.SetStatValue(statType, newValue);
 
         return newValue;
     }

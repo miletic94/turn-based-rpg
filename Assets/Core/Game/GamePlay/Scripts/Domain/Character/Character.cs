@@ -12,9 +12,7 @@ public class Character
     (
         Name,
         Health,
-        Attack,
-        Defense,
-        Magic,
+        new Stats(Attack, Defense, Magic),
         Moves
     );
 }

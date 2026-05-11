@@ -21,18 +21,19 @@ public class StatsManagementView : MonoBehaviour
     {
         _availablePointsView.SetAvailablePoints(availablePoints);
 
-        foreach (var stat in stats)
+        foreach (var statData in stats)
         {
-            var row = Instantiate(_rowPrefab, _container);
-
-            row.Initialize(
-                stat,
-                onPlus,
-                onMinus);
-
-            _rows.Add(stat.Type, row);
+            if (_rows.TryGetValue(statData.Type, out var statView))
+            {
+                RefreshRow(statData, statView, availablePoints);
+            }
+            else
+            {
+                InitializeRow(statData, onPlus, onMinus, availablePoints);
+            }
         }
 
+        _saveButton.onClick.RemoveAllListeners();
         _saveButton.onClick.AddListener(onSave.Invoke);
     }
 
@@ -42,9 +43,38 @@ public class StatsManagementView : MonoBehaviour
 
         foreach (var stat in stats)
         {
-            _rows[stat.Type].Refresh(
-                stat,
-                availablePoints > 0);
+            if (_rows.TryGetValue(stat.Type, out var statView))
+            {
+                RefreshRow(stat, statView, availablePoints);
+            }
+            else
+            {
+                throw new Exception($"Stat {stat.Type} not found");
+            }
         }
+    }
+
+    private void InitializeRow(
+        StatData statData,
+        Action<StatType> onPlus,
+        Action<StatType> onMinus,
+        int availablePoints)
+    {
+        var row = Instantiate(_rowPrefab, _container);
+
+        row.Initialize(
+            statData,
+            onPlus,
+            onMinus);
+
+        row.Refresh(statData, availablePoints > 0);
+
+        _rows.Add(statData.Type, row);
+    }
+    private void RefreshRow(StatData stat, StatItemRowView statItem, int availablePoints)
+    {
+        statItem.Refresh(
+            stat,
+            availablePoints > 0);
     }
 }

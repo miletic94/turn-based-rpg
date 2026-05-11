@@ -15,21 +15,10 @@ public class HeroDTO
     (
          Name,
          Health,
-         Attack,
-         Defense,
-         Magic,
+         new Stats(Attack, Defense, Magic),
          Xp.ToXp(),
          AvailableStatPoints,
          AvailableMoves.ConvertAll(m => m.ToMove()),
         EquippedMoves.ConvertAll(m => m.ToMove())
     );
-    public CharacterDTO ToCharacter() => new CharacterDTO
-    {
-        Name = Name,
-        Health = Health,
-        Attack = Attack,
-        Defense = Defense,
-        Magic = Magic,
-        Moves = EquippedMoves
-    };
 }

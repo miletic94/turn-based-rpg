@@ -16,20 +16,23 @@ public class StatItemRowView : MonoBehaviour
         Action<StatType> onPlus,
         Action<StatType> onMinus)
     {
+        _plusButton.onClick.RemoveAllListeners();
+        _minusButton.onClick.RemoveAllListeners();
+
         _plusButton.onClick.AddListener(() => onPlus(stat.Type));
         _minusButton.onClick.AddListener(() => onMinus(stat.Type));
 
         Refresh(stat, true);
     }
 
-    public void Refresh(StatData stat, bool canIncrease)
+    public void Refresh(StatData statData, bool canIncrease)
     {
-        SetStatName(stat.Type.ToString());
-        SetStatValue(stat.CurrentValue.ToString());
-        Color color = stat.CurrentGTBase ? Color.green : Color.white;
+        SetStatName(statData.Type.ToString());
+        SetStatValue(statData.CurrentValue.ToString());
+        Color color = statData.CurrentGTBase ? Color.green : Color.white;
         SetStatColor(color);
 
-        SetButtonsInteractable(stat.CurrentGTBase, canIncrease);
+        SetButtonsInteractable(statData.CurrentGTBase, canIncrease);
     }
 
     public void SetStatName(string statName)

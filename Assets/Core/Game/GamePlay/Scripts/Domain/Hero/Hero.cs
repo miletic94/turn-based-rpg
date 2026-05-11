@@ -4,20 +4,16 @@ public class Hero
 {
     public string Name { get; private set; }
     public float Health { get; private set; }
-    public float Attack { get; private set; }
-    public float Defense { get; private set; }
-    public float Magic { get; private set; }
+    public Stats Stats { get; private set; }
     public Xp Xp { get; private set; }
     public int AvailableStatPoints { get; private set; }
     public List<Move> AvailableMoves { get; private set; }
     public List<Move> EquippedMoves { get; private set; }
-    public Hero(string name, float health, float attack, float defense, float magic, Xp xp, int availableStatPoints, List<Move> availableMoves, List<Move> equippedMoves)
+    public Hero(string name, float health, Stats stats, Xp xp, int availableStatPoints, List<Move> availableMoves, List<Move> equippedMoves)
     {
         Name = name;
         Health = health;
-        Attack = attack;
-        Defense = defense;
-        Magic = magic;
+        Stats = stats;
         Xp = xp;
         AvailableStatPoints = availableStatPoints;
         AvailableMoves = availableMoves;
@@ -27,9 +23,7 @@ public class Hero
         (
             Name,
             Health,
-            Attack,
-            Defense,
-            Magic,
+            Stats,
             EquippedMoves
         );
     public void SetAvailableMoves(List<Move> availableMoves)
@@ -42,18 +36,7 @@ public class Hero
     }
     public void SetStat(StatType statType, float value)
     {
-        switch (statType)
-        {
-            case StatType.Attack:
-                Attack = value;
-                break;
-            case StatType.Defense:
-                Defense = value;
-                break;
-            case StatType.Magic:
-                Magic = value;
-                break;
-        }
+        Stats.SetStatValue(statType, value);
     }
     public void SetAvaialbleStatPoints(int value)
     {

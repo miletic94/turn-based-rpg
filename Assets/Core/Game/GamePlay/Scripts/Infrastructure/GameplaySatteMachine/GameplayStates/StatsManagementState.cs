@@ -15,7 +15,7 @@ public class StatsManagementState : IState
 
     public void Enter()
     {
-        _context.StatsManagementBootstrapper.Load(_context.GameplayContext.Hero, OnSave);
+        _context.StatsManagementBootstrapper.Load(_context.GameplayContext, OnSave);
     }
 
     public void Exit()
@@ -23,14 +23,8 @@ public class StatsManagementState : IState
         _context.StatsManagementBootstrapper.Unload();
     }
 
-    private void OnSave(IEnumerable<StatData> stats, int availableStatPoints)
+    private void OnSave()
     {
-        var hero = _context.GameplayContext.Hero;
-        foreach (var s in stats)
-        {
-            hero.SetStat(s.Type, s.CurrentValue);
-        }
-        hero.SetAvaialbleStatPoints(availableStatPoints);
         _gameplayStateMachine.EnterMap();
     }
 }

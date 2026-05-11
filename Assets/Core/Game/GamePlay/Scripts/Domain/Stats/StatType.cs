@@ -1,7 +1,7 @@
 public enum StatType
 {
-    None,
-    Health,
+    None, // TODO: Remove
+    Health, // TODO: Remove
     Attack,
     Defense,
     Magic

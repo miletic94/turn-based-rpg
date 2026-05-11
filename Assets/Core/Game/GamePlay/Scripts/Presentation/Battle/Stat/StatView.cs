@@ -9,18 +9,24 @@ public class StatView : MonoBehaviour
 
     private Dictionary<StatType, StatRowView> _rows = new();
 
-    public void ShowStat(Combatant character)
+    public void ShowStat(Combatant combatant)
     {
         var header = Instantiate(_statHeaderPrefab, _container);
-        header.SetText(character.Name);
+        header.SetText(combatant.Name);
 
-        foreach (var stat in character.GetStats())
+        // TODO: Handle Health better
+        var healthRow = Instantiate(_statRowPrefab, _container);
+        healthRow.SetIdentifier("Health");
+        healthRow.SetValue(combatant.Health.ToString());
+
+
+        foreach (var stat in combatant.GetStats())
         {
             var row = Instantiate(_statRowPrefab, _container);
-            row.SetIdentifier(stat.type.ToString());
-            row.SetValue(stat.currentValue.ToString());
+            row.SetIdentifier(stat.Type.ToString());
+            row.SetValue(stat.CurrentValue.ToString());
 
-            _rows[stat.type] = row;
+            _rows[stat.Type] = row;
         }
     }
 
@@ -28,18 +34,16 @@ public class StatView : MonoBehaviour
     {
         foreach (var stat in character.GetStats())
         {
-            if (_rows.TryGetValue(stat.type, out var row))
+            if (_rows.TryGetValue(stat.Type, out var row))
             {
-                row.SetValue(stat.currentValue.ToString());
+                row.SetValue(stat.CurrentValue.ToString());
 
-                var comparison = stat.currentValue.CompareTo(stat.baseValue);
+                var comparison = stat.CurrentValue.CompareTo(stat.BaseValue);
                 row.SetColor(
                     comparison > 0 ? Color.green :
                     comparison < 0 ? Color.red :
                     Color.white
                 );
-
-
             }
         }
     }

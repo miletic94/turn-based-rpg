@@ -6,12 +6,20 @@ public class StatsManagementBootstrapper : MonoBehaviour
 {
     [SerializeField] StatsManagementScreen _statsManagementScreen;
     [SerializeField] StatsManagementView _statsManagementView;
+    private StatsManagementService _statsManagementService;
+    private StatsManagementController _statsManagementController;
 
-    public void Load(Hero hero, Action<IEnumerable<StatData>, int> onSave)
+
+
+    public void Load(GameplayContext context, Action onSave)
     {
-        var statsManagementService = new StatsManagementService(new StatsViewData(hero));
-        var statsManagementController = new StatsManagementController(_statsManagementView, statsManagementService, onSave);
-        statsManagementController.Initialize();
+        // TODO: This can be done better
+        if (_statsManagementService == null)
+            _statsManagementService = new StatsManagementService(context);
+        if (_statsManagementController == null)
+            _statsManagementController = new StatsManagementController(_statsManagementView, _statsManagementService, onSave);
+
+        _statsManagementController.Initialize();
         _statsManagementScreen.Show();
     }
     public void Unload()
