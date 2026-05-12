@@ -1,99 +1,33 @@
-using System;
-
-// ======================================================
-// MOVE SERVICE
-// Application layer use-case service
-//
-// Responsibilities:
-// - Validate move ownership
-// - Validate resource cost
-// - Advance source modifier state
-// - Build execution context
-// - Execute effect pipeline
-// - Spend resources
-// - Cleanup expired modifiers
-// ======================================================
+using System.Collections.Generic;
 
 public class MoveService
 {
-    private readonly MoveEffectExecutionService _effectExecutionService;
-    private readonly IEventBus _eventBus;
+    private readonly MoveEffectService _moveEffectService;
 
     public MoveService(
-        MoveEffectExecutionService effectExecutionService,
-        IEventBus eventBus)
+        MoveEffectService effectExecutionService)
     {
-        _effectExecutionService = effectExecutionService;
-        _eventBus = eventBus;
+        _moveEffectService = effectExecutionService;
     }
 
-    public void ExecuteMove(
+    public void ApplyMove(
         Combatant source,
         Combatant target,
         Move move)
     {
-        ValidateMoveOwnership(source, move);
-
-        ValidateResources(source, move);
-
-        ProcessTurnStart(source);
-
         var context = CreateEffectContext(source, target);
-
-        ExecuteEffects(move, context);
-
-        SpendMoveCost(source, move);
-
-        ProcessTurnEnd(source);
-
-        _eventBus.Publish(new MoveExecutedEvent(source, target, move));
+        ApplyEffects(move, context);
     }
 
-    // ======================================================
-    // VALIDATION
-    // ======================================================
-
-    private void ValidateMoveOwnership(
-        Combatant source,
-        Move move)
+    public void TickModifiers(Combatant combatant)
     {
-        if (!source.HasMove(move))
-        {
-            throw new Exception(
-                $"{source.Name} does not have move {move.Name}");
-        }
+        _moveEffectService.TickModifiers(combatant);
     }
 
-    private void ValidateResources(
-        Combatant source,
-        Move move)
+    public void RemoveExpiredModifiers(Combatant combatant)
     {
-        if (!source.HasEnoughResource(move))
-        {
-            // TODO: It shouldn't throw exception but disallow move
-            throw new Exception(
-                $"{source.Name} does not have enough resources. " +
-                $"Needs: {move.Cost.Amount} {move.Cost.Type}");
-        }
+        _moveEffectService.RemoveExpiredModifiers(combatant);
     }
-
-    // ======================================================
-    // TURN PROCESSING
-    // ======================================================
-
-    private void ProcessTurnStart(Combatant source)
-    {
-        source.TickModifiers();
-    }
-
-    private void ProcessTurnEnd(Combatant source)
-    {
-        source.ClearInactiveModifiers();
-    }
-
-    // ======================================================
-    // CONTEXT
-    // ======================================================
 
     private EffectContext CreateEffectContext(
         Combatant source,
@@ -102,28 +36,13 @@ public class MoveService
         return new EffectContext(source, target);
     }
 
-    // ======================================================
-    // EFFECT PIPELINE
-    // ======================================================
-
-    private void ExecuteEffects(
+    private void ApplyEffects(
         Move move,
         EffectContext context)
     {
         foreach (var effect in move.Effects)
         {
-            _effectExecutionService.Execute(effect, context);
+            _moveEffectService.Apply(effect, context);
         }
-    }
-
-    // ======================================================
-    // COST
-    // ======================================================
-
-    private void SpendMoveCost(
-        Combatant source,
-        Move move)
-    {
-        source.ReduceResource(move.Cost);
     }
 }

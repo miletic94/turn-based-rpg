@@ -2,7 +2,7 @@ using System;
 
 public class BattleQueryService
 {
-    public Combatant GetByRole(BattleData state, CombatantRole role)
+    public Combatant GetByRole(BattleContext state, CombatantRole role)
     {
         foreach (var combatant in state.Combatants)
         {
@@ -13,12 +13,12 @@ public class BattleQueryService
         throw new Exception($"No combatant found with role {role}");
     }
 
-    public Combatant GetPlayer(BattleData state)
+    public Combatant GetPlayer(BattleContext state)
     {
         return GetByRole(state, CombatantRole.Player);
     }
 
-    public Combatant GetEnemy(BattleData state)
+    public Combatant GetEnemy(BattleContext state)
     {
         return GetByRole(state, CombatantRole.Enemy);
     }

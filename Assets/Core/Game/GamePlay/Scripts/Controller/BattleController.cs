@@ -39,7 +39,7 @@ public class BattleController
         _statController.Show(player);
         _combatantViewController.Create(player);
         _combatantViewController.Create(enemy);
-        var battleData = new BattleData(new List<Combatant> { player, enemy });
+        var battleData = new BattleContext(new List<Combatant> { player, enemy });
 
         _battleService = new BattleService(
             battleData,
@@ -58,15 +58,21 @@ public class BattleController
                 var actor = _battleService.CurrentActor;
                 var target = _battleService.CurrentTarget;
 
+                _battleService.RemoveExpiredModifiers(actor);
+                _statController.RefreshStatView(actor, target);
+
+                // TODO: There could be one MoveProvider class with GetMove(Actor actor) method. This class reads actor.MoveProvider string and chooses the right provicer
                 var provider = actor.Role == CombatantRole.Player
                     ? _playerProvider
                     : _enemyProvider;
-
                 var move = await provider.GetMove(actor);
+
                 _battleService.SubmitMove(move);
 
+                _battleService.TickModifiers(actor);
+
                 _combatantViewController.OnMoveExecuted(actor, target, move);
-                _statController.OnMoveExecuted(actor, target);
+                _statController.RefreshStatView(actor, target);
             }
 
             if (_battleService.Phase == BattlePhase.ResolvingTurn)

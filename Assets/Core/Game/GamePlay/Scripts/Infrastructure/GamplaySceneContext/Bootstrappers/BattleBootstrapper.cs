@@ -12,13 +12,13 @@ public class BattleBootstrapper : MonoBehaviour
     {
         _battleScreen.Show();
 
-        var effectExecutionService = new MoveEffectExecutionService();
+        var effectExecutionService = new MoveEffectService();
 
         var moveController = new MoveController(_moveView);
         var combatantViewController = new CombatantViewController(_combatantViewFactory);
         var statController = new StatController(_statView);
 
-        var moveService = new MoveService(effectExecutionService, AppContext.EventBus);
+        var moveService = new MoveService(effectExecutionService);
         var turnService = new BattleTurnService();
         var resolutionService = new BattleResolutionService();
 

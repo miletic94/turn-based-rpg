@@ -24,7 +24,7 @@ public class StatView : MonoBehaviour
         {
             var row = Instantiate(_statRowPrefab, _container);
             row.SetIdentifier(stat.Type.ToString());
-            row.SetValue(stat.CurrentValue.ToString());
+            row.SetValue(stat.GetCurrentValue().ToString());
 
             _rows[stat.Type] = row;
         }
@@ -36,9 +36,9 @@ public class StatView : MonoBehaviour
         {
             if (_rows.TryGetValue(stat.Type, out var row))
             {
-                row.SetValue(stat.CurrentValue.ToString());
+                row.SetValue(stat.GetCurrentValue().ToString());
 
-                var comparison = stat.CurrentValue.CompareTo(stat.BaseValue);
+                var comparison = stat.GetCurrentValue().CompareTo(stat.BaseValue);
                 row.SetColor(
                     comparison > 0 ? Color.green :
                     comparison < 0 ? Color.red :

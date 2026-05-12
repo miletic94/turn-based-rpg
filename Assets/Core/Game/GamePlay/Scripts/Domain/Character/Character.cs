@@ -12,7 +12,7 @@ public class Character
     (
         Name,
         Health,
-        new Stats(Attack, Defense, Magic),
+        new CombatantStats(Attack, Defense, Magic),
         Moves
     );
 }

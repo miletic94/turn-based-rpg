@@ -1,7 +1,7 @@
 [
     {
         "name": "Witch",
-        "health": 100,
+        "health": 1000,
         "attack": 0.5,
         "defense": 0.1,
         "magic": 1.2,
@@ -65,7 +65,7 @@
                         "stat": "attack",
                         "value": {
                             "type": "flat",
-                            "baseValue": 0.1
+                            "baseValue": 0.5
                         },
                         "tickBehavior": "once",
                         "duration": 2,
@@ -88,7 +88,7 @@
                         "stat": "magic",
                         "value": {
                             "type": "flat",
-                            "baseValue": 0.1
+                            "baseValue": 0.5
                         },
                         "tickBehavior": "once",
                         "duration": 2,
@@ -148,7 +148,7 @@
                         "stat": "defense",
                         "value": {
                             "type": "flat",
-                            "baseValue": 0.1
+                            "baseValue": 0.5
                         },
                         "tickBehavior": "once",
                         "duration": 2,
@@ -186,7 +186,7 @@
                         "stat": "defense",
                         "value": {
                             "type": "flat",
-                            "baseValue": 0.1
+                            "baseValue": 0.5
                         },
                         "tickBehavior": "once",
                         "duration": 2,

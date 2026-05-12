@@ -14,15 +14,4 @@ public class HealEffect : IMoveEffect
         Value = value;
         IsSource = isSource;
     }
-
-    public void Execute(EffectContext context)
-    {
-        float value = Value.GetValue(context);
-        var target = context.ResolveTarget(Target);
-
-        if (IsSource)
-            context.StoreResult(Id, value);
-
-        target.Heal(value);
-    }
 }

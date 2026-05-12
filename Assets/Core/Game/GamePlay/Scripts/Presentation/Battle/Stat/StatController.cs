@@ -15,7 +15,7 @@ public class StatController
         _view.ShowStat(character);
     }
 
-    public void OnMoveExecuted(Combatant target, Combatant source)
+    public void RefreshStatView(Combatant target, Combatant source)
     {
         if (_currentCharacter == target)
             Refresh(target);

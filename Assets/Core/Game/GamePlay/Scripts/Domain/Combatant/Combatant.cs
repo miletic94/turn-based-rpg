@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public class Combatant
 {
@@ -9,105 +8,40 @@ public class Combatant
     public float BaseHealth => _baseHealth;
     // TODO: Health should be integer
     public float Health { get; private set; }
-    public Stats Stats { get; private set; }
+    public CombatantStats Stats { get; private set; }
     public int Mana { get; private set; } = 4;
     public List<Move> Moves { get; private set; }
-    private List<ActiveModifier> _modifiers;
     public CombatantRole Role { get; set; }
-    public Combatant(string name, float health, Stats stats, List<Move> moves)
+    public Combatant(string name, float health, CombatantStats stats, List<Move> moves)
     {
         Name = name;
         Health = health;
         _baseHealth = health;
         Stats = stats;
         Moves = moves;
-        _modifiers = new List<ActiveModifier>();
     }
 
-    public void ApplyDamage(float damage)
+    public void SetHealth(float value)
     {
-        Health = Math.Max(0, Health - damage);
+        Health = value;
     }
-
-    public void Heal(float amount)
+    public void AddActiveModifier(ActiveModifier modifier)
     {
-        Health = Math.Min(Health + amount, _baseHealth);
+        Stats.AddActiveModifier(modifier);
     }
-
-    public void ApplyModifier(ModifierType type, StatType statType, float value, ModifierTickBehavior tickBehavior, int duration)
+    public void RemoveExpiredModifiers()
     {
-        var baseStat = Stats.GetStat(statType).CurrentValue;
-        var modifier = value * (type == ModifierType.Debuff ? -1 : 1);
-        Stats.SetStatValue(statType, baseStat + modifier);
-
-        _modifiers.Add(new ActiveModifier(type, statType, value, tickBehavior, duration));
-    }
-
-    public void UnapplyModifier(ActiveModifier modifier)
-    {
-        var currentValue = Stats.GetStat(modifier.Stat).CurrentValue;
-        var modifierValue = modifier.Value
-            * (modifier.Type == ModifierType.Debuff ? 1 : -1);
-
-        Stats.SetStatValue(modifier.Stat, currentValue + modifierValue);
-    }
-
-    public void ClearInactiveModifiers()
-    {
-        var expired = _modifiers
-            .Where(m => m.RemainingDuration <= 0)
-            .ToList();
-
-        expired.ForEach(m => UnapplyModifier(m));
-
-        _modifiers.RemoveAll(m => m.RemainingDuration <= 0);
+        Stats.RemoveExpiredModifiers();
     }
 
     public void TickModifiers()
     {
-        foreach (var m in _modifiers)
-        {
-            m.Tick();
-        }
+        Stats.TickModifiers();
     }
 
-    public IEnumerable<StatData> GetStats()
+    public IEnumerable<CombatantStatData> GetStats()
     {
         return Stats.GetStats();
-    }
-
-    public bool HasMove(Move move)
-    {
-        if (Moves.Find(m => m.Id == move.Id) == null) return false;
-        return true;
-    }
-
-    public bool HasEnoughResource(Move move)
-    {
-        var costType = move.Cost.Type;
-        var resource = costType switch
-        {
-            ResourceType.Mana => Mana,
-            ResourceType.Health => Health,
-            ResourceType.None => float.PositiveInfinity,
-            _ => throw new Exception($"Unkonw resource type {costType}")
-        };
-
-        if (resource < move.Cost.Amount) return false;
-        return true;
-    }
-
-    public void ReduceResource(Cost cost)
-    {
-        switch (cost.Type)
-        {
-            case ResourceType.Mana:
-                Mana -= cost.Amount;
-                break;
-            case ResourceType.Health:
-                Health -= cost.Amount;
-                break;
-        }
     }
 
 

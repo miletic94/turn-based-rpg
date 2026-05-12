@@ -1,4 +1,4 @@
 public interface IMoveEffectValue
 {
-    public float GetValue(EffectContext context);
+    public float Get(EffectContext context);
 }

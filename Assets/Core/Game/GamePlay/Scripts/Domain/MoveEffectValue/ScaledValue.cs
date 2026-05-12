@@ -13,20 +13,20 @@ public class ScaledValue : IMoveEffectValue
         ReducedBy = reducedBy;
     }
 
-    public float GetValue(EffectContext context)
+    public float Get(EffectContext context)
     {
         var scalar = ScalesOff switch
         {
-            StatType.Attack => context.Source.Stats.GetStat(StatType.Attack).CurrentValue,
-            StatType.Defense => context.Source.Stats.GetStat(StatType.Defense).CurrentValue,
-            StatType.Magic => context.Source.Stats.GetStat(StatType.Magic).CurrentValue,
+            StatType.Attack => context.Source.Stats.GetStat(StatType.Attack),
+            StatType.Defense => context.Source.Stats.GetStat(StatType.Defense),
+            StatType.Magic => context.Source.Stats.GetStat(StatType.Magic),
             _ => 0
         };
         var reducer = ReducedBy switch
         {
-            StatType.Attack => context.Target.Stats.GetStat(StatType.Attack).CurrentValue,
-            StatType.Defense => context.Target.Stats.GetStat(StatType.Defense).CurrentValue,
-            StatType.Magic => context.Target.Stats.GetStat(StatType.Magic).CurrentValue,
+            StatType.Attack => context.Target.Stats.GetStat(StatType.Attack),
+            StatType.Defense => context.Target.Stats.GetStat(StatType.Defense),
+            StatType.Magic => context.Target.Stats.GetStat(StatType.Magic),
             _ => 0
         };
         return BaseValue * scalar * (1 - reducer);

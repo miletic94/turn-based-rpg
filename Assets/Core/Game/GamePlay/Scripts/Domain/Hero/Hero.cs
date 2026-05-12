@@ -23,7 +23,9 @@ public class Hero
         (
             Name,
             Health,
-            Stats,
+            new CombatantStats(Stats.GetStat(StatType.Attack).CurrentValue,
+                Stats.GetStat(StatType.Defense).CurrentValue,
+                Stats.GetStat(StatType.Magic).CurrentValue),
             EquippedMoves
         );
     public void SetAvailableMoves(List<Move> availableMoves)

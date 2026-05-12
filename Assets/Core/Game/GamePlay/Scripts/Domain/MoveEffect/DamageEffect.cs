@@ -13,15 +13,4 @@ public class DamageEffect : IMoveEffect
         Value = value;
         IsSource = isSource;
     }
-
-    public void Execute(EffectContext context)
-    {
-        var target = context.ResolveTarget(Target);
-        var damage = Value.GetValue(context);
-
-        if (IsSource)
-            context.StoreResult(Id, damage);
-
-        target.ApplyDamage(damage);
-    }
 }

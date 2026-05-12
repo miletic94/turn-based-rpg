@@ -1,5 +1,5 @@
-            
-If player wins two times the bug happens in StatsManagementView on line _rows.Add(stat.Type, row) ArgumentException: An item with the same key has already been added. Key: Attack
+Battle must be more readable
+If player uses stat modifier and it doesn't expire it stays applied after the battle ends
 If defense is 1 - combatant doesn't take any damage
 If player passed level - they shouldn't be able to play it again
 SceneLoader and ScreenLoader

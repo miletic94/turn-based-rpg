@@ -9,11 +9,10 @@ public class AppBootstrapper : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // _sceneLoader = new SceneLoaderService();
-        var eventBus = new EventBus();
         var appStateMachine = new ApplicationStateMachine();
 
 
-        AppContext.Initialize(eventBus, appStateMachine);
+        AppContext.Initialize(appStateMachine);
 
         await appStateMachine.EnterMainMenu();
     }

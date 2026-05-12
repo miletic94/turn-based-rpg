@@ -14,7 +14,6 @@ public class StatsManagementController
         Action onSave
         )
     {
-        Debug.Log($"Controller created {GetHashCode()}");
         _view = view;
         _service = service;
         _onSave = onSave;
@@ -53,7 +52,6 @@ public class StatsManagementController
 
     private void Refresh()
     {
-        Debug.Log($"SMController.Refresh - available points: {_service.GetAvailablePoints()}");
         _view.Refresh(
             _service.GetStats(),
             _service.GetAvailablePoints());

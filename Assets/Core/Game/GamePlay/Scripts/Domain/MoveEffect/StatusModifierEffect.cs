@@ -19,16 +19,4 @@ public class StatModifierEffect : IMoveEffect
         Duration = duration;
         IsSource = isSource;
     }
-
-    public void Execute(EffectContext context)
-    {
-        var target = context.ResolveTarget(Target);
-
-        var value = Value.GetValue(context);
-
-        if (IsSource)
-            context.StoreResult(Id, value);
-
-        target.ApplyModifier(Type, Stat, value, TickBehavior, Duration);
-    }
 }

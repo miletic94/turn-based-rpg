@@ -9,7 +9,7 @@ public class ReferenceValue : IMoveEffectValue
         SourceId = sourceId;
     }
 
-    public float GetValue(EffectContext context)
+    public float Get(EffectContext context)
     {
         return context.GetResult(SourceId);
     }

@@ -6,7 +6,7 @@ public class FlatValue : IMoveEffectValue
         BaseValue = baseValue;
     }
 
-    public float GetValue(EffectContext context)
+    public float Get(EffectContext context)
     {
         return BaseValue;
     }

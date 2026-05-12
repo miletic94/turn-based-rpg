@@ -4,24 +4,25 @@ public class ActiveModifier
     public StatType Stat { get; }
     public float Value { get; }
     public bool HasOccured { get; private set; }
-    private int _baseDuration;
     public int RemainingDuration { get; private set; }
 
-    public ActiveModifier(ModifierType type, StatType stat, float value, ModifierTickBehavior tickBehavior, int duration)
+    public ActiveModifier(ModifierType type, StatType stat, float value, int duration)
     {
         Type = type;
         Stat = stat;
         Value = value;
         HasOccured = false;
-        _baseDuration = duration;
         RemainingDuration = duration;
     }
 
-    public void Tick()
+    public void SetHasOccured(bool hasOccured)
     {
-        if (!HasOccured) HasOccured = true;
-        RemainingDuration--;
+        HasOccured = hasOccured;
     }
 
+    public void SubstractRemainingDuration()
+    {
+        RemainingDuration--;
+    }
     public bool IsExpired => RemainingDuration <= 0;
 }

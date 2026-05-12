@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 public enum BattlePhase
 {
     NeedMoveSelection,
@@ -7,12 +9,12 @@ public enum BattlePhase
 
 public class BattleService
 {
-    private readonly BattleData _battleData;
+    private readonly BattleContext _battleData;
     private readonly BattleTurnService _battleTurnService;
     private readonly BattleResolutionService _battleResolutionService;
     private readonly MoveService _moveService;
 
-    public BattleService(BattleData battleData, BattleTurnService battleTurnService, BattleResolutionService battleResolutionService, MoveService moveService)
+    public BattleService(BattleContext battleData, BattleTurnService battleTurnService, BattleResolutionService battleResolutionService, MoveService moveService)
     {
         _battleData = battleData;
         _battleTurnService = battleTurnService;
@@ -29,9 +31,19 @@ public class BattleService
     public void SubmitMove(Move move)
     {
         if (Phase != BattlePhase.NeedMoveSelection) return;
+        _moveService.ApplyMove(CurrentActor, CurrentTarget, move);
 
-        _moveService.ExecuteMove(CurrentActor, CurrentTarget, move);
         Phase = BattlePhase.ResolvingTurn;
+    }
+
+    // TODO: This shouldn't be here
+    public void RemoveExpiredModifiers(Combatant currentActor)
+    {
+        _moveService.RemoveExpiredModifiers(currentActor);
+    }
+    public void TickModifiers(Combatant currentActor)
+    {
+        _moveService.TickModifiers(currentActor);
     }
 
     public void Advance()
