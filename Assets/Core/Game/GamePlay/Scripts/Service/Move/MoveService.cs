@@ -19,16 +19,6 @@ public class MoveService
         ApplyEffects(move, context);
     }
 
-    public void TickModifiers(Combatant combatant)
-    {
-        _moveEffectService.TickModifiers(combatant);
-    }
-
-    public void RemoveExpiredModifiers(Combatant combatant)
-    {
-        _moveEffectService.RemoveExpiredModifiers(combatant);
-    }
-
     private EffectContext CreateEffectContext(
         Combatant source,
         Combatant target)

@@ -9,14 +9,14 @@ public enum BattlePhase
 
 public class BattleService
 {
-    private readonly BattleContext _battleData;
+    private readonly BattleContext _battleContext;
     private readonly BattleTurnService _battleTurnService;
     private readonly BattleResolutionService _battleResolutionService;
     private readonly MoveService _moveService;
 
-    public BattleService(BattleContext battleData, BattleTurnService battleTurnService, BattleResolutionService battleResolutionService, MoveService moveService)
+    public BattleService(BattleContext battleContext, BattleTurnService battleTurnService, BattleResolutionService battleResolutionService, MoveService moveService)
     {
-        _battleData = battleData;
+        _battleContext = battleContext;
         _battleTurnService = battleTurnService;
         _battleResolutionService = battleResolutionService;
         _moveService = moveService;
@@ -25,8 +25,8 @@ public class BattleService
     public BattlePhase Phase { get; private set; } = BattlePhase.NeedMoveSelection;
     public Combatant Winner { get; private set; }
 
-    public Combatant CurrentActor => _battleTurnService.GetCurrentCombatant(_battleData);
-    public Combatant CurrentTarget => _battleTurnService.GetNextCombatant(_battleData);
+    public Combatant CurrentActor => _battleTurnService.GetCurrentCombatant(_battleContext);
+    public Combatant CurrentTarget => _battleTurnService.GetNextCombatant(_battleContext);
 
     public void SubmitMove(Move move)
     {
@@ -39,25 +39,25 @@ public class BattleService
     // TODO: This shouldn't be here
     public void RemoveExpiredModifiers(Combatant currentActor)
     {
-        _moveService.RemoveExpiredModifiers(currentActor);
+        currentActor.RemoveExpiredModifiers();
     }
     public void TickModifiers(Combatant currentActor)
     {
-        _moveService.TickModifiers(currentActor);
+        currentActor.TickModifiers();
     }
 
     public void Advance()
     {
         if (Phase == BattlePhase.ResolvingTurn)
         {
-            if (_battleResolutionService.TryGetWinner(_battleData, out var winner))
+            if (_battleResolutionService.TryGetWinner(_battleContext, out var winner))
             {
                 Winner = winner;
                 Phase = BattlePhase.Finished;
                 return;
             }
 
-            _battleTurnService.AdvanceTurn(_battleData);
+            _battleTurnService.AdvanceTurn(_battleContext);
             Phase = BattlePhase.NeedMoveSelection;
         }
     }

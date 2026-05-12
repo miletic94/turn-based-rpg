@@ -52,14 +52,4 @@ public class MoveEffectService
     {
         target.AddActiveModifier(modifier);
     }
-
-    public void RemoveExpiredModifiers(Combatant combatant)
-    {
-        combatant.RemoveExpiredModifiers();
-    }
-
-    public void TickModifiers(Combatant combatant)
-    {
-        combatant.TickModifiers();
-    }
 }
