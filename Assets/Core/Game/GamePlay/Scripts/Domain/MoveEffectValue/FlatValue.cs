@@ -10,4 +10,8 @@ public class FlatValue : IMoveEffectValue
     {
         return BaseValue;
     }
+    public override string ToString()
+    {
+        return $"Value: {BaseValue}";
+    }
 }

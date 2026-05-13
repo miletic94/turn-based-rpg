@@ -13,4 +13,9 @@ public class ReferenceValue : IMoveEffectValue
     {
         return context.GetResult(SourceId);
     }
+
+    public override string ToString()
+    {
+        return "Value references previous effect";
+    }
 }

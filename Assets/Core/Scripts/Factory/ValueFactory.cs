@@ -13,7 +13,7 @@ public static class ValueFactory
                 return new ScaledValue(
                     dto.BaseValue,
                     EnumUtils.ParseEnum<StatType>(dto.ScalesOff),
-                    EnumUtils.ParseEnum<StatType>(dto.ReducedBy)
+                    EnumUtils.ParseEnum<StatType>(dto.ReducedBy) // TODO: Magic moves have StatType.None here. I don't like that
                 );
             case "reference":
                 return new ReferenceValue(dto.SourceId);

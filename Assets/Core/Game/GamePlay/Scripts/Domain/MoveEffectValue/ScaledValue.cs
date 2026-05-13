@@ -31,4 +31,10 @@ public class ScaledValue : IMoveEffectValue
         };
         return BaseValue * scalar * (1 - reducer);
     }
+
+    public override string ToString()
+    {
+        return $"Value: {BaseValue}. Scales off {ScalesOff}"
+        + (ReducedBy != StatType.None ? $"reduced by: {ReducedBy}" : "");
+    }
 }

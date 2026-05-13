@@ -19,4 +19,9 @@ public class StatModifierEffect : IMoveEffect
         Duration = duration;
         IsSource = isSource;
     }
+
+    public override string ToString()
+    {
+        return $"{Type} {Target}'s {Stat} for {Duration} turns. {Value}";
+    }
 }

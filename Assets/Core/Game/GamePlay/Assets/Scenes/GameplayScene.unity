@@ -2493,7 +2493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0caee6043e078fe46ba0fe1c6279431a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveButtonPrefab: {fileID: 6234815309650302400, guid: b2450b3d17d37be4990f40a4a9b142fa, type: 3}
+  moveButtonPrefab: {fileID: 6455260918530206184, guid: b2450b3d17d37be4990f40a4a9b142fa, type: 3}
   content: {fileID: 1418024981}
 --- !u!1 &1527474709
 GameObject:

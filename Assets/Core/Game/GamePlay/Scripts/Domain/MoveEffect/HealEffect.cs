@@ -14,4 +14,8 @@ public class HealEffect : IMoveEffect
         Value = value;
         IsSource = isSource;
     }
+    public override string ToString()
+    {
+        return $"Restores HP of {Target}. {Value}";
+    }
 }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class MoveView : MonoBehaviour, IMoveView
 {
-    [SerializeField] GameObject moveButtonPrefab;
+    [SerializeField] MoveButtonUI moveButtonPrefab;
     [SerializeField] Transform content;
-    public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected)
+    public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected, Action<Move> onMoveHovered)
     {
         // TODO: Implement pooling for move buttons
         foreach (Transform child in content)
@@ -17,12 +17,11 @@ public class MoveView : MonoBehaviour, IMoveView
         // Instantiate new buttons
         foreach (var move in moves)
         {
-            var buttonObj = Instantiate(moveButtonPrefab, content);
-            var button = buttonObj.GetComponent<Button>();
-            var text = buttonObj.GetComponentInChildren<TMP_Text>();
-            text.text = move.Name;
+            var moveButtonUI = Instantiate(moveButtonPrefab, content);
+            moveButtonUI.SetText(move.Name);
 
-            button.onClick.AddListener(() => onMoveSelected(move));
+            moveButtonUI.SetOnClick(() => onMoveSelected(move));
+            moveButtonUI.SetOnHover(() => onMoveHovered(move));
         }
     }
 }

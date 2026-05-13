@@ -13,4 +13,8 @@ public class DamageEffect : IMoveEffect
         Value = value;
         IsSource = isSource;
     }
+    public override string ToString()
+    {
+        return $"Deals damage to {Target}. {Value}";
+    }
 }
