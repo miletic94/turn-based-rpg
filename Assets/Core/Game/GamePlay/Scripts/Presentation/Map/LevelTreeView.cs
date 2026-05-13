@@ -16,12 +16,10 @@ public class LevelTreeView : MonoBehaviour, ILevelTreeView
         {
             var node = Instantiate(_nodePrefab, _nodesContainer);
 
-            node.SetText(level.LevelNumber.ToString());
-
-            node.SetClickAction(() =>
-            {
-                onEnemySelected?.Invoke(level.Enemy);
-            });
+            node
+                .SetInteractable(false)
+                .SetText(level.LevelNumber.ToString())
+                .OnClicked(() => onEnemySelected(level.Enemy));
         }
     }
 }

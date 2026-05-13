@@ -149,8 +149,9 @@ GameObject:
   - component: {fileID: 5809557559011276522}
   - component: {fileID: 4314302328799346110}
   - component: {fileID: 8207714588775132707}
+  - component: {fileID: 1871382731272526208}
   m_Layer: 5
-  m_Name: LevelButton
+  m_Name: LevelTreeNodeView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,4 +272,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _label: {fileID: 6358442800911205958}
-  _button: {fileID: 4314302328799346110}
+  _clickable: {fileID: 1871382731272526208}
+  _hoverable: {fileID: 0}
+--- !u!114 &1871382731272526208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229627894912048219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a695098ac053f8945a95ef705607cc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
