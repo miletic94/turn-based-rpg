@@ -31,4 +31,8 @@ public class CombatantStatData
             return m.Value * (m.Type == ModifierType.Debuff ? -1 : 1);
         });
     }
+    public List<ActiveModifier> GetActiveModifiers()
+    {
+        return ActiveModifiers;
+    }
 }

@@ -25,4 +25,9 @@ public class ActiveModifier
         RemainingDuration--;
     }
     public bool IsExpired => RemainingDuration <= 0;
+
+    public override string ToString()
+    {
+        return $"{Type} {Stat} for {Value} for the next {RemainingDuration} turns";
+    }
 }

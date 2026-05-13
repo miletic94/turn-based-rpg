@@ -37,6 +37,20 @@ public class CombatantStats
             throw new System.Exception($"Stat {statType} not found");
         return stat.GetCurrentValue();
     }
+    // TODO: This is debugging
+    public string GetActiveModifiersToString(StatType statType)
+    {
+        string result = "[";
+        if (!_stats.TryGetValue(statType, out var stat))
+            throw new System.Exception($"Stat {statType} not found");
+        var modifiers = stat.GetActiveModifiers();
+        foreach (var m in modifiers)
+        {
+            result += m.ToString() + ", ";
+        }
+        result += "]";
+        return result;
+    }
 
     public IEnumerable<CombatantStatData> GetStats()
     {

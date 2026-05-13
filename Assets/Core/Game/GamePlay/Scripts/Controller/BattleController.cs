@@ -59,7 +59,9 @@ public class BattleController
                 var target = _battleService.CurrentTarget;
 
                 _battleService.RemoveExpiredModifiers(actor);
-                _statController.RefreshStatView(actor, target);
+                _battleService.TickModifiers(actor);
+
+                _statController.UpdateStatView(actor, target);
 
                 // TODO: There could be one MoveProvider class with GetMove(Actor actor) method. This class reads actor.MoveProvider string and chooses the right provicer
                 var provider = actor.Role == CombatantRole.Player
@@ -69,10 +71,12 @@ public class BattleController
 
                 _battleService.SubmitMove(move);
 
-                _battleService.TickModifiers(actor);
+                Debug.Log($@"MOVE
+                actor: {actor}
+                target: {target}");
 
                 _combatantViewController.OnMoveExecuted(actor, target, move);
-                _statController.RefreshStatView(actor, target);
+                _statController.UpdateHealth(actor, target);
             }
 
             if (_battleService.Phase == BattlePhase.ResolvingTurn)

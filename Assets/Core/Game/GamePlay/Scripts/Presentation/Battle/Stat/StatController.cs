@@ -15,16 +15,24 @@ public class StatController
         _view.ShowStat(character);
     }
 
-    public void RefreshStatView(Combatant target, Combatant source)
+    public void UpdateHealth(Combatant target, Combatant source)
     {
         if (_currentCharacter == target)
-            Refresh(target);
+            _view.UpdateHealth(target);
         else if (_currentCharacter == source)
-            Refresh(source);
+            _view.UpdateHealth(source);
     }
 
-    private void Refresh(Combatant combatant)
+    public void UpdateStatView(Combatant target, Combatant source)
     {
-        _view.UpdateStat(combatant);
+        if (_currentCharacter == target)
+            UpdateStats(target);
+        else if (_currentCharacter == source)
+            UpdateStats(source);
+    }
+
+    private void UpdateStats(Combatant combatant)
+    {
+        _view.UpdateStats(combatant);
     }
 }

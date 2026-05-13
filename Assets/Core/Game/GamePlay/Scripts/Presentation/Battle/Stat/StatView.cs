@@ -6,6 +6,7 @@ public class StatView : MonoBehaviour
     [SerializeField] private StatHeaderView _statHeaderPrefab;
     [SerializeField] private StatRowView _statRowPrefab;
     [SerializeField] private Transform _container;
+    private StatRowView _healthRow;
 
     private Dictionary<StatType, StatRowView> _rows = new();
 
@@ -15,9 +16,9 @@ public class StatView : MonoBehaviour
         header.SetText(combatant.Name);
 
         // TODO: Handle Health better
-        var healthRow = Instantiate(_statRowPrefab, _container);
-        healthRow.SetIdentifier("Health");
-        healthRow.SetValue(combatant.Health.ToString());
+        _healthRow = Instantiate(_statRowPrefab, _container);
+        _healthRow.SetIdentifier("Health");
+        _healthRow.SetValue(combatant.Health.ToString());
 
 
         foreach (var stat in combatant.GetStats())
@@ -30,7 +31,11 @@ public class StatView : MonoBehaviour
         }
     }
 
-    public void UpdateStat(Combatant character)
+    public void UpdateHealth(Combatant character)
+    {
+        _healthRow.SetValue(character.Health.ToString());
+    }
+    public void UpdateStats(Combatant character)
     {
         foreach (var stat in character.GetStats())
         {
