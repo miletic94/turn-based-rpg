@@ -1,4 +1,6 @@
 Battle must be more readable
+Create MoveDescriptionView so you can attach it to both Battle and RewardManagement
+StatManagement can be a reusable system used in StatManagement and Battle
 If player uses stat modifier and it doesn't expire it stays applied after the battle ends
 If defense is 1 - combatant doesn't take any damage
 If player passed level - they shouldn't be able to play it again

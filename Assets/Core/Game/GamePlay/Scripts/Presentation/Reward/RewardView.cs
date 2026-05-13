@@ -7,7 +7,7 @@ public class RewardView : MonoBehaviour
     [SerializeField] private Transform _rewardContainer;
     [SerializeField] private RewardItemView _rewardItemPrefab;
 
-    public void ShowRewards(List<Move> rewards, Action<Move> onRewardSelected)
+    public void ShowRewards(List<Move> rewards, Action<Move> onRewardSelected, Action<Move> onRewardHovered)
     {
         // TODO: Implement pooling for reward items
         foreach (Transform child in _rewardContainer)
@@ -18,7 +18,8 @@ public class RewardView : MonoBehaviour
         {
             var rewardItem = Instantiate(_rewardItemPrefab, _rewardContainer);
             rewardItem.SetText(reward.Name);
-            rewardItem.SetButtonAction(() => onRewardSelected(reward));
+            rewardItem.SetOnRewardSelected(() => onRewardSelected(reward));
+            rewardItem.SetOnRewardHovered(() => onRewardHovered(reward));
         }
     }
 }
