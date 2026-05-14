@@ -41,6 +41,16 @@ public class InteractebleElementUI : MonoBehaviour
         return this;
     }
 
+    public InteractebleElementUI OnHoverDelayed(Action onHoverDelayed)
+    {
+        _hoverable.OnHoverDelayed += () =>
+        {
+            if (_isInteractable)
+                onHoverDelayed();
+        };
+        return this;
+    }
+
     public InteractebleElementUI OnHoverExited(Action onHoverExited)
     {
         _hoverable.OnHoverExited += () =>

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class MoveView : MonoBehaviour, IMoveView
 {
-    [SerializeField] MoveButtonUI moveButtonPrefab;
+    [SerializeField] MoveElementView moveItemViewPrefab;
     [SerializeField] Transform content;
     public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected, Action<Move> onMoveHovered)
     {
@@ -17,11 +16,12 @@ public class MoveView : MonoBehaviour, IMoveView
         // Instantiate new buttons
         foreach (var move in moves)
         {
-            var moveButtonUI = Instantiate(moveButtonPrefab, content);
-            moveButtonUI.SetText(move.Name);
+            var moveItemView = Instantiate(moveItemViewPrefab, content);
 
-            moveButtonUI.SetOnClick(() => onMoveSelected(move));
-            moveButtonUI.SetOnHover(() => onMoveHovered(move));
+            moveItemView
+                .SetText(move.Name)
+                .OnClicked(() => onMoveSelected(move))
+                .OnHoverDelayed(() => onMoveHovered(move));
         }
     }
 }
