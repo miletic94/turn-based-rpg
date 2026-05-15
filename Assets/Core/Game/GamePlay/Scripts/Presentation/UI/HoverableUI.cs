@@ -14,7 +14,11 @@ public class HoverableUI : MonoBehaviour,
     public event Action HoverExited;
     public event Action HoverDelayed;
 
-    public bool IsInteractable = true;
+    private bool _isInteractable = false;
+    public void SetInteractable(bool isInteractable)
+    {
+        _isInteractable = isInteractable;
+    }
 
     private CancellationTokenSource _hoverCts;
 
@@ -35,28 +39,28 @@ public class HoverableUI : MonoBehaviour,
     }
     private void InvokeHoverEntered()
     {
-        if (IsInteractable)
+        if (_isInteractable)
         {
             HoverEntered?.Invoke();
         }
     }
     private void InvokeHoverDelayed()
     {
-        if (IsInteractable)
+        if (_isInteractable)
         {
             HoverDelayed?.Invoke();
         }
     }
     private void InvokeHoverExited()
     {
-        if (IsInteractable)
+        if (_isInteractable)
         {
             HoverExited?.Invoke();
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!IsInteractable) return;
+        if (!_isInteractable) return;
 
         InvokeHoverEntered();
 
@@ -68,7 +72,7 @@ public class HoverableUI : MonoBehaviour,
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!IsInteractable) return;
+        if (!_isInteractable) return;
 
         _hoverCts?.Cancel();
 
@@ -77,7 +81,7 @@ public class HoverableUI : MonoBehaviour,
 
     private async Awaitable HandleDelayedHoverAsync(CancellationToken token)
     {
-        if (!IsInteractable) return;
+        if (!_isInteractable) return;
 
         try
         {

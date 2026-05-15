@@ -5,7 +5,7 @@ using UnityEngine;
 public class RewardView : MonoBehaviour
 {
     [SerializeField] private Transform _rewardContainer;
-    [SerializeField] private RewardItemView _rewardItemPrefab;
+    [SerializeField] private MoveElementView _moveViewPrefab;
 
     public void ShowRewards(List<Move> rewards, Action<Move> onRewardSelected, Action<Move> onRewardHovered)
     {
@@ -16,10 +16,11 @@ public class RewardView : MonoBehaviour
         }
         foreach (var reward in rewards)
         {
-            var rewardItem = Instantiate(_rewardItemPrefab, _rewardContainer);
-            rewardItem.SetText(reward.Name);
-            rewardItem.SetOnRewardSelected(() => onRewardSelected(reward));
-            rewardItem.SetOnRewardHovered(() => onRewardHovered(reward));
+            var rewardItem = Instantiate(_moveViewPrefab, _rewardContainer);
+            rewardItem
+            .SetLabel(reward.Name)
+            .MakeClickable(() => onRewardSelected(reward))
+            .MakeHoverable(onHoverDelayed: () => onRewardHovered(reward));
         }
     }
 }

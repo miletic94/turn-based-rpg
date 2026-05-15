@@ -19,7 +19,7 @@ public class InteractableElementUI : MonoBehaviour
         {
             Debug.LogError("ClickableUI missing on gam object", gameObject);
         }
-        _clickable.IsInteractable = isClickable;
+        _clickable.SetInteractable(isClickable);
     }
     public void SetHoverable(bool isHoverable)
     {
@@ -27,7 +27,7 @@ public class InteractableElementUI : MonoBehaviour
         {
             Debug.LogError("HoverableUI missing on gam object", gameObject);
         }
-        _hoverable.IsInteractable = isHoverable;
+        _hoverable.SetInteractable(isHoverable);
     }
     public void SetDraggable(bool isDraggable)
     {
@@ -35,7 +35,7 @@ public class InteractableElementUI : MonoBehaviour
         {
             Debug.LogError("DraggableUI missing on gam object", gameObject);
         }
-        _draggable.IsInteractable = isDraggable;
+        _draggable.SetInteractable(isDraggable);
     }
 
 }

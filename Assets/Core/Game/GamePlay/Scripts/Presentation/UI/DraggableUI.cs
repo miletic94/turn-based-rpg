@@ -13,7 +13,11 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public event Action DragBegan;
     public event Action Dragging;
     public event Action DragEnded;
-    public bool IsInteractable = true;
+    private bool _isInteractable = false;
+    public void SetInteractable(bool isInteractable)
+    {
+        _isInteractable = isInteractable;
+    }
 
     public void OnEnable()
     {
@@ -43,7 +47,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void InvokeDragBegan()
     {
-        if (IsInteractable)
+        if (_isInteractable)
         {
             DragBegan?.Invoke();
         }
@@ -51,7 +55,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void InvokeDragging()
     {
-        if (IsInteractable)
+        if (_isInteractable)
         {
             Dragging?.Invoke();
         }
@@ -59,7 +63,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void InvokeDragEnded()
     {
-        if (IsInteractable)
+        if (_isInteractable)
         {
             DragEnded?.Invoke();
         }
@@ -67,7 +71,8 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (!IsInteractable) return;
+        Debug.Log($"IOnBeginDrag - sInteractable: {_isInteractable}");
+        if (!_isInteractable) return;
 
         _originalParent = transform.parent;
 
@@ -81,7 +86,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (!IsInteractable) return;
+        if (!_isInteractable) return;
 
         transform.position =
             eventData.position;
@@ -91,7 +96,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!IsInteractable) return;
+        if (!_isInteractable) return;
 
         _canvasGroup.blocksRaycasts = true;
 

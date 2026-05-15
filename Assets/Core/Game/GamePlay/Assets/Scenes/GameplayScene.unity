@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rewardContainer: {fileID: 1569931564}
-  _rewardItemPrefab: {fileID: 8283415471073407511, guid: 07c3aa2cf7997b7439447c02d6bfef40, type: 3}
+  _moveViewPrefab: {fileID: -2271806946096572753, guid: 1fbb71678cd6c134ca86d62c94467721, type: 3}
 --- !u!1 &158200081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3521,7 +3521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _availableZone: {fileID: 1413115010}
   _equippedZone: {fileID: 701114473}
-  _moveItemPrefab: {fileID: 3903513005567098117, guid: 2cf752bebdf855b4cab7e918968acb50, type: 3}
+  _moveViewPrefab: {fileID: -2271806946096572753, guid: 1fbb71678cd6c134ca86d62c94467721, type: 3}
   _saveButton: {fileID: 1986393484}
 --- !u!1 &1962843796
 GameObject:

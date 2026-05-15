@@ -13,14 +13,14 @@ public class MoveManagementView : MonoBehaviour
     [SerializeField] private MoveDropZone _equippedZone;
 
     [Header("Prefab")]
-    [SerializeField] private MoveItemView _moveItemPrefab;
+    [SerializeField] private MoveElementView _moveViewPrefab;
 
     [Header("Controls")]
     [SerializeField] private Button _saveButton;
 
     public event Action SaveClicked;
-    private readonly Dictionary<Move, MoveItemView> _items =
-        new Dictionary<Move, MoveItemView>();
+    private readonly Dictionary<Move, MoveElementView> _items =
+        new Dictionary<Move, MoveElementView>();
 
     private void OnEnable()
     {
@@ -56,7 +56,7 @@ public class MoveManagementView : MonoBehaviour
         foreach (var move in moves)
         {
             var moveItemView = Instantiate(
-                _moveItemPrefab,
+                _moveViewPrefab,
                 container);
 
             moveItemView
