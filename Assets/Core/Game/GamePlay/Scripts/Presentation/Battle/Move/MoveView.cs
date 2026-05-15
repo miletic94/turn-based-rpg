@@ -19,7 +19,6 @@ public class MoveView : MonoBehaviour, IMoveView
             var moveItemView = Instantiate(moveItemViewPrefab, content);
 
             moveItemView
-                .SetInteractable(true)
                 .SetLabel(move.Name)
                 .MakeClickable(() => onMoveSelected(move))
                 .MakeHoverable(onHoverDelayed: () => onHoverDelayed(move));

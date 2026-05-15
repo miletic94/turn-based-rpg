@@ -25,6 +25,7 @@ public static class InteractebleElementExtensions
             Debug.LogError("Missing ClickableUI component on InteractableElementUI game object", element.gameObject);
         }
         element.Clickable?.Bind(onClicked);
+        element.SetClickable(true);
         return element;
     }
 
@@ -39,6 +40,8 @@ public static class InteractebleElementExtensions
             Debug.LogError("Missing HoverableUI component on InteractableElementUI game object", element.gameObject);
         }
         element.Hoverable?.Bind(onHoverEntered, onHoverDelayed, onHoverExited);
+
+        element.SetHoverable(true);
         return element;
     }
 
@@ -55,6 +58,7 @@ public static class InteractebleElementExtensions
         }
         element.Draggable?.SetPayload(payload);
         element.Draggable?.Bind(onDragStarted, onDragging, onDragEnded);
+        element.SetDraggable(true);
         return element;
     }
 }

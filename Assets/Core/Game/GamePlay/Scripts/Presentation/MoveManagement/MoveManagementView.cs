@@ -60,7 +60,6 @@ public class MoveManagementView : MonoBehaviour
                 container);
 
             moveItemView
-                .SetInteractable(true)
                 .SetLabel(move.Name)
                 .MakeHoverable()
                 .MaheDraggable(new MovePayload(move));

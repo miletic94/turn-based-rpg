@@ -13,20 +13,29 @@ public class InteractableElementUI : MonoBehaviour
     [SerializeField] private DraggableUI _draggable;
     public DraggableUI Draggable => _draggable;
 
-    public InteractableElementUI SetInteractable(bool isInteractable)
+    public void SetClickable(bool isClickable)
     {
-        if (_clickable != null)
+        if (_clickable == null)
         {
-            _clickable.IsInteractable = isInteractable;
+            Debug.LogError("ClickableUI missing on gam object", gameObject);
         }
-        if (_hoverable != null)
-        {
-            _hoverable.IsInteractable = isInteractable;
-        }
-        if (_draggable != null)
-        {
-            _draggable.IsInteractable = isInteractable;
-        }
-        return this;
+        _clickable.IsInteractable = isClickable;
     }
+    public void SetHoverable(bool isHoverable)
+    {
+        if (_hoverable == null)
+        {
+            Debug.LogError("HoverableUI missing on gam object", gameObject);
+        }
+        _hoverable.IsInteractable = isHoverable;
+    }
+    public void SetDraggable(bool isDraggable)
+    {
+        if (_draggable == null)
+        {
+            Debug.LogError("DraggableUI missing on gam object", gameObject);
+        }
+        _draggable.IsInteractable = isDraggable;
+    }
+
 }

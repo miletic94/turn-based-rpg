@@ -152,6 +152,8 @@ GameObject:
   - component: {fileID: 1794856639842042918}
   - component: {fileID: 5703851057894615245}
   - component: {fileID: 5242363091873870875}
+  - component: {fileID: -916703965168485989}
+  - component: {fileID: 8473460986539489598}
   m_Layer: 5
   m_Name: MoveItemView
   m_TagString: Untagged
@@ -276,7 +278,7 @@ MonoBehaviour:
   _label: {fileID: 5242363091873870875}
   _clickable: {fileID: 1794856639842042918}
   _hoverable: {fileID: 5703851057894615245}
-  _draggable: {fileID: 0}
+  _draggable: {fileID: -916703965168485989}
 --- !u!114 &1794856639842042918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,3 +319,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   label: {fileID: 4590660818944847661}
+--- !u!114 &-916703965168485989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6234815309650302400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab479e0a121ab644861879f09999765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 8473460986539489598}
+  IsInteractable: 1
+--- !u!225 &8473460986539489598
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6234815309650302400}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

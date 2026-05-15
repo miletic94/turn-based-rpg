@@ -17,7 +17,6 @@ public class LevelTreeView : MonoBehaviour, ILevelTreeView
             var node = Instantiate(_nodePrefab, _nodesContainer);
 
             node
-                .SetInteractable(true)
                 .SetLabel(level.LevelNumber.ToString())
                 .MakeClickable(() => onEnemySelected(level.Enemy));
         }
