@@ -5,7 +5,7 @@ using UnityEngine;
 public class RewardView : MonoBehaviour
 {
     [SerializeField] private Transform _rewardContainer;
-    [SerializeField] private MoveElementView _moveViewPrefab;
+    [SerializeField] private MoveView _moveViewPrefab;
 
     public void ShowRewards(List<Move> rewards, Action<Move> onRewardSelected, Action<Move> onRewardHovered)
     {

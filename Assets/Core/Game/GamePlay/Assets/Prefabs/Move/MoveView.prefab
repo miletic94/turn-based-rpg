@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a695098ac053f8945a95ef705607cc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsInteractable: 1
 --- !u!114 &5703851057894615245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,8 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e41701366dc19034589ffe0de95099d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hoverDelay: 1
-  IsInteractable: 1
+  _hoverDelay: 0.5
 --- !u!114 &5242363091873870875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 8473460986539489598}
-  IsInteractable: 1
 --- !u!225 &8473460986539489598
 CanvasGroup:
   m_ObjectHideFlags: 0

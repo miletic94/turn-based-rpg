@@ -13,14 +13,14 @@ public class MoveManagementView : MonoBehaviour
     [SerializeField] private MoveDropZone _equippedZone;
 
     [Header("Prefab")]
-    [SerializeField] private MoveElementView _moveViewPrefab;
+    [SerializeField] private MoveView _moveViewPrefab;
 
     [Header("Controls")]
     [SerializeField] private Button _saveButton;
 
     public event Action SaveClicked;
-    private readonly Dictionary<Move, MoveElementView> _items =
-        new Dictionary<Move, MoveElementView>();
+    private readonly Dictionary<Move, MoveView> _items =
+        new Dictionary<Move, MoveView>();
 
     private void OnEnable()
     {
@@ -62,7 +62,7 @@ public class MoveManagementView : MonoBehaviour
             moveItemView
                 .SetLabel(move.Name)
                 .MakeHoverable()
-                .MaheDraggable(new MovePayload(move));
+                .MakeDraggable(new MovePayload(move));
 
             _items[move] = moveItemView;
         }

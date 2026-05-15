@@ -4,10 +4,9 @@ public class BattleBootstrapper : MonoBehaviour
 {
     [SerializeField] BattleScreen _battleScreen;
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
-    [SerializeField] private MoveView _moveView;
+    [SerializeField] private BattleView _battleView;
     [SerializeField] private StatView _statView;
     private BattleController _battleController;
-    private MoveController _moveController;
 
     public BattleController Load()
     {
@@ -15,7 +14,6 @@ public class BattleBootstrapper : MonoBehaviour
 
         var effectExecutionService = new MoveEffectService();
 
-        _moveController = new MoveController(_moveView, new MoveDescriptionService());
         var combatantViewController = new CombatantViewController(_combatantViewFactory);
         var statController = new StatController(_statView);
 
@@ -25,7 +23,7 @@ public class BattleBootstrapper : MonoBehaviour
 
 
         _battleController = new BattleController(
-            _moveController,
+            _battleView,
             combatantViewController,
             statController,
             moveService,

@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _battleScreen: {fileID: 1962843801}
   _combatantViewFactory: {fileID: 158200082}
-  _moveView: {fileID: 1418024986}
+  _battleView: {fileID: 1952324974}
   _statView: {fileID: 950749754}
 --- !u!1 &519420028
 GameObject:
@@ -1217,8 +1217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad570f0b5d343a45b65d6cbee1d7d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveView: {fileID: 1418024986}
-  _statView: {fileID: 950749754}
+  _moveViewPrefab: {fileID: 0}
+  _movesContainer: {fileID: 0}
 --- !u!1 &587634718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1674,7 @@ Transform:
   - {fileID: 153524728}
   - {fileID: 657169871}
   - {fileID: 1978158602}
+  - {fileID: 1952324973}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &748940751
@@ -2376,9 +2377,8 @@ GameObject:
   - component: {fileID: 1418024984}
   - component: {fileID: 1418024983}
   - component: {fileID: 1418024982}
-  - component: {fileID: 1418024986}
   m_Layer: 5
-  m_Name: MoveView
+  m_Name: MovesContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2481,20 +2481,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1418024980}
   m_CullTransparentMesh: 1
---- !u!114 &1418024986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418024980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0caee6043e078fe46ba0fe1c6279431a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveItemViewPrefab: {fileID: -2271806946096572753, guid: 1fbb71678cd6c134ca86d62c94467721, type: 3}
-  content: {fileID: 1418024981}
 --- !u!1 &1527474709
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,6 +3509,52 @@ MonoBehaviour:
   _equippedZone: {fileID: 701114473}
   _moveViewPrefab: {fileID: -2271806946096572753, guid: 1fbb71678cd6c134ca86d62c94467721, type: 3}
   _saveButton: {fileID: 1986393484}
+--- !u!1 &1952324972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1952324973}
+  - component: {fileID: 1952324974}
+  m_Layer: 0
+  m_Name: BattleView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1952324973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952324972}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 722945153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1952324974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952324972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad570f0b5d343a45b65d6cbee1d7d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveViewPrefab: {fileID: -2271806946096572753, guid: 1fbb71678cd6c134ca86d62c94467721, type: 3}
+  _movesContainer: {fileID: 1418024981}
 --- !u!1 &1962843796
 GameObject:
   m_ObjectHideFlags: 0

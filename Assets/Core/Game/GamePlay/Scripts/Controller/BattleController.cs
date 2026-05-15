@@ -4,7 +4,7 @@ using UnityEngine;
 public class BattleController
 {
     private BattleService _battleService;
-    private readonly MoveController _moveController;
+    private readonly BattleView _battleView;
     private readonly CombatantViewController _combatantViewController;
 
     private readonly StatController _statController;
@@ -15,14 +15,14 @@ public class BattleController
     private readonly IMoveProvider _enemyProvider;
 
     public BattleController(
-        MoveController moveController,
+        BattleView battleView,
         CombatantViewController combatantViewController,
         StatController statController,
         MoveService moveService,
         BattleTurnService turnService,
         BattleResolutionService resolutionService)
     {
-        _moveController = moveController;
+        _battleView = battleView;
         _combatantViewController = combatantViewController;
         _statController = statController;
         _moveService = moveService;
@@ -35,7 +35,7 @@ public class BattleController
     public void Initialize(Hero hero, Character enemyCharacter)
     {
         var (player, enemy) = ConfigureCombatants(hero, enemyCharacter);
-        _moveController.Initialize(player.Moves, _playerProvider.OnMoveSelected);
+        _battleView.Initialize(player.Moves, _playerProvider.OnMoveSelected);
         _statController.Show(player);
         _combatantViewController.Create(player);
         _combatantViewController.Create(enemy);

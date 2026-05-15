@@ -45,7 +45,7 @@ public static class InteractebleElementExtensions
         return element;
     }
 
-    public static InteractableElementUI MaheDraggable(
+    public static InteractableElementUI MakeDraggable(
         this InteractableElementUI element,
         IDraggablePayload payload,
         Action onDragStarted = null,
