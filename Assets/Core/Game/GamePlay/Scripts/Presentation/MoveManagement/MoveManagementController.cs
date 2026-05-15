@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class MoveManagementController
 {
-    private readonly IMoveManagementView _view;
+    private readonly MoveManagementView _view;
     private readonly MoveLoadoutService _service;
 
     private Action<List<Move>, List<Move>> _onSave;
 
     public MoveManagementController(
-        IMoveManagementView view,
+        MoveManagementView view,
         MoveLoadoutService service,
         Action<List<Move>, List<Move>> onSave)
     {
@@ -21,7 +21,7 @@ public class MoveManagementController
 
     public void Bind()
     {
-        _view.MoveDropped += HandleDrop;
+        _view.OnMoveDropped += HandleDrop;
         _view.SaveClicked += HandleSave;
 
         Refresh();
@@ -29,28 +29,28 @@ public class MoveManagementController
 
     public void Unbind()
     {
-        _view.MoveDropped -= HandleDrop;
+        _view.OnMoveDropped -= HandleDrop;
         _view.SaveClicked -= HandleSave;
     }
 
     private void HandleDrop(
-        Move move,
-        MoveDropZone.ZoneType zone)
+        MovePayload movePayload,
+        MoveDropZoneType zoneType)
     {
-        bool success = zone switch
+        bool success = zoneType switch
         {
-            MoveDropZone.ZoneType.Equipped =>
-                _service.MoveToEquipped(move),
+            MoveDropZoneType.Equipped =>
+                _service.MoveToEquipped(movePayload.Move),
 
-            MoveDropZone.ZoneType.Available =>
-                _service.MoveToAvailable(move),
+            MoveDropZoneType.Available =>
+                _service.MoveToAvailable(movePayload.Move),
 
             _ => false
         };
 
         if (!success)
         {
-            _view.ResetDrag(move);
+            _view.ResetDrag(movePayload.Move);
             return;
         }
 

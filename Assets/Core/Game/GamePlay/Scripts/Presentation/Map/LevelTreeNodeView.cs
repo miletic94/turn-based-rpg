@@ -1,4 +1,4 @@
-public class LevelTreeNodeView : InteractebleElementUI
+public class LevelTreeNodeView : InteractableElementUI
 {
 
 }

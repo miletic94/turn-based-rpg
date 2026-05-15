@@ -2,62 +2,31 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class InteractebleElementUI : MonoBehaviour
+public class InteractableElementUI : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _label;
+    [SerializeField] private TextLabelUI _label;
+    public TextLabelUI Label => _label;
     [SerializeField] private ClickableUI _clickable;
+    public ClickableUI Clickable => _clickable;
     [SerializeField] private HoverableUI _hoverable;
-    private bool _isInteractable = true;
+    public HoverableUI Hoverable => _hoverable;
+    [SerializeField] private DraggableUI _draggable;
+    public DraggableUI Draggable => _draggable;
 
-    public InteractebleElementUI SetText(string text)
+    public InteractableElementUI SetInteractable(bool isInteractable)
     {
-        _label.text = text;
-        return this;
-    }
-
-    public InteractebleElementUI SetInteractable(bool isInteractable)
-    {
-        _isInteractable = isInteractable;
-        return this;
-    }
-
-    public InteractebleElementUI OnClicked(Action onClicked)
-    {
-        _clickable.OnClicked += () =>
+        if (_clickable != null)
         {
-            if (_isInteractable)
-                onClicked();
-        };
-        return this;
-    }
-
-    public InteractebleElementUI OnHoverEntered(Action onHoverEntered)
-    {
-        _hoverable.OnHoverEntered += () =>
+            _clickable.IsInteractable = isInteractable;
+        }
+        if (_hoverable != null)
         {
-            if (_isInteractable)
-                onHoverEntered();
-        };
-        return this;
-    }
-
-    public InteractebleElementUI OnHoverDelayed(Action onHoverDelayed)
-    {
-        _hoverable.OnHoverDelayed += () =>
+            _hoverable.IsInteractable = isInteractable;
+        }
+        if (_draggable != null)
         {
-            if (_isInteractable)
-                onHoverDelayed();
-        };
-        return this;
-    }
-
-    public InteractebleElementUI OnHoverExited(Action onHoverExited)
-    {
-        _hoverable.OnHoverExited += () =>
-        {
-            if (_isInteractable)
-                onHoverExited();
-        };
+            _draggable.IsInteractable = isInteractable;
+        }
         return this;
     }
 }

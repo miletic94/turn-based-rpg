@@ -10,35 +10,75 @@ public class HoverableUI : MonoBehaviour,
     [SerializeField]
     private float _hoverDelay = 1f;
 
-    public event Action OnHoverEntered;
-    public event Action OnHoverExited;
-    public event Action OnHoverDelayed;
+    public event Action HoverEntered;
+    public event Action HoverExited;
+    public event Action HoverDelayed;
+
+    public bool IsInteractable = true;
 
     private CancellationTokenSource _hoverCts;
 
-    public void OnPointerEnter(
-        PointerEventData eventData)
+    private void OnDsiable()
     {
-        OnHoverEntered?.Invoke();
+        _hoverCts?.Cancel();
+        _hoverCts?.Dispose();
+    }
+
+    public void Bind(
+        Action onHoverEntered = null,
+        Action onHoverDelayed = null,
+        Action onHoverExited = null)
+    {
+        HoverEntered = onHoverEntered;
+        HoverDelayed = onHoverDelayed;
+        HoverExited = onHoverExited;
+    }
+    private void InvokeHoverEntered()
+    {
+        if (IsInteractable)
+        {
+            HoverEntered?.Invoke();
+        }
+    }
+    private void InvokeHoverDelayed()
+    {
+        if (IsInteractable)
+        {
+            HoverDelayed?.Invoke();
+        }
+    }
+    private void InvokeHoverExited()
+    {
+        if (IsInteractable)
+        {
+            HoverExited?.Invoke();
+        }
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!IsInteractable) return;
+
+        InvokeHoverEntered();
 
         _hoverCts?.Cancel();
         _hoverCts = new CancellationTokenSource();
 
-        HandleDelayedHoverAsync(
-            _hoverCts.Token);
+        HandleDelayedHoverAsync(_hoverCts.Token);
     }
 
-    public void OnPointerExit(
-        PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
+        if (!IsInteractable) return;
+
         _hoverCts?.Cancel();
 
-        OnHoverExited?.Invoke();
+        InvokeHoverExited();
     }
 
-    private async Awaitable HandleDelayedHoverAsync(
-        CancellationToken token)
+    private async Awaitable HandleDelayedHoverAsync(CancellationToken token)
     {
+        if (!IsInteractable) return;
+
         try
         {
             await Awaitable.WaitForSecondsAsync(
@@ -47,18 +87,12 @@ public class HoverableUI : MonoBehaviour,
 
             if (!token.IsCancellationRequested)
             {
-                OnHoverDelayed?.Invoke();
+                InvokeHoverDelayed();
             }
         }
         catch (OperationCanceledException)
         {
             // ignored
         }
-    }
-
-    private void OnDsiable()
-    {
-        _hoverCts?.Cancel();
-        _hoverCts?.Dispose();
     }
 }

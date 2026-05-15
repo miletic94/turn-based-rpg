@@ -18,8 +18,8 @@ public class LevelTreeView : MonoBehaviour, ILevelTreeView
 
             node
                 .SetInteractable(true)
-                .SetText(level.LevelNumber.ToString())
-                .OnClicked(() => onEnemySelected(level.Enemy));
+                .SetLabel(level.LevelNumber.ToString())
+                .MakeClickable(() => onEnemySelected(level.Enemy));
         }
     }
 }

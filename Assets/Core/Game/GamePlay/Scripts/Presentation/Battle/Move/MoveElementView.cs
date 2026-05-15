@@ -1,5 +1,5 @@
 // TODO: Maybe rename to MoveItemView
-public class MoveElementView : InteractebleElementUI
+public class MoveElementView : InteractableElementUI
 {
 
 }

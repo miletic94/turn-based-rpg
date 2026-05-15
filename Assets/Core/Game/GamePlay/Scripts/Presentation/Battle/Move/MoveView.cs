@@ -7,7 +7,7 @@ public class MoveView : MonoBehaviour, IMoveView
 {
     [SerializeField] MoveElementView moveItemViewPrefab;
     [SerializeField] Transform content;
-    public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected, Action<Move> onMoveHovered)
+    public void ShowMoves(List<Move> moves, Action<Move> onMoveSelected, Action<Move> onHoverDelayed)
     {
         // TODO: Implement pooling for move buttons
         foreach (Transform child in content)
@@ -19,9 +19,10 @@ public class MoveView : MonoBehaviour, IMoveView
             var moveItemView = Instantiate(moveItemViewPrefab, content);
 
             moveItemView
-                .SetText(move.Name)
-                .OnClicked(() => onMoveSelected(move))
-                .OnHoverDelayed(() => onMoveHovered(move));
+                .SetInteractable(true)
+                .SetLabel(move.Name)
+                .MakeClickable(() => onMoveSelected(move))
+                .MakeHoverable(onHoverDelayed: () => onHoverDelayed(move));
         }
     }
 }

@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: -2271806946096572753}
   - component: {fileID: 1794856639842042918}
   - component: {fileID: 5703851057894615245}
+  - component: {fileID: 5242363091873870875}
   m_Layer: 5
   m_Name: MoveItemView
   m_TagString: Untagged
@@ -272,9 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928d6938557343e4ba64a5d7fc5c04ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _label: {fileID: 4590660818944847661}
+  _label: {fileID: 5242363091873870875}
   _clickable: {fileID: 1794856639842042918}
   _hoverable: {fileID: 5703851057894615245}
+  _draggable: {fileID: 0}
 --- !u!114 &1794856639842042918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a695098ac053f8945a95ef705607cc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsInteractable: 1
 --- !u!114 &5703851057894615245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,3 +303,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverDelay: 1
+  IsInteractable: 1
+--- !u!114 &5242363091873870875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6234815309650302400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f852a106f8b0c47945eba10123320c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: {fileID: 4590660818944847661}

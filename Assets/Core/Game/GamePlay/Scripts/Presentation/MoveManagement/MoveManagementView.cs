@@ -4,11 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoveManagementView : MonoBehaviour, IMoveManagementView
+public class MoveManagementView : MonoBehaviour
 {
-    [Header("Containers")]
-    [SerializeField] private Transform _availableContainer;
-    [SerializeField] private Transform _equippedContainer;
+    public event Action<MovePayload, MoveDropZoneType> OnMoveDropped;
 
     [Header("Zones")]
     [SerializeField] private MoveDropZone _availableZone;
@@ -17,56 +15,33 @@ public class MoveManagementView : MonoBehaviour, IMoveManagementView
     [Header("Prefab")]
     [SerializeField] private MoveItemView _moveItemPrefab;
 
-    [Header("Canvas")]
-    [SerializeField] private Canvas _canvas;
-
     [Header("Controls")]
     [SerializeField] private Button _saveButton;
 
-    public event Action<Move, MoveDropZone.ZoneType> MoveDropped;
     public event Action SaveClicked;
     private readonly Dictionary<Move, MoveItemView> _items =
         new Dictionary<Move, MoveItemView>();
 
     private void OnEnable()
     {
-        _availableZone.OnItemDropped += HandleDrop;
-        _equippedZone.OnItemDropped += HandleDrop;
+        _availableZone.OnDropped += HandleDrop;
+        _equippedZone.OnDropped += HandleDrop;
         _saveButton.onClick.AddListener(HandleSave);
     }
 
     private void OnDisable()
     {
-        _availableZone.OnItemDropped -= HandleDrop;
-        _equippedZone.OnItemDropped -= HandleDrop;
+        _availableZone.OnDropped -= HandleDrop;
+        _equippedZone.OnDropped -= HandleDrop;
         _saveButton.onClick.RemoveListener(HandleSave);
-    }
-
-    public void HandleDrop(
-        MoveItemView item,
-        MoveDropZone.ZoneType zone)
-    {
-        Transform targetContainer =
-    zone == MoveDropZone.ZoneType.Available
-        ? _availableContainer
-        : _equippedContainer;
-
-        item.transform.SetParent(targetContainer);
-        item.transform.localPosition = Vector3.zero;
-        MoveDropped?.Invoke(item.MoveData, zone);
-    }
-
-    public void HandleSave()
-    {
-        SaveClicked?.Invoke();
     }
 
     public void Render(
         List<Move> available,
         List<Move> equipped)
     {
-        RenderMoves(_availableContainer, available);
-        RenderMoves(_equippedContainer, equipped);
+        RenderMoves(_availableZone.transform, available);
+        RenderMoves(_equippedZone.transform, equipped);
     }
 
     private void RenderMoves(
@@ -84,16 +59,30 @@ public class MoveManagementView : MonoBehaviour, IMoveManagementView
                 _moveItemPrefab,
                 container);
 
-            var text =
-                moveItemView.GetComponentInChildren<TMP_Text>();
-
-            text.text = move.Name;
-
-            moveItemView.Initialize(
-                move,
-                _canvas);
+            moveItemView
+                .SetInteractable(true)
+                .SetLabel(move.Name)
+                .MakeHoverable()
+                .MaheDraggable(new MovePayload(move));
 
             _items[move] = moveItemView;
+        }
+    }
+
+
+    public void HandleDrop(
+        DraggableUI item,
+        DropZoneUI zone)
+    {
+        var moveDropZone = zone.GetComponent<MoveDropZone>();
+
+        if (moveDropZone == null) return;
+        if (item.Payload is MovePayload movePayload)
+        {
+            item.transform.SetParent(zone.transform);
+            item.transform.localPosition = Vector3.zero;
+
+            OnMoveDropped?.Invoke(movePayload, moveDropZone.Type);
         }
     }
 
@@ -101,7 +90,12 @@ public class MoveManagementView : MonoBehaviour, IMoveManagementView
     {
         if (_items.TryGetValue(move, out var item))
         {
-            item.ReturnToOriginalParent();
+            item.Draggable.ReturnToOriginalParent();
         }
+    }
+
+    public void HandleSave()
+    {
+        SaveClicked?.Invoke();
     }
 }
