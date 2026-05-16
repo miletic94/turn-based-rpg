@@ -4,8 +4,9 @@ public class BattleBootstrapper : MonoBehaviour
 {
     [SerializeField] BattleScreen _battleScreen;
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
-    [SerializeField] private BattleView _battleView;
+    [SerializeField] private BattleMoveView _battleMoveView;
     [SerializeField] private StatView _statView;
+    [SerializeField] private TooltipView _tooltipView;
     private BattleController _battleController;
 
     public BattleController Load()
@@ -23,7 +24,11 @@ public class BattleBootstrapper : MonoBehaviour
 
 
         _battleController = new BattleController(
-            _battleView,
+            new BattleMoveController(
+                _battleMoveView,
+                new MoveTooltipBinder(
+                    new MoveDescriptionService()
+                    , _tooltipView)),
             combatantViewController,
             statController,
             moveService,
