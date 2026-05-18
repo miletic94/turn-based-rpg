@@ -9,4 +9,8 @@ public class TextLabelUI : MonoBehaviour
     {
         label.text = text;
     }
+    public void SetColor(Color color)
+    {
+        label.color = color;
+    }
 }

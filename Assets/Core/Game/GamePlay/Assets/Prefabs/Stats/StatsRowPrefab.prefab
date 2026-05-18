@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f4065eaa40886458eb40255a6b8819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _identifierTextHolder: {fileID: 3399271534634993708}
-  _valueTextHolder: {fileID: 7665485417184189164}
+  _key: {fileID: 8769228666256542501}
+  _value: {fileID: 4623463768216845040}
 --- !u!1 &2761719435921957055
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 907579415770196447}
   - component: {fileID: 7665485417184189164}
   - component: {fileID: 6093407710863656923}
+  - component: {fileID: 4623463768216845040}
   m_Layer: 5
   m_Name: Value
   m_TagString: Untagged
@@ -236,6 +237,19 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &4623463768216845040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2761719435921957055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f852a106f8b0c47945eba10123320c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: {fileID: 7665485417184189164}
 --- !u!1 &4895024709688875273
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,8 +262,9 @@ GameObject:
   - component: {fileID: 97200535602977260}
   - component: {fileID: 3399271534634993708}
   - component: {fileID: 1624791732676626684}
+  - component: {fileID: 8769228666256542501}
   m_Layer: 5
-  m_Name: Identifier
+  m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,3 +408,16 @@ MonoBehaviour:
   m_FlexibleWidth: 1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8769228666256542501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4895024709688875273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01f852a106f8b0c47945eba10123320c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: {fileID: 3399271534634993708}

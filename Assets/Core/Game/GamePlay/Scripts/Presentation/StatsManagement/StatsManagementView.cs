@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// TODO: Move to MVC-ish
 public class StatsManagementView : MonoBehaviour
 {
     [SerializeField] private StatAvailablePointsView _availablePointsView;
@@ -19,7 +20,7 @@ public class StatsManagementView : MonoBehaviour
         Action<StatType> onMinus,
         Action onSave)
     {
-        _availablePointsView.SetAvailablePoints(availablePoints);
+        _availablePointsView.Value.SetText(availablePoints.ToString());
 
         foreach (var statData in stats)
         {
@@ -39,7 +40,7 @@ public class StatsManagementView : MonoBehaviour
 
     public void Refresh(IEnumerable<StatData> stats, int availablePoints)
     {
-        _availablePointsView.SetAvailablePoints(availablePoints);
+        _availablePointsView.Value.SetText(availablePoints.ToString());
 
         foreach (var stat in stats)
         {

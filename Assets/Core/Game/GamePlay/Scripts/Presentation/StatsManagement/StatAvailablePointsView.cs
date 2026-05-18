@@ -1,12 +1,3 @@
-using TMPro;
-using UnityEngine;
-
-public class StatAvailablePointsView : MonoBehaviour
+public class StatAvailablePointsView : KeyValueRowUI
 {
-    [SerializeField] private TMP_Text _availablePointsValueText;
-
-    public void SetAvailablePoints(int availablePoints)
-    {
-        _availablePointsValueText.text = $"{availablePoints}";
-    }
 }

@@ -7,7 +7,7 @@ public class BattleController
     private BattleMoveController _battleMoveSelectionController;
     private readonly CombatantViewController _combatantViewController;
 
-    private readonly StatController _statController;
+    private readonly BattleStatPanelController _battleStatPanelController;
     private readonly MoveService _moveService;
     private readonly BattleTurnService _turnService;
     private readonly BattleResolutionService _resolutionService;
@@ -17,14 +17,14 @@ public class BattleController
     public BattleController(
         BattleMoveController battleMoveController,
         CombatantViewController combatantViewController,
-        StatController statController,
+        BattleStatPanelController statController,
         MoveService moveService,
         BattleTurnService turnService,
         BattleResolutionService resolutionService)
     {
         _battleMoveSelectionController = battleMoveController;
         _combatantViewController = combatantViewController;
-        _statController = statController;
+        _battleStatPanelController = statController;
         _moveService = moveService;
         _turnService = turnService;
         _resolutionService = resolutionService;
@@ -38,7 +38,7 @@ public class BattleController
 
         _battleMoveSelectionController.ShowMoves(player.Moves, _playerProvider.OnMoveSelected);
 
-        _statController.Show(player);
+        _battleStatPanelController.Show(player);
         _combatantViewController.Create(player);
         _combatantViewController.Create(enemy);
         var battleData = new BattleContext(new List<Combatant> { player, enemy });
@@ -63,7 +63,7 @@ public class BattleController
                 _battleService.RemoveExpiredModifiers(actor);
                 _battleService.TickModifiers(actor);
 
-                _statController.UpdateStatView(actor, target);
+                _battleStatPanelController.UpdateStats(actor, target);
 
                 // TODO: There could be one MoveProvider class with GetMove(Actor actor) method. This class reads actor.MoveProvider string and chooses the right provicer
                 var provider = actor.Role == CombatantRole.Player
@@ -78,7 +78,7 @@ public class BattleController
                 target: {target}");
 
                 _combatantViewController.OnMoveExecuted(actor, target, move);
-                _statController.UpdateHealth(actor, target);
+                _battleStatPanelController.UpdateHealth(actor, target);
             }
 
             if (_battleService.Phase == BattlePhase.ResolvingTurn)
