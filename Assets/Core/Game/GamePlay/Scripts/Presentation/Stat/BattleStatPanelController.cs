@@ -1,6 +1,3 @@
-
-using System.Drawing;
-
 public class BattleStatPanelController
 {
     private readonly BattleStatPanelView _battleStatPanelView;

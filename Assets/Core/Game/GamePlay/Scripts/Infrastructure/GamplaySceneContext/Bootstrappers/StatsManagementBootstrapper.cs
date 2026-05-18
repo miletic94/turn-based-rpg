@@ -5,9 +5,9 @@ using UnityEngine;
 public class StatsManagementBootstrapper : MonoBehaviour
 {
     [SerializeField] StatsManagementScreen _statsManagementScreen;
-    [SerializeField] StatsManagementView _statsManagementView;
+    [SerializeField] StatsManagementPanelView _statsManagementView;
     private StatsManagementService _statsManagementService;
-    private StatsManagementController _statsManagementController;
+    private StatsManagementPanelController _statsManagementPanelController;
 
 
 
@@ -16,10 +16,12 @@ public class StatsManagementBootstrapper : MonoBehaviour
         // TODO: This can be done better
         if (_statsManagementService == null)
             _statsManagementService = new StatsManagementService(context);
-        if (_statsManagementController == null)
-            _statsManagementController = new StatsManagementController(_statsManagementView, _statsManagementService, onSave);
+        if (_statsManagementPanelController == null)
+            _statsManagementPanelController = new StatsManagementPanelController(
+                _statsManagementView,
+                _statsManagementService);
 
-        _statsManagementController.Initialize();
+        _statsManagementPanelController.Initialize(onSave);
         _statsManagementScreen.Show();
     }
     public void Unload()
