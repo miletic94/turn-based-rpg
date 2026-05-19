@@ -18,15 +18,22 @@ public class StatsManagementPanelView : MonoBehaviour
     {
         _availablePointsView.Value.SetText(text);
     }
-    public StatsManagementPanelRowView CreateAndRegisterStatManagementPanelRow(StatType statType)
+
+    public StatsManagementPanelRowView ShowStatRow(StatRowViewData data)
     {
         var row = Instantiate(_statManagementPanelRowPrefab, _container);
-        _rows[statType] = row;
+        row.ShowStatRow(data);
+        _rows[data.StatType] = row;
         return row;
     }
-    public bool TryGetStatManagementPanelRow(StatType statType, out StatsManagementPanelRowView statsManagementPanelRowView)
+
+    public StatsManagementPanelRowView UpdateStatRow(StatRowViewData statRowViewData)
     {
-        return _rows.TryGetValue(statType, out statsManagementPanelRowView);
+        if (_rows.TryGetValue(statRowViewData.StatType, out var statManagementRowView))
+        {
+            statManagementRowView.ShowStatRow(statRowViewData);
+        }
+        return statManagementRowView;
     }
 
     public void SetSaveButtonClickedCallback(Action onSaveButtonClicked)

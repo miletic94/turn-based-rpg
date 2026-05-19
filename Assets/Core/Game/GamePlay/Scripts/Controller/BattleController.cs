@@ -38,7 +38,7 @@ public class BattleController
 
         _battleMoveSelectionController.ShowMoves(player.Moves, _playerProvider.OnMoveSelected);
 
-        _battleStatPanelController.Show(player);
+        _battleStatPanelController.CreateStatPanel(player);
         _combatantViewController.Create(player);
         _combatantViewController.Create(enemy);
         var battleData = new BattleContext(new List<Combatant> { player, enemy });
@@ -78,7 +78,7 @@ public class BattleController
                 target: {target}");
 
                 _combatantViewController.OnMoveExecuted(actor, target, move);
-                _battleStatPanelController.UpdateHealth(actor, target);
+                _battleStatPanelController.SetHealthBar(actor, target);
             }
 
             if (_battleService.Phase == BattlePhase.ResolvingTurn)

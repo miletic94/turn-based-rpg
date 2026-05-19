@@ -21,7 +21,7 @@ public class StatsManagementBootstrapper : MonoBehaviour
                 _statsManagementView,
                 _statsManagementService);
 
-        _statsManagementPanelController.Initialize(onSave);
+        _statsManagementPanelController.CreateStatPanel(onSave);
         _statsManagementScreen.Show();
     }
     public void Unload()

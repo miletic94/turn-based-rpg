@@ -23,12 +23,33 @@ public class StatsManagementService
         return _context.Hero.AvailableStatPoints;
     }
 
-    public void SetAvailablePoints(int value)
+    public void IncreaseStat(StatType type)
+    {
+        AddStat(type);
+
+        ChangeAvailablePoints(-1);
+    }
+
+    public void DecreaseStat(StatType type)
+    {
+        SubstractStat(type);
+
+        ChangeAvailablePoints(+1);
+    }
+
+    private void ChangeAvailablePoints(int amount)
+    {
+        int current = GetAvailablePoints();
+
+        SetAvailablePoints(current + amount);
+    }
+
+    private void SetAvailablePoints(int value)
     {
         _context.Hero.SetAvaialbleStatPoints(value);
     }
 
-    public float AddStat(StatType statType, float amount = 0.1f)
+    private float AddStat(StatType statType, float amount = 0.1f)
     {
         var stat = _context.Hero.Stats.GetStat(statType);
 
@@ -39,7 +60,7 @@ public class StatsManagementService
         return newValue;
     }
 
-    public float SubstractStat(StatType statType, float amount = 0.1f)
+    private float SubstractStat(StatType statType, float amount = 0.1f)
     {
         var stat = _context.Hero.Stats.GetStat(statType);
 

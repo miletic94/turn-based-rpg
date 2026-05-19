@@ -4,6 +4,7 @@ public class Hero
 {
     public string Name { get; private set; }
     public float Health { get; private set; }
+    // TODO: Hero shouldn't depend on Stats data structure
     public Stats Stats { get; private set; }
     public Xp Xp { get; private set; }
     public int AvailableStatPoints { get; private set; }

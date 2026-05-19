@@ -2,66 +2,121 @@ using System;
 
 public class StatsManagementPanelController
 {
-    private readonly StatsManagementPanelView _statManagementPanelView;
+    private readonly StatsManagementPanelView _view;
     private readonly StatsManagementService _service;
 
     public StatsManagementPanelController(
         StatsManagementPanelView view,
-        StatsManagementService service
-        )
+        StatsManagementService service)
     {
-        _statManagementPanelView = view;
+        _view = view;
         _service = service;
     }
 
-    public void Initialize(Action onSvaeButtonClicked)
+    public void CreateStatPanel(Action onSaveButtonClicked)
     {
-        _statManagementPanelView.SetAvailablePointsText(
-            _service.GetAvailablePoints().ToString());
+        RefreshAll();
 
-        foreach (var statData in _service.GetStats())
-        {
-            var row
-            = _statManagementPanelView.CreateAndRegisterStatManagementPanelRow(statData.Type);
-            row.SetRowKey(statData.Type.ToString());
-            row.SetRowValue(statData.CurrentValue.ToString());
-
-            row.SetControlInteractable(statData.CurrentGTBase, _service.GetAvailablePoints() > 0);
-            row.SetControlCallbacks(
-                () => OnMinusClicked(statData.Type),
-                () => OnPlusClicked(statData.Type));
-        }
-
-        _statManagementPanelView.SetSaveButtonClickedCallback(onSvaeButtonClicked);
+        _view.SetSaveButtonClickedCallback(onSaveButtonClicked);
     }
 
-    private void Refresh()
-    {
-        _statManagementPanelView.SetAvailablePointsText(
-            _service.GetAvailablePoints().ToString());
+    // ----------------------------
+    // Refresh
+    // ----------------------------
 
+    private void RefreshAll()
+    {
+        RefreshAvailablePoints();
+        RefreshStatRows();
+    }
+
+    private void RefreshAvailablePoints()
+    {
+        _view.SetAvailablePointsText(
+            _service.GetAvailablePoints().ToString());
+    }
+
+    private void RefreshStatRows()
+    {
         foreach (var stat in _service.GetStats())
         {
-            _statManagementPanelView.TryGetStatManagementPanelRow(stat.Type, out var row);
-            row.SetRowValue(stat.CurrentValue.ToString());
-
-            row.SetControlInteractable(stat.CurrentGTBase, _service.GetAvailablePoints() > 0);
+            CreateOrUpdateRow(stat);
         }
     }
 
-    private void OnPlusClicked(StatType type)
-    {
-        _service.AddStat(type);
-        _service.SetAvailablePoints(_service.GetAvailablePoints() - 1);
+    // ----------------------------
+    // Row Setup
+    // ----------------------------
 
-        Refresh();
+    private void CreateOrUpdateRow(StatData stat)
+    {
+        var rowData = CreateStatRowViewData(stat);
+        UnityEngine.Debug.Log(
+            $"{rowData.BaseValue}, {rowData.CurrentValue}, {rowData.CapValue}");
+
+        var row = _view.UpdateStatRow(rowData);
+
+        if (row == null)
+        {
+            row = _view.ShowStatRow(rowData);
+
+            BindRowCallbacks(row, stat.Type);
+        }
+
+        UpdateRowInteractability(row, stat);
     }
 
-    private void OnMinusClicked(StatType type)
+    private void BindRowCallbacks(StatsManagementPanelRowView row, StatType statType)
     {
-        _service.SubstractStat(type);
-        _service.SetAvailablePoints(_service.GetAvailablePoints() + 1);
+        row.SetControlCallbacks(
+            () => ModifyStat(statType, +1),
+            () => ModifyStat(statType, -1));
+    }
 
-        Refresh();
+    private void UpdateRowInteractability(
+        StatsManagementPanelRowView row,
+        StatData stat)
+    {
+        bool canDecrease = stat.CurrentGTBase;
+        bool canIncrease = _service.GetAvailablePoints() > 0;
+
+        row.SetControlInteractable(
+            canDecrease,
+            canIncrease);
+    }
+
+    // ----------------------------
+    // Stat Modification
+    // ----------------------------
+
+    private void ModifyStat(StatType type, int delta)
+    {
+        if (delta > 0)
+        {
+            _service.IncreaseStat(type);
+        }
+        else
+        {
+            _service.DecreaseStat(type);
+        }
+
+        RefreshAll();
+    }
+
+    // ----------------------------
+    // View Data
+    // ----------------------------
+
+    private StatRowViewData CreateStatRowViewData(StatData stat)
+    {
+        return new StatRowViewData(
+            stat.Type,
+            ConvertToViewValue(stat.BaseValue),
+            ConvertToViewValue(stat.CurrentValue));
+    }
+
+    private int ConvertToViewValue(float value)
+    {
+        return (int)(value * 10);
     }
 }
