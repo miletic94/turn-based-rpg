@@ -15,7 +15,9 @@ public class HeroDTO
     (
          Name,
          Health,
-         new Stats(Attack, Defense, Magic),
+         Attack,
+         Defense,
+         Magic,
          Xp.ToXp(),
          AvailableStatPoints,
          AvailableMoves.ConvertAll(m => m.ToMove()),

@@ -1,72 +1,48 @@
 using System.Collections.Generic;
+using System.Data.Common;
 
 // TODO: Services should be stateless. This one specifically had a bug that shows why
 public class StatsManagementService
 {
-    private readonly GameplayContext _context;
-    public StatsManagementService(GameplayContext context)
+
+    public void IncreaseStat(StatManagementData data, StatType type)
     {
-        _context = context;
-    }
-    public IEnumerable<StatData> GetStats()
-    {
-        return _context.Hero.Stats.GetStats();
+        AddStat(data, type);
+
+        ChangeAvailablePoints(data, -1);
     }
 
-    public StatData GetStat(StatType statType)
+    public void DecreaseStat(StatManagementData data, StatType type)
     {
-        return _context.Hero.Stats.GetStat(statType);
+        SubstractStat(data, type);
+
+        ChangeAvailablePoints(data, +1);
     }
 
-    public int GetAvailablePoints()
+    private void ChangeAvailablePoints(StatManagementData data, int amount)
     {
-        return _context.Hero.AvailableStatPoints;
+        int current = data.AvailableStatPoints;
+
+        data.SetAvaialableStatPoints(current + amount);
     }
-
-    public void IncreaseStat(StatType type)
+    private float AddStat(StatManagementData data, StatType statType, float amount = 0.1f)
     {
-        AddStat(type);
-
-        ChangeAvailablePoints(-1);
-    }
-
-    public void DecreaseStat(StatType type)
-    {
-        SubstractStat(type);
-
-        ChangeAvailablePoints(+1);
-    }
-
-    private void ChangeAvailablePoints(int amount)
-    {
-        int current = GetAvailablePoints();
-
-        SetAvailablePoints(current + amount);
-    }
-
-    private void SetAvailablePoints(int value)
-    {
-        _context.Hero.SetAvaialbleStatPoints(value);
-    }
-
-    private float AddStat(StatType statType, float amount = 0.1f)
-    {
-        var stat = _context.Hero.Stats.GetStat(statType);
+        var stat = data.Stats.GetStat(statType);
 
         var newValue = stat.CurrentValue + amount;
 
-        _context.Hero.Stats.SetStatValue(statType, newValue);
+        data.Stats.SetStatValue(statType, newValue);
 
         return newValue;
     }
 
-    private float SubstractStat(StatType statType, float amount = 0.1f)
+    private float SubstractStat(StatManagementData data, StatType statType, float amount = 0.1f)
     {
-        var stat = _context.Hero.Stats.GetStat(statType);
+        var stat = data.Stats.GetStat(statType);
 
         var newValue = stat.CurrentValue - amount;
 
-        _context.Hero.Stats.SetStatValue(statType, newValue);
+        data.Stats.SetStatValue(statType, newValue);
 
         return newValue;
     }

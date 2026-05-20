@@ -11,17 +11,17 @@ public class StatsManagementBootstrapper : MonoBehaviour
 
 
 
-    public void Load(GameplayContext context, Action onSave)
+    public void Load(GameplayContext context, Action<StatSaveData> onSave)
     {
         // TODO: This can be done better
         if (_statsManagementService == null)
-            _statsManagementService = new StatsManagementService(context);
+            _statsManagementService = new StatsManagementService();
         if (_statsManagementPanelController == null)
             _statsManagementPanelController = new StatsManagementPanelController(
                 _statsManagementView,
                 _statsManagementService);
 
-        _statsManagementPanelController.CreateStatPanel(onSave);
+        _statsManagementPanelController.CreateStatPanel(context.Hero, onSave);
         _statsManagementScreen.Show();
     }
     public void Unload()

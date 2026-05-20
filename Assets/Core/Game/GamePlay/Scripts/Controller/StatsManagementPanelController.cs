@@ -4,6 +4,7 @@ public class StatsManagementPanelController
 {
     private readonly StatsManagementPanelView _view;
     private readonly StatsManagementService _service;
+    private StatManagementData _data;
 
     public StatsManagementPanelController(
         StatsManagementPanelView view,
@@ -13,11 +14,13 @@ public class StatsManagementPanelController
         _service = service;
     }
 
-    public void CreateStatPanel(Action onSaveButtonClicked)
+    public void CreateStatPanel(Hero hero, Action<StatSaveData> onSaveButtonClicked)
     {
+        _data = CreateStatManagementData(hero);
         RefreshAll();
 
-        _view.SetSaveButtonClickedCallback(onSaveButtonClicked);
+        _view.SetSaveButtonClickedCallback(
+            () => onSaveButtonClicked(CreateStatSaveData(_data)));
     }
 
     // ----------------------------
@@ -33,12 +36,12 @@ public class StatsManagementPanelController
     private void RefreshAvailablePoints()
     {
         _view.SetAvailablePointsText(
-            _service.GetAvailablePoints().ToString());
+            _data.AvailableStatPoints.ToString());
     }
 
     private void RefreshStatRows()
     {
-        foreach (var stat in _service.GetStats())
+        foreach (var stat in _data.Stats.GetStats())
         {
             CreateOrUpdateRow(stat);
         }
@@ -69,8 +72,9 @@ public class StatsManagementPanelController
     private void BindRowCallbacks(StatsManagementPanelRowView row, StatType statType)
     {
         row.SetControlCallbacks(
-            () => ModifyStat(statType, +1),
-            () => ModifyStat(statType, -1));
+            () => ModifyStat(statType, -1),
+            () => ModifyStat(statType, +1)
+            );
     }
 
     private void UpdateRowInteractability(
@@ -78,7 +82,7 @@ public class StatsManagementPanelController
         StatData stat)
     {
         bool canDecrease = stat.CurrentGTBase;
-        bool canIncrease = _service.GetAvailablePoints() > 0;
+        bool canIncrease = _data.AvailableStatPoints > 0;
 
         row.SetControlInteractable(
             canDecrease,
@@ -93,14 +97,32 @@ public class StatsManagementPanelController
     {
         if (delta > 0)
         {
-            _service.IncreaseStat(type);
+            _service.IncreaseStat(_data, type);
         }
         else
         {
-            _service.DecreaseStat(type);
+            _service.DecreaseStat(_data, type);
         }
 
         RefreshAll();
+    }
+    // ----------------------------
+    //  Data
+    // ----------------------------
+
+    public StatSaveData CreateStatSaveData(StatManagementData data)
+    {
+        return new StatSaveData(
+            data.Stats.GetStat(StatType.Attack).CurrentValue,
+            data.Stats.GetStat(StatType.Defense).CurrentValue,
+            data.Stats.GetStat(StatType.Magic).CurrentValue
+            );
+    }
+    public StatManagementData CreateStatManagementData(Hero hero)
+    {
+        return new StatManagementData(
+            hero.AvailableStatPoints,
+            new Stats(hero.Attack, hero.Defense, hero.Magic));
     }
 
     // ----------------------------

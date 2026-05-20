@@ -23,8 +23,9 @@ public class StatsManagementState : IState
         _context.StatsManagementBootstrapper.Unload();
     }
 
-    private void OnSave()
+    private void OnSave(StatSaveData saveData)
     {
+        _context.GameplayContext.Hero.SetStats(saveData.Attack, saveData.Defense, saveData.Magic);
         _gameplayStateMachine.EnterMap();
     }
 }

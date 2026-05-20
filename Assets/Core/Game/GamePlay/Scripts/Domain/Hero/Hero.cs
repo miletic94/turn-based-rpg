@@ -4,17 +4,21 @@ public class Hero
 {
     public string Name { get; private set; }
     public float Health { get; private set; }
-    // TODO: Hero shouldn't depend on Stats data structure
-    public Stats Stats { get; private set; }
+    public float Attack { get; private set; }
+    public float Defense { get; private set; }
+    public float Magic { get; private set; }
+
     public Xp Xp { get; private set; }
     public int AvailableStatPoints { get; private set; }
     public List<Move> AvailableMoves { get; private set; }
     public List<Move> EquippedMoves { get; private set; }
-    public Hero(string name, float health, Stats stats, Xp xp, int availableStatPoints, List<Move> availableMoves, List<Move> equippedMoves)
+    public Hero(string name, float health, float attack, float defense, float magic, Xp xp, int availableStatPoints, List<Move> availableMoves, List<Move> equippedMoves)
     {
         Name = name;
         Health = health;
-        Stats = stats;
+        Attack = attack;
+        Defense = defense;
+        Magic = magic;
         Xp = xp;
         AvailableStatPoints = availableStatPoints;
         AvailableMoves = availableMoves;
@@ -24,11 +28,16 @@ public class Hero
         (
             Name,
             Health,
-            new CombatantStats(Stats.GetStat(StatType.Attack).CurrentValue,
-                Stats.GetStat(StatType.Defense).CurrentValue,
-                Stats.GetStat(StatType.Magic).CurrentValue),
+            new CombatantStats(Attack, Defense, Magic),
             EquippedMoves
         );
+
+    public void SetStats(float attack, float defense, float magic)
+    {
+        Attack = attack;
+        Defense = defense;
+        Magic = magic;
+    }
     public void SetAvailableMoves(List<Move> availableMoves)
     {
         AvailableMoves = availableMoves;
@@ -36,14 +45,6 @@ public class Hero
     public void SetEquippedMoves(List<Move> equippedMoves)
     {
         EquippedMoves = equippedMoves;
-    }
-    public void SetStat(StatType statType, float value)
-    {
-        Stats.SetStatValue(statType, value);
-    }
-    public void SetAvaialbleStatPoints(int value)
-    {
-        AvailableStatPoints = value;
     }
     public void AddAvailableStatPoints(int amount)
     {
