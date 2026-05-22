@@ -1,40 +1,40 @@
 fileFormatVersion: 2
-guid: 69af5b457fb8f5344910fc49ac4ad97a
+guid: 9190963f7421dbe458eb23bb5a338855
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2678117307762808000
-    second: Action_panel_0
+      213: 184072650999508264
+    second: candeliar_0
   - first:
-      213: -2967464138562639994
-    second: Action_panel_1
+      213: 4810533787541704885
+    second: candeliar_1
   - first:
-      213: 7490909027001448214
-    second: Action_panel_2
+      213: 5230798024687083314
+    second: candeliar_2
   - first:
-      213: 8818557686247508717
-    second: Action_panel_3
+      213: 5084529359021155813
+    second: candeliar_3
   - first:
-      213: 8190202942815179626
-    second: Action_panel_4
+      213: -84291151296422516
+    second: candeliar_4
   - first:
-      213: 1291737993660870816
-    second: Action_panel_5
+      213: 2689367831715863358
+    second: candeliar_5
   - first:
-      213: 3024772523474242210
-    second: Action_panel_6
+      213: -2155535823921277195
+    second: candeliar_6
   - first:
-      213: 7044285566318344818
-    second: Action_panel_7
+      213: -796099979398142244
+    second: candeliar_7
   - first:
-      213: 9167033657735099162
-    second: Action_panel_8
+      213: -8091440405216581469
+    second: candeliar_8
   - first:
-      213: -8669341311543686296
-    second: Action_panel_9
+      213: -4137710770697110904
+    second: candeliar_9
   - first:
-      213: 5281840824156573430
-    second: Action_panel_10
+      213: -2118602593956622847
+    second: candeliar_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -67,21 +67,21 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,7 +105,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,243 +130,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Action_panel_0
+      name: candeliar_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 63
-        width: 168
-        height: 21
+        x: 15
+        y: 395
+        width: 210
+        height: 390
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0c4170c80859a2520800000000000000
-      internalID: 2678117307762808000
+      spriteID: 82da0bfc915fd8200800000000000000
+      internalID: 184072650999508264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_1
+      name: candeliar_1
       rect:
         serializedVersion: 2
-        x: 11
-        y: 31
-        width: 170
-        height: 22
+        x: 231
+        y: 379
+        width: 274
+        height: 390
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6876349961371d6d0800000000000000
-      internalID: -2967464138562639994
+      spriteID: 5b010721ef272c240800000000000000
+      internalID: 4810533787541704885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_2
+      name: candeliar_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 16
-        width: 16
-        height: 16
+        x: 583
+        y: 391
+        width: 62
+        height: 330
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 617303f421e05f760800000000000000
-      internalID: 7490909027001448214
+      spriteID: 23fd949e617879840800000000000000
+      internalID: 5230798024687083314
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_3
+      name: candeliar_3
       rect:
         serializedVersion: 2
-        x: 144
-        y: 16
-        width: 16
-        height: 16
+        x: 631
+        y: 399
+        width: 162
+        height: 390
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: deac2103e7fc16a70800000000000000
-      internalID: 8818557686247508717
+      spriteID: 5e520865380ef8640800000000000000
+      internalID: 5084529359021155813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_4
+      name: candeliar_4
       rect:
         serializedVersion: 2
-        x: 160
-        y: 16
-        width: 16
-        height: 16
+        x: 795
+        y: 411
+        width: 114
+        height: 318
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a639bd4de2279a170800000000000000
-      internalID: 8190202942815179626
+      spriteID: c8d944df4a984def0800000000000000
+      internalID: -84291151296422516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_5
+      name: candeliar_5
       rect:
         serializedVersion: 2
-        x: 176
-        y: 16
-        width: 16
-        height: 16
+        x: 907
+        y: 423
+        width: 62
+        height: 330
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0a0380f7cdc2de110800000000000000
-      internalID: 1291737993660870816
+      spriteID: e3b59c74bcd825520800000000000000
+      internalID: 2689367831715863358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_6
+      name: candeliar_6
       rect:
         serializedVersion: 2
-        x: 12
-        y: 0
-        width: 24
-        height: 20
+        x: 983
+        y: 411
+        width: 162
+        height: 390
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2aa4b0c85962af920800000000000000
-      internalID: 3024772523474242210
+      spriteID: 5f61b82b69ff512e0800000000000000
+      internalID: -2155535823921277195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_7
+      name: candeliar_7
       rect:
         serializedVersion: 2
-        x: 60
-        y: 0
-        width: 24
-        height: 20
+        x: 1127
+        y: 411
+        width: 142
+        height: 346
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 0, z: 3, w: 1}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 27af0dc766452c160800000000000000
-      internalID: 7044285566318344818
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: frame_2
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 1, y: 1, z: 1, w: 1}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a13b95dea88d73f70800000000000000
-      internalID: 9167033657735099162
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Action_panel_9
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 1
-        width: 11
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 86bc1d0620050b780800000000000000
-      internalID: -8669341311543686296
+      spriteID: cd62742694fa3f4f0800000000000000
+      internalID: -796099979398142244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Action_panel_10
+      name: candeliar_8
       rect:
         serializedVersion: 2
-        x: 178
-        y: 1
-        width: 11
-        height: 14
+        x: 1287
+        y: 407
+        width: 114
+        height: 318
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6fe4204ce3edc4940800000000000000
-      internalID: 5281840824156573430
+      spriteID: 3a8a2dd52dd65bf80800000000000000
+      internalID: -8091440405216581469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candeliar_9
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 383
+        width: 370
+        height: 418
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88a7a410af5e396c0800000000000000
+      internalID: -4137710770697110904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candeliar_10
+      rect:
+        serializedVersion: 2
+        x: 1779
+        y: 411
+        width: 134
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10e8ef66a263992e0800000000000000
+      internalID: -2118602593956622847
       vertices: []
       indices: 
       edges: []
@@ -375,7 +375,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 41ec3d2a269b86d4f9f22236d10d10ab
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -385,17 +385,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Action_panel_0: 2678117307762808000
-      Action_panel_1: -2967464138562639994
-      Action_panel_10: 5281840824156573430
-      Action_panel_2: 7490909027001448214
-      Action_panel_3: 8818557686247508717
-      Action_panel_4: 8190202942815179626
-      Action_panel_5: 1291737993660870816
-      Action_panel_6: 3024772523474242210
-      Action_panel_7: 7044285566318344818
-      Action_panel_9: -8669341311543686296
-      frame_2: 9167033657735099162
+      candeliar_0: 184072650999508264
+      candeliar_1: 4810533787541704885
+      candeliar_10: -2118602593956622847
+      candeliar_2: 5230798024687083314
+      candeliar_3: 5084529359021155813
+      candeliar_4: -84291151296422516
+      candeliar_5: 2689367831715863358
+      candeliar_6: -2155535823921277195
+      candeliar_7: -796099979398142244
+      candeliar_8: -8091440405216581469
+      candeliar_9: -4137710770697110904
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
