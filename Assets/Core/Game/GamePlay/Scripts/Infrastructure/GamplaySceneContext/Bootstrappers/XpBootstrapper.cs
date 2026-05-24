@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class XpBootstrapper : MonoBehaviour
 {
-    [SerializeField] private XpScreen _xpScreen;
+    [SerializeField] private Screen _xpScreen;
     [SerializeField] private XpView _xpView;
     public XpController Load(Xp xp)
     {

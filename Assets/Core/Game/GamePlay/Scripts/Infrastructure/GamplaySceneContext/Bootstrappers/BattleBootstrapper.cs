@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BattleBootstrapper : MonoBehaviour
 {
-    [SerializeField] BattleScreen _battleScreen;
+    [SerializeField] Screen _battleScreen;
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
     [SerializeField] private BattleMoveView _battleMoveView;
     [SerializeField] private BattleStatPanelView _battleStatPanelView;

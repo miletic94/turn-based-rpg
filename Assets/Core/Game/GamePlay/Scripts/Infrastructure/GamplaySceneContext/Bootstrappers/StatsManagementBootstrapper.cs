@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StatsManagementBootstrapper : MonoBehaviour
 {
-    [SerializeField] StatsManagementScreen _statsManagementScreen;
+    [SerializeField] Screen _statsManagementScreen;
     [SerializeField] StatsManagementPanelView _statsManagementView;
     private StatsManagementService _statsManagementService;
     private StatsManagementPanelController _statsManagementPanelController;

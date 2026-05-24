@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RewardBootstrapper : MonoBehaviour
 {
-    [SerializeField] RewardScreen RewardScreen;
+    [SerializeField] Screen RewardScreen;
     [SerializeField] RewardView _rewardView;
     private RewardController _rewardController;
 

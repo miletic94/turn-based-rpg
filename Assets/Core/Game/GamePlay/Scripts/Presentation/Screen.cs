@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveManagementScreen : MonoBehaviour
+public class Screen : MonoBehaviour
 {
     public void Show()
     {

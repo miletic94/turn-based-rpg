@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MapBootstrapper : MonoBehaviour
 {
-    [SerializeField] private MapScreen _mapScreen;
+    [SerializeField] private Screen _mapScreen;
     [SerializeField] private MapView _mapView;
     public MapController Load()
     {

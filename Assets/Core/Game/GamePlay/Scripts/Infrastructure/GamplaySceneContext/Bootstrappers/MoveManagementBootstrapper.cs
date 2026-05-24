@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveManagementBootstrapper : MonoBehaviour
 {
     [SerializeField]
-    private MoveManagementScreen _moveManagementScreen;
+    private Screen _moveManagementScreen;
 
     [SerializeField]
     private MoveManagementView _moveManagementView;
