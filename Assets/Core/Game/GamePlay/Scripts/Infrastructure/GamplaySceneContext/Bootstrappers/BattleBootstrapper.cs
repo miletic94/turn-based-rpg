@@ -4,7 +4,7 @@ public class BattleBootstrapper : MonoBehaviour
 {
     [SerializeField] Screen _battleScreen;
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
-    [SerializeField] private BattleMoveView _battleMoveView;
+    [SerializeField] private BattleMovePanelView _battleMoveView;
     [SerializeField] private BattleStatPanelView _battleStatPanelView;
     [SerializeField] private TooltipView _tooltipView;
     private BattleController _battleController;
@@ -17,7 +17,7 @@ public class BattleBootstrapper : MonoBehaviour
             new MoveDescriptionService(),
             _tooltipView);
         var battleMoveController =
-            new BattleMoveController(_battleMoveView, moveTooltipBinder);
+            new BattleMovePanelController(_battleMoveView, moveTooltipBinder);
 
         var effectExecutionService = new MoveEffectService();
 

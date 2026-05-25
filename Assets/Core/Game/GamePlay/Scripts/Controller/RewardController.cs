@@ -20,7 +20,7 @@ public class RewardController
         _moveDescriptionService = moveDescriptionService;
         _onRewardSelected = onRewardSelected;
     }
-    public async void Initialize(Character enemy)
+    public async Awaitable Initialize(Character enemy)
     {
         var rewardDataList = await CreateRewardItemData(enemy);
 

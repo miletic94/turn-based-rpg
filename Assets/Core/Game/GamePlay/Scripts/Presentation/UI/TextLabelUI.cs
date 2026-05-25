@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 
+
+// TODO: Redundant to TMP_Text. Delete
 public class TextLabelUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text label;
