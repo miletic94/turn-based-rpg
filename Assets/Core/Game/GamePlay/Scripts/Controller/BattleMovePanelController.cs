@@ -7,12 +7,12 @@ using UnityEngine.AddressableAssets;
 
 public class BattleMovePanelController
 {
-    private readonly BattleMovePanelView _battleMoveView;
+    private readonly BattleMoveListView _moveListView;
     private readonly MoveTooltipBinder _moveTooltipBinder;
 
-    public BattleMovePanelController(BattleMovePanelView battleView, MoveTooltipBinder moveTooltipBinder)
+    public BattleMovePanelController(BattleMoveListView moveListView, MoveTooltipBinder moveTooltipBinder)
     {
-        _battleMoveView = battleView;
+        _moveListView = moveListView;
         _moveTooltipBinder = moveTooltipBinder;
     }
 
@@ -22,12 +22,12 @@ public class BattleMovePanelController
     {
         var moveDataList = await CreateMoveItemData(moves);
 
-        _battleMoveView.ShowMoves(moveDataList);
+        _moveListView.Render(moveDataList);
 
-        foreach (var rewardData in moveDataList)
+        foreach (var moveData in moveDataList)
         {
-            var view = _battleMoveView.GetView(rewardData.Id);
-            var move = moves.Find(move => move.Id == rewardData.Id);
+            var view = _moveListView.GetView(moveData.Id);
+            var move = moves.Find(move => move.Id == moveData.Id);
 
             view.BindClick(() => handleMoveSelected(move));
         }

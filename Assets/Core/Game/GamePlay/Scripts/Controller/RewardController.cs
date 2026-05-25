@@ -8,15 +8,15 @@ using UnityEngine.AddressableAssets;
 
 public class RewardController
 {
-    private readonly RewardView _rewardView;
+    private readonly RewardListView _rewardListView;
     private readonly MoveDescriptionService _moveDescriptionService;
     private readonly Action<Move> _onRewardSelected;
 
-    public RewardController(RewardView rewardView,
+    public RewardController(RewardListView rewardListView,
     MoveDescriptionService moveDescriptionService,
     Action<Move> onRewardSelected)
     {
-        _rewardView = rewardView;
+        _rewardListView = rewardListView;
         _moveDescriptionService = moveDescriptionService;
         _onRewardSelected = onRewardSelected;
     }
@@ -24,11 +24,11 @@ public class RewardController
     {
         var rewardDataList = await CreateRewardItemData(enemy);
 
-        _rewardView.ShowRewards(rewardDataList);
+        _rewardListView.Render(rewardDataList);
 
         foreach (var rewardData in rewardDataList)
         {
-            var view = _rewardView.GetView(rewardData.Id);
+            var view = _rewardListView.GetView(rewardData.Id);
             var move = enemy.Moves.Find(move => move.Id == rewardData.Id);
             view.BindClick(() => HandleRewardSelected(move));
         }

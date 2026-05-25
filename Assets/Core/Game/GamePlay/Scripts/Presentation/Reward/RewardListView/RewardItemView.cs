@@ -1,12 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 public class RewardItemView : ListItemView<RewardItemData>
 {
-    [SerializeField] MoveView1 _moveView;
+    [SerializeField] Image _icon;
     [SerializeField] ClickableUI _clickable;
     public override void ShowData(RewardItemData data)
     {
-        _moveView.SetSprite(data.IconSprite);
+        _icon.sprite = data.IconSprite;
     }
 
     public void BindClick(Action callback)
