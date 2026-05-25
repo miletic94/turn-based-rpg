@@ -6,7 +6,7 @@ public class ClickableUI : MonoBehaviour, IPointerClickHandler
 {
     public event Action Clicked;
 
-    private bool _isInteractable = false;
+    private bool _isInteractable = true;
     public void SetInteractable(bool isInteractable)
     {
         _isInteractable = isInteractable;

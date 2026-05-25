@@ -1,5 +1,6 @@
-public class LevelNodeData
+public class LevelNodeData : IIdentifiable
 {
-    public int LevelNumber;
-    public Character Enemy;
+    public int Id { get; set; }
+
+    public int LevelNumber { get; set; }
 }

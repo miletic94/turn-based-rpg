@@ -14,7 +14,7 @@ public class HoverableUI : MonoBehaviour,
     public event Action HoverExited;
     public event Action HoverDelayed;
 
-    private bool _isInteractable = false;
+    private bool _isInteractable = true;
     public void SetInteractable(bool isInteractable)
     {
         _isInteractable = isInteractable;

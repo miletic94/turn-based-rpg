@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class ListView<TView, TData> : MonoBehaviour
+    where TView : ListItemView<TData>
+    where TData : IIdentifiable
+{
+    [SerializeField] private TView _prefab;
+    [SerializeField] private Transform _container;
+
+    private readonly Dictionary<int, TView> _viewsById = new();
+
+    public void Render(IReadOnlyList<TData> dataList)
+    {
+        var activeIds = new HashSet<int>();
+
+        foreach (var data in dataList)
+        {
+            activeIds.Add(data.Id);
+
+            if (_viewsById.TryGetValue(data.Id, out var existingView))
+            {
+                existingView.ShowData(data);
+            }
+            else
+            {
+                CreateView(data);
+            }
+        }
+
+        RemoveMissingViews(activeIds);
+    }
+
+    public TView GetView(int id)
+    {
+        return _viewsById[id];
+    }
+
+    public bool TryGetView(int id, out TView view)
+    {
+        return _viewsById.TryGetValue(id, out view);
+    }
+
+    private void CreateView(TData data)
+    {
+        var view = Instantiate(_prefab, _container);
+
+        view.ShowData(data);
+
+        _viewsById.Add(data.Id, view);
+    }
+
+    private void RemoveMissingViews(HashSet<int> activeIds)
+    {
+        var idsToRemove = new List<int>();
+
+        foreach (var id in _viewsById.Keys)
+        {
+            if (!activeIds.Contains(id))
+            {
+                idsToRemove.Add(id);
+            }
+        }
+
+        foreach (var id in idsToRemove)
+        {
+            Destroy(_viewsById[id].gameObject);
+
+            _viewsById.Remove(id);
+        }
+    }
+}

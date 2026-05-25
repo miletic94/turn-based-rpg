@@ -1,20 +1,22 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MapView : MonoBehaviour
 {
-    [SerializeField] private LevelTreeView _levelTreeView;
-    [SerializeField] private Button _manageMovesButton;
+    [SerializeField] private ClickableUI _manageMovesButton;
+    [SerializeField] private LevelTreeView _list;
 
-    public void ShowLevels(List<LevelNodeData> levels, Action<Character> onEnemySelected)
+    public void ShowLevels(List<LevelNodeData> levels)
     {
-        _levelTreeView.ShowLevels(levels, onEnemySelected);
+        _list.Render(levels);
+    }
+    public LevelNode GetView(int id)
+    {
+        return _list.GetView(id);
     }
     public void SetOnMoveManagementButtonClicked(Action onMoveManagementButtonClicked)
     {
-        _manageMovesButton.onClick.RemoveAllListeners();
-        _manageMovesButton.onClick.AddListener(() => onMoveManagementButtonClicked?.Invoke());
+        _manageMovesButton.Bind(onMoveManagementButtonClicked);
     }
 }

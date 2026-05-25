@@ -1,32 +1,43 @@
 using System;
+using System.Collections.Generic;
 
 public class RewardController
 {
     private readonly RewardView _rewardView;
     private readonly MoveDescriptionService _moveDescriptionService;
-    private readonly RewardService _rewardService;
     private readonly Action<Move> _onRewardSelected;
 
     public RewardController(RewardView rewardView,
     MoveDescriptionService moveDescriptionService,
-    RewardService rewardService,
     Action<Move> onRewardSelected)
     {
         _rewardView = rewardView;
         _moveDescriptionService = moveDescriptionService;
-        _rewardService = rewardService;
         _onRewardSelected = onRewardSelected;
     }
-    public void Initialize()
+    public void Initialize(Character enemy)
     {
-        ShowRewards();
+        var rewardDataList = CreateRewardItemData(enemy);
+
+        _rewardView.ShowRewards(rewardDataList);
+
+        foreach (var rewardData in rewardDataList)
+        {
+            var view = _rewardView.GetView(rewardData.Id);
+            var move = enemy.Moves.Find(move => move.Id == rewardData.Id);
+            view.BindClick(() => HandleRewardSelected(move));
+        }
     }
 
-    private void ShowRewards()
+    public List<RewardItemData> CreateRewardItemData(Character enemy)
     {
-        _rewardView.ShowRewards(_rewardService.GetRewards(), HandleRewardSelected, HandleRewardHovered);
+        var data = new List<RewardItemData>();
+        foreach (var move in enemy.Moves)
+        {
+            data.Add(new RewardItemData(move.Id, null));
+        }
+        return data;
     }
-
     public void HandleRewardSelected(Move move)
     {
         _onRewardSelected?.Invoke(move);
@@ -36,3 +47,4 @@ public class RewardController
         UnityEngine.Debug.Log(_moveDescriptionService.Describe(move));
     }
 }
+

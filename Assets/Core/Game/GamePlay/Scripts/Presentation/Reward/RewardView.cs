@@ -4,23 +4,14 @@ using UnityEngine;
 
 public class RewardView : MonoBehaviour
 {
-    [SerializeField] private Transform _rewardContainer;
-    [SerializeField] private MoveView _moveViewPrefab;
+    [SerializeField] RewardListView _list;
 
-    public void ShowRewards(List<Move> rewards, Action<Move> onRewardSelected, Action<Move> onRewardHovered)
+    public void ShowRewards(List<RewardItemData> rewards)
     {
-        // TODO: Implement pooling for reward items
-        foreach (Transform child in _rewardContainer)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (var reward in rewards)
-        {
-            var rewardItem = Instantiate(_moveViewPrefab, _rewardContainer);
-            rewardItem
-            .SetLabel(reward.Name)
-            .MakeClickable(() => onRewardSelected(reward))
-            .MakeHoverable(onHoverDelayed: () => onRewardHovered(reward));
-        }
+        _list.Render(rewards);
+    }
+    public RewardItemView GetView(int id)
+    {
+        return _list.GetView(id);
     }
 }

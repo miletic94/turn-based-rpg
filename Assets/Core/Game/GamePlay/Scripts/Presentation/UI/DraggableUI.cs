@@ -13,7 +13,7 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public event Action DragBegan;
     public event Action Dragging;
     public event Action DragEnded;
-    private bool _isInteractable = false;
+    private bool _isInteractable = true;
     public void SetInteractable(bool isInteractable)
     {
         _isInteractable = isInteractable;
