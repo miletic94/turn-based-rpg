@@ -3,19 +3,6 @@ using UnityEngine;
 
 public static class InteractebleElementExtensions
 {
-    public static InteractableElementUI SetLabel(
-        this InteractableElementUI element,
-        string text
-        )
-    {
-        if (element.Label == null)
-        {
-            Debug.LogError("Missing LabelUI component on InteractableElementUI game object", element.gameObject);
-        }
-        element.Label.SetText(text);
-        return element;
-    }
-
     public static InteractableElementUI MakeClickable(
         this InteractableElementUI element,
         Action onClicked = null)

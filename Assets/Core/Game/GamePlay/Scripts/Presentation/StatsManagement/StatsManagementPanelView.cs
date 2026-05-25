@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class StatsManagementPanelView : MonoBehaviour
 {
-    [SerializeField] private StatAvailablePointsView _availablePointsView;
+    [SerializeField] private TMP_Text _availablePointsLabel;
     [SerializeField] private Transform _container;
     [SerializeField]
     private StatsManagementPanelRowView _statManagementPanelRowPrefab;
@@ -16,7 +17,7 @@ public class StatsManagementPanelView : MonoBehaviour
 
     public void SetAvailablePointsText(string text)
     {
-        _availablePointsView.Value.SetText(text);
+        _availablePointsLabel.SetText(text);
     }
 
     public StatsManagementPanelRowView ShowStatRow(StatRowViewData data)

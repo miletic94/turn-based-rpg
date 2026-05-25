@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class InteractableElementUI : MonoBehaviour
 {
-    [SerializeField] private TextLabelUI _label;
-    public TextLabelUI Label => _label;
     [SerializeField] private ClickableUI _clickable;
     public ClickableUI Clickable => _clickable;
     [SerializeField] private HoverableUI _hoverable;

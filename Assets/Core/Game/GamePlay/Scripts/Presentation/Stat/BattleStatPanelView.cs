@@ -1,9 +1,10 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BattleStatPanelView : MonoBehaviour
 {
-    [SerializeField] private StatHeaderView _statHeader;
+    [SerializeField] private TMP_Text _statHeaderLabel;
     [SerializeField] private StatRowView _statRowPrefab;
     [SerializeField] private Transform _container;
     [SerializeField] private HealthBarView _healthBarView;
@@ -12,7 +13,7 @@ public class BattleStatPanelView : MonoBehaviour
 
     public void SetHeaderText(string text)
     {
-        _statHeader.SetText(text);
+        _statHeaderLabel.SetText(text);
     }
 
     public void SetHealthBar(float percent)

@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6b8ce95b8870c4e842f295caf8c0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textLabel: {fileID: 3436282095214006826}
+  _textLabel: {fileID: 6071643320426110847}
   _clickable: {fileID: 6424694938916664730}
 --- !u!114 &6424694938916664730
 MonoBehaviour:
