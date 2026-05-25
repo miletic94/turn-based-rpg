@@ -17,6 +17,7 @@
         {
             "id": "0",
             "name": "Slash",
+            "iconAddress": "blade-drag",
             "effects": [
                 {
                     "id": "0",
@@ -36,6 +37,7 @@
         {
             "id": "1",
             "name": "Shield Up",
+            "iconAddress": "shield",
             "effects": [
                 {
                     "id": "1",
@@ -44,7 +46,7 @@
                     "stat": "defense",
                     "value": {
                         "type": "flat",
-                        "baseValue": 0.5
+                        "baseValue": 0.1
                     },
                     "tickBehavior": "once",
                     "duration": 2,
@@ -55,6 +57,7 @@
         {
             "id": "2",
             "name": "Battle Cry",
+            "iconAddress": "trumpet-flag",
             "effects": [
                 {
                     "id": "2",
@@ -63,7 +66,7 @@
                     "stat": "attack",
                     "value": {
                         "type": "flat",
-                        "baseValue": 0.5
+                        "baseValue": 0.1
                     },
                     "tickBehavior": "once",
                     "duration": 2,
@@ -74,6 +77,7 @@
         {
             "id": "3",
             "name": "Second Wind",
+            "iconAddress": "healing",
             "effects": [
                 {
                     "id": "3",

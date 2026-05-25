@@ -2,6 +2,7 @@
     {
         "id": "0",
         "name": "Slash",
+        "iconAddress": "blade-drag",
         "effects": [
             {
                 "id": "0",
@@ -21,6 +22,7 @@
     {
         "id": "1",
         "name": "Shield Up",
+        "iconAddress": "shield",
         "effects": [
             {
                 "id": "1",
@@ -40,6 +42,7 @@
     {
         "id": "2",
         "name": "Battle Cry",
+        "iconAddress": "trumpet-flag",
         "effects": [
             {
                 "id": "2",
@@ -59,6 +62,7 @@
     {
         "id": "3",
         "name": "Second Wind",
+        "iconAddress": "healing",
         "effects": [
             {
                 "id": "3",
@@ -78,6 +82,7 @@
     {
         "id": "4",
         "name": "Shadow Bolt",
+        "iconAddress": "bolt-spell-cast",
         "effects": [
             {
                 "id": "4",
@@ -97,6 +102,7 @@
     {
         "id": "5",
         "name": "Drain Life",
+        "iconAddress": "chewed-heart",
         "effects": [
             {
                 "id": "5",
@@ -126,6 +132,7 @@
     {
         "id": "6",
         "name": "Curse",
+        "iconAddress": "cursed-star",
         "effects": [
             {
                 "id": "7",
@@ -145,6 +152,7 @@
     {
         "id": "7",
         "name": "Dark Pact",
+        "iconAddress": "daemon-skull",
         "cost": {
             "type": "health",
             "amount": 5
@@ -168,6 +176,7 @@
     {
         "id": "8",
         "name": "Bite",
+        "iconAddress": "spider-face",
         "cost": {
             "type": "mana",
             "amount": 3
@@ -191,6 +200,7 @@
     {
         "id": "9",
         "name": "Web Throw",
+        "iconAddress": "spider-web",
         "cost": {
             "type": "mana",
             "amount": 6
@@ -227,6 +237,7 @@
     {
         "id": "10",
         "name": "Pounce",
+        "iconAddress": "long-legged-spider",
         "cost": {
             "type": "mana",
             "amount": 6
@@ -250,6 +261,7 @@
     {
         "id": "11",
         "name": "Skitter",
+        "iconAddress": "fire-dash",
         "cost": {
             "type": "mana",
             "amount": 3
@@ -273,6 +285,7 @@
     {
         "id": "12",
         "name": "Flame Breath",
+        "iconAddress": "dragon-breath",
         "cost": {
             "type": "mana",
             "amount": 6
@@ -296,6 +309,7 @@
     {
         "id": "13",
         "name": "Claw Swipe",
+        "iconAddress": "claw-dashes",
         "cost": {
             "type": "mana",
             "amount": 3
@@ -319,6 +333,7 @@
     {
         "id": "14",
         "name": "Intimidate",
+        "iconAddress": "terror",
         "effects": [
             {
                 "id": "16",
@@ -338,6 +353,7 @@
     {
         "id": "15",
         "name": "Dragon Scales",
+        "iconAddress": "energy-shield",
         "effects": [
             {
                 "id": "17",
@@ -357,6 +373,7 @@
     {
         "id": "16",
         "name": "Rusty Blade",
+        "iconAddress": "rusty-sword",
         "effects": [
             {
                 "id": "18",
@@ -376,6 +393,7 @@
     {
         "id": "17",
         "name": "Dirty Kick",
+        "iconAddress": "boot-kick",
         "effects": [
             {
                 "id": "19",
@@ -408,6 +426,7 @@
     {
         "id": "18",
         "name": "Frenzy",
+        "iconAddress": "enrage",
         "effects": [
             {
                 "id": "21",
@@ -427,6 +446,7 @@
     {
         "id": "19",
         "name": "Headbutt",
+        "iconAddress": "skull-bolt",
         "effects": [
             {
                 "id": "22",
@@ -446,6 +466,7 @@
     {
         "id": "20",
         "name": "Firebolt",
+        "iconAddress": "fire-spell-cast",
         "effects": [
             {
                 "id": "23",
@@ -465,6 +486,7 @@
     {
         "id": "21",
         "name": "Arcane Surge",
+        "iconAddress": "magic-swirl",
         "effects": [
             {
                 "id": "24",
@@ -484,6 +506,7 @@
     {
         "id": "22",
         "name": "Mana Drain",
+        "iconAddress": "glowing-hands",
         "effects": [
             {
                 "id": "25",
@@ -516,6 +539,7 @@
     {
         "id": "23",
         "name": "Hex Shield",
+        "iconAddress": "magic-shield",
         "effects": [
             {
                 "id": "27",

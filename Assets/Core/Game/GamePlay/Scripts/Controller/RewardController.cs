@@ -1,5 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
 
 public class RewardController
 {
@@ -15,9 +20,9 @@ public class RewardController
         _moveDescriptionService = moveDescriptionService;
         _onRewardSelected = onRewardSelected;
     }
-    public void Initialize(Character enemy)
+    public async void Initialize(Character enemy)
     {
-        var rewardDataList = CreateRewardItemData(enemy);
+        var rewardDataList = await CreateRewardItemData(enemy);
 
         _rewardView.ShowRewards(rewardDataList);
 
@@ -29,14 +34,17 @@ public class RewardController
         }
     }
 
-    public List<RewardItemData> CreateRewardItemData(Character enemy)
+    public async Awaitable<List<RewardItemData>> CreateRewardItemData(Character enemy)
     {
-        var data = new List<RewardItemData>();
-        foreach (var move in enemy.Moves)
+        var tasks = enemy.Moves.Select(async move =>
         {
-            data.Add(new RewardItemData(move.Id, null));
-        }
-        return data;
+            var handle = Addressables.LoadAssetAsync<Sprite>(move.IconAddress);
+            var sprite = await handle.Task;
+
+            return new RewardItemData(move.Id, sprite);
+        });
+
+        return (await Task.WhenAll(tasks)).ToList();
     }
     public void HandleRewardSelected(Move move)
     {

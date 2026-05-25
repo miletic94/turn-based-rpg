@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -13,7 +11,6 @@ public class CharacterDeserializer
         string charactersJson = File.ReadAllText(charactersPath);
 
         List<CharacterDTO> characters = JsonConvert.DeserializeObject<List<CharacterDTO>>(charactersJson);
-
         return characters;
     }
 

@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Moves
+  m_EditorClassIdentifier: 
+  m_GroupName: Moves
+  m_GUID: cf119eea1cf70ad46ac5aa874d6164ae
+  m_SerializeEntries:
+  - m_GUID: 031f398ce2591264d8bfb999caf42f46
+    m_Address: daemon-skull
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b66f73f93c92704e930493cbdf00111
+    m_Address: magic-shield
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0da232f4148bf6a4cb521e7a11f53e64
+    m_Address: energy-shield
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0dd1bcaa2993cd44ab6181da97565633
+    m_Address: cursed-star
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17f09f48f3baafe4ba37f2e58484c1cc
+    m_Address: fire-spell-cast
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36cfcba2b2d56724e8015840a1eaaca3
+    m_Address: spider-web
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 571a3081af171b148b761c691335c7ac
+    m_Address: spider-face
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 587f1b540e7a62e49b9a00aa5912c8ed
+    m_Address: magic-swirl
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72ae0b35d2fc3ac45808f5165f835f2b
+    m_Address: claw-dashes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79ae2e4319b829345bae62889f095f69
+    m_Address: blade-drag
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a1e7782b2857eb47bf21ff79cb71a85
+    m_Address: rusty-sword
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a30201fbd489ac468169054dd3bdc3a
+    m_Address: healing
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a21f3a8c2cc06154db5b6a4ad92831eb
+    m_Address: boot-kick
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aaa1d4701e2fbcf43a0c42c98598444c
+    m_Address: skull-bolt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac45a82aca1aee94cbb5979e93907421
+    m_Address: trumpet-flag
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b56443d341c066b4183b0f14022325e7
+    m_Address: enrage
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdd310ea74e91a44091278e36bd04a69
+    m_Address: shield
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d28042c3970b52942821c98b98fa14ae
+    m_Address: terror
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da0c29d158ac04b409dba67fd0aeef7f
+    m_Address: long-legged-spider
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da61eb2cb3cd5a049b8a01132af6025e
+    m_Address: bolt-spell-cast
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efcfa56104b0ce446bd0cf5c5b005d39
+    m_Address: dragon-breath
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0cf79deae98bc44da6c2d72f2cee3b9
+    m_Address: chewed-heart
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3d250e5fa8cdc6468457fc2ad0f9502
+    m_Address: glowing-hands
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb56084ddca2c94438449e8ac84f166a
+    m_Address: fire-dash
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 7a789d35cd455b7408d956b956361b68, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b952ee8a67b6c39489547bb94f895eba, type: 2}
+    - {fileID: 11400000, guid: 5fc1e5727b45485498f9fd9dc235d98b, type: 2}
