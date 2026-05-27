@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public abstract class ListView<TView, TData> : MonoBehaviour
-    where TView : ListItemView<TData>
+    where TView : MonoBehaviour, IListItemView<TData>
     where TData : IIdentifiable
 {
     [SerializeField] private TView _prefab;
@@ -11,7 +11,7 @@ public abstract class ListView<TView, TData> : MonoBehaviour
 
     private readonly Dictionary<int, TView> _viewsById = new();
 
-    public void Render(IReadOnlyList<TData> dataList)
+    public List<TView> Render(IReadOnlyList<TData> dataList)
     {
         var activeIds = new HashSet<int>();
 
@@ -30,11 +30,18 @@ public abstract class ListView<TView, TData> : MonoBehaviour
         }
 
         RemoveMissingViews(activeIds);
+
+        return _viewsById.Values.ToList();
     }
 
     public TView GetView(int id)
     {
         return _viewsById[id];
+    }
+
+    public List<TView> GetViews()
+    {
+        return _viewsById.Values.ToList();
     }
 
     public bool TryGetView(int id, out TView view)

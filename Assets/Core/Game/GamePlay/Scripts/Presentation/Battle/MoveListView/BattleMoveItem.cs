@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-public class BattleMoveItem : ListItemView<BattleMoveItemData>
+public class BattleMoveItem : MonoBehaviour, IListItemView<BattleMoveItemData>
 {
     [SerializeField] Image _icon;
     [SerializeField] ClickableUI _clickable;
-    public override void ShowData(BattleMoveItemData data)
+    public void ShowData(BattleMoveItemData data)
     {
         _icon.sprite = data.IconSprite;
     }

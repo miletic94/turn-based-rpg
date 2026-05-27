@@ -34,14 +34,14 @@ public class RewardController
         }
     }
 
-    public async Awaitable<List<RewardItemData>> CreateRewardItemData(Character enemy)
+    public async Awaitable<List<MoveItemData>> CreateRewardItemData(Character enemy)
     {
         var tasks = enemy.Moves.Select(async move =>
         {
             var handle = Addressables.LoadAssetAsync<Sprite>(move.IconAddress);
             var sprite = await handle.Task;
 
-            return new RewardItemData(move.Id, sprite);
+            return new MoveItemData(move.Id, sprite);
         });
 
         return (await Task.WhenAll(tasks)).ToList();

@@ -8,42 +8,43 @@ public class MoveManagementBootstrapper : MonoBehaviour
     private Screen _moveManagementScreen;
 
     [SerializeField]
-    private MoveManagementView _moveManagementView;
+    private MoveManagementPanel _availableMovesPanel;
+    private MoveManagementPanel _equippedMovesPanel;
 
-    private MoveManagementController _moveManagementController;
+    private MMController _moveManagementController;
 
     public void Load(
         Hero hero,
         Action<List<Move>, List<Move>> onSave)
     {
-        var loadout = CreateLoadout(hero);
-        var service = new MoveLoadoutService(loadout);
+        // var loadout = CreateLoadout(hero);
+        // var service = new MoveLoadoutService(loadout);
 
-        _moveManagementController = new MoveManagementController(
-            _moveManagementView,
-            service,
-            onSave);
+        // _moveManagementController = new MoveManagementController(
+        //     _moveManagementView,
+        //     service,
+        //     onSave);
 
-        _moveManagementController.Bind();
+        // _moveManagementController.Bind();
 
-        _moveManagementScreen.Show();
+        // _moveManagementScreen.Show();
     }
 
-    public void Unload()
-    {
-        _moveManagementScreen.Hide();
-        _moveManagementController.Unbind();
-    }
+    // public void Unload()
+    // {
+    //     _moveManagementScreen.Hide();
+    //     _moveManagementController.Unbind();
+    // }
 
-    MoveLoadout CreateLoadout(Hero hero)
-    {
-        var loadout = new MoveLoadout
-        {
-            AvailableMoves = new List<Move>(hero.AvailableMoves),
-            EquippedMoves = new List<Move>(hero.EquippedMoves),
-            MaxEquipped = 4
-        };
+    // MoveLoadout CreateLoadout(Hero hero)
+    // {
+    //     var loadout = new MoveLoadout
+    //     {
+    //         AvailableMoves = new List<Move>(hero.AvailableMoves),
+    //         EquippedMoves = new List<Move>(hero.EquippedMoves),
+    //         MaxEquipped = 4
+    //     };
 
-        return loadout;
-    }
+    //     return loadout;
+    // }
 }

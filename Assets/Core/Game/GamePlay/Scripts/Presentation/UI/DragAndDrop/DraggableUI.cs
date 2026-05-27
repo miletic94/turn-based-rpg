@@ -2,13 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+[RequireComponent(typeof(CanvasGroup))]
+public class DraggableUI : MonoBehaviour,
+    IBeginDragHandler,
+    IDragHandler,
+    IEndDragHandler
 {
     public IDraggablePayload Payload { get; private set; }
 
     private Transform _originalParent;
     private Canvas _canvas;
     [SerializeField] private CanvasGroup _canvasGroup;
+    private DragContext _context;
 
     public event Action DragBegan;
     public event Action Dragging;
@@ -43,41 +48,33 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     public void ReturnToOriginalParent()
     {
         transform.SetParent(_originalParent);
+        transform.localPosition = Vector3.zero;
     }
 
-    private void InvokeDragBegan()
+    public DragContext GetContext()
     {
-        if (_isInteractable)
-        {
-            DragBegan?.Invoke();
-        }
+        return _context;
     }
-
-    private void InvokeDragging()
-    {
-        if (_isInteractable)
-        {
-            Dragging?.Invoke();
-        }
-    }
-
-    private void InvokeDragEnded()
-    {
-        if (_isInteractable)
-        {
-            DragEnded?.Invoke();
-        }
-    }
-
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log($"IOnBeginDrag - sInteractable: {_isInteractable}");
         if (!_isInteractable) return;
 
         _originalParent = transform.parent;
 
-        transform.SetParent(
-            _canvas.transform);
+        var sourceZone =
+            GetComponentInParent<IDropZone>();
+
+        var dataSource =
+            GetComponent<IDragDataSource>();
+
+        _context = new DragContext
+        {
+            Draggable = this,
+            Data = dataSource?.GetDragData(),
+            SourceZone = sourceZone
+        };
+
+        transform.SetParent(_canvas.transform);
 
         _canvasGroup.blocksRaycasts = false;
 
@@ -107,4 +104,29 @@ public class DraggableUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
         InvokeDragEnded();
     }
+
+    private void InvokeDragBegan()
+    {
+        if (_isInteractable)
+        {
+            DragBegan?.Invoke();
+        }
+    }
+
+    private void InvokeDragging()
+    {
+        if (_isInteractable)
+        {
+            Dragging?.Invoke();
+        }
+    }
+
+    private void InvokeDragEnded()
+    {
+        if (_isInteractable)
+        {
+            DragEnded?.Invoke();
+        }
+    }
+
 }

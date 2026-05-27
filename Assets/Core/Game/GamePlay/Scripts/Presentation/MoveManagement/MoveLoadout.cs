@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 public class MoveLoadout
 {
-    public List<Move> AvailableMoves = new();
-    public List<Move> EquippedMoves = new();
+    public HashSet<int> AvailableMoves = new();
+    public HashSet<int> EquippedMoves = new();
 
     public int MaxEquipped = 4;
 }

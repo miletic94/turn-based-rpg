@@ -2,34 +2,38 @@ using System.Collections.Generic;
 public class MoveLoadoutService
 {
     private readonly MoveLoadout _loadout;
-    public List<Move> AvailableMoves => _loadout.AvailableMoves;
-    public List<Move> EquippedMoves => _loadout.EquippedMoves;
+    public HashSet<int> AvailableMoves => _loadout.AvailableMoves;
+    public HashSet<int> EquippedMoves => _loadout.EquippedMoves;
     public MoveLoadoutService(
         MoveLoadout loadout)
     {
         _loadout = loadout;
     }
 
-    public bool MoveToEquipped(Move move)
+    public bool TryEquip(int moveId)
     {
-        if (_loadout.EquippedMoves.Count >=
-            _loadout.MaxEquipped)
+        if (_loadout.EquippedMoves.Contains(moveId))
+            return true;
+
+        if (!_loadout.AvailableMoves.Remove(moveId))
             return false;
 
-        if (!_loadout.AvailableMoves.Remove(move))
+        if (_loadout.EquippedMoves.Count >= _loadout.MaxEquipped)
             return false;
 
-        _loadout.EquippedMoves.Add(move);
+        _loadout.EquippedMoves.Add(moveId);
         return true;
     }
 
-    public bool MoveToAvailable(Move move)
+    public bool TryUnequip(int moveId)
     {
-        if (!_loadout.EquippedMoves.Remove(move))
+        if (_loadout.AvailableMoves.Contains(moveId))
+            return true;
+
+        if (!_loadout.EquippedMoves.Remove(moveId))
             return false;
 
-        _loadout.AvailableMoves.Add(move);
-
+        _loadout.AvailableMoves.Add(moveId);
         return true;
     }
 }

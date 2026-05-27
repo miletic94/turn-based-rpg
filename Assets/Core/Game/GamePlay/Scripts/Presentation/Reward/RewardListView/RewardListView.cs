@@ -1,4 +1,4 @@
-public class RewardListView : ListView<RewardItemView, RewardItemData>
+public class RewardListView : ListView<RewardItemView, MoveItemData>
 {
 
 }

@@ -32,6 +32,6 @@ public class MoveManagementState : IState
 
     public void Exit()
     {
-        _context.MoveManagementBootstrapper.Unload();
+        // _context.MoveManagementBootstrapper.Unload();
     }
 }

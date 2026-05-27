@@ -1,13 +1,8 @@
 using UnityEngine;
 
-public class BattleMoveItemData : IIdentifiable
+// TODO: If RewardItemData doesn't add anything to MoveItemData 
+// we can use MoveItemData directly in BattleMoveItem
+public class BattleMoveItemData : MoveItemData
 {
-    public int Id { get; }
-    public Sprite IconSprite;
-
-    public BattleMoveItemData(int id, Sprite sprite)
-    {
-        Id = id;
-        IconSprite = sprite;
-    }
+    public BattleMoveItemData(int id, Sprite sprite) : base(id, sprite) { }
 }
