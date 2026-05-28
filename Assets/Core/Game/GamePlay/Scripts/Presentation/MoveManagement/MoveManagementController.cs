@@ -40,11 +40,12 @@ public class MoveManagementController
     private void HandleSaveClicked()
     {
         if (!_service.TrySave())
-            _feedback.Publish(
-    new FeedbackMessage(
-        "Not enough equipped moves",
-        FeedbackType.Warning));
-        return;
+            //UIFeedbackBus.Publish(new FeedbackMessageEvent()
+            // new FeedbackMessageEventArgs(
+            // this
+            // "Not enough equipped moves",
+            // FeedbackType.Warning)); 
+            return;
 
         _onSave?.Invoke();
     }
