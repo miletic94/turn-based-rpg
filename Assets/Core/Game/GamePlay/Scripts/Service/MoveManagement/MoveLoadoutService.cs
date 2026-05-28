@@ -1,7 +1,11 @@
 using System.Collections.Generic;
+using System.Linq;
 public class MoveLoadoutService
 {
     private readonly MoveLoadout _loadout;
+    public List<int> AvailableMoves => _loadout.AvailableMoves.ToList();
+    public List<int> EquippedMoves => _loadout.EquippedMoves.ToList();
+
     public MoveLoadoutService(
         MoveLoadout loadout)
     {
@@ -32,6 +36,21 @@ public class MoveLoadoutService
             return false;
 
         _loadout.AvailableMoves.Add(moveId);
+        return true;
+    }
+
+    public void UnequipAll()
+    {
+        _loadout.AvailableMoves.UnionWith(_loadout.EquippedMoves);
+        _loadout.EquippedMoves.Clear();
+    }
+
+    public bool TrySave()
+    {
+        if (_loadout.EquippedMoves.Count < _loadout.MinEquipped)
+        {
+            return false;
+        }
         return true;
     }
 }

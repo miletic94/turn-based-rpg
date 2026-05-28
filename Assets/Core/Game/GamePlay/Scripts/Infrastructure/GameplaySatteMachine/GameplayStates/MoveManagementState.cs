@@ -1,102 +1,92 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 public class MoveManagementState : IState
 {
-    private readonly GameplayStateMachine _gameplayStateMachine;
+    private readonly GameplayStateMachine _stateMachine;
     private readonly GameplaySceneContext _context;
 
+    private Dictionary<int, Move> _movesById;
+
+    private MoveLoadoutService _moveLoadoutService;
 
     public MoveManagementState(
-        GameplayStateMachine gameplayStateMachine,
+        GameplayStateMachine stateMachine,
         GameplaySceneContext context)
     {
-        _gameplayStateMachine = gameplayStateMachine;
+        _stateMachine = stateMachine;
         _context = context;
     }
 
     public async void Enter()
     {
         var hero = _context.GameplayContext.Hero;
-        var moveLoadout = new MoveLoadout
+
+        var allMoves =
+            hero.AvailableMoves
+                .Concat(hero.EquippedMoves)
+                .ToList();
+
+        _movesById =
+            allMoves.ToDictionary(x => x.Id);
+
+        var loadout = new MoveLoadout
         {
-            AvailableMoves = hero.AvailableMoves.Select(move => move.Id).ToHashSet(),
-            EquippedMoves = hero.EquippedMoves.Select(move => move.Id).ToHashSet()
+            AvailableMoves =
+                hero.AvailableMoves
+                    .Select(x => x.Id)
+                    .ToHashSet(),
+
+            EquippedMoves =
+                hero.EquippedMoves
+                    .Select(x => x.Id)
+                    .ToHashSet()
         };
-        var moveLoadoutService = new MoveLoadoutService(moveLoadout);
 
-        var movesItemData = await CreateMoveItemData(hero.AvailableMoves.Concat(hero.EquippedMoves).ToList());
-        var availableMoveSlots = CreateMoveSlotData(
-            moveLoadout.AvailableMoves.Select(id => movesItemData[id]).ToList(),
-            hero.AvailableMoves.Count + hero.EquippedMoves.Count);
+        _moveLoadoutService =
+            new MoveLoadoutService(loadout);
 
-        var equippedMoveSlots = CreateMoveSlotData(
-            moveLoadout.EquippedMoves.Select(id => movesItemData[id]).ToList(),
-            moveLoadout.MaxEquipped);
+        var presenter =
+            new MoveManagementPresenter();
+
+        var presentation =
+            await presenter.Build(
+                hero.AvailableMoves,
+                hero.EquippedMoves,
+                loadout.MaxEquipped);
 
         _context.MoveManagementBootstrapper.Load(
-            moveLoadoutService,
-            OnSave
-        );
-        _context.MoveManagementBootstrapper.Initialize(
-            availableMoveSlots,
-            equippedMoveSlots,
-            movesItemData);
-
+            _moveLoadoutService,
+            presentation,
+            HandleSaveRequested);
     }
 
-    public void OnSave(List<Move> availableMoves, List<Move> equippedMoves)
+    private void HandleSaveRequested()
     {
-        _context.GameplayContext.Hero.SetAvailableMoves(availableMoves);
-        _context.GameplayContext.Hero.SetEquippedMoves(equippedMoves);
-        _gameplayStateMachine.EnterMap();
+        var availableMoves =
+            _moveLoadoutService.AvailableMoves
+                .Select(id => _movesById[id])
+                .ToList();
+
+        var equippedMoves =
+            _moveLoadoutService.EquippedMoves
+                .Select(id => _movesById[id])
+                .ToList();
+
+        var hero =
+            _context.GameplayContext.Hero;
+
+        hero.SetAvailableMoves(
+            availableMoves);
+
+        hero.SetEquippedMoves(
+            equippedMoves);
+
+        _stateMachine.EnterMap();
     }
 
     public void Exit()
     {
-        // _context.MoveManagementBootstrapper.Unload();
-    }
-
-    public async Awaitable<Dictionary<int, MoveItemData>>
-       CreateMoveItemData(List<Move> moves)
-    {
-        var tasks = moves.Select(async move =>
-        {
-            var handle =
-                Addressables.LoadAssetAsync<Sprite>(
-                    move.IconAddress);
-
-            var sprite = await handle.Task;
-
-            return new MoveItemData(
-                move.Id,
-                sprite);
-        });
-
-        var results = await Task.WhenAll(tasks);
-
-        return results.ToDictionary(x => x.Id);
-    }
-
-    public List<MoveSlotData> CreateMoveSlotData(List<MoveItemData> moveItemData, int slotCount)
-    {
-        List<MoveSlotData> slotList = new();
-
-        for (int slotIndex = 0; slotIndex < slotCount; slotIndex++)
-        {
-            MoveItemData content = null;
-            if (slotIndex < moveItemData.Count)
-            {
-                content = moveItemData[slotIndex];
-            }
-            slotList.Add(new MoveSlotData(
-                slotIndex,
-                content));
-        }
-        return slotList;
+        _context.MoveManagementBootstrapper.Unload();
     }
 }

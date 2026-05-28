@@ -2,7 +2,7 @@ public abstract class SlotItemData<TContent> : IIdentifiable where TContent : II
 {
     public int Id { get; }
 
-    public TContent Content { get; }
+    public TContent Content;
 
     public SlotItemData(int id, TContent contentData)
     {

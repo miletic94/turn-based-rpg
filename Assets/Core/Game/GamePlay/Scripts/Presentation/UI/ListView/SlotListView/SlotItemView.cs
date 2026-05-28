@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public abstract class SlotItemView<TSlotData, TContentView, TContentData> :
+public abstract class SlotItemView
+    <TSlotData, TContentView, TContentData> :
     MonoBehaviour,
     IListItemView<TSlotData>
     where TSlotData : SlotItemData<TContentData>
     where TContentView : MonoBehaviour, IListItemView<TContentData>
-    where TContentData : IIdentifiable
+    where TContentData : class, IIdentifiable
 {
     [SerializeField]
     private TContentView _contentPrefab;
@@ -24,33 +25,60 @@ public abstract class SlotItemView<TSlotData, TContentView, TContentData> :
         RefreshContent();
     }
 
+    // -------------------------
+    // PUBLIC SLOT API
+    // -------------------------
+
+    public void SetContent(TContentData content)
+    {
+        Data.Content = content;
+
+        RefreshContent();
+    }
+
+    public void ClearContent()
+    {
+        Data.Content = null;
+
+        RefreshContent();
+    }
+
+    // -------------------------
+    // INTERNAL VISUAL SYNC
+    // -------------------------
+
     protected virtual void RefreshContent()
     {
         if (Data.Content == null)
         {
-            ClearContent();
+            DestroyContentView();
             return;
         }
 
-        if (_contentView == null)
-        {
-            _contentView =
-                Instantiate(
-                    _contentPrefab,
-                    _contentContainer);
-        }
+        EnsureContentViewExists();
 
         _contentView.ShowData(Data.Content);
     }
 
-    protected virtual void ClearContent()
+    protected virtual void EnsureContentViewExists()
     {
         if (_contentView != null)
-        {
-            Destroy(_contentView.gameObject);
+            return;
 
-            _contentView = null;
-        }
+        _contentView =
+            Instantiate(
+                _contentPrefab,
+                _contentContainer);
+    }
+
+    protected virtual void DestroyContentView()
+    {
+        if (_contentView == null)
+            return;
+
+        Destroy(_contentView.gameObject);
+
+        _contentView = null;
     }
 
     public TContentView GetContentView()

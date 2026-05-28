@@ -1,42 +1,33 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveManagementBootstrapper : MonoBehaviour
 {
     [SerializeField]
-    private Screen _moveManagementScreen;
+    private MoveManagementView _screenView;
+    [SerializeField] private Screen _moveManagementScreen;
 
-    [SerializeField]
-    private MoveManagementPanel _availableMovesPanel;
-    [SerializeField]
-    private MoveManagementPanel _equippedMovesPanel;
-
-    private MMController _moveManagementController;
+    private MoveManagementController _controller;
 
     public void Load(
-        MoveLoadoutService moveLoadoutService,
-        Action<List<Move>, List<Move>> onSave)
+        MoveLoadoutService service,
+        MoveManagementPresentation presentation,
+        Action onSave)
     {
-        _moveManagementController =
-        new MMController(
-            _availableMovesPanel,
-            _equippedMovesPanel,
-            moveLoadoutService);
+        _controller =
+            new MoveManagementController(
+                _screenView,
+                service,
+                onSave);
+
+        _controller.Initialize(
+            presentation);
+
+        _moveManagementScreen.Show();
     }
 
-    public void Initialize(
-        List<MoveSlotData> availableMovesData,
-        List<MoveSlotData> equippedMovesData,
-        Dictionary<int, MoveItemData> moveItemDataById
-    )
+    public void Unload()
     {
-        _moveManagementController.Initialize(availableMovesData, equippedMovesData, moveItemDataById);
+        _moveManagementScreen.Hide();
     }
-
-    // public void Unload()
-    // {
-    //     _moveManagementScreen.Hide();
-    //     _moveManagementController.Unbind();
-    // }
 }
