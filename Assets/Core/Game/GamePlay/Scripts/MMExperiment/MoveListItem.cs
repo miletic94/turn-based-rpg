@@ -17,9 +17,4 @@ public class MoveListItem :
 
         _icon.sprite = data.IconSprite;
     }
-
-    public MoveItemData GetData()
-    {
-        return _data;
-    }
 }

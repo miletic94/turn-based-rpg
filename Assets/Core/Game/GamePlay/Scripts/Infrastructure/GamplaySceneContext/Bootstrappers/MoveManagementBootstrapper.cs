@@ -9,42 +9,34 @@ public class MoveManagementBootstrapper : MonoBehaviour
 
     [SerializeField]
     private MoveManagementPanel _availableMovesPanel;
+    [SerializeField]
     private MoveManagementPanel _equippedMovesPanel;
 
     private MMController _moveManagementController;
 
     public void Load(
-        Hero hero,
+        MoveLoadoutService moveLoadoutService,
         Action<List<Move>, List<Move>> onSave)
     {
-        // var loadout = CreateLoadout(hero);
-        // var service = new MoveLoadoutService(loadout);
+        _moveManagementController =
+        new MMController(
+            _availableMovesPanel,
+            _equippedMovesPanel,
+            moveLoadoutService);
+    }
 
-        // _moveManagementController = new MoveManagementController(
-        //     _moveManagementView,
-        //     service,
-        //     onSave);
-
-        // _moveManagementController.Bind();
-
-        // _moveManagementScreen.Show();
+    public void Initialize(
+        List<MoveSlotData> availableMovesData,
+        List<MoveSlotData> equippedMovesData,
+        Dictionary<int, MoveItemData> moveItemDataById
+    )
+    {
+        _moveManagementController.Initialize(availableMovesData, equippedMovesData, moveItemDataById);
     }
 
     // public void Unload()
     // {
     //     _moveManagementScreen.Hide();
     //     _moveManagementController.Unbind();
-    // }
-
-    // MoveLoadout CreateLoadout(Hero hero)
-    // {
-    //     var loadout = new MoveLoadout
-    //     {
-    //         AvailableMoves = new List<Move>(hero.AvailableMoves),
-    //         EquippedMoves = new List<Move>(hero.EquippedMoves),
-    //         MaxEquipped = 4
-    //     };
-
-    //     return loadout;
     // }
 }

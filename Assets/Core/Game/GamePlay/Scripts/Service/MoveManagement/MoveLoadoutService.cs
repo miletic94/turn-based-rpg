@@ -2,8 +2,6 @@ using System.Collections.Generic;
 public class MoveLoadoutService
 {
     private readonly MoveLoadout _loadout;
-    public HashSet<int> AvailableMoves => _loadout.AvailableMoves;
-    public HashSet<int> EquippedMoves => _loadout.EquippedMoves;
     public MoveLoadoutService(
         MoveLoadout loadout)
     {
