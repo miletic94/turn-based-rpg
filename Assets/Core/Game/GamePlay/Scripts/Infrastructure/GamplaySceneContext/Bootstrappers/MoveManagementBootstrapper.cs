@@ -12,12 +12,14 @@ public class MoveManagementBootstrapper : MonoBehaviour
     public void Load(
         MoveLoadoutService service,
         MoveManagementPresentation presentation,
+        UIFeedbackBus uiFeedbackBus,
         Action onSave)
     {
         _controller =
             new MoveManagementController(
                 _screenView,
                 service,
+                uiFeedbackBus,
                 onSave);
 
         _controller.Initialize(

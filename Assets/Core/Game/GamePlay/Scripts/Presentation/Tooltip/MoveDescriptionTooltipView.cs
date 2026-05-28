@@ -1,16 +1,13 @@
 using TMPro;
 using UnityEngine;
 
-public class TooltipView : MonoBehaviour
+public class MoveDescriptionTooltipView : MonoBehaviour, ITooltipView<string>
 {
     [SerializeField] TMP_Text _tooltipTextContainer;
 
-    public void SetText(string text)
+    public void Show(string data)
     {
-        _tooltipTextContainer.text = text;
-    }
-    public void Show()
-    {
+        _tooltipTextContainer.text = data;
         gameObject.SetActive(true);
     }
 

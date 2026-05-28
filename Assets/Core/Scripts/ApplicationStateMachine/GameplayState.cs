@@ -34,6 +34,6 @@ public class GameplayState : IAsyncState
         var deserializer = new CharacterDeserializer();
         var hero = deserializer.DeserializeHero().ToHero();
         var enemies = deserializer.DeserializeCharacter().ConvertAll(dto => dto.ToCharacter());
-        context.InitializeRun(hero, enemies);
+        context.Initialize(hero, enemies);
     }
 }

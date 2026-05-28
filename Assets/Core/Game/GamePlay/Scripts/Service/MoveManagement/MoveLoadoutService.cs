@@ -6,6 +6,7 @@ public class MoveLoadoutService
     public List<int> AvailableMoves => _loadout.AvailableMoves.ToList();
     public List<int> EquippedMoves => _loadout.EquippedMoves.ToList();
 
+
     public MoveLoadoutService(
         MoveLoadout loadout)
     {
@@ -45,10 +46,12 @@ public class MoveLoadoutService
         _loadout.EquippedMoves.Clear();
     }
 
-    public bool TrySave()
+    public bool TrySave(out string errorMessage)
     {
+        errorMessage = null;
         if (_loadout.EquippedMoves.Count < _loadout.MinEquipped)
         {
+            errorMessage = $"Equip {_loadout.MinEquipped} moves first";
             return false;
         }
         return true;

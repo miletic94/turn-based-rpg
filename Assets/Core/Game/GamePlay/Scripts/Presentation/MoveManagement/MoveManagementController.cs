@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 
 public class MoveManagementController
 {
     private readonly MoveManagementView _view;
     private readonly MoveLoadoutService _service;
+    private readonly UIFeedbackBus _uiFeedbackBus;
     private Action _onSave;
     private MoveManagementPresentation _presentation;
 
@@ -12,10 +14,12 @@ public class MoveManagementController
     public MoveManagementController(
         MoveManagementView view,
         MoveLoadoutService service,
+        UIFeedbackBus uiFeedbackBus,
         Action onSave)
     {
         _view = view;
         _service = service;
+        _uiFeedbackBus = uiFeedbackBus;
         _onSave = onSave;
     }
 
@@ -39,13 +43,11 @@ public class MoveManagementController
 
     private void HandleSaveClicked()
     {
-        if (!_service.TrySave())
-            //UIFeedbackBus.Publish(new FeedbackMessageEvent()
-            // new FeedbackMessageEventArgs(
-            // this
-            // "Not enough equipped moves",
-            // FeedbackType.Warning)); 
+        if (!_service.TrySave(out var errorMessage))
+        {
+            _uiFeedbackBus.Publish(new WarningMessage { Message = errorMessage });
             return;
+        }
 
         _onSave?.Invoke();
     }

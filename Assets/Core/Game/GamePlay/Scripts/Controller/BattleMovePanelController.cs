@@ -8,12 +8,10 @@ using UnityEngine.AddressableAssets;
 public class BattleMovePanelController
 {
     private readonly BattleMoveListView _moveListView;
-    private readonly MoveTooltipBinder _moveTooltipBinder;
 
-    public BattleMovePanelController(BattleMoveListView moveListView, MoveTooltipBinder moveTooltipBinder)
+    public BattleMovePanelController(BattleMoveListView moveListView)
     {
         _moveListView = moveListView;
-        _moveTooltipBinder = moveTooltipBinder;
     }
 
     public async Awaitable Initialize(

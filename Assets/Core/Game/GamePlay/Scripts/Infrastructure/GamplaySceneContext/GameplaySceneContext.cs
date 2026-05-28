@@ -10,12 +10,16 @@ public class GameplaySceneContext : MonoBehaviour
     public MoveManagementBootstrapper MoveManagementBootstrapper;
     public StatsManagementBootstrapper StatsManagementBootstrapper;
     public XpBootstrapper XpBootstrapper;
+    public TooltipRouter TooltipRouter;
 
     [Header("Run State")]
     public GameplayContext GameplayContext { get; private set; }
+    public UIFeedbackBus UIFeedbackBus { get; private set; }
 
-    public void InitializeRun(Hero hero, List<Character> enemies)
+    public void Initialize(Hero hero, List<Character> enemies)
     {
         GameplayContext = new GameplayContext(hero, enemies);
+        UIFeedbackBus = new UIFeedbackBus();
+        TooltipRouter.Initialize(UIFeedbackBus);
     }
 }

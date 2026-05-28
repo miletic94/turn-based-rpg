@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class GameplayStateMachine
 {
     private readonly StateMachine _machine = new();
