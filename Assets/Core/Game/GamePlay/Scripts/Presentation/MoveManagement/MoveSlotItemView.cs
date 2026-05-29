@@ -16,6 +16,7 @@ public class MoveSlotItemView :
         ZoneType = zoneType;
     }
 
+    // TODO: CanAccept shouldn't mutate state
     public bool CanAccept(DragContext context)
     {
         return
@@ -23,6 +24,9 @@ public class MoveSlotItemView :
             && _moveDropRequested.Invoke(moveData.MoveId, ZoneType);
 
     }
+
+    // TODO: Accept shouldn't change visuals. 
+    // There should be only one source of truth and it should be in Controlelr/Service 
     public void Accept(DragContext context)
     {
         if (context.Data is MoveDragData moveData)

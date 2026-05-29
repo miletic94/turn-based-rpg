@@ -36,6 +36,10 @@ public class MoveManagementController
         BindSlots(availableSlots, MoveDropZoneType.Available);
         BindSlots(equippedSlots, MoveDropZoneType.Equipped);
 
+
+        BindSlotItems(availableSlots);
+        BindSlotItems(equippedSlots);
+
         _view.SaveButton.Bind(HandleSaveClicked);
 
         _view.UnequipAllButton.Bind(HandleUnequipAllClicked);
@@ -68,6 +72,9 @@ public class MoveManagementController
 
         RefreshSlotGroup(availableSlots, availableMoveIds);
         RefreshSlotGroup(equippedSlots, equippedMoveIds);
+
+        BindSlotItems(availableSlots);
+        BindSlotItems(equippedSlots);
     }
 
     private void RefreshSlotGroup(
@@ -97,6 +104,34 @@ public class MoveManagementController
             slot.SetZoneType(zoneType);
             slot.Bind(HandleMoveDropRequested);
         }
+    }
+
+    private void BindSlotItems(List<MoveSlotItemView> slots)
+    {
+        foreach (var slot in slots)
+        {
+            var slotItem = slot.GetContentView();
+            if (slotItem != null)
+            {
+                slotItem.BindHoverable(
+                    onHoverDelayed: HandleHoverDelayed,
+                    onHoverExited: HandleHoverExit);
+            }
+        }
+    }
+
+    private void HandleHoverDelayed(HoverData hoverData)
+    {
+        if (hoverData.Data is MoveHoverData moveHoverData)
+        {
+            _uiFeedbackBus.Publish(
+                new MoveDescriptionTooltipMessage
+                    ("Move description", moveHoverData.RectTransform));
+        }
+    }
+    private void HandleHoverExit(HoverData hoverData)
+    {
+        _uiFeedbackBus.Publish(new HideMessage());
     }
 
     private bool HandleMoveDropRequested(

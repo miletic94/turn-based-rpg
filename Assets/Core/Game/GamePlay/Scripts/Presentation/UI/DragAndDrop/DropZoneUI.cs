@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropZoneUI : MonoBehaviour, IDropHandler
+public class DropZoneUI : MonoBehaviour,
+    IDropHandler
 {
     private IDropZone _dropZone;
 
@@ -11,7 +12,6 @@ public class DropZoneUI : MonoBehaviour, IDropHandler
         _dropZone = GetComponent<IDropZone>();
     }
 
-    public event Action<DraggableUI, DropZoneUI> OnDropped;
     public void OnDrop(PointerEventData eventData)
     {
         var draggable =
@@ -26,12 +26,9 @@ public class DropZoneUI : MonoBehaviour, IDropHandler
             return;
 
         context.TargetZone = _dropZone;
-
         if (!_dropZone.CanAccept(context))
             return;
 
         _dropZone.Accept(context);
-
-        OnDropped?.Invoke(draggable, this);
     }
 }
