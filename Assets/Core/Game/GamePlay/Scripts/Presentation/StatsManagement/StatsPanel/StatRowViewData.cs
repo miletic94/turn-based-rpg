@@ -5,8 +5,6 @@ namespace Presentation.StatsManagement.StatsPanel
 {
     public class StatRowViewData : StatItemData
     {
-        public Action MinusButtonCallback { get; }
-        public Action PlusButtonCallback { get; }
         public bool MinusInteractable { get; }
         public bool PlusInteractable { get; }
 
@@ -16,14 +14,10 @@ namespace Presentation.StatsManagement.StatsPanel
             StatType statType,
             int baseValue,
             int currentValue,
-            Action minusButtonCallback,
-            Action plusButtonCallback,
             bool minusInteractable,
             bool plusInteractable) :
                 base(id, statType, baseValue, currentValue)
         {
-            MinusButtonCallback = minusButtonCallback;
-            PlusButtonCallback = plusButtonCallback;
             MinusInteractable = minusInteractable;
             PlusInteractable = plusInteractable;
         }

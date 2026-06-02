@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using Presentation.Stat;
 
-namespace Presentation.StatsManagement.StatsPanel
+namespace Presentation.StatsManagement
 {
-    public class StatPanelController
+    public class StatsManagementController
     {
-        private readonly StatsPanelView _view;
+        private readonly StatManagementView _view;
         private readonly StatsManagementService _service;
         private StatManagementData _data;
 
-        public StatPanelController(
-            StatsPanelView view,
+        public StatsManagementController(
+            StatManagementView view,
             StatsManagementService service)
         {
             _view = view;
@@ -21,9 +20,11 @@ namespace Presentation.StatsManagement.StatsPanel
         public void CreateStatPanel(Hero hero, Action<StatSaveData> onSaveButtonClicked)
         {
             _data = CreateStatManagementData(hero);
-            RefreshAll();
 
-            _view.SetSaveButtonClickedCallback(
+            RefreshAvailablePoints();
+            CreateStatRows();
+
+            _view.BindSaveClicked(
                 () => onSaveButtonClicked(CreateStatSaveData(_data)));
         }
 
@@ -39,31 +40,50 @@ namespace Presentation.StatsManagement.StatsPanel
 
         private void RefreshAvailablePoints()
         {
-            _view.ShowAvailablePoints(
+            _view.Panel.ShowAvailablePoints(
                 _data.AvailableStatPoints.ToString());
         }
 
-        private void RefreshStatRows()
+        private void CreateStatRows()
         {
-            List<StatRowViewData> statsData = new();
-            int idx = 0;
+            List<StatsPanel.StatRowViewData> statsData = new();
             foreach (var stat in _data.Stats.GetStats())
             {
-                var statData = new StatRowViewData(
-                idx,
+                var statData = new StatsPanel.StatRowViewData(
+                (int)stat.Type,
                 stat.Type,
                 ConvertToViewValue(stat.BaseValue),
                 ConvertToViewValue(stat.CurrentValue),
-                () => ModifyStat(stat.Type, -1),
-                () => ModifyStat(stat.Type, 1),
                 stat.CurrentGTBase,
                 _data.AvailableStatPoints > 0
                 );
 
                 statsData.Add(statData);
-                idx++;
             }
-            _view.Render(statsData);
+            var rows = _view.Panel.Render(statsData);
+            foreach (var row in rows)
+            {
+                row.SetControlCallbacks(ModifyStat, ModifyStat);
+            }
+        }
+
+        private void RefreshStatRows()
+        {
+            List<StatsPanel.StatRowViewData> statsData = new();
+            foreach (var stat in _data.Stats.GetStats())
+            {
+                var statData = new StatsPanel.StatRowViewData(
+                (int)stat.Type,
+                stat.Type,
+                ConvertToViewValue(stat.BaseValue),
+                ConvertToViewValue(stat.CurrentValue),
+                stat.CurrentGTBase,
+                _data.AvailableStatPoints > 0
+                );
+
+                statsData.Add(statData);
+            }
+            _view.Panel.Refresh(statsData);
         }
 
         // ----------------------------
@@ -86,7 +106,6 @@ namespace Presentation.StatsManagement.StatsPanel
         // ----------------------------
         //  Data
         // ----------------------------
-
         public StatSaveData CreateStatSaveData(StatManagementData data)
         {
             return new StatSaveData(

@@ -6,6 +6,9 @@ namespace Presentation.Stat
     {
         [SerializeField] TMP_Text _label;
         [SerializeField] TMP_Text _value;
+        [SerializeField] Color _regularColor;
+        [SerializeField] Color _downgradeColor;
+        [SerializeField] Color _upgradeColor;
         StatItemData _data;
 
         public void ShowData(StatItemData data)
@@ -17,7 +20,21 @@ namespace Presentation.Stat
         }
         private void SetValueColor()
         {
-            _value.color = _data.BaseValue < _data.CurrentValue ? Color.green : Color.red;
+            if (_data.BaseValue < _data.CurrentValue)
+            {
+                _upgradeColor.a = 1f;
+                _value.color = _upgradeColor;
+            }
+            else if (_data.BaseValue > _data.CurrentValue)
+            {
+                _downgradeColor.a = 1f;
+                _value.color = _downgradeColor;
+            }
+            else
+            {
+                _regularColor.a = 1f;
+                _value.color = _regularColor;
+            }
         }
     }
 }

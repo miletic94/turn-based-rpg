@@ -34,6 +34,19 @@ public abstract class ListView<TView, TData> : MonoBehaviour
         return _viewsById.Values.ToList();
     }
 
+    public List<TView> Refresh(IReadOnlyList<TData> dataList)
+    {
+
+        foreach (var data in dataList)
+        {
+            if (_viewsById.TryGetValue(data.Id, out var existingView))
+            {
+                existingView.ShowData(data);
+            }
+        }
+        return _viewsById.Values.ToList();
+    }
+
     public TView GetView(int id)
     {
         return _viewsById[id];

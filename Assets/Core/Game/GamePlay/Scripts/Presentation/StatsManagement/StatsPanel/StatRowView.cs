@@ -9,13 +9,11 @@ namespace Presentation.StatsManagement.StatsPanel
     {
         [SerializeField] private Button _minusButton;
         [SerializeField] private Button _plusButton;
+        private StatType _statType;
         public void ShowData(StatRowViewData data)
         {
             base.ShowData(data);
-
-            SetControlCallbacks(
-                data.MinusButtonCallback,
-                data.PlusButtonCallback);
+            _statType = data.StatType;
 
             SetControlInteractable(data.MinusInteractable, data.PlusInteractable);
         }
@@ -25,13 +23,13 @@ namespace Presentation.StatsManagement.StatsPanel
             _plusButton.interactable = plusInteractable;
         }
 
-        private void SetControlCallbacks(Action minusClicked, Action plusClicked)
+        public void SetControlCallbacks(Action<StatType, int> minusClicked, Action<StatType, int> plusClicked)
         {
             _minusButton.onClick.RemoveAllListeners();
             _plusButton.onClick.RemoveAllListeners();
 
-            _minusButton.onClick.AddListener(minusClicked.Invoke);
-            _plusButton.onClick.AddListener(plusClicked.Invoke);
+            _minusButton.onClick.AddListener(() => minusClicked.Invoke(_statType, -1));
+            _plusButton.onClick.AddListener(() => plusClicked.Invoke(_statType, 1));
         }
     }
 }

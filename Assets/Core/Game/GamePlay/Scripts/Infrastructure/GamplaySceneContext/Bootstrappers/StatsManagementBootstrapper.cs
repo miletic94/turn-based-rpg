@@ -1,12 +1,13 @@
 using System;
+using Presentation.StatsManagement;
 using UnityEngine;
 
 public class StatsManagementBootstrapper : MonoBehaviour
 {
     [SerializeField] Screen _statsManagementScreen;
-    [SerializeField] StatsManagementPanelView _statsManagementView;
+    [SerializeField] StatManagementView _statsManagementView;
     private StatsManagementService _statsManagementService;
-    private StatsManagementPanelController _statsManagementPanelController;
+    private StatsManagementController _statsManagementController;
 
 
 
@@ -15,12 +16,12 @@ public class StatsManagementBootstrapper : MonoBehaviour
         // TODO: This can be done better
         if (_statsManagementService == null)
             _statsManagementService = new StatsManagementService();
-        if (_statsManagementPanelController == null)
-            _statsManagementPanelController = new StatsManagementPanelController(
+        if (_statsManagementController == null)
+            _statsManagementController = new StatsManagementController(
                 _statsManagementView,
                 _statsManagementService);
 
-        _statsManagementPanelController.CreateStatPanel(context.Hero, onSave);
+        _statsManagementController.CreateStatPanel(context.Hero, onSave);
         _statsManagementScreen.Show();
     }
     public void Unload()
