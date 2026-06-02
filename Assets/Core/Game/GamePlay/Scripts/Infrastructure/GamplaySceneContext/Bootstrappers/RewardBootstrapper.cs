@@ -9,8 +9,8 @@ public class RewardBootstrapper : MonoBehaviour
 
     public void Load(Character enemy, Action<Move> onRewardSelected)
     {
-        _rewardController = new RewardController(_rewardListView, new MoveDescriptionService(), onRewardSelected);
-        _rewardController.Initialize(enemy);
+        _rewardController = new RewardController(_rewardListView, onRewardSelected);
+        _ = _rewardController.Initialize(enemy);
         RewardScreen.Show();
     }
     public void Unload()

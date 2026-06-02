@@ -57,6 +57,7 @@ public class MoveManagementState : IState
 
         _context.MoveManagementBootstrapper.Load(
             _moveLoadoutService,
+            new MoveDescriptionService(_movesById),
             presentation,
             _context.UIFeedbackBus,
             HandleSaveRequested);

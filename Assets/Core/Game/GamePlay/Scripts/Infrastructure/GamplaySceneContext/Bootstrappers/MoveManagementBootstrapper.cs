@@ -11,6 +11,7 @@ public class MoveManagementBootstrapper : MonoBehaviour
 
     public void Load(
         MoveLoadoutService service,
+        MoveDescriptionService moveDescriptionService,
         MoveManagementPresentation presentation,
         UIFeedbackBus uiFeedbackBus,
         Action onSave)
@@ -19,6 +20,7 @@ public class MoveManagementBootstrapper : MonoBehaviour
             new MoveManagementController(
                 _screenView,
                 service,
+                moveDescriptionService,
                 uiFeedbackBus,
                 onSave);
 

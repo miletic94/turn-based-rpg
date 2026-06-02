@@ -9,15 +9,12 @@ using UnityEngine.AddressableAssets;
 public class RewardController
 {
     private readonly RewardListView _rewardListView;
-    private readonly MoveDescriptionService _moveDescriptionService;
     private readonly Action<Move> _onRewardSelected;
 
     public RewardController(RewardListView rewardListView,
-    MoveDescriptionService moveDescriptionService,
     Action<Move> onRewardSelected)
     {
         _rewardListView = rewardListView;
-        _moveDescriptionService = moveDescriptionService;
         _onRewardSelected = onRewardSelected;
     }
     public async Awaitable Initialize(Character enemy)
@@ -49,10 +46,6 @@ public class RewardController
     public void HandleRewardSelected(Move move)
     {
         _onRewardSelected?.Invoke(move);
-    }
-    public void HandleRewardHovered(Move move)
-    {
-        UnityEngine.Debug.Log(_moveDescriptionService.Describe(move));
     }
 }
 

@@ -9,16 +9,19 @@ public class MoveManagementController
     private readonly UIFeedbackBus _uiFeedbackBus;
     private Action _onSave;
     private MoveManagementPresentation _presentation;
+    private MoveDescriptionService _moveDescriptionService;
 
 
     public MoveManagementController(
         MoveManagementView view,
         MoveLoadoutService service,
+        MoveDescriptionService moveDescriptionService,
         UIFeedbackBus uiFeedbackBus,
         Action onSave)
     {
         _view = view;
         _service = service;
+        _moveDescriptionService = moveDescriptionService;
         _uiFeedbackBus = uiFeedbackBus;
         _onSave = onSave;
     }
@@ -126,7 +129,8 @@ public class MoveManagementController
         {
             _uiFeedbackBus.Publish(
                 new MoveDescriptionTooltipMessage
-                    ("Move description", moveHoverData.RectTransform));
+                    (_moveDescriptionService.Describe(moveHoverData.MoveId),
+                        moveHoverData.RectTransform));
         }
     }
     private void HandleHoverExit(HoverData hoverData)
