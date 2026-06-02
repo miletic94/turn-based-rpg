@@ -15,7 +15,7 @@ public class StatsManagementPanelView : MonoBehaviour
 
     private readonly Dictionary<StatType, StatsManagementPanelRowView> _rows = new();
 
-    public void SetAvailablePointsText(string text)
+    public void ShowAvailablePoints(string text)
     {
         _availablePointsLabel.SetText(text);
     }
