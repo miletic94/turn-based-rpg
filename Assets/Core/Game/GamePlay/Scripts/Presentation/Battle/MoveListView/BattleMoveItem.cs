@@ -16,9 +16,9 @@ public class BattleMoveItem : MonoBehaviour, IListItemView<BattleMoveItemData>, 
         _icon.sprite = data.IconSprite;
     }
 
-    public void BindClick(Action callback)
+    public void BindClick(Action<Move> callback)
     {
-        _clickable.Bind(callback);
+        _clickable.Bind(() => callback.Invoke(_data.Move));
     }
 
     public object GetHoverDelayedData()

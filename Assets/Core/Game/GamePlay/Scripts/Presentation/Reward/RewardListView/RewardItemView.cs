@@ -8,9 +8,9 @@ public class RewardItemView : MoveListItem, IHoverDelayedDataSource
     private Action<HoverData> _onHoverDelayed;
     private Action<HoverData> _onHoverExited;
 
-    public void BindClick(Action callback)
+    public void BindClick(Action<Move> callback)
     {
-        _clickable.Bind(callback);
+        _clickable.Bind(() => callback.Invoke(_data.Move));
     }
 
     public object GetHoverDelayedData()

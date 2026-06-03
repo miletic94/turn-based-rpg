@@ -28,13 +28,11 @@ public class RewardController
     {
         var rewardDataList = await CreateRewardItemData(enemy);
 
-        _rewardListView.Render(rewardDataList);
+        var views = _rewardListView.Render(rewardDataList);
 
-        foreach (var rewardData in rewardDataList)
+        foreach (var view in views)
         {
-            var view = _rewardListView.GetView(rewardData.Id);
-            var move = enemy.Moves.Find(move => move.Id == rewardData.Id);
-            view.BindClick(() => HandleRewardSelected(move));
+            view.BindClick(_onRewardSelected);
             view.BindHoverable(HandleHoverDelayed, HandleHoverExit);
         }
     }
@@ -46,14 +44,10 @@ public class RewardController
             var handle = Addressables.LoadAssetAsync<Sprite>(move.IconAddress);
             var sprite = await handle.Task;
 
-            return new MoveItemData(move.Id, sprite);
+            return new MoveItemData(move.Id, move, sprite);
         });
 
         return (await Task.WhenAll(tasks)).ToList();
-    }
-    public void HandleRewardSelected(Move move)
-    {
-        _onRewardSelected?.Invoke(move);
     }
 
     private void HandleHoverDelayed(HoverData hoverData)

@@ -140,7 +140,6 @@ public class HoverableUI :
             return;
         if (_isHovered && _disappearsOnClick && pointerData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("HoverableUI: Clicked while hovered, ending hover.");
             EndHover();
         }
     }
@@ -168,8 +167,6 @@ public class HoverableUI :
 
     private void InvokeHoverExited()
     {
-        Debug.Log("InvokeHoverExited");
-
         var hoverData =
             new HoverData(
                 this,

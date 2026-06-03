@@ -49,6 +49,7 @@ public class MoveManagementPresenter
 
             return new MoveItemData(
                 move.Id,
+                move,
                 sprite);
         });
 

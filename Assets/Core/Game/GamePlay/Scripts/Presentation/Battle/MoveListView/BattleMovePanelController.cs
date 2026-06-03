@@ -26,12 +26,9 @@ public class BattleMovePanelController
 
         var views = _moveListView.Render(moveDataList);
 
-        foreach (var moveData in moveDataList)
+        foreach (var view in views)
         {
-            var view = _moveListView.GetView(moveData.Id);
-            var move = moves.Find(move => move.Id == moveData.Id);
-
-            view.BindClick(() => handleMoveSelected(move));
+            view.BindClick(handleMoveSelected);
             view.BindHoverable(HandleHoverDelayed, HandleHoverExit);
         }
     }
@@ -41,9 +38,7 @@ public class BattleMovePanelController
         {
             var handle = Addressables.LoadAssetAsync<Sprite>(move.IconAddress);
             var sprite = await handle.Task;
-
-            return new BattleMoveItemData(move.Id, sprite);
-
+            return new BattleMoveItemData(move.Id, move, sprite);
         });
 
         return (await Task.WhenAll(tasks)).ToList();
