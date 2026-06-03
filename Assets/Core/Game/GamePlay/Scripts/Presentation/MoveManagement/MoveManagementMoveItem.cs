@@ -27,14 +27,16 @@ public class MoveManagementMoveItem :
     public void BindHoverable(Action<HoverData> onHoverDelayed,
         Action<HoverData> onHoverExited)
     {
+        UnbindHoverable();
         _onHoverDelayed = onHoverDelayed;
         _onHoverExited = onHoverExited;
         _hoverable.HoverDelayed += _onHoverDelayed;
-        _hoverable._hoverExited += _onHoverExited;
+        _hoverable.HoverExited += _onHoverExited;
     }
-    public void OnDestroy()
+
+    private void UnbindHoverable()
     {
-        _hoverable.HoverDelayed -= _onHoverExited;
-        _hoverable._hoverExited -= _onHoverExited;
+        _hoverable.HoverDelayed -= _onHoverDelayed;
+        _hoverable.HoverExited -= _onHoverExited;
     }
 }

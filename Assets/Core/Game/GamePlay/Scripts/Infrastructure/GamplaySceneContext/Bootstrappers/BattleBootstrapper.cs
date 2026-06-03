@@ -11,13 +11,13 @@ public class BattleBootstrapper : MonoBehaviour
     private BattleController _battleController;
     private CharacterInfoPanelsController _characterInfoPanelsController;
 
-    public BattleController Load()
+    public BattleController Load(UIFeedbackBus uiFeedbackBus, MoveDescriptionService moveDescriptionService)
     {
         _battleScreen.Show();
         _batleBackground.Show();
 
         var battleMoveController =
-            new BattleMovePanelController(_moveListView);
+            new BattleMovePanelController(_moveListView, uiFeedbackBus, moveDescriptionService);
 
         var effectExecutionService = new MoveEffectService();
 

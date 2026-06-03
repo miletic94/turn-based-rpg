@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 216964411741234117}
   - component: {fileID: 3449744537180697626}
   - component: {fileID: 6387837211640067444}
+  - component: {fileID: 3306004750525413050}
   m_Layer: 5
   m_Name: RewardItemView
   m_TagString: Untagged
@@ -82,6 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 4517508675582778788}
   _clickable: {fileID: 6387837211640067444}
+  _hoverable: {fileID: 3306004750525413050}
+  _rectTransform: {fileID: 2472529675204037386}
 --- !u!114 &6387837211640067444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +97,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a695098ac053f8945a95ef705607cc4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3306004750525413050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6073007876415607701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41701366dc19034589ffe0de95099d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hoverDelay: 1
 --- !u!1001 &5835338717026324102
 PrefabInstance:
   m_ObjectHideFlags: 0

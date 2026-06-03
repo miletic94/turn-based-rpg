@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -32,10 +33,13 @@ public readonly struct HoverData
 public class HoverableUI :
     MonoBehaviour,
     IPointerEnterHandler,
-    IPointerExitHandler
+    IPointerExitHandler,
+    IPointerClickHandler
 {
     [SerializeField]
     private float _hoverDelay = 1f;
+    [SerializeField]
+    private bool _disappearsOnClick = true;
 
     private bool _isInteractable = true;
 
@@ -51,7 +55,8 @@ public class HoverableUI :
 
     public event Action<HoverData> HoverDelayed;
 
-    public event Action<HoverData> _hoverExited;
+    public event Action<HoverData> HoverExited;
+    private bool _isHovered;
 
     private void Awake()
     {
@@ -81,6 +86,8 @@ public class HoverableUI :
         if (!_isInteractable)
             return;
 
+        _isHovered = true;
+
         InvokeHoverEntered();
 
         BeginDelayedHover();
@@ -91,9 +98,7 @@ public class HoverableUI :
     {
         if (!_isInteractable)
             return;
-
-        CancelHover();
-        InvokeHoverExited();
+        EndHover();
     }
 
     private void BeginDelayedHover()
@@ -129,6 +134,17 @@ public class HoverableUI :
         }
     }
 
+    public void OnPointerClick(PointerEventData pointerData)
+    {
+        if (!_isInteractable)
+            return;
+        if (_isHovered && _disappearsOnClick && pointerData.button == PointerEventData.InputButton.Left)
+        {
+            Debug.Log("HoverableUI: Clicked while hovered, ending hover.");
+            EndHover();
+        }
+    }
+
     private void InvokeHoverEntered()
     {
         var hoverData =
@@ -152,12 +168,14 @@ public class HoverableUI :
 
     private void InvokeHoverExited()
     {
+        Debug.Log("InvokeHoverExited");
+
         var hoverData =
             new HoverData(
                 this,
                 HoverPhase.Exit,
                 _hoverExitDataSource?.GetHoverExitedData());
-        _hoverExited?.Invoke(hoverData);
+        HoverExited?.Invoke(hoverData);
     }
 
     private void CancelHover()
@@ -169,11 +187,22 @@ public class HoverableUI :
 
     private void OnDisable()
     {
-        CancelHover();
+        EndHover();
     }
 
     private void OnDestroy()
     {
+        EndHover();
+    }
+
+    private void EndHover()
+    {
+        if (!_isHovered)
+            return;
+
+        _isHovered = false;
+
         CancelHover();
+        InvokeHoverExited();
     }
 }

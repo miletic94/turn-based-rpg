@@ -1,12 +1,7 @@
 Battle must be more readable
 
-There's a bug in StatManagement - Dont spend SP first time (left 2). Next time spend all 4 (left 0). Next time there's 4 SP again.
-
 Player can steal the same move multiple times, which also produces a bug in MoveManagementState - 30 line
 If player passed level - they shouldn't be able to play it again
-
-Move description should show *10 values, not 0.1, 0.5
-Move description in tooltip on hover in BattleView in RewardView and in MoveManagementView
 
 If player uses stat modifier and it doesn't expire it stays applied after the battle ends
 If defense is 1 - combatant doesn't take any damage

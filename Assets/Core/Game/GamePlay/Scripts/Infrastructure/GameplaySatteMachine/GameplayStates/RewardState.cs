@@ -1,3 +1,5 @@
+using System.Linq;
+
 public class RewardState : IState
 {
     private readonly GameplayStateMachine _gameplayStateMachine;
@@ -13,7 +15,13 @@ public class RewardState : IState
 
     public void Enter()
     {
-        _context.RewardBootstrapper.Load(_context.GameplayContext.CurrentEnemy, HandleRewardSelected); ;
+        var currentEnemy = _context.GameplayContext.CurrentEnemy;
+
+        _context.RewardBootstrapper.Load(
+            currentEnemy,
+            _context.UIFeedbackBus,
+            new MoveDescriptionService(currentEnemy.Moves.ToDictionary(x => x.Id)),
+            HandleRewardSelected); ;
     }
     public void HandleRewardSelected(Move move)
     {

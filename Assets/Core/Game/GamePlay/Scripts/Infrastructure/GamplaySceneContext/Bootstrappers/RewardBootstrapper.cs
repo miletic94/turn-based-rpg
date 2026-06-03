@@ -8,9 +8,13 @@ public class RewardBootstrapper : MonoBehaviour
     [SerializeField] RewardListView _rewardListView;
     private RewardController _rewardController;
 
-    public void Load(Character enemy, Action<Move> onRewardSelected)
+    public void Load(Character enemy, UIFeedbackBus uiFeedbackBus, MoveDescriptionService moveDescriptionService, Action<Move> onRewardSelected)
     {
-        _rewardController = new RewardController(_rewardListView, onRewardSelected);
+        _rewardController = new RewardController(_rewardListView,
+            uiFeedbackBus,
+            moveDescriptionService,
+            onRewardSelected);
+
         _ = _rewardController.Initialize(enemy);
         RewardScreen.Show();
         _rewardBackground.Show();

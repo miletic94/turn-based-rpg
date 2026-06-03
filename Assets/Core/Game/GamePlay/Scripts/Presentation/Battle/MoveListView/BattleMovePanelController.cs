@@ -8,10 +8,14 @@ using UnityEngine.AddressableAssets;
 public class BattleMovePanelController
 {
     private readonly BattleMoveListView _moveListView;
+    private readonly UIFeedbackBus _uiFeedbackBus;
+    private readonly MoveDescriptionService _moveDescriptionService;
 
-    public BattleMovePanelController(BattleMoveListView moveListView)
+    public BattleMovePanelController(BattleMoveListView moveListView, UIFeedbackBus uiFeedbackBus, MoveDescriptionService moveDescriptionService)
     {
         _moveListView = moveListView;
+        _uiFeedbackBus = uiFeedbackBus;
+        _moveDescriptionService = moveDescriptionService;
     }
 
     public async Awaitable Initialize(
@@ -20,7 +24,7 @@ public class BattleMovePanelController
     {
         var moveDataList = await CreateMoveItemData(moves);
 
-        _moveListView.Render(moveDataList);
+        var views = _moveListView.Render(moveDataList);
 
         foreach (var moveData in moveDataList)
         {
@@ -28,6 +32,7 @@ public class BattleMovePanelController
             var move = moves.Find(move => move.Id == moveData.Id);
 
             view.BindClick(() => handleMoveSelected(move));
+            view.BindHoverable(HandleHoverDelayed, HandleHoverExit);
         }
     }
     private async Awaitable<List<BattleMoveItemData>> CreateMoveItemData(List<Move> moves)
@@ -42,5 +47,24 @@ public class BattleMovePanelController
         });
 
         return (await Task.WhenAll(tasks)).ToList();
+    }
+
+    private void HandleHoverDelayed(HoverData hoverData)
+    {
+        if (hoverData.Data is MoveHoverData moveHoverData)
+        {
+            _uiFeedbackBus.Publish(
+                new MoveDescriptionTooltipMessage
+                    (_moveDescriptionService.Describe(moveHoverData.MoveId),
+                        moveHoverData.RectTransform));
+        }
+        else
+        {
+            Debug.LogError("Unexpected hover data type: " + hoverData.Data.GetType());
+        }
+    }
+    private void HandleHoverExit(HoverData hoverData)
+    {
+        _uiFeedbackBus.Publish(new HideMessage());
     }
 }

@@ -22,6 +22,6 @@ public class StatModifierEffect : IMoveEffect
 
     public override string ToString()
     {
-        return $"{Type} {Target}'s {Stat} for {Duration} turns. {Value}";
+        return $"{Type} {Target}'s {Stat} for {Duration} turns. Value: {(Value is FlatValue flatValue ? flatValue.BaseValue * 100 : Value)}";
     }
 }
