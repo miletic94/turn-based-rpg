@@ -111,7 +111,8 @@ namespace Presentation.StatsManagement
             return new StatSaveData(
                 data.Stats.GetStat(StatType.Attack).CurrentValue,
                 data.Stats.GetStat(StatType.Defense).CurrentValue,
-                data.Stats.GetStat(StatType.Magic).CurrentValue
+                data.Stats.GetStat(StatType.Magic).CurrentValue,
+                data.AvailableStatPoints
                 );
         }
         public StatManagementData CreateStatManagementData(Hero hero)

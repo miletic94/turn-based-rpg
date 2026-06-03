@@ -26,6 +26,7 @@ public class StatsManagementState : IState
     private void OnSave(StatSaveData saveData)
     {
         _context.GameplayContext.Hero.SetStats(saveData.Attack, saveData.Defense, saveData.Magic);
+        _context.GameplayContext.Hero.SetAvaialableStatPoints(saveData.AvailableStatPoints);
         _gameplayStateMachine.EnterMap();
     }
 }
