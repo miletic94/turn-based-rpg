@@ -7,12 +7,6 @@ public class Character
     public float Attack;
     public float Defense;
     public float Magic;
+    public string SpriteAddress;
     public List<Move> Moves;
-    public Combatant ToCombatant() => new Combatant
-    (
-        Name,
-        Health,
-        new CombatantStats(Attack, Defense, Magic),
-        Moves
-    );
 }

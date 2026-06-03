@@ -6,7 +6,7 @@ public class MoveManagementBootstrapper : MonoBehaviour
     [SerializeField]
     private MoveManagementView _screenView;
     [SerializeField] private Screen _moveManagementScreen;
-
+    [SerializeField] private Background _moveManagementBackground;
     private MoveManagementController _controller;
 
     public void Load(
@@ -28,10 +28,12 @@ public class MoveManagementBootstrapper : MonoBehaviour
             presentation);
 
         _moveManagementScreen.Show();
+        _moveManagementBackground.Show();
     }
 
     public void Unload()
     {
         _moveManagementScreen.Hide();
+        _moveManagementBackground.Hide();
     }
 }

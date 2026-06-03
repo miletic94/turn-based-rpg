@@ -1,5 +1,3 @@
-using System;
-
 namespace Presentation.Stat
 {
     public class StatItemData : IIdentifiable

@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 
 public class Combatant
 {
@@ -9,15 +11,17 @@ public class Combatant
     // TODO: Health should be integer
     public float Health { get; private set; }
     public CombatantStats Stats { get; private set; }
+    public Sprite Portrait { get; private set; }
     public int Mana { get; private set; } = 4;
     public List<Move> Moves { get; private set; }
     public CombatantRole Role { get; set; }
-    public Combatant(string name, float health, CombatantStats stats, List<Move> moves)
+    public Combatant(string name, float health, CombatantStats stats, Sprite portrait, List<Move> moves)
     {
         Name = name;
         Health = health;
         _baseHealth = health;
         Stats = stats;
+        Portrait = portrait;
         Moves = moves;
     }
 

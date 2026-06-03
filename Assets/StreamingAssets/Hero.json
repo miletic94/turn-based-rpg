@@ -4,6 +4,7 @@
     "attack": 1.2,
     "defense": 0.2,
     "magic": 0.4,
+    "spriteAddress": "rogues[knight]",
     "mana": 4,
     "XP": {
         "current": 50,

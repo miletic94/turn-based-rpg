@@ -14,7 +14,7 @@ public class BattleState : IState
     public async void Enter()
     {
         var battleController = _context.BattleBootstrapper.Load();
-        battleController.Initialize(_context.GameplayContext.Hero, _context.GameplayContext.CurrentEnemy);
+        await battleController.Initialize(_context.GameplayContext.Hero, _context.GameplayContext.CurrentEnemy);
 
         var result = await battleController.Run();
 

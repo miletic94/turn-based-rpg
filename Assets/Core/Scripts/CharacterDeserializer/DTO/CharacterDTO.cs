@@ -7,6 +7,7 @@ public class CharacterDTO
     public float Attack;
     public float Defense;
     public float Magic;
+    public string SpriteAddress;
     public List<MoveDTO> Moves;
 
     public Character ToCharacter() => new Character
@@ -16,6 +17,7 @@ public class CharacterDTO
         Attack = Attack,
         Defense = Defense,
         Magic = Magic,
+        SpriteAddress = SpriteAddress,
         Moves = Moves.ConvertAll(m => m.ToMove())
     };
 }

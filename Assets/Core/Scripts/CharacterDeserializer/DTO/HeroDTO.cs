@@ -7,6 +7,7 @@ public class HeroDTO
     public float Attack;
     public float Defense;
     public float Magic;
+    public string SpriteAddress;
     public XpDTO Xp;
     public int AvailableStatPoints;
     public List<MoveDTO> AvailableMoves;
@@ -18,6 +19,7 @@ public class HeroDTO
          Attack,
          Defense,
          Magic,
+         SpriteAddress,
          Xp.ToXp(),
          AvailableStatPoints,
          AvailableMoves.ConvertAll(m => m.ToMove()),

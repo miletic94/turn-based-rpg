@@ -33,7 +33,6 @@ public abstract class ListView<TView, TData> : MonoBehaviour
 
         return _viewsById.Values.ToList();
     }
-
     public List<TView> Refresh(IReadOnlyList<TData> dataList)
     {
 
@@ -47,6 +46,7 @@ public abstract class ListView<TView, TData> : MonoBehaviour
         return _viewsById.Values.ToList();
     }
 
+    // TODO: See if you can remove this
     public TView GetView(int id)
     {
         return _viewsById[id];
@@ -55,11 +55,6 @@ public abstract class ListView<TView, TData> : MonoBehaviour
     public List<TView> GetViews()
     {
         return _viewsById.Values.ToList();
-    }
-
-    public bool TryGetView(int id, out TView view)
-    {
-        return _viewsById.TryGetValue(id, out view);
     }
 
     private void CreateView(TData data)

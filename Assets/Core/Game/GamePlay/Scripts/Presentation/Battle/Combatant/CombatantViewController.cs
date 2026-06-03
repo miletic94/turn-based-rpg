@@ -14,9 +14,6 @@ public class CombatantViewController
     {
         var view = _factory.CreateView(combatant);
         _views[combatant] = view;
-
-        // Initial sync
-        view.UpdateHealthBar(combatant);
     }
 
     public void RemoveAll()
@@ -25,19 +22,5 @@ public class CombatantViewController
             view.Dispose();
 
         _views.Clear();
-    }
-
-    public void OnMoveExecuted(Combatant source, Combatant target, Move move)
-    {
-        Update(source);
-        Update(target);
-    }
-
-    private void Update(Combatant combatant)
-    {
-        if (_views.TryGetValue(combatant, out var view))
-        {
-            view.UpdateHealthBar(combatant);
-        }
     }
 }

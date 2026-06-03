@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea69d41f90c6ea4fa55c27c1d60c145, type: 3}
-  m_Name: AddressableAssetGroupSortSettings
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: Monsters_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  sortOrder:
-  - e4d170dce8d72ac48af9d745418a6b7e
-  - 3d17e45d38b1d0547ae05d8b96e4ee2f
-  - cf119eea1cf70ad46ac5aa874d6164ae
+  m_Group: {fileID: 11400000, guid: b5c8b421f9958464caf6fca78e6243c3, type: 2}
+  m_StaticContent: 0

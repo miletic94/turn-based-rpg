@@ -3,14 +3,18 @@ using UnityEngine;
 public class BattleBootstrapper : MonoBehaviour
 {
     [SerializeField] Screen _battleScreen;
+    [SerializeField] Background _batleBackground;
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
     [SerializeField] private BattleMoveListView _moveListView;
-    [SerializeField] private BattleStatPanelView _battleStatPanelView;
+    [SerializeField] private CharacterInfoPanelsView _characterInfoPanelsView;
+
     private BattleController _battleController;
+    private CharacterInfoPanelsController _characterInfoPanelsController;
 
     public BattleController Load()
     {
         _battleScreen.Show();
+        _batleBackground.Show();
 
         var battleMoveController =
             new BattleMovePanelController(_moveListView);
@@ -18,8 +22,7 @@ public class BattleBootstrapper : MonoBehaviour
         var effectExecutionService = new MoveEffectService();
 
         var combatantViewController = new CombatantViewController(_combatantViewFactory);
-        var battleStatPanelController = new BattleStatPanelController(_battleStatPanelView);
-
+        _characterInfoPanelsController = new CharacterInfoPanelsController(_characterInfoPanelsView);
         var moveService = new MoveService(effectExecutionService);
         var turnService = new BattleTurnService();
         var resolutionService = new BattleResolutionService();
@@ -28,7 +31,7 @@ public class BattleBootstrapper : MonoBehaviour
         _battleController = new BattleController(
             battleMoveController,
             combatantViewController,
-            battleStatPanelController,
+            _characterInfoPanelsController,
             moveService,
             turnService,
             resolutionService
@@ -39,6 +42,7 @@ public class BattleBootstrapper : MonoBehaviour
     public void Unload()
     {
         _battleScreen.Hide();
+        _batleBackground.Hide();
         _battleController.RemoveCombatants();
     }
 }
