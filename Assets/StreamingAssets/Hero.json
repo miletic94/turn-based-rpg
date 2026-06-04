@@ -13,7 +13,28 @@
         "rewardPoints": 2
     },
     "availableStatPoints": 0,
-    "availableMoves": [],
+    "availableMoves": [
+        {
+            "id": "4",
+            "name": "Shadow Bolt",
+            "iconAddress": "bolt-spell-cast",
+            "effects": [
+                {
+                    "id": "4",
+                    "category": "magic",
+                    "type": "damage",
+                    "target": "enemy",
+                    "value": {
+                        "type": "scaled",
+                        "baseValue": 30,
+                        "scalesOff": "magic",
+                        "reducedBy": "none"
+                    },
+                    "isSource": false
+                }
+            ]
+        }
+    ],
     "equippedMoves": [
         {
             "id": "0",

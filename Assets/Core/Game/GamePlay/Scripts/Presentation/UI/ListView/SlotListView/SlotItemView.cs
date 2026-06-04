@@ -65,10 +65,7 @@ public abstract class SlotItemView
         if (_contentView != null)
             return;
 
-        _contentView =
-            Instantiate(
-                _contentPrefab,
-                _contentContainer);
+        _contentView = Instantiate(_contentPrefab, _contentContainer);
     }
 
     protected virtual void DestroyContentView()

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
 
 public class MoveManagementController
 {
@@ -31,50 +30,28 @@ public class MoveManagementController
     {
         _presentation = presentation;
 
-        var availableSlots =
-            _view.AvailablePanel.Render(presentation.AvailableSlots);
-        var equippedSlots =
-            _view.EquippedPanel.Render(presentation.EquippedSlots);
-
-        BindSlots(availableSlots, MoveDropZoneType.Available);
-        BindSlots(equippedSlots, MoveDropZoneType.Equipped);
-
-
-        BindSlotItems(availableSlots);
-        BindSlotItems(equippedSlots);
+        RefreshPanels();
 
         _view.SaveButton.Bind(HandleSaveClicked);
 
         _view.UnequipAllButton.Bind(HandleUnequipAllClicked);
     }
 
-    private void HandleSaveClicked()
-    {
-        if (!_service.TrySave(out var errorMessage))
-        {
-            _uiFeedbackBus.Publish(new WarningMessage { Message = errorMessage });
-            return;
-        }
-
-        _onSave?.Invoke();
-    }
-
-    private void HandleUnequipAllClicked()
-    {
-        _service.UnequipAll();
-        RefreshPanels();
-    }
-
     private void RefreshPanels()
     {
-        var availableSlots = _view.AvailablePanel.GetViews();
-        var equippedSlots = _view.EquippedPanel.GetViews();
+        var availableSlots =
+            _view.AvailablePanel.Render(_presentation.AvailableSlots);
+        var equippedSlots =
+            _view.EquippedPanel.Render(_presentation.EquippedSlots);
 
         var availableMoveIds = _service.AvailableMoves;
         var equippedMoveIds = _service.EquippedMoves;
 
         RefreshSlotGroup(availableSlots, availableMoveIds);
         RefreshSlotGroup(equippedSlots, equippedMoveIds);
+
+        BindSlots(availableSlots, MoveDropZoneType.Available);
+        BindSlots(equippedSlots, MoveDropZoneType.Equipped);
 
         BindSlotItems(availableSlots);
         BindSlotItems(equippedSlots);
@@ -86,14 +63,12 @@ public class MoveManagementController
     {
         for (int i = 0; i < slots.Count; i++)
         {
+            slots[i].ClearContent();
+
             if (i < moveIds.Count)
             {
                 var moveId = moveIds[i];
                 slots[i].SetContent(_presentation.MoveItemDataById[moveId]);
-            }
-            else
-            {
-                slots[i].ClearContent();
             }
         }
     }
@@ -105,7 +80,7 @@ public class MoveManagementController
         foreach (var slot in slots)
         {
             slot.SetZoneType(zoneType);
-            slot.Bind(HandleMoveDropRequested);
+            slot.Bind(HandleMoveDropRequested, HandleMoveDropAllowed);
         }
     }
 
@@ -144,9 +119,38 @@ public class MoveManagementController
     {
         return dropZone switch
         {
-            MoveDropZoneType.Equipped => _service.TryEquip(moveId),
-            MoveDropZoneType.Available => _service.TryUnequip(moveId),
+            MoveDropZoneType.Equipped => _service.CanEquip(moveId),
+            MoveDropZoneType.Available => _service.CanUnequip(moveId),
             _ => false
         };
+    }
+    private void HandleMoveDropAllowed(int moveId, MoveDropZoneType dropZone)
+    {
+        switch (dropZone)
+        {
+            case MoveDropZoneType.Equipped:
+                _service.Equip(moveId);
+                break;
+            case MoveDropZoneType.Available:
+                _service.Unequip(moveId);
+                break;
+        }
+    }
+
+    private void HandleSaveClicked()
+    {
+        if (!_service.TrySave(out var errorMessage))
+        {
+            _uiFeedbackBus.Publish(new WarningMessage { Message = errorMessage });
+            return;
+        }
+
+        _onSave?.Invoke();
+    }
+
+    private void HandleUnequipAllClicked()
+    {
+        _service.UnequipAll();
+        RefreshPanels();
     }
 }

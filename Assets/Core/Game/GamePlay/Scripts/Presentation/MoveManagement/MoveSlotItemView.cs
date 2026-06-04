@@ -9,7 +9,9 @@ public class MoveSlotItemView :
     IDropZone
 {
     public delegate bool MoveDropRequestedHandler(int moveId, MoveDropZoneType dropZoneType);
+    public delegate void MoveDropAllowedHandler(int moveId, MoveDropZoneType dropZoneType);
     private MoveDropRequestedHandler _moveDropRequested;
+    private MoveDropAllowedHandler _moveDropAllowed;
     public MoveDropZoneType ZoneType { get; private set; }
     public void SetZoneType(MoveDropZoneType zoneType)
     {
@@ -19,10 +21,10 @@ public class MoveSlotItemView :
     // TODO: CanAccept shouldn't mutate state
     public bool CanAccept(DragContext context)
     {
+        if (GetComponentInChildren<MoveManagementMoveItem>() != null) return false;
         return
             context.Data is MoveDragData moveData
             && _moveDropRequested.Invoke(moveData.MoveId, ZoneType);
-
     }
 
     // TODO: Accept shouldn't change visuals. 
@@ -31,12 +33,15 @@ public class MoveSlotItemView :
     {
         if (context.Data is MoveDragData moveData)
         {
+            _moveDropAllowed?.Invoke(moveData.MoveId, ZoneType);
             context.Draggable.transform.SetParent(transform);
             context.Draggable.transform.localPosition = Vector3.zero;
         }
     }
-    public void Bind(MoveDropRequestedHandler moveDropRequested)
+    public void Bind(MoveDropRequestedHandler moveDropRequested,
+        MoveDropAllowedHandler moveDropAllowed)
     {
         _moveDropRequested = moveDropRequested;
+        _moveDropAllowed = moveDropAllowed;
     }
 }

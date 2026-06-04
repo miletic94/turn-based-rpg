@@ -35,7 +35,6 @@ public abstract class ListView<TView, TData> : MonoBehaviour
     }
     public List<TView> Refresh(IReadOnlyList<TData> dataList)
     {
-
         foreach (var data in dataList)
         {
             if (_viewsById.TryGetValue(data.Id, out var existingView))
@@ -43,17 +42,6 @@ public abstract class ListView<TView, TData> : MonoBehaviour
                 existingView.ShowData(data);
             }
         }
-        return _viewsById.Values.ToList();
-    }
-
-    // TODO: See if you can remove this
-    public TView GetView(int id)
-    {
-        return _viewsById[id];
-    }
-
-    public List<TView> GetViews()
-    {
         return _viewsById.Values.ToList();
     }
 

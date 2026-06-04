@@ -1,8 +1,5 @@
 Battle must be more readable
 
-Bug: When you empty Equipped Panel in MoveManagement if there are some available moves, but they aren't on position 1 - available moves are overshadowed. Then empty and save don't work anymore
-Bug: When I tried to replicate previous bug all 5 moves appeared in equpped panel 
-
 Player can steal the same move multiple times, which also produces a bug in MoveManagementState - 30 line
 If player passed level - they shouldn't be able to play it again
 

@@ -6,38 +6,45 @@ public class MoveLoadoutService
     public List<int> AvailableMoves => _loadout.AvailableMoves.ToList();
     public List<int> EquippedMoves => _loadout.EquippedMoves.ToList();
 
-
     public MoveLoadoutService(
         MoveLoadout loadout)
     {
         _loadout = loadout;
     }
 
-    public bool TryEquip(int moveId)
+    public bool CanEquip(int moveId)
     {
         if (_loadout.EquippedMoves.Contains(moveId))
             return true;
-
-        if (!_loadout.AvailableMoves.Remove(moveId))
+        if (!_loadout.AvailableMoves.Contains(moveId))
             return false;
-
         if (_loadout.EquippedMoves.Count >= _loadout.MaxEquipped)
             return false;
 
-        _loadout.EquippedMoves.Add(moveId);
         return true;
     }
 
-    public bool TryUnequip(int moveId)
+    public void Equip(int moveId)
+    {
+        _loadout.AvailableMoves.Remove(moveId);
+        _loadout.EquippedMoves.Add(moveId);
+    }
+
+    public bool CanUnequip(int moveId)
     {
         if (_loadout.AvailableMoves.Contains(moveId))
             return true;
 
-        if (!_loadout.EquippedMoves.Remove(moveId))
+        if (!_loadout.EquippedMoves.Contains(moveId))
             return false;
 
-        _loadout.AvailableMoves.Add(moveId);
         return true;
+    }
+
+    public void Unequip(int moveId)
+    {
+        _loadout.EquippedMoves.Remove(moveId);
+        _loadout.AvailableMoves.Add(moveId);
     }
 
     public void UnequipAll()
