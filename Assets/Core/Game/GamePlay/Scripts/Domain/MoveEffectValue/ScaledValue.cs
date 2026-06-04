@@ -13,6 +13,7 @@ public class ScaledValue : IMoveEffectValue
         ReducedBy = reducedBy;
     }
 
+    // TODO: Data knows about logic?
     public float Get(EffectContext context)
     {
         var scalar = ScalesOff switch
@@ -29,7 +30,8 @@ public class ScaledValue : IMoveEffectValue
             StatType.Magic => context.Target.Stats.GetStat(StatType.Magic),
             _ => 0
         };
-        return BaseValue * scalar * (1 - reducer);
+
+        return BaseValue * (scalar * (scalar / (scalar + reducer)));
     }
 
     public override string ToString()

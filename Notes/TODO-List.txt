@@ -1,12 +1,16 @@
 Battle must be more readable
 
-Maybe MoveLoadoutService should manipulate domain data directly
-
 If player uses stat modifier and it doesn't expire it stays applied after the battle ends
-If defense is 1 - combatant doesn't take any damage
+
+Maybe MoveLoadoutService should manipulate domain data directly
+Server
+
 SceneLoader and ScreenLoader
 TurnView and TurnService to show who is on turn when
 Battle should be broke down into multiple MVC-s and maybe even have BattleStateMachine
 Show how much health each turn removed from enemy
-Server
 [CHECK] Maybe BatlleMoveItemView and MoveManagementMoveItem and RewardItemView should be either prefab variants or in some way extensions of MoveListItem
+
+Architectural questions:
+Can game be played without Controllers and Views 
+Does everything depends on interfaces?

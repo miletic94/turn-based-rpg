@@ -15,8 +15,4 @@ public class AIBattleMoveSelector : IMoveProvider
         return move;
         // return moves[Random.Range(0, moves.Count)];
     }
-    public void OnMoveSelected(Move move)
-    {
-        throw new System.NotImplementedException();
-    }
 }

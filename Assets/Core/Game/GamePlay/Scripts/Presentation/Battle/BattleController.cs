@@ -6,31 +6,33 @@ using UnityEngine.AddressableAssets;
 public class BattleController
 {
     private BattleService _battleService;
-    private BattleMovePanelController _battleMoveSelectionController;
+    private BattleMovePanelController _movePanelController;
     private readonly CombatantViewController _combatantViewController;
 
-    private readonly CharacterInfoPanelsController _characteRInfoPanelsController;
+    private readonly CharacterInfoPanelsController _characterInfoPanelsController;
     private readonly MoveService _moveService;
     private readonly BattleTurnService _turnService;
     private readonly BattleResolutionService _resolutionService;
+    private MoveSelectionService _moveSelectionService;
     private readonly IMoveProvider _playerProvider;
     private readonly IMoveProvider _enemyProvider;
 
     public BattleController(
-        BattleMovePanelController battleMoveController,
+        BattleMovePanelController movePanelController,
         CombatantViewController combatantViewController,
         CharacterInfoPanelsController characterInfoPanelsController,
         MoveService moveService,
         BattleTurnService turnService,
         BattleResolutionService resolutionService)
     {
-        _battleMoveSelectionController = battleMoveController;
+        _movePanelController = movePanelController;
         _combatantViewController = combatantViewController;
-        _characteRInfoPanelsController = characterInfoPanelsController;
+        _characterInfoPanelsController = characterInfoPanelsController;
         _moveService = moveService;
         _turnService = turnService;
         _resolutionService = resolutionService;
-        _playerProvider = new PlayerMoveProvider();
+        _moveSelectionService = new MoveSelectionService();
+        _playerProvider = new PlayerMoveProvider(_moveSelectionService);
         _enemyProvider = new AIBattleMoveSelector();
     }
 
@@ -38,9 +40,9 @@ public class BattleController
     {
         var (player, enemy) = await ConfigureCombatants(hero, enemyCharacter);
 
-        _ = _battleMoveSelectionController.Initialize(player.Moves, _playerProvider.OnMoveSelected);
+        _ = _movePanelController.Initialize(player.Moves, _moveSelectionService.SelectMove);
 
-        _characteRInfoPanelsController.CreatePanels(player, enemy);
+        _characterInfoPanelsController.CreatePanels(player, enemy);
         _combatantViewController.Create(player);
         _combatantViewController.Create(enemy);
         var battleData = new BattleContext(new List<Combatant> { player, enemy });
@@ -65,7 +67,7 @@ public class BattleController
                 _battleService.RemoveExpiredModifiers(actor);
                 _battleService.TickModifiers(actor);
 
-                _characteRInfoPanelsController.RefreshStatsPanels(actor, target);
+                _characterInfoPanelsController.RefreshStatsPanels(actor, target);
 
                 // TODO: There could be one MoveProvider class with GetMove(Actor actor) method. This class reads actor.MoveProvider string and chooses the right provicer
                 var provider = actor.Role == CombatantRole.Player
@@ -78,7 +80,7 @@ public class BattleController
                 Debug.Log($@"MOVE
                 actor: {actor}
                 target: {target}");
-                _characteRInfoPanelsController.SetHealthBars(actor, target);
+                _characterInfoPanelsController.SetHealthBars(actor, target);
             }
 
             if (_battleService.Phase == BattlePhase.ResolvingTurn)
