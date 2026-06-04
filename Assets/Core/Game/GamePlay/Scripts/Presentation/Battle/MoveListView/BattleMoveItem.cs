@@ -1,20 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-public class BattleMoveItem : MonoBehaviour, IListItemView<BattleMoveItemData>, IHoverDelayedDataSource
+public class BattleMoveItem :
+MoveListItem,
+IHoverDelayedDataSource
 {
-    [SerializeField] Image _icon;
     [SerializeField] ClickableUI _clickable;
     [SerializeField] HoverableUI _hoverable;
     [SerializeField] RectTransform _rectTransform;
     private Action<HoverData> _onHoverDelayed;
     private Action<HoverData> _onHoverExited;
-    private BattleMoveItemData _data;
-    public void ShowData(BattleMoveItemData data)
-    {
-        _data = data;
-        _icon.sprite = data.IconSprite;
-    }
 
     public void BindClick(Action<Move> callback)
     {

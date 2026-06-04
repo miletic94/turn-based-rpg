@@ -1,1 +1,1 @@
-public class BattleMoveListView : ListView<BattleMoveItem, BattleMoveItemData> { }
+public class BattleMoveListView : ListView<BattleMoveItem, MoveItemData> { }

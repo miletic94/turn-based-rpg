@@ -9,6 +9,7 @@ public class LevelNode : MonoBehaviour, IListItemView<LevelNodeData>
     private LevelNodeData _levelNodeData;
     public void ShowData(LevelNodeData data)
     {
+        _levelNodeData = data;
         _textLabel.SetText(data.LevelNumber.ToString());
     }
 

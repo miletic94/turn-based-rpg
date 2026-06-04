@@ -8,13 +8,11 @@ public class MoveListItem :
 {
     [SerializeField]
     private Image _icon;
-
     protected MoveItemData _data;
 
     public void ShowData(MoveItemData data)
     {
         _data = data;
-
         _icon.sprite = data.IconSprite;
     }
 }

@@ -32,13 +32,13 @@ public class BattleMovePanelController
             view.BindHoverable(HandleHoverDelayed, HandleHoverExit);
         }
     }
-    private async Awaitable<List<BattleMoveItemData>> CreateMoveItemData(List<Move> moves)
+    private async Awaitable<List<MoveItemData>> CreateMoveItemData(List<Move> moves)
     {
         var tasks = moves.Select(async move =>
         {
             var handle = Addressables.LoadAssetAsync<Sprite>(move.IconAddress);
             var sprite = await handle.Task;
-            return new BattleMoveItemData(move.Id, move, sprite);
+            return new MoveItemData(move.Id, move, sprite);
         });
 
         return (await Task.WhenAll(tasks)).ToList();
