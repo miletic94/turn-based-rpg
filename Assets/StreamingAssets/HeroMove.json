@@ -1,0 +1,12 @@
+[
+    {
+        "heroCharacter": 0,
+        "move": 0,
+        "isEquipped": true
+    },
+    {
+        "heroCharacter": 0,
+        "move": 1,
+        "isEquipped": true
+    }
+]

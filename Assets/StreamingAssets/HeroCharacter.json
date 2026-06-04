@@ -1,0 +1,15 @@
+{
+    "character": 0,
+    "attackModifier": 0,
+    "defenseModifier": 0,
+    "magicModifier": 0,
+    "currentXp": 50,
+    "xPlevel": 1,
+    "availableStatPoints": 0,
+    "heroMoves": [
+        0,
+        1,
+        2,
+        3
+    ]
+}

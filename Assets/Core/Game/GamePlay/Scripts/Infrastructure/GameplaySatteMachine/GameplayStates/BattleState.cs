@@ -24,7 +24,10 @@ public class BattleState : IState
         var result = await battleController.Run();
 
         if (result.Role == CombatantRole.Player)
+        {
+            _context.GameplayContext.Hero.AdvanceLevel();
             _gameplayStateMachine.EnterReward();
+        }
         else
             _gameplayStateMachine.EnterXp();
     }

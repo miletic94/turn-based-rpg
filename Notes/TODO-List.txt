@@ -1,7 +1,6 @@
 Battle must be more readable
 
-Player can steal the same move multiple times, which also produces a bug in MoveManagementState - 30 line
-If player passed level - they shouldn't be able to play it again
+Maybe MoveLoadoutService should manipulate domain data directly
 
 If player uses stat modifier and it doesn't expire it stays applied after the battle ends
 If defense is 1 - combatant doesn't take any damage

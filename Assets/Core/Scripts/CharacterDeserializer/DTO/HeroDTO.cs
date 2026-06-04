@@ -2,6 +2,8 @@ using System.Collections.Generic;
 
 public class HeroDTO
 {
+    // TODO: This shouldn't be here:
+    public int LevelAchieved;
     public string Name;
     public float Health;
     public float Attack;
@@ -14,6 +16,7 @@ public class HeroDTO
     public List<MoveDTO> EquippedMoves;
     public Hero ToHero() => new Hero
     (
+        LevelAchieved,
          Name,
          Health,
          Attack,

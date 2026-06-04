@@ -1,4 +1,5 @@
 {
+    "levelAchieved": 0,
     "name": "Knight",
     "health": 1000,
     "attack": 1.2,

@@ -15,6 +15,7 @@ public class MapState : IState
     {
         var mapController = _context.MapBootstrapper.Load();
         mapController.Initialize(_context.GameplayContext.Enemies,
+            _context.GameplayContext.Hero.LevelAchieved,
             OnEnemySelected,
             OnManageMovesButtonClicked);
     }

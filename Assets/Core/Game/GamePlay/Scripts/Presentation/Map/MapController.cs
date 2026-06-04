@@ -9,10 +9,10 @@ public class MapController
     {
         _mapView = mapView;
     }
-    public void Initialize(List<Character> enemies, Action<Character> handleEnemySelected,
+    public void Initialize(List<Character> enemies, int levelAchieved, Action<Character> handleEnemySelected,
         Action handleManageMovesButtonClicked)
     {
-        var levelNodeDataList = CreateLevelNodeData(enemies);
+        var levelNodeDataList = CreateLevelNodeData(enemies, levelAchieved);
         var views = _mapView.ShowLevels(levelNodeDataList);
 
         foreach (var view in views)
@@ -22,15 +22,18 @@ public class MapController
         _mapView.SetOnMoveManagementButtonClicked(handleManageMovesButtonClicked);
     }
 
-    public List<LevelNodeData> CreateLevelNodeData(List<Character> enemies)
+    public List<LevelNodeData> CreateLevelNodeData(List<Character> enemies, int levelAchieved)
     {
         var result = new List<LevelNodeData>();
         for (int i = 0; i < enemies.Count; i++)
         {
+            var level = i + 1;
+            UnityEngine.Debug.Log($"level: {level} levelAchieved: {levelAchieved}");
             result.Add(new LevelNodeData(
                 i,
                 enemies[i],
-                i + 1
+                level,
+                levelAchieved < level
             ));
         }
         return result;
