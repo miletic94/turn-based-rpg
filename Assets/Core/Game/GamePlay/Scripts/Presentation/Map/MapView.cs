@@ -7,13 +7,9 @@ public class MapView : MonoBehaviour
     [SerializeField] private ClickableUI _manageMovesButton;
     [SerializeField] private LevelTreeView _list;
 
-    public void ShowLevels(List<LevelNodeData> levels)
+    public List<LevelNode> ShowLevels(List<LevelNodeData> levels)
     {
-        _list.Render(levels);
-    }
-    public LevelNode GetView(int id)
-    {
-        return _list.GetView(id);
+        return _list.Render(levels);
     }
     public void SetOnMoveManagementButtonClicked(Action onMoveManagementButtonClicked)
     {
