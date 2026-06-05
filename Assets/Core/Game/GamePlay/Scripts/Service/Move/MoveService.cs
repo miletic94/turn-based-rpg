@@ -10,13 +10,13 @@ public class MoveService
         _moveEffectService = effectExecutionService;
     }
 
-    public void ApplyMove(
+    public List<IEffectResult> ApplyMove(
         Combatant source,
         Combatant target,
         Move move)
     {
         var context = CreateEffectContext(source, target);
-        ApplyEffects(move, context);
+        return ApplyEffects(move, context);
     }
 
     private EffectContext CreateEffectContext(
@@ -26,13 +26,15 @@ public class MoveService
         return new EffectContext(source, target);
     }
 
-    private void ApplyEffects(
+    private List<IEffectResult> ApplyEffects(
         Move move,
         EffectContext context)
     {
+        List<IEffectResult> results = new();
         foreach (var effect in move.Effects)
         {
-            _moveEffectService.Apply(effect, context);
+            results.Add(_moveEffectService.Apply(effect, context));
         }
+        return results;
     }
 }

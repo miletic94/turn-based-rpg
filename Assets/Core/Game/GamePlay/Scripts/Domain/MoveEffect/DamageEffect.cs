@@ -16,9 +16,10 @@ public class DamageEffect : IMoveEffect
         IsSource = isSource;
     }
 
-    public void Apply(Combatant target, float value)
+    public IEffectResult Apply(Combatant target, float value)
     {
         target.SetHealth(Math.Max(0, target.Health - value));
+        return new DamageEffectResult(target, -value);
     }
     public override string ToString()
     {

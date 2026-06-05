@@ -20,9 +20,11 @@ public class StatModifierEffect : IMoveEffect
         IsSource = isSource;
     }
 
-    public void Apply(Combatant target, float value)
+    public IEffectResult Apply(Combatant target, float value)
     {
-        target.AddActiveModifier(new ActiveModifier(Type, Stat, value, Duration));
+        var modifier = new ActiveModifier(Type, Stat, value, Duration);
+        target.AddActiveModifier(modifier);
+        return new StatModifierEffectResult(target, modifier);
     }
     public override string ToString()
     {

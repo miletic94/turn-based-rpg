@@ -4,5 +4,5 @@ public interface IMoveEffect
     TargetType Target { get; }
     IMoveEffectValue Value { get; }
     bool IsSource { get; }
-    void Apply(Combatant target, float value);
+    IEffectResult Apply(Combatant target, float value);
 }

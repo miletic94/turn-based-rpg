@@ -89,11 +89,22 @@ public class BattleController
     private void HandleMoveExecuted(
     MoveExecutedUpdate update)
     {
-        Debug.Log($"Move: {update.Move.Name} executed");
-        _characterInfoPanelsController
-            .SetHealthBars(
-                update.Actor,
-                update.Target);
+        foreach (var effectResult in update.MoveResult)
+        {
+            switch (effectResult)
+            {
+                case DamageEffectResult result:
+                    Debug.Log($"{result.Target.Name} health {result.Value}");
+                    break;
+                case HealEffectResult result:
+                    Debug.Log($"{result.Target.Name} health {result.Value}");
+                    break;
+                case StatModifierEffectResult result:
+                    var modifier = result.Modifier;
+                    Debug.Log($"{modifier.Type} {result.Target.Name}'s {modifier.Stat} for {modifier.Value}. Duration: {modifier.RemainingDuration}");
+                    break;
+            }
+        }
     }
 
     public async Awaitable<(Combatant, Combatant)> ConfigureCombatants(

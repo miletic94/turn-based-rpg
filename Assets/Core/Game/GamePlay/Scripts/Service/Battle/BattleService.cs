@@ -73,14 +73,11 @@ public class BattleService
             var move =
                 await provider.GetMove(actor);
 
-            _moveService.ApplyMove(CurrentActor, CurrentTarget, move);
+            var moveResult = _moveService.ApplyMove(CurrentActor, CurrentTarget, move);
 
             Phase = BattlePhase.TurnResolution;
 
-            return new MoveExecutedUpdate(
-                actor,
-                target,
-                move);
+            return new MoveExecutedUpdate(moveResult);
         }
 
         if (Phase == BattlePhase.TurnResolution)

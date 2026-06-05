@@ -11,7 +11,7 @@ public struct EffectResult
 }
 public class MoveEffectService
 {
-    public void Apply(IMoveEffect effect, EffectContext context)
+    public IEffectResult Apply(IMoveEffect effect, EffectContext context)
     {
         var target = context.ResolveTarget(effect.Target);
 
@@ -20,6 +20,6 @@ public class MoveEffectService
         if (effect.IsSource)
             context.StoreResult(effect.Id, value);
 
-        effect.Apply(target, value);
+        return effect.Apply(target, value);
     }
 }

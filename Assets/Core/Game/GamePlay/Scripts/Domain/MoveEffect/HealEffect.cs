@@ -16,9 +16,10 @@ public class HealEffect : IMoveEffect
         IsSource = isSource;
     }
 
-    public void Apply(Combatant target, float value)
+    public IEffectResult Apply(Combatant target, float value)
     {
         target.SetHealth(Math.Min(target.Health + value, target.BaseHealth));
+        return new HealEffectResult(target, value);
     }
     public override string ToString()
     {
