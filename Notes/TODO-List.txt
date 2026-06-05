@@ -1,9 +1,8 @@
 Battle must be more readable
-
-If player uses stat modifier and it doesn't expire it stays applied after the battle ends
+AI
+Server
 
 Maybe MoveLoadoutService should manipulate domain data directly
-Server
 
 SceneLoader and ScreenLoader
 TurnView and TurnService to show who is on turn when
@@ -14,3 +13,6 @@ Show how much health each turn removed from enemy
 Architectural questions:
 Can game be played without Controllers and Views 
 Does everything depends on interfaces?
+
+Couldn't replicate:
+If player uses stat modifier and it doesn't expire it stays applied after the battle ends

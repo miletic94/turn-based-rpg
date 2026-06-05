@@ -14,8 +14,7 @@ public class BattleController
     private readonly BattleTurnService _turnService;
     private readonly BattleResolutionService _resolutionService;
     private MoveSelectionService _moveSelectionService;
-    private readonly IMoveProvider _playerProvider;
-    private readonly IMoveProvider _enemyProvider;
+
 
     public BattleController(
         BattleMovePanelController movePanelController,
@@ -32,8 +31,6 @@ public class BattleController
         _turnService = turnService;
         _resolutionService = resolutionService;
         _moveSelectionService = new MoveSelectionService();
-        _playerProvider = new PlayerMoveProvider(_moveSelectionService);
-        _enemyProvider = new AIBattleMoveSelector();
     }
 
     public async Awaitable Initialize(Hero hero, Character enemyCharacter)
@@ -45,51 +42,58 @@ public class BattleController
         _characterInfoPanelsController.CreatePanels(player, enemy);
         _combatantViewController.Create(player);
         _combatantViewController.Create(enemy);
-        var battleData = new BattleContext(new List<Combatant> { player, enemy });
+        var battleContext = new BattleContext(new List<Combatant> { player, enemy });
 
         _battleService = new BattleService(
-            battleData,
+            battleContext,
             _turnService,
             _resolutionService,
-            _moveService);
+            _moveService,
+            new PlayerMoveProvider(_moveSelectionService),
+            new AIBattleMoveSelector());
     }
 
 
     public async Awaitable<Combatant> Run()
     {
-        while (_battleService.Phase != BattlePhase.Finished)
+        while (true)
         {
-            if (_battleService.Phase == BattlePhase.NeedMoveSelection)
+            var update =
+                await _battleService.Step();
+
+            switch (update)
             {
-                var actor = _battleService.CurrentActor;
-                var target = _battleService.CurrentTarget;
+                case TurnStartedUpdate turn:
+                    HandleTurnStarted(turn);
+                    break;
 
-                _battleService.RemoveExpiredModifiers(actor);
-                _battleService.TickModifiers(actor);
+                case MoveExecutedUpdate moveExecutedUpdate:
+                    HandleMoveExecuted(moveExecutedUpdate);
+                    break;
 
-                _characterInfoPanelsController.RefreshStatsPanels(actor, target);
-
-                // TODO: There could be one MoveProvider class with GetMove(Actor actor) method. This class reads actor.MoveProvider string and chooses the right provicer
-                var provider = actor.Role == CombatantRole.Player
-                    ? _playerProvider
-                    : _enemyProvider;
-                var move = await provider.GetMove(actor);
-
-                _battleService.SubmitMove(move);
-
-                Debug.Log($@"MOVE
-                actor: {actor}
-                target: {target}");
-                _characterInfoPanelsController.SetHealthBars(actor, target);
-            }
-
-            if (_battleService.Phase == BattlePhase.ResolvingTurn)
-            {
-                _battleService.Advance();
+                case BattleFinishedUpdate finished:
+                    return finished.Winner;
             }
         }
+    }
 
-        return _battleService.Winner;
+    private void HandleTurnStarted(
+    TurnStartedUpdate update)
+    {
+        _characterInfoPanelsController
+            .RefreshStatsPanels(
+                update.Actor,
+                update.Target);
+    }
+
+    private void HandleMoveExecuted(
+    MoveExecutedUpdate update)
+    {
+        Debug.Log($"Move: {update.Move.Name} executed");
+        _characterInfoPanelsController
+            .SetHealthBars(
+                update.Actor,
+                update.Target);
     }
 
     public async Awaitable<(Combatant, Combatant)> ConfigureCombatants(

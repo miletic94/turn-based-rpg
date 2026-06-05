@@ -7,7 +7,7 @@ public class AIBattleMoveSelector : IMoveProvider
     public async Awaitable<Move> GetMove(
            Combatant actor)
     {
-        await Awaitable.WaitForSecondsAsync(0.5f);
+        await Awaitable.WaitForSecondsAsync(1f);
 
         var moves = actor.Moves;
         var move = moves[moveQueue[moveIndex]];

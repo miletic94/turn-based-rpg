@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 public class HealEffect : IMoveEffect
@@ -13,6 +14,11 @@ public class HealEffect : IMoveEffect
         Target = target;
         Value = value;
         IsSource = isSource;
+    }
+
+    public void Apply(Combatant target, float value)
+    {
+        target.SetHealth(Math.Min(target.Health + value, target.BaseHealth));
     }
     public override string ToString()
     {

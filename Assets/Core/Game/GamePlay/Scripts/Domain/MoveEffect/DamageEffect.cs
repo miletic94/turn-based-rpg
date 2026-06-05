@@ -1,3 +1,5 @@
+using System;
+
 public class DamageEffect : IMoveEffect
 {
     public string Id { get; }
@@ -12,6 +14,11 @@ public class DamageEffect : IMoveEffect
         Category = category;
         Value = value;
         IsSource = isSource;
+    }
+
+    public void Apply(Combatant target, float value)
+    {
+        target.SetHealth(Math.Max(0, target.Health - value));
     }
     public override string ToString()
     {

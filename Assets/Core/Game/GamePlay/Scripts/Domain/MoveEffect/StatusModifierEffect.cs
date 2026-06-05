@@ -20,6 +20,10 @@ public class StatModifierEffect : IMoveEffect
         IsSource = isSource;
     }
 
+    public void Apply(Combatant target, float value)
+    {
+        target.AddActiveModifier(new ActiveModifier(Type, Stat, value, Duration));
+    }
     public override string ToString()
     {
         return $"{Type} {Target}'s {Stat} for {Duration} turns. Value: {(Value is FlatValue flatValue ? flatValue.BaseValue * 100 : Value)}";

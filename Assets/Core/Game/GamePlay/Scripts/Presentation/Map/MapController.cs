@@ -28,7 +28,6 @@ public class MapController
         for (int i = 0; i < enemies.Count; i++)
         {
             var level = i + 1;
-            UnityEngine.Debug.Log($"level: {level} levelAchieved: {levelAchieved}");
             result.Add(new LevelNodeData(
                 i,
                 enemies[i],
