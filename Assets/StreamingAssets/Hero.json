@@ -16,20 +16,30 @@
     "availableStatPoints": 0,
     "availableMoves": [
         {
-            "id": "4",
-            "name": "Shadow Bolt",
-            "iconAddress": "bolt-spell-cast",
+            "id": "5",
+            "name": "Drain Life",
+            "iconAddress": "chewed-heart",
             "effects": [
                 {
-                    "id": "4",
+                    "id": "5",
                     "category": "magic",
                     "type": "damage",
                     "target": "enemy",
                     "value": {
                         "type": "scaled",
-                        "baseValue": 30,
+                        "baseValue": 10,
                         "scalesOff": "magic",
                         "reducedBy": "none"
+                    },
+                    "isSource": true
+                },
+                {
+                    "id": "6",
+                    "type": "heal",
+                    "target": "self",
+                    "value": {
+                        "type": "reference",
+                        "sourceId": "5"
                     },
                     "isSource": false
                 }

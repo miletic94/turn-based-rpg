@@ -1,6 +1,6 @@
 public interface IEffectResult
 {
-
+    Combatant Target { get; }
 }
 
 public class DamageEffectResult : IEffectResult

@@ -7,6 +7,7 @@ public class BattleBootstrapper : MonoBehaviour
     [SerializeField] private CombatantViewFactory _combatantViewFactory;
     [SerializeField] private BattleMoveListView _moveListView;
     [SerializeField] private CharacterInfoPanelsView _characterInfoPanelsView;
+    [SerializeField] private MoveTelegraphView _moveTelegraphView;
 
     private BattleController _battleController;
     private CharacterInfoPanelsController _characterInfoPanelsController;

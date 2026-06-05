@@ -63,7 +63,6 @@ public class BattleService
         if (Phase == BattlePhase.MoveExecution)
         {
             var actor = CurrentActor;
-            var target = CurrentTarget;
 
             var provider =
                 actor.Role == CombatantRole.Player
@@ -77,7 +76,7 @@ public class BattleService
 
             Phase = BattlePhase.TurnResolution;
 
-            return new MoveExecutedUpdate(moveResult);
+            return new MoveExecutedUpdate(CurrentActor, CurrentTarget, moveResult);
         }
 
         if (Phase == BattlePhase.TurnResolution)
