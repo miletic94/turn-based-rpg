@@ -2,7 +2,6 @@ using System.Collections.Generic;
 
 public class Hero
 {
-    public int LevelAchieved { get; private set; }
     public string Name { get; private set; }
     public float Health { get; private set; }
     public float Attack { get; private set; }
@@ -12,11 +11,11 @@ public class Hero
 
     public Xp Xp { get; private set; }
     public int AvailableStatPoints { get; private set; }
+    public List<string> EnemiesBeaten { get; private set; }
     public List<Move> AvailableMoves { get; private set; }
     public List<Move> EquippedMoves { get; private set; }
-    public Hero(int levelAchieved, string name, float health, float attack, float defense, float magic, string spriteAddress, Xp xp, int availableStatPoints, List<Move> availableMoves, List<Move> equippedMoves)
+    public Hero(string name, float health, float attack, float defense, float magic, string spriteAddress, Xp xp, int availableStatPoints, List<string> enemiesBeaten, List<Move> availableMoves, List<Move> equippedMoves)
     {
-        LevelAchieved = levelAchieved;
         Name = name;
         Health = health;
         Attack = attack;
@@ -25,12 +24,13 @@ public class Hero
         SpriteAddress = spriteAddress;
         Xp = xp;
         AvailableStatPoints = availableStatPoints;
+        EnemiesBeaten = enemiesBeaten;
         AvailableMoves = availableMoves;
         EquippedMoves = equippedMoves;
     }
-    public void AdvanceLevel()
+    public void AddBeatenEnemy(string enemyName)
     {
-        LevelAchieved++;
+        EnemiesBeaten.Add(enemyName);
     }
     public void SetStats(float attack, float defense, float magic)
     {

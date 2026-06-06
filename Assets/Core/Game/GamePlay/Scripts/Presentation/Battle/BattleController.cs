@@ -54,7 +54,7 @@ public class BattleController
     }
 
 
-    public async Awaitable<Combatant> Run()
+    public async Awaitable<BattleFinishedUpdate> Run()
     {
         while (true)
         {
@@ -71,8 +71,8 @@ public class BattleController
                     await HandleMoveExecuted(moveExecutedUpdate);
                     break;
 
-                case BattleFinishedUpdate finished:
-                    return finished.Winner;
+                case BattleFinishedUpdate finishedResult:
+                    return finishedResult;
             }
         }
     }

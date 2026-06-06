@@ -1,5 +1,4 @@
 {
-    "levelAchieved": 0,
     "name": "Knight",
     "health": 100,
     "attack": 1.2,
@@ -14,6 +13,7 @@
         "rewardPoints": 2
     },
     "availableStatPoints": 0,
+    "enemiesBeaten": [],
     "availableMoves": [
         {
             "id": "5",

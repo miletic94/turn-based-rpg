@@ -42,8 +42,11 @@ public class BattleService
     {
         if (Phase == BattlePhase.Finished)
         {
-            return new BattleFinishedUpdate(
-                Winner);
+            // TODO: This is suspicious
+            var (player, enemy) = CurrentActor.Role == CombatantRole.Player
+                ? (CurrentActor, CurrentTarget)
+                : (CurrentTarget, CurrentActor);
+            return new BattleFinishedUpdate(player, enemy, Winner);
         }
 
         if (Phase == BattlePhase.TurnStart)

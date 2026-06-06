@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "Knight",
         "health": 140,
         "attack": 1.0,
@@ -90,6 +91,7 @@
         ]
     },
     {
+        "id": 2,
         "name": "Witch",
         "health": 100,
         "attack": 0.5,
@@ -205,6 +207,7 @@
         ]
     },
     {
+        "id": 3,
         "name": "Giant Spider",
         "health": 110,
         "attack": 1.2,
@@ -308,6 +311,7 @@
         ]
     },
     {
+        "id": 4,
         "name": "Dragon",
         "health": 200,
         "attack": 1.5,
@@ -398,6 +402,7 @@
         ]
     },
     {
+        "id": 5,
         "name": "Goblin Warrior",
         "health": 90,
         "attack": 1.0,
@@ -501,6 +506,7 @@
         ]
     },
     {
+        "id": 6,
         "name": "Goblin Mage",
         "health": 80,
         "attack": 0.4,

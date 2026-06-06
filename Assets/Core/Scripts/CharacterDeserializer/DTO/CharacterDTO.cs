@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 public class CharacterDTO
 {
+    public int Id;
     public string Name;
     public float Health;
     public float Attack;
@@ -12,6 +13,7 @@ public class CharacterDTO
 
     public Character ToCharacter() => new Character
     {
+        Id = Id,
         Name = Name,
         Health = Health,
         Attack = Attack,

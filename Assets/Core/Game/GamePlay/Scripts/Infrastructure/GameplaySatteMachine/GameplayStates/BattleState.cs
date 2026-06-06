@@ -23,9 +23,9 @@ public class BattleState : IState
 
         var result = await battleController.Run();
 
-        if (result.Role == CombatantRole.Player)
+        if (result.Winner.Role == CombatantRole.Player)
         {
-            _context.GameplayContext.Hero.AdvanceLevel();
+            _context.GameplayContext.Hero.AddBeatenEnemy(result.Enemy.Name);
             _gameplayStateMachine.EnterReward();
         }
         else

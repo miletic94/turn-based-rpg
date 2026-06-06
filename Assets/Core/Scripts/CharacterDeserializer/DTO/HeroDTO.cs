@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 public class HeroDTO
 {
-    // TODO: This shouldn't be here:
-    public int LevelAchieved;
     public string Name;
     public float Health;
     public float Attack;
@@ -12,11 +10,11 @@ public class HeroDTO
     public string SpriteAddress;
     public XpDTO Xp;
     public int AvailableStatPoints;
+    public List<string> EnemiesBeaten;
     public List<MoveDTO> AvailableMoves;
     public List<MoveDTO> EquippedMoves;
     public Hero ToHero() => new Hero
     (
-        LevelAchieved,
          Name,
          Health,
          Attack,
@@ -25,6 +23,7 @@ public class HeroDTO
          SpriteAddress,
          Xp.ToXp(),
          AvailableStatPoints,
+         EnemiesBeaten,
          AvailableMoves.ConvertAll(m => m.ToMove()),
         EquippedMoves.ConvertAll(m => m.ToMove())
     );
