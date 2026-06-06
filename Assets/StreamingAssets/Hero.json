@@ -1,7 +1,7 @@
 {
     "levelAchieved": 0,
     "name": "Knight",
-    "health": 1000,
+    "health": 100,
     "attack": 1.2,
     "defense": 0.2,
     "magic": 0.4,
@@ -79,7 +79,7 @@
                     "stat": "defense",
                     "value": {
                         "type": "flat",
-                        "baseValue": 0.1
+                        "baseValue": 0.2
                     },
                     "tickBehavior": "once",
                     "duration": 2,
@@ -99,7 +99,7 @@
                     "stat": "attack",
                     "value": {
                         "type": "flat",
-                        "baseValue": 0.1
+                        "baseValue": 0.2
                     },
                     "tickBehavior": "once",
                     "duration": 2,

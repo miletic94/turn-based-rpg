@@ -1,127 +1,19 @@
 [
     {
-        "name": "Witch",
-        "health": 100,
-        "attack": 0.5,
-        "defense": 0.1,
-        "magic": 1.2,
-        "spriteAddress": "monsters[witch]",
+        "name": "Knight",
+        "health": 140,
+        "attack": 1.0,
+        "defense": 1.0,
+        "magic": 0.6,
+        "spriteAddress": "rogues[knight]",
         "moves": [
             {
-                "id": "4",
-                "name": "Shadow Bolt",
-                "iconAddress": "bolt-spell-cast",
+                "id": "0",
+                "name": "Slash",
+                "iconAddress": "blade-drag",
                 "effects": [
                     {
-                        "id": "4",
-                        "category": "magic",
-                        "type": "damage",
-                        "target": "enemy",
-                        "value": {
-                            "type": "scaled",
-                            "baseValue": 30,
-                            "scalesOff": "magic",
-                            "reducedBy": "none"
-                        },
-                        "isSource": false
-                    }
-                ]
-            },
-            {
-                "id": "5",
-                "name": "Drain Life",
-                "iconAddress": "chewed-heart",
-                "effects": [
-                    {
-                        "id": "5",
-                        "category": "magic",
-                        "type": "damage",
-                        "target": "enemy",
-                        "value": {
-                            "type": "scaled",
-                            "baseValue": 10,
-                            "scalesOff": "magic",
-                            "reducedBy": "none"
-                        },
-                        "isSource": true
-                    },
-                    {
-                        "id": "6",
-                        "type": "heal",
-                        "target": "self",
-                        "value": {
-                            "type": "reference",
-                            "sourceId": "5"
-                        },
-                        "isSource": false
-                    }
-                ]
-            },
-            {
-                "id": "6",
-                "name": "Curse",
-                "iconAddress": "cursed-star",
-                "effects": [
-                    {
-                        "id": "7",
-                        "type": "debuff",
-                        "target": "enemy",
-                        "stat": "attack",
-                        "value": {
-                            "type": "flat",
-                            "baseValue": 0.1
-                        },
-                        "tickBehavior": "once",
-                        "duration": 2,
-                        "isSource": false
-                    }
-                ]
-            },
-            {
-                "id": "7",
-                "name": "Dark Pact",
-                "iconAddress": "daemon-skull",
-                "cost": {
-                    "type": "health",
-                    "amount": 5
-                },
-                "effects": [
-                    {
-                        "id": "8",
-                        "type": "buff",
-                        "target": "self",
-                        "stat": "magic",
-                        "value": {
-                            "type": "flat",
-                            "baseValue": 0.1
-                        },
-                        "tickBehavior": "once",
-                        "duration": 2,
-                        "isSource": false
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "Giant Spider",
-        "health": 100,
-        "attack": 1.2,
-        "defense": 0.3,
-        "magic": 0.3,
-        "spriteAddress": "monsters[giant_spider]",
-        "moves": [
-            {
-                "id": "8",
-                "name": "Bite",
-                "iconAddress": "spider-face",
-                "cost": {
-                    "type": "mana",
-                    "amount": 3
-                },
-                "effects": [
-                    {
-                        "id": "9",
+                        "id": "0",
                         "category": "physical",
                         "type": "damage",
                         "target": "enemy",
@@ -136,16 +28,217 @@
                 ]
             },
             {
+                "id": "1",
+                "name": "Shield Up",
+                "iconAddress": "shield",
+                "effects": [
+                    {
+                        "id": "1",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.2
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "name": "Battle Cry",
+                "iconAddress": "trumpet-flag",
+                "effects": [
+                    {
+                        "id": "2",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "attack",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.2
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "3",
+                "name": "Second Wind",
+                "iconAddress": "healing",
+                "effects": [
+                    {
+                        "id": "3",
+                        "category": "magic",
+                        "type": "heal",
+                        "target": "self",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Witch",
+        "health": 100,
+        "attack": 0.5,
+        "defense": 0.1,
+        "magic": 1.2,
+        "spriteAddress": "monsters[witch]",
+        "moves": [
+            {
+                "id": "5",
+                "name": "Shadow Bolt",
+                "iconAddress": "bolt-spell-cast",
+                "effects": [
+                    {
+                        "id": "5",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 30,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "6",
+                "name": "Drain Life",
+                "iconAddress": "chewed-heart",
+                "effects": [
+                    {
+                        "id": "6",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 10,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": true
+                    },
+                    {
+                        "id": "7",
+                        "type": "heal",
+                        "target": "self",
+                        "value": {
+                            "type": "reference",
+                            "sourceId": "6"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "8",
+                "name": "Curse",
+                "iconAddress": "cursed-star",
+                "effects": [
+                    {
+                        "id": "8",
+                        "type": "debuff",
+                        "target": "enemy",
+                        "stat": "attack",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.2
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
                 "id": "9",
-                "name": "Web Throw",
-                "iconAddress": "spider-web",
+                "name": "Dark Pact",
+                "iconAddress": "daemon-skull",
                 "cost": {
-                    "type": "mana",
-                    "amount": 6
+                    "type": "health",
+                    "amount": 5
                 },
                 "effects": [
                     {
+                        "id": "9",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "magic",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.25
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    },
+                    {
                         "id": "10",
+                        "type": "damage",
+                        "target": "self",
+                        "category": "magic",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 5
+                        },
+                        "isSource": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Giant Spider",
+        "health": 110,
+        "attack": 1.2,
+        "defense": 0.6,
+        "magic": 0.3,
+        "spriteAddress": "monsters[giant_spider]",
+        "moves": [
+            {
+                "id": "11",
+                "name": "Bite",
+                "iconAddress": "spider-face",
+                "effects": [
+                    {
+                        "id": "11",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "12",
+                "name": "Web Throw",
+                "iconAddress": "spider-web",
+                "effects": [
+                    {
+                        "id": "12",
                         "category": "physical",
                         "type": "damage",
                         "target": "enemy",
@@ -158,13 +251,13 @@
                         "isSource": false
                     },
                     {
-                        "id": "11",
+                        "id": "13",
                         "type": "debuff",
                         "target": "enemy",
                         "stat": "defense",
                         "value": {
                             "type": "flat",
-                            "baseValue": 0.1
+                            "baseValue": 0.15
                         },
                         "tickBehavior": "once",
                         "duration": 2,
@@ -173,16 +266,12 @@
                 ]
             },
             {
-                "id": "10",
+                "id": "14",
                 "name": "Pounce",
                 "iconAddress": "long-legged-spider",
-                "cost": {
-                    "type": "mana",
-                    "amount": 6
-                },
                 "effects": [
                     {
-                        "id": "12",
+                        "id": "14",
                         "category": "physical",
                         "type": "damage",
                         "target": "enemy",
@@ -197,22 +286,314 @@
                 ]
             },
             {
-                "id": "11",
+                "id": "15",
                 "name": "Skitter",
                 "iconAddress": "fire-dash",
-                "cost": {
-                    "type": "mana",
-                    "amount": 3
-                },
                 "effects": [
                     {
-                        "id": "13",
+                        "id": "15",
                         "type": "buff",
                         "target": "self",
                         "stat": "defense",
                         "value": {
                             "type": "flat",
-                            "baseValue": 0.1
+                            "baseValue": 0.2
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Dragon",
+        "health": 200,
+        "attack": 1.5,
+        "defense": 1.0,
+        "magic": 1.5,
+        "spriteAddress": "monsters[dragon]",
+        "moves": [
+            {
+                "id": "16",
+                "name": "Flame Breath",
+                "iconAddress": "dragon-breath",
+                "effects": [
+                    {
+                        "id": "16",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 35,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "17",
+                "name": "Claw Swipe",
+                "iconAddress": "claw-dashes",
+                "effects": [
+                    {
+                        "id": "17",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "18",
+                "name": "Intimidate",
+                "iconAddress": "terror",
+                "effects": [
+                    {
+                        "id": "18",
+                        "type": "debuff",
+                        "target": "enemy",
+                        "stat": "attack",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.2
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "19",
+                "name": "Dragon Scales",
+                "iconAddress": "energy-shield",
+                "effects": [
+                    {
+                        "id": "19",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.25
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Goblin Warrior",
+        "health": 90,
+        "attack": 1.0,
+        "defense": 0.7,
+        "magic": 0.3,
+        "spriteAddress": "monsters[goblin_brute]",
+        "moves": [
+            {
+                "id": "20",
+                "name": "Rusty Blade",
+                "iconAddress": "rusty-sword",
+                "effects": [
+                    {
+                        "id": "20",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 20,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "21",
+                "name": "Dirty Kick",
+                "iconAddress": "boot-kick",
+                "effects": [
+                    {
+                        "id": "21",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 10,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    },
+                    {
+                        "id": "22",
+                        "type": "debuff",
+                        "target": "enemy",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.15
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "23",
+                "name": "Frenzy",
+                "iconAddress": "enrage",
+                "effects": [
+                    {
+                        "id": "23",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "attack",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.2
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "24",
+                "name": "Headbutt",
+                "iconAddress": "skull-bolt",
+                "effects": [
+                    {
+                        "id": "24",
+                        "category": "physical",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 30,
+                            "scalesOff": "attack",
+                            "reducedBy": "defense"
+                        },
+                        "isSource": false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Goblin Mage",
+        "health": 80,
+        "attack": 0.4,
+        "defense": 0.4,
+        "magic": 1.1,
+        "spriteAddress": "monsters[goblin_mage]",
+        "moves": [
+            {
+                "id": "25",
+                "name": "Firebolt",
+                "iconAddress": "fire-spell-cast",
+                "effects": [
+                    {
+                        "id": "25",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 25,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "26",
+                "name": "Arcane Surge",
+                "iconAddress": "glowing-hands",
+                "effects": [
+                    {
+                        "id": "26",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "magic",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.25
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "27",
+                "name": "Mana Drain",
+                "iconAddress": "magic-swirl",
+                "effects": [
+                    {
+                        "id": "27",
+                        "category": "magic",
+                        "type": "damage",
+                        "target": "enemy",
+                        "value": {
+                            "type": "scaled",
+                            "baseValue": 10,
+                            "scalesOff": "magic",
+                            "reducedBy": "none"
+                        },
+                        "isSource": true
+                    },
+                    {
+                        "id": "28",
+                        "type": "debuff",
+                        "target": "enemy",
+                        "stat": "magic",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.15
+                        },
+                        "tickBehavior": "once",
+                        "duration": 2,
+                        "isSource": false
+                    }
+                ]
+            },
+            {
+                "id": "29",
+                "name": "Hex Shield",
+                "iconAddress": "magic-shield",
+                "effects": [
+                    {
+                        "id": "29",
+                        "type": "buff",
+                        "target": "self",
+                        "stat": "defense",
+                        "value": {
+                            "type": "flat",
+                            "baseValue": 0.2
                         },
                         "tickBehavior": "once",
                         "duration": 2,

@@ -1,6 +1,16 @@
-Battle must be more readable
+Sat modifier has value of 0.2 but I see in View that it's upgraded for 1 (0.1*10)
+    In battle against knight on 3xbuff it goes 10->12->13->16
+LevelMap looks bad
+Move Tooltip position must be better becuase sometimes it goes out of visibility
+Color of level nodes becomes darker and darker on every load 
+Battle must be more readable: MoveTelegraphing is not readable (bigger / better colors / font)
+
+
 AI
 Server
+
+
+I'm afraid that on every load we're creating new controllers. For example RewardController.Initialize allocates new controller while the old one might still exist
 
 Maybe MoveLoadoutService should manipulate domain data directly
 

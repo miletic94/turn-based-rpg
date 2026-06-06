@@ -23,6 +23,7 @@ public class MoveManagementState : IState
     {
         var hero = _context.GameplayContext.Hero;
 
+        // TODO: What to do if player already has a move that suddenly is reward offering
         var allMoves =
             hero.AvailableMoves
                 .Concat(hero.EquippedMoves)
