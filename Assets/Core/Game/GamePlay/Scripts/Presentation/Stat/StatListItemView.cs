@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 namespace Presentation.Stat
@@ -20,12 +21,12 @@ namespace Presentation.Stat
         }
         private void SetValueColor()
         {
-            if (_data.BaseValue < _data.CurrentValue)
+            if ((_data.CurrentValue - _data.BaseValue) > 0.01f)
             {
                 _upgradeColor.a = 1f;
                 _value.color = _upgradeColor;
             }
-            else if (_data.BaseValue > _data.CurrentValue)
+            else if ((_data.CurrentValue - _data.BaseValue) < -0.01f)
             {
                 _downgradeColor.a = 1f;
                 _value.color = _downgradeColor;

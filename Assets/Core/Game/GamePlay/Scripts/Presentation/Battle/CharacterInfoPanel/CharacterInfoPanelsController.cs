@@ -75,12 +75,7 @@ public class CharacterInfoPanelsController
         return new StatItemData(
                 (int)statData.Type,
                 statData.Type,
-                ConvertToViewValue(statData.BaseValue),
-                ConvertToViewValue(statData.GetCurrentValue()));
-    }
-
-    private int ConvertToViewValue(float value)
-    {
-        return (int)(value * 10);
+                ViewUtils.ConvertToViewValue(statData.BaseValue),
+                ViewUtils.ConvertToViewValue(statData.GetCurrentValue()));
     }
 }

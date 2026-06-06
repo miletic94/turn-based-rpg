@@ -59,7 +59,7 @@
                     "target": "enemy",
                     "value": {
                         "type": "scaled",
-                        "baseValue": 20,
+                        "baseValue": 200,
                         "scalesOff": "attack",
                         "reducedBy": "defense"
                     },

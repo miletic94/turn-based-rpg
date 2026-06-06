@@ -12,8 +12,8 @@ namespace Presentation.StatsManagement.StatsPanel
         public StatRowViewData(
             int id,
             StatType statType,
-            int baseValue,
-            int currentValue,
+            float baseValue,
+            float currentValue,
             bool minusInteractable,
             bool plusInteractable) :
                 base(id, statType, baseValue, currentValue)

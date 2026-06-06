@@ -6,15 +6,15 @@ namespace Presentation.Stat
     {
         public int Id { get; }
         public StatType StatType { get; }
-        public int BaseValue { get; }
-        public int CurrentValue { get; }
+        public float BaseValue { get; }
+        public float CurrentValue { get; }
 
 
         public StatItemData(
             int id,
             StatType statType,
-            int baseValue,
-            int currentValue)
+            float baseValue,
+            float currentValue)
         {
             Id = id;
             StatType = statType;

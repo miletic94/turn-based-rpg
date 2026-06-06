@@ -52,8 +52,8 @@ namespace Presentation.StatsManagement
                 var statData = new StatsPanel.StatRowViewData(
                 (int)stat.Type,
                 stat.Type,
-                ConvertToViewValue(stat.BaseValue),
-                ConvertToViewValue(stat.CurrentValue),
+                ViewUtils.ConvertToViewValue(stat.BaseValue),
+                ViewUtils.ConvertToViewValue(stat.CurrentValue),
                 stat.CurrentGTBase,
                 _data.AvailableStatPoints > 0
                 );
@@ -75,8 +75,8 @@ namespace Presentation.StatsManagement
                 var statData = new StatsPanel.StatRowViewData(
                 (int)stat.Type,
                 stat.Type,
-                ConvertToViewValue(stat.BaseValue),
-                ConvertToViewValue(stat.CurrentValue),
+                ViewUtils.ConvertToViewValue(stat.BaseValue),
+                ViewUtils.ConvertToViewValue(stat.CurrentValue),
                 stat.CurrentGTBase,
                 _data.AvailableStatPoints > 0
                 );
@@ -120,15 +120,6 @@ namespace Presentation.StatsManagement
             return new StatManagementData(
                 hero.AvailableStatPoints,
                 new Stats(hero.Attack, hero.Defense, hero.Magic));
-        }
-
-        // ----------------------------
-        // View Data
-        // ----------------------------
-
-        private int ConvertToViewValue(float value)
-        {
-            return (int)(value * 10);
         }
     }
 }

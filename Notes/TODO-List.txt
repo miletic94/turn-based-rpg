@@ -1,5 +1,5 @@
-Sat modifier has value of 0.2 but I see in View that it's upgraded for 1 (0.1*10)
-    In battle against knight on 3xbuff it goes 10->12->13->16
+Levels are not sorted well. If player wins 4th level first - the first level is marked done
+What happens when stat is reduced to 0?
 LevelMap looks bad
 Move Tooltip position must be better becuase sometimes it goes out of visibility
 Color of level nodes becomes darker and darker on every load 

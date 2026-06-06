@@ -26,10 +26,19 @@ public class CombatantStatData
     // TODO: Domain knows about logic?
     public float GetCurrentValue()
     {
-        return BaseValue + ActiveModifiers.Sum(m =>
+        var str = "";
+        var sum = ActiveModifiers.Sum(m =>
         {
+            str += $"{m.Type} {m.Stat}: {m.Value * (m.Type == ModifierType.Debuff ? -1 : 1)}\n";
             return m.Value * (m.Type == ModifierType.Debuff ? -1 : 1);
         });
+        str += $"sum of modifiers: {sum}\n";
+        var total = BaseValue + sum;
+        str += $"BaseValue: {BaseValue} Total: {total}";
+        str += $"(int)(value * 10) = {(int)(total * 10)}";
+
+        UnityEngine.Debug.Log(str);
+        return BaseValue + sum;
     }
     public List<ActiveModifier> GetActiveModifiers()
     {
