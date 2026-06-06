@@ -32,7 +32,6 @@ public class MapController
         }
         for (int i = 0; i < enemies.Count; i++)
         {
-            UnityEngine.Debug.Log(enemiesBeaten.Contains(enemies[i].Name));
             var level = i + 1;
             result.Add(new LevelNodeData(
                 i,

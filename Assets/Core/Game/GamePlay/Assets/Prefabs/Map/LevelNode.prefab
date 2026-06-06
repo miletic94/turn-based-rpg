@@ -158,6 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _textLabel: {fileID: 6071643320426110847}
   _clickable: {fileID: 6424694938916664730}
+  _originalColor: {r: 1, g: 1, b: 1, a: 0}
+  _beatenColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 0}
+  _backgroundImage: {fileID: 7809082869081581715}
 --- !u!114 &6424694938916664730
 MonoBehaviour:
   m_ObjectHideFlags: 0

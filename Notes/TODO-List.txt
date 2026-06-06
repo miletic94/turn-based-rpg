@@ -1,6 +1,6 @@
-Levels are not sorted well. If player wins 4th level first - the first level is marked done
-Color of level nodes becomes darker and darker on every load 
 LevelMap looks bad
+
+Sometimes float values in stats can become 0.9999999999
 
 What happens when stat is reduced to 0?
 Move Tooltip position must be better becuase sometimes it goes out of visibility
