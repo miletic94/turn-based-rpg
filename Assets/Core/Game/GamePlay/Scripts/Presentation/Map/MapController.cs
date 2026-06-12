@@ -26,10 +26,6 @@ public class MapController
     public List<LevelNodeData> CreateLevelNodeData(List<Character> enemies, List<string> enemiesBeaten)
     {
         var result = new List<LevelNodeData>();
-        foreach (var name in enemiesBeaten)
-        {
-            UnityEngine.Debug.Log(name);
-        }
         for (int i = 0; i < enemies.Count; i++)
         {
             var level = i + 1;

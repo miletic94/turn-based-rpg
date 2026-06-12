@@ -1,6 +1,6 @@
-LevelMap looks bad
-
 Sometimes float values in stats can become 0.9999999999
+
+UI doesn't scale with screen (specifically in battle)
 
 What happens when stat is reduced to 0?
 Move Tooltip position must be better becuase sometimes it goes out of visibility
