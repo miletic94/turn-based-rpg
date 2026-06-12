@@ -1,9 +1,9 @@
 Sometimes float values in stats can become 0.9999999999
 
-UI doesn't scale with screen (specifically in battle)
+UI doesn't scale with screen on FreeAspect (specifically in battle)
 
 What happens when stat is reduced to 0?
-Move Tooltip position must be better becuase sometimes it goes out of visibility
+Move Tooltip position is better positioned. Not going out of visibility
 
 Battle must be more readable: MoveTelegraphing is not readable (bigger / better colors / font)
 
