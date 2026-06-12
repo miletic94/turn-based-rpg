@@ -3,14 +3,14 @@ Sometimes float values in stats can become 0.9999999999
 UI doesn't scale with screen on FreeAspect (specifically in battle)
 
 What happens when stat is reduced to 0?
-Move Tooltip position is better positioned. Not going out of visibility
 
 Battle must be more readable: MoveTelegraphing is not readable (bigger / better colors / font)
-
 
 AI
 Server
 
+Colors are somewhere hardcoded. Maybe there should be a theme that controls colors
+Gameplay numbers are rounded and otherwise transformed to view numbers in different places. Maybe that should be unified
 
 I'm afraid that on every load we're creating new controllers. For example RewardController.Initialize allocates new controller while the old one might still exist
 

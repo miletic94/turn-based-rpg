@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -28,21 +29,23 @@ public class CombatantViewController
     }
     private MoveTelegraphData CreateMoveTelegraphData(IEffectResult moveResult)
     {
-
+        var greenValue = new Vector3(22f, 130f, 21f) / 255f;
+        var green = new Color(greenValue.x, greenValue.y, greenValue.z, 1);
+        var red = new Color(1, 0, 0, 1);
         var (text, color) = moveResult switch
         {
             DamageEffectResult result =>
-                ($"{result.Value}", Color.red),
+                ($"{Math.Round(result.Value, 2)}", red),
 
             HealEffectResult result =>
-                ($"{result.Value}", Color.green),
+                ($"{Math.Round(result.Value, 2)}", green),
 
             StatModifierEffectResult result =>
                 (
                     CreateStatusModifierEffectResultString(result),
                     result.Modifier.Type == ModifierType.Buff
-                        ? Color.green
-                        : Color.red
+                        ? green
+                        : red
                 ),
 
             _ => ("", Color.white)
