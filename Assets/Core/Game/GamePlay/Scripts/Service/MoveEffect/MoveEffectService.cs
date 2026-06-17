@@ -1,14 +1,3 @@
-using System;
-public struct EffectResult
-{
-    public Combatant Target { get; }
-    public float Value { get; }
-    public EffectResult(Combatant target, float value)
-    {
-        Target = target;
-        Value = value;
-    }
-}
 public class MoveEffectService
 {
     public IEffectResult Apply(IMoveEffect effect, EffectContext context)
