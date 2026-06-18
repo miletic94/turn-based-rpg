@@ -20,7 +20,7 @@ public class RewardState : IState
         _context.RewardBootstrapper.Load(
             currentEnemy,
             _context.UIFeedbackBus,
-            new MoveDescriptionService(currentEnemy.Moves.ToDictionary(x => x.Id)),
+            new MoveDescriptionService(),
             HandleRewardSelected); ;
     }
     public void HandleRewardSelected(Move move)

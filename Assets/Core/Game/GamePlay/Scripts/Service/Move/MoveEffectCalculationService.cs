@@ -5,110 +5,104 @@ public class MoveEffectCalculationService
 {
     public MoveEffect Calculate(Move move, Combatant source, Combatant target)
     {
-        var healthModifierEffects = CalculateHealthModifierEffects(move.HealthModifiers, source, target);
-        var statModifierEffects = CalculateStatModifierEffects(move.StatModifiers, source, target);
+        var healthModifierEffects = CalculateHealthModifierEffects(move, source, target);
+        var statModifierEffects = CalculateStatModifierEffects(move, source, target);
 
         return new MoveEffect(healthModifierEffects, statModifierEffects);
     }
-    private List<HealthModifierEffect> CalculateHealthModifierEffects(List<HealthModifier> healthModifiers, Combatant source, Combatant target)
+    private List<HealthModifierEffect> CalculateHealthModifierEffects(Move move, Combatant source, Combatant target)
     {
         EffectContext context = new EffectContext();
         List<HealthModifierEffect> healthModifierEffects = new();
-
-        foreach (var modifier in healthModifiers)
+        foreach (var modifier in move.HealthModifiers)
         {
-            var effect = CalculateHealthModifierEffect(modifier, source, target, context);
+            var targetCombatant = modifier.Target == TargetType.User ?
+                source : target;
+
+            float baseValue = ResolveHealthModifierValue(modifier, context);
+
+            float scaledValue = ApplyMoveScaling(
+                baseValue,
+                move.Category,
+                source,
+                target);
+
+            float valueSign = modifier.Type == HealthModifierType.Damage ?
+                -1 : 1;
+
+            float finalValue = scaledValue * valueSign;
+
+            var effect = new HealthModifierEffect(targetCombatant, finalValue);
+
+            if (modifier.IsSource)
+            {
+                context.StoreResult(modifier.Id, baseValue);
+            }
+
             healthModifierEffects.Add(effect);
         }
-
         return healthModifierEffects;
     }
-    private HealthModifierEffect CalculateHealthModifierEffect(
-        HealthModifier healthModifier,
-        Combatant source,
-        Combatant target,
+    private float ResolveHealthModifierValue(
+        HealthModifier modifier,
         EffectContext context)
     {
-        var targetCombatant = healthModifier.Target == TargetType.User ?
-            source : target;
-        var valueSign = healthModifier.Type == HealthModifierType.Damage ?
-            -1 : 1;
-        var absoluteValue = CalculateHealthModifierValue(healthModifier, source, target, context);
-        var value = valueSign * absoluteValue;
-
-        if (healthModifier.IsSource)
+        return modifier.Value.Type switch
         {
-            context.StoreResult(healthModifier.Id, absoluteValue);
-        }
-        return new HealthModifierEffect(targetCombatant, value);
-    }
+            HealthModifierValueType.Scaled =>
+                modifier.Value.BaseValue
+                    ?? throw new Exception("Modifier with Value.Type = Scaled needs BaseValue to be assigned"),
 
-    private float CalculateHealthModifierValue(
-        HealthModifier healthModifier,
-        Combatant source,
-        Combatant target,
-        EffectContext context)
-    {
-        return healthModifier.Category switch
-        {
-            HealthModifierCategory.Physical => CalculatePhysical(healthModifier, source, target),
-            HealthModifierCategory.Magic => CalculateMagic(healthModifier, source),
-            HealthModifierCategory.Referenced => CalculateReferenced(healthModifier, context),
-            _ => throw new Exception($"Health modifier category {healthModifier.Category} not recognized")
+            HealthModifierValueType.Referenced =>
+                context.GetResult(
+                    modifier.Value.SourceId
+                        ?? throw new Exception("Modifier with Value.Type = Referenced needs SourceId to be assigned")),
+
+            _ => throw new Exception($"Modifier value type {modifier.Value.Type} not recognized")
         };
     }
-
-    private float CalculatePhysical(
-        HealthModifier modifier,
+    private float ApplyMoveScaling(float baseValue,
+        MoveCategory moveCategory,
         Combatant source,
         Combatant target)
     {
-        float baseValue = modifier.Value.BaseValue
-            ?? throw new Exception("Physical modifier requires BaseValue");
+        return moveCategory switch
+        {
+            MoveCategory.Physical =>
+                ApplyPhysicalScaling(baseValue, source, target),
 
-        float attack = source.Stats.GetStat(StatType.Attack);
-        float defense = target.Stats.GetStat(StatType.Defense);
+            MoveCategory.Magic =>
+                ApplyMagicScaling(baseValue, source),
 
-        return baseValue * (attack * attack) / (attack + defense);
+            _ => throw new Exception($"Move category {moveCategory} not recognized")
+        };
     }
-
-    private float CalculateMagic(
-        HealthModifier modifier,
-        Combatant source)
+    private float ApplyPhysicalScaling(float baseValue, Combatant source, Combatant target)
     {
-        float baseValue = modifier.Value.BaseValue
-            ?? throw new Exception("Magic modifier requires BaseValue");
-
-        float magic = source.Stats.GetStat(StatType.Magic);
-
+        var attack = source.Stats.GetStat(StatType.Attack);
+        var defense = target.Stats.GetStat(StatType.Defense);
+        var doubleResult = baseValue * Math.Pow(attack, 2) / (attack + defense);
+        return (float)doubleResult;
+    }
+    private float ApplyMagicScaling(float baseValue, Combatant source)
+    {
+        var magic = source.Stats.GetStat(StatType.Magic);
         return baseValue * magic;
     }
-
-    private float CalculateReferenced(
-    HealthModifier modifier,
-    EffectContext context)
-    {
-        int sourceId = modifier.Value.SourceId
-            ?? throw new Exception("Referenced modifier requires SourceId");
-
-        return context.GetResult(sourceId);
-    }
-
-    private List<StatModifierEffect> CalculateStatModifierEffects(List<StatModifier> statModifiers, Combatant source, Combatant target)
+    private List<StatModifierEffect> CalculateStatModifierEffects(Move move, Combatant source, Combatant target)
     {
         List<StatModifierEffect> statModifierEffects = new();
-
-        foreach (var modifier in statModifiers)
+        foreach (var modifier in move.StatModifiers)
         {
             var effect = CalculateStatModifierEffect(modifier, source, target);
             statModifierEffects.Add(effect);
         }
-
         return statModifierEffects;
     }
 
     private StatModifierEffect CalculateStatModifierEffect(StatModifier statModifier, Combatant source, Combatant target)
     {
+
         var targetCombatant = statModifier.Target == TargetType.User ?
             source : target;
         var valueSign = statModifier.Type == StatModifierType.Debuff ?

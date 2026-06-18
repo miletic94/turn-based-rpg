@@ -1,10 +1,9 @@
 public class HealthModifierValue
 {
-    public float? BaseValue { get; }
-    public int? SourceId { get; }
-    public HealthModifierValue(float? baseValue, int? sourceId)
-    {
-        BaseValue = baseValue;
-        SourceId = sourceId;
-    }
+    public HealthModifierValueType Type;
+    public float? BaseValue;
+    public int? SourceId;
+
+    public string Description => Type == HealthModifierValueType.Scaled ?
+        $"{BaseValue}" : "the same";
 }

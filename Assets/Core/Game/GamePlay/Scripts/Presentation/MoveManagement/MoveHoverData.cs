@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class MoveHoverData
 {
-    public int MoveId;
+    public Move Move;
     public RectTransform RectTransform;
 }

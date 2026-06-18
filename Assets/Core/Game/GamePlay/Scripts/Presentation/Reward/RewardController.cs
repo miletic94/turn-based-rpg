@@ -56,7 +56,7 @@ public class RewardController
         {
             _uiFeedbackBus.Publish(
                 new MoveDescriptionTooltipMessage
-                    (_moveDescriptionService.Describe(moveHoverData.MoveId),
+                    (_moveDescriptionService.Describe(moveHoverData.Move),
                         moveHoverData.RectTransform));
         }
     }

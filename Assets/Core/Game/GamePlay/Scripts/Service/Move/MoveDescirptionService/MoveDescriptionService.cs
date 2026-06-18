@@ -1,31 +1,25 @@
-using System.Collections.Generic;
+using System.Linq;
 
 public class MoveDescriptionService
 {
-    private readonly Dictionary<int, Move> _moveById; // TODO: This should be database
-    public MoveDescriptionService(Dictionary<int, Move> moveById)
+    public string Describe(Move move)
     {
-        _moveById = moveById;
-    }
-    public string Describe(int moveId)
-    {
-        var move = _moveById.TryGetValue(moveId, out var m) ? m : null;
-        if (move == null)
+        string description = "";
+        var effects = move.HealthModifiers.Concat<IDescribable>(move.StatModifiers).ToArray();
+        for (int i = 0; i < effects.Length; i++)
         {
-            throw new System.Exception("Move not found.");
+            description += effects[i].Description;
+            if (i + 1 != effects.Length) description += " and ";
+            else description += ".";
         }
-        var effects = move.Effects;
-        string result = "";
-        foreach (var e in effects)
+        if (move.Category == MoveCategory.Physical)
         {
-            result += DescribeEffect(e);
-            result += ".\n";
+            description += " Scales off attack, reduced by defense";
         }
-        return result;
-    }
-    public string DescribeEffect(IMoveEffect effect)
-    {
-
-        return $"{effect}";
+        if (move.Category == MoveCategory.Magic)
+        {
+            description += " Scales off magic";
+        }
+        return description;
     }
 }

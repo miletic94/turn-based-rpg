@@ -14,118 +14,80 @@
     },
     "availableStatPoints": 0,
     "enemiesBeaten": [],
-    "availableMoves": [
-        {
-            "id": "5",
-            "name": "Drain Life",
-            "iconAddress": "chewed-heart",
-            "effects": [
-                {
-                    "id": "5",
-                    "category": "magic",
-                    "type": "damage",
-                    "target": "enemy",
-                    "value": {
-                        "type": "scaled",
-                        "baseValue": 10,
-                        "scalesOff": "magic",
-                        "reducedBy": "none"
-                    },
-                    "isSource": true
-                },
-                {
-                    "id": "6",
-                    "type": "heal",
-                    "target": "self",
-                    "value": {
-                        "type": "reference",
-                        "sourceId": "5"
-                    },
-                    "isSource": false
-                }
-            ]
-        }
-    ],
+    "availableMoves": [],
     "equippedMoves": [
         {
-            "id": "0",
+            "id": 1,
             "name": "Slash",
+            "category": "physical",
             "iconAddress": "blade-drag",
-            "effects": [
+            "healthModifiers": [
                 {
-                    "id": "0",
-                    "category": "physical",
+                    "id": 1,
                     "type": "damage",
-                    "target": "enemy",
+                    "target": "Enemy",
                     "value": {
                         "type": "scaled",
-                        "baseValue": 20,
-                        "scalesOff": "attack",
-                        "reducedBy": "defense"
+                        "baseValue": 20
                     },
                     "isSource": false
                 }
-            ]
+            ],
+            "statModifiers": []
         },
         {
-            "id": "1",
+            "id": 2,
             "name": "Shield Up",
+            "category": "none",
             "iconAddress": "shield",
-            "effects": [
+            "healthModifiers": [],
+            "statModifiers": [
                 {
-                    "id": "1",
+                    "id": 1,
                     "type": "buff",
-                    "target": "self",
-                    "stat": "defense",
-                    "value": {
-                        "type": "flat",
-                        "baseValue": 0.2
-                    },
-                    "tickBehavior": "once",
-                    "duration": 2,
-                    "isSource": false
+                    "target": "User",
+                    "targetStat": "defense",
+                    "value": 0.2,
+                    "duration": 2
                 }
             ]
         },
         {
-            "id": "2",
+            "id": 3,
             "name": "Battle Cry",
+            "category": "none",
             "iconAddress": "trumpet-flag",
-            "effects": [
+            "healthModifiers": [],
+            "statModifiers": [
                 {
-                    "id": "2",
+                    "id": 2,
                     "type": "buff",
-                    "target": "self",
-                    "stat": "attack",
-                    "value": {
-                        "type": "flat",
-                        "baseValue": 0.2
-                    },
-                    "tickBehavior": "once",
-                    "duration": 2,
-                    "isSource": false
+                    "target": "User",
+                    "targetStat": "attack",
+                    "value": 0.2,
+                    "duration": 2
                 }
             ]
         },
         {
-            "id": "3",
+            "id": 4,
             "name": "Second Wind",
+            "category": "magic",
             "iconAddress": "healing",
-            "effects": [
+            "healthModifiers": [
                 {
-                    "id": "3",
+                    "id": 2,
                     "category": "magic",
                     "type": "heal",
-                    "target": "self",
+                    "target": "User",
                     "value": {
                         "type": "scaled",
-                        "baseValue": 20,
-                        "scalesOff": "magic",
-                        "reducedBy": "none"
+                        "baseValue": 20
                     },
                     "isSource": false
                 }
-            ]
+            ],
+            "statModifiers": []
         }
     ]
 }

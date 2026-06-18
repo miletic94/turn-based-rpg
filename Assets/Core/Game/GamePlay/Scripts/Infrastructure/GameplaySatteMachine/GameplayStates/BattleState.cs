@@ -18,7 +18,7 @@ public class BattleState : IState
         var hero = _context.GameplayContext.Hero;
         var battleController = _context.BattleBootstrapper.Load(
             _context.UIFeedbackBus,
-            new MoveDescriptionService(hero.EquippedMoves.ToDictionary(x => x.Id)));
+            new MoveDescriptionService());
         await battleController.Initialize(hero, _context.GameplayContext.CurrentEnemy);
 
         var result = await battleController.Run();

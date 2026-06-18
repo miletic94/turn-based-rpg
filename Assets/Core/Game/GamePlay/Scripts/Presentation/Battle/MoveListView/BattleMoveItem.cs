@@ -19,7 +19,7 @@ IHoverDelayedDataSource
     {
         return new MoveHoverData
         {
-            MoveId = _data.Id,
+            Move = _data.Move,
             RectTransform = _rectTransform
         };
     }

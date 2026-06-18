@@ -5,6 +5,7 @@ public class MoveDTO
 {
     public int Id;
     public string Name;
+    public MoveCategory Category;
     public string IconAddress;
     public Cost Cost;
     public List<HealthModifierDTO> HealthModifiers;
@@ -15,6 +16,7 @@ public class MoveDTO
      (
         Id,
         Name,
+        Category,
         IconAddress,
         Cost,
         HealthModifiers.Select(modifier => modifier.ToHealthModifier()).ToList(),
