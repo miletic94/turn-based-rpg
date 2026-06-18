@@ -43,7 +43,7 @@ public class CombatantStats
         string result = "[";
         if (!_stats.TryGetValue(statType, out var stat))
             throw new System.Exception($"Stat {statType} not found");
-        var modifiers = stat.GetActiveModifiers();
+        var modifiers = stat.ActiveModifiers;
         foreach (var m in modifiers)
         {
             result += m.ToString() + ", ";
@@ -59,7 +59,7 @@ public class CombatantStats
 
     public void AddActiveModifier(ActiveModifier activeModifier)
     {
-        _stats[activeModifier.Stat].AddActiveModifier(activeModifier);
+        _stats[activeModifier.TargetStat].AddActiveModifier(activeModifier);
     }
 
     public void RemoveExpiredModifiers()
@@ -76,8 +76,6 @@ public class CombatantStats
         {
             foreach (var m in stat.ActiveModifiers)
             {
-                if (!m.HasOccured) { m.SetHasOccured(true); }
-
                 m.SubstractRemainingDuration();
             }
         }

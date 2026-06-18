@@ -6,16 +6,9 @@ using UnityEngine;
 public class MoveTelegraphView : MonoBehaviour
 {
     [SerializeField] TMP_Text text;
-    public async Awaitable ShowData(List<MoveTelegraphData> dataList)
+    public async Awaitable ShowData(MoveTelegraphData data)
     {
-        await ShowEffects(dataList);
-    }
-    private async Task ShowEffects(List<MoveTelegraphData> dataList)
-    {
-        foreach (var data in dataList)
-        {
-            await ShowEffect(data);
-        }
+        await ShowEffect(data);
     }
 
     private async Awaitable ShowEffect(MoveTelegraphData data)

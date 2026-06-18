@@ -8,7 +8,7 @@ public class BattleTargetService
     {
         return targetType switch
         {
-            TargetType.Self => source,
+            TargetType.User => source,
             TargetType.Enemy => ResolveDefaultEnemy(state, source),
             _ => ResolveDefaultEnemy(state, source)
         };

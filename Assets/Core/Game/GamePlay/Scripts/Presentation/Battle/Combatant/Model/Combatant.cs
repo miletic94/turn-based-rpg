@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,12 +40,6 @@ public class Combatant
     {
         Stats.TickModifiers();
     }
-
-    public IEnumerable<CombatantStatData> GetStats()
-    {
-        return Stats.GetStats();
-    }
-
 
     // TODO: This is debug helper. Not for final build
     public override string ToString()

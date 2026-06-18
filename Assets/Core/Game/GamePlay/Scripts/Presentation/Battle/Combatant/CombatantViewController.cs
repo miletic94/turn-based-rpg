@@ -1,64 +1,61 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class CombatantViewController
 {
     private readonly CombatantViewFactory _factory;
     private readonly Dictionary<Combatant, CombatantView> _views = new();
+    private readonly Color _green =
+    new(22f / 255f, 130f / 255f, 21f / 255f, 1f);
+
+    private readonly Color _red =
+        new(1f, 0f, 0f, 1f);
+
+    private Color GetModifierColor(float value)
+    {
+        return value > 0 ? _green : _red;
+    }
 
     public CombatantViewController(CombatantViewFactory factory)
     {
         _factory = factory;
     }
-    public async Awaitable ShowMoveResult(List<IEffectResult> moveResult)
+    public async Awaitable ShowMoveEffect(MoveEffect moveEffect)
     {
-        var groupedResults = moveResult.GroupBy(result => result.Target);
-        foreach (var group in groupedResults)
+        foreach (var healthModifier in moveEffect.HealthModifierEffects)
         {
-            var combatant = group.Key;
-            var view = _views[combatant];
-
-            var telegraphs = group
-                .Select(CreateMoveTelegraphData)
-                .ToList();
-
-            await view.ShowData(telegraphs);
+            var data = CreateHealthModifierTelegraph(healthModifier);
+            await ShowTelegraph(healthModifier.Target, data);
+        }
+        foreach (var statModifier in moveEffect.StatModifierEffects)
+        {
+            var data = CreateStathModifierTelegraph(statModifier);
+            await ShowTelegraph(statModifier.Target, data);
         }
     }
-    private MoveTelegraphData CreateMoveTelegraphData(IEffectResult moveResult)
+    private async Awaitable ShowTelegraph(
+    Combatant target,
+    MoveTelegraphData data)
     {
-        var greenValue = new Vector3(22f, 130f, 21f) / 255f;
-        var green = new Color(greenValue.x, greenValue.y, greenValue.z, 1);
-        var red = new Color(1, 0, 0, 1);
-        var (text, color) = moveResult switch
-        {
-            DamageEffectResult result =>
-                ($"{Math.Round(result.Value, 2)}", red),
-
-            HealEffectResult result =>
-                ($"{Math.Round(result.Value, 2)}", green),
-
-            StatModifierEffectResult result =>
-                (
-                    CreateStatusModifierEffectResultString(result),
-                    result.Modifier.Type == ModifierType.Buff
-                        ? green
-                        : red
-                ),
-
-            _ => ("", Color.white)
-        };
+        var view = _views[target];
+        await view.ShowData(data);
+    }
+    private MoveTelegraphData CreateHealthModifierTelegraph(
+        HealthModifierEffect effect)
+    {
+        var text = effect.Value.ToString();
+        var color = GetModifierColor(effect.Value);
 
         return new MoveTelegraphData(text, color);
     }
-    private string CreateStatusModifierEffectResultString(StatModifierEffectResult result)
+
+    private MoveTelegraphData CreateStathModifierTelegraph(
+        StatModifierEffect effect)
     {
-        var modifier = result.Modifier;
-        var isBuff = modifier.Type == ModifierType.Buff;
-        var value = modifier.Value * 10;
-        return $"{modifier.Stat} {(isBuff ? value : -value)}";
+        var text = $"{effect.TargetStat} {ViewUtils.ConvertToViewValue(effect.Value)}";
+        var color = GetModifierColor(effect.Value);
+
+        return new MoveTelegraphData(text, color);
     }
 
     public void Create(Combatant combatant)

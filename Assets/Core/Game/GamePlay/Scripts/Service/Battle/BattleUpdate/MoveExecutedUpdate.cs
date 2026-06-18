@@ -4,13 +4,13 @@ public sealed class MoveExecutedUpdate : BattleUpdate
 {
     public Combatant Actor { get; }
     public Combatant Target { get; }
-    public List<IEffectResult> MoveResult { get; }
+    public MoveEffect MoveEffect { get; }
 
 
-    public MoveExecutedUpdate(Combatant actor, Combatant target, List<IEffectResult> moveResult)
+    public MoveExecutedUpdate(Combatant actor, Combatant target, MoveEffect moveEffect)
     {
         Actor = actor;
         Target = target;
-        MoveResult = moveResult;
+        MoveEffect = moveEffect;
     }
 }

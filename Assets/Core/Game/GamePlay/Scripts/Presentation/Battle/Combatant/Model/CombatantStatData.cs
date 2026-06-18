@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-// TODO: Make this data structure part of Hero and Combatant
 public class CombatantStatData
 {
     public StatType Type { get; }
@@ -23,17 +21,12 @@ public class CombatantStatData
     {
         ActiveModifiers.Add(activeModifier);
     }
-    // TODO: Domain knows about logic?
     public float GetCurrentValue()
     {
         var sum = ActiveModifiers.Sum(m =>
         {
-            return m.Value * (m.Type == ModifierType.Debuff ? -1 : 1);
+            return m.Value;
         });
         return BaseValue + sum;
-    }
-    public List<ActiveModifier> GetActiveModifiers()
-    {
-        return ActiveModifiers;
     }
 }

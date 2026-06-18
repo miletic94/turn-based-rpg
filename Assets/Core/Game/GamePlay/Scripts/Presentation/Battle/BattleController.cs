@@ -10,7 +10,8 @@ public class BattleController
     private readonly CombatantViewController _combatantViewController;
 
     private readonly CharacterInfoPanelsController _characterInfoPanelsController;
-    private readonly MoveService _moveService;
+    private readonly MoveEffectCalculationService _moveEffectCalculationService;
+    private readonly MoveExecutionService _moveExecutionService;
     private readonly BattleTurnService _turnService;
     private readonly BattleResolutionService _resolutionService;
     private MoveSelectionService _moveSelectionService;
@@ -20,14 +21,16 @@ public class BattleController
         BattleMovePanelController movePanelController,
         CombatantViewController combatantViewController,
         CharacterInfoPanelsController characterInfoPanelsController,
-        MoveService moveService,
+        MoveEffectCalculationService moveEffectCalculationService,
+        MoveExecutionService moveExecutionService,
         BattleTurnService turnService,
         BattleResolutionService resolutionService)
     {
         _movePanelController = movePanelController;
         _combatantViewController = combatantViewController;
         _characterInfoPanelsController = characterInfoPanelsController;
-        _moveService = moveService;
+        _moveEffectCalculationService = moveEffectCalculationService;
+        _moveExecutionService = moveExecutionService;
         _turnService = turnService;
         _resolutionService = resolutionService;
         _moveSelectionService = new MoveSelectionService();
@@ -48,7 +51,8 @@ public class BattleController
             battleContext,
             _turnService,
             _resolutionService,
-            _moveService,
+            _moveEffectCalculationService,
+            _moveExecutionService,
             new PlayerMoveProvider(_moveSelectionService),
             new AIBattleMoveSelector());
     }
@@ -90,7 +94,7 @@ public class BattleController
     MoveExecutedUpdate update)
     {
         _characterInfoPanelsController.SetHealthBars(update.Actor, update.Target);
-        await _combatantViewController.ShowMoveResult(update.MoveResult);
+        await _combatantViewController.ShowMoveEffect(update.MoveEffect);
     }
 
     public async Awaitable<(Combatant, Combatant)> ConfigureCombatants(

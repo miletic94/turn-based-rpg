@@ -8,9 +8,9 @@ public class CombatantView : MonoBehaviour
     {
         _spriteRenderer.sprite = sprite;
     }
-    public async Awaitable ShowData(List<MoveTelegraphData> dataList)
+    public async Awaitable ShowData(MoveTelegraphData data)
     {
-        await _moveTelegraph.ShowData(dataList);
+        await _moveTelegraph.ShowData(data);
     }
     public void FlipSpriteX(bool flip)
     {

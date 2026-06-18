@@ -1,558 +1,493 @@
 [
     {
-        "id": "0",
+        "id": 1,
         "name": "Slash",
         "iconAddress": "blade-drag",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "0",
+                "id": 1,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 20
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "1",
+        "id": 2,
         "name": "Shield Up",
         "iconAddress": "shield",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "1",
+                "id": 1,
                 "type": "buff",
                 "target": "self",
-                "stat": "defense",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "defense",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "2",
+        "id": 3,
         "name": "Battle Cry",
         "iconAddress": "trumpet-flag",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "2",
+                "id": 2,
                 "type": "buff",
                 "target": "self",
-                "stat": "attack",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "attack",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "3",
+        "id": 4,
         "name": "Second Wind",
         "iconAddress": "healing",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "3",
+                "id": 2,
                 "category": "magic",
                 "type": "heal",
                 "target": "self",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "magic",
-                    "reducedBy": "none"
+                    "baseValue": 20
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "4",
+        "id": 5,
         "name": "Shadow Bolt",
         "iconAddress": "bolt-spell-cast",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "4",
+                "id": 3,
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 30,
-                    "scalesOff": "magic",
-                    "reducedBy": "none"
+                    "baseValue": 30
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "5",
+        "id": 6,
         "name": "Drain Life",
         "iconAddress": "chewed-heart",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "5",
+                "id": 4,
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 10,
-                    "scalesOff": "magic",
-                    "reducedBy": "none"
+                    "baseValue": 10
                 },
                 "isSource": true
             },
             {
-                "id": "6",
+                "id": 5,
+                "category": "referenced",
                 "type": "heal",
                 "target": "self",
                 "value": {
                     "type": "reference",
-                    "sourceId": "5"
+                    "sourceId": 4
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "6",
+        "id": 7,
         "name": "Curse",
         "iconAddress": "cursed-star",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "7",
+                "id": 3,
                 "type": "debuff",
                 "target": "enemy",
-                "stat": "attack",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "attack",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "7",
+        "id": 8,
         "name": "Dark Pact",
         "iconAddress": "daemon-skull",
         "cost": {
             "type": "health",
             "amount": 5
         },
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "8",
+                "id": 4,
                 "type": "buff",
                 "target": "self",
-                "stat": "magic",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "magic",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "8",
+        "id": 9,
         "name": "Bite",
         "iconAddress": "spider-face",
         "cost": {
             "type": "mana",
             "amount": 3
         },
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "9",
+                "id": 5,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 20
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "9",
+        "id": 10,
         "name": "Web Throw",
         "iconAddress": "spider-web",
         "cost": {
             "type": "mana",
             "amount": 6
         },
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "10",
+                "id": 6,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 10,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 10
                 },
                 "isSource": false
-            },
+            }
+        ],
+        "statModifiers": [
             {
-                "id": "11",
+                "id": 5,
                 "type": "debuff",
                 "target": "enemy",
-                "stat": "defense",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "defense",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "10",
+        "id": 11,
         "name": "Pounce",
         "iconAddress": "long-legged-spider",
         "cost": {
             "type": "mana",
             "amount": 6
         },
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "12",
+                "id": 7,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 30,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 30
                 },
                 "isSource": false
             }
         ]
     },
     {
-        "id": "11",
+        "id": 12,
         "name": "Skitter",
         "iconAddress": "fire-dash",
         "cost": {
             "type": "mana",
             "amount": 3
         },
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "13",
+                "id": 6,
                 "type": "buff",
                 "target": "self",
-                "stat": "defense",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "defense",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "12",
+        "id": 13,
         "name": "Flame Breath",
         "iconAddress": "dragon-breath",
         "cost": {
             "type": "mana",
             "amount": 6
         },
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "14",
+                "id": 8,
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 30,
-                    "scalesOff": "magic",
-                    "reducedBy": "none"
+                    "baseValue": 30
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "13",
+        "id": 14,
         "name": "Claw Swipe",
         "iconAddress": "claw-dashes",
         "cost": {
             "type": "mana",
             "amount": 3
         },
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "15",
+                "id": 9,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 20
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "14",
+        "id": 15,
         "name": "Intimidate",
         "iconAddress": "terror",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "16",
+                "id": 7,
                 "type": "debuff",
                 "target": "enemy",
-                "stat": "attack",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "attack",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "15",
+        "id": 16,
         "name": "Dragon Scales",
         "iconAddress": "energy-shield",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "17",
+                "id": 8,
                 "type": "buff",
                 "target": "self",
-                "stat": "defense",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "defense",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "16",
+        "id": 17,
         "name": "Rusty Blade",
         "iconAddress": "rusty-sword",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "18",
+                "id": 10,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 20
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "17",
+        "id": 18,
         "name": "Dirty Kick",
         "iconAddress": "boot-kick",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "19",
+                "id": 11,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 10,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 10
                 },
                 "isSource": false
-            },
+            }
+        ],
+        "statModifiers": [
             {
-                "id": "20",
+                "id": 9,
                 "type": "debuff",
                 "target": "enemy",
-                "stat": "defense",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "defense",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "18",
+        "id": 19,
         "name": "Frenzy",
         "iconAddress": "enrage",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "21",
+                "id": 10,
                 "type": "buff",
                 "target": "self",
-                "stat": "attack",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "attack",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "19",
+        "id": 20,
         "name": "Headbutt",
         "iconAddress": "skull-bolt",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "22",
+                "id": 12,
                 "category": "physical",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 30,
-                    "scalesOff": "attack",
-                    "reducedBy": "defense"
+                    "baseValue": 30
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "20",
+        "id": 21,
         "name": "Firebolt",
         "iconAddress": "fire-spell-cast",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "23",
+                "id": 13,
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "magic",
-                    "reducedBy": "none"
+                    "baseValue": 20
                 },
                 "isSource": false
             }
-        ]
+        ],
+        "statModifiers": []
     },
     {
-        "id": "21",
+        "id": 22,
         "name": "Arcane Surge",
         "iconAddress": "magic-swirl",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "24",
+                "id": 11,
                 "type": "buff",
                 "target": "self",
-                "stat": "magic",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "magic",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     },
     {
-        "id": "22",
+        "id": 23,
         "name": "Mana Drain",
         "iconAddress": "glowing-hands",
-        "effects": [
+        "healthModifiers": [
             {
-                "id": "25",
+                "id": 14,
                 "category": "magic",
                 "type": "damage",
                 "target": "enemy",
                 "value": {
                     "type": "scaled",
-                    "baseValue": 20,
-                    "scalesOff": "magic",
-                    "reducedBy": "none"
+                    "baseValue": 20
                 },
                 "isSource": false
-            },
+            }
+        ],
+        "statModifiers": [
             {
-                "id": "26",
+                "id": 12,
                 "type": "debuff",
                 "target": "enemy",
-                "stat": "magic",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
+                "targetStat": "magic",
+                "value": 0.2,
                 "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "duration": 2
             }
         ]
     },
     {
-        "id": "23",
+        "id": 24,
         "name": "Hex Shield",
         "iconAddress": "magic-shield",
-        "effects": [
+        "healthModifiers": [],
+        "statModifiers": [
             {
-                "id": "27",
+                "id": 13,
                 "type": "buff",
                 "target": "self",
-                "stat": "defense",
-                "value": {
-                    "type": "flat",
-                    "baseValue": 0.1
-                },
-                "tickBehavior": "once",
-                "duration": 2,
-                "isSource": false
+                "targetStat": "defense",
+                "value": 0.2,
+                "duration": 2
             }
         ]
     }

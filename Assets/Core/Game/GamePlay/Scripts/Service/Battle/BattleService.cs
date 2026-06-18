@@ -14,21 +14,24 @@ public class BattleService
     private readonly BattleContext _battleContext;
     private readonly BattleTurnService _battleTurnService;
     private readonly BattleResolutionService _battleResolutionService;
-    private readonly MoveService _moveService;
+    private readonly MoveEffectCalculationService _moveEffectCalculationService;
+    private readonly MoveExecutionService _moveExecutionService;
     private readonly IMoveProvider _playerProvider;
     private readonly IMoveProvider _enemyProvider;
 
     public BattleService(BattleContext battleContext,
         BattleTurnService battleTurnService,
         BattleResolutionService battleResolutionService,
-        MoveService moveService,
+        MoveEffectCalculationService moveEffectCalculationService,
+        MoveExecutionService moveExecutionService,
         IMoveProvider playerProvider,
         IMoveProvider enemyProvider)
     {
         _battleContext = battleContext;
         _battleTurnService = battleTurnService;
         _battleResolutionService = battleResolutionService;
-        _moveService = moveService;
+        _moveEffectCalculationService = moveEffectCalculationService;
+        _moveExecutionService = moveExecutionService;
         _playerProvider = playerProvider;
         _enemyProvider = enemyProvider;
     }
@@ -75,11 +78,12 @@ public class BattleService
             var move =
                 await provider.GetMove(actor);
 
-            var moveResult = _moveService.ApplyMove(CurrentActor, CurrentTarget, move);
+            var moveEffect = _moveEffectCalculationService.Calculate(move, CurrentActor, CurrentTarget);
+            var executedMoveEffect = _moveExecutionService.Execute(moveEffect);
 
             Phase = BattlePhase.TurnResolution;
 
-            return new MoveExecutedUpdate(CurrentActor, CurrentTarget, moveResult);
+            return new MoveExecutedUpdate(CurrentActor, CurrentTarget, executedMoveEffect);
         }
 
         if (Phase == BattlePhase.TurnResolution)

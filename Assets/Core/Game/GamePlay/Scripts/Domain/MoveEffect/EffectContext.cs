@@ -1,30 +1,16 @@
-#nullable enable
-
 using System;
 using System.Collections.Generic;
 
 public class EffectContext
 {
-    public Combatant Source { get; }
-    public Combatant Target { get; }
-    private readonly Dictionary<string, float> _results = new();
+    private readonly Dictionary<int, float> _results = new();
 
-    public EffectContext(Combatant source, Combatant target)
+    public void StoreResult(int id, float value)
     {
-        Source = source;
-        Target = target;
+        _results[id] = value;
     }
 
-    public Combatant ResolveTarget(TargetType type)
-        => type == TargetType.Self ? Source : Target;
-
-    public void StoreResult(string? id, float value)
-    {
-        if (id != null)
-            _results[id] = value;
-    }
-
-    public float GetResult(string id)
+    public float GetResult(int id)
     {
         if (!_results.TryGetValue(id, out var value))
             throw new Exception($"Effect result '{id}' not found");
