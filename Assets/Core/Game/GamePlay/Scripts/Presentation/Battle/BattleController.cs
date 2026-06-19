@@ -12,7 +12,6 @@ public class BattleController
     private readonly CharacterInfoPanelsController _characterInfoPanelsController;
     private readonly MoveEffectCalculationService _moveEffectCalculationService;
     private readonly MoveExecutionService _moveExecutionService;
-    private readonly BattleTurnService _turnService;
     private readonly BattleResolutionService _resolutionService;
     private MoveSelectionService _moveSelectionService;
 
@@ -23,7 +22,6 @@ public class BattleController
         CharacterInfoPanelsController characterInfoPanelsController,
         MoveEffectCalculationService moveEffectCalculationService,
         MoveExecutionService moveExecutionService,
-        BattleTurnService turnService,
         BattleResolutionService resolutionService)
     {
         _movePanelController = movePanelController;
@@ -31,7 +29,6 @@ public class BattleController
         _characterInfoPanelsController = characterInfoPanelsController;
         _moveEffectCalculationService = moveEffectCalculationService;
         _moveExecutionService = moveExecutionService;
-        _turnService = turnService;
         _resolutionService = resolutionService;
         _moveSelectionService = new MoveSelectionService();
     }
@@ -49,12 +46,11 @@ public class BattleController
 
         _battleService = new BattleService(
             battleContext,
-            _turnService,
             _resolutionService,
             _moveEffectCalculationService,
             _moveExecutionService,
             new PlayerMoveProvider(_moveSelectionService),
-            new AIBattleMoveSelector());
+            new AIMoveProvider(_moveEffectCalculationService));
     }
 
 

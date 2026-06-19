@@ -24,7 +24,6 @@ public class BattleBootstrapper : MonoBehaviour
         _characterInfoPanelsController = new CharacterInfoPanelsController(_characterInfoPanelsView);
         var moveEffectCalculationService = new MoveEffectCalculationService();
         var moveExecutionService = new MoveExecutionService();
-        var turnService = new BattleTurnService();
         var resolutionService = new BattleResolutionService();
 
 
@@ -34,7 +33,6 @@ public class BattleBootstrapper : MonoBehaviour
             _characterInfoPanelsController,
             moveEffectCalculationService,
             moveExecutionService,
-            turnService,
             resolutionService
         );
         return _battleController;

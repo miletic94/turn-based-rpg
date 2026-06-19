@@ -2,9 +2,9 @@
     {
         "id": 2,
         "name": "Witch",
-        "health": 100,
-        "attack": 0.5,
-        "defense": 0.1,
+        "health": 200,
+        "attack": 0.6,
+        "defense": 0.8,
         "magic": 1.2,
         "spriteAddress": "monsters[witch]",
         "moves": [
@@ -100,7 +100,7 @@
     {
         "id": 3,
         "name": "Giant Spider",
-        "health": 110,
+        "health": 210,
         "attack": 1.2,
         "defense": 0.6,
         "magic": 0.3,
@@ -210,7 +210,7 @@
     {
         "id": 4,
         "name": "Dragon",
-        "health": 200,
+        "health": 250,
         "attack": 1.5,
         "defense": 1.0,
         "magic": 1.5,
@@ -301,7 +301,7 @@
     {
         "id": 5,
         "name": "Goblin Warrior",
-        "health": 90,
+        "health": 200,
         "attack": 1.0,
         "defense": 0.7,
         "magic": 0.3,
@@ -395,7 +395,7 @@
     {
         "id": 6,
         "name": "Goblin Mage",
-        "health": 80,
+        "health": 200,
         "attack": 0.4,
         "defense": 0.4,
         "magic": 1.1,

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class MoveEffectCalculationService
 {
-    public MoveEffect Calculate(Move move, Combatant source, Combatant target)
+    public MoveEffect Calculate(Move move, Combatant actor, Combatant target)
     {
-        var healthModifierEffects = CalculateHealthModifierEffects(move, source, target);
-        var statModifierEffects = CalculateStatModifierEffects(move, source, target);
+        var healthModifierEffects = CalculateHealthModifierEffects(move, actor, target);
+        var statModifierEffects = CalculateStatModifierEffects(move, actor, target);
 
         return new MoveEffect(healthModifierEffects, statModifierEffects);
     }

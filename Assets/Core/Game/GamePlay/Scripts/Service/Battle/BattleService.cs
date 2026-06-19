@@ -73,7 +73,7 @@ public class BattleService
                     : _enemyProvider;
 
             var move =
-                await provider.GetMove(actor);
+                await provider.GetMove(_battleContext);
 
             var moveEffect = _moveEffectCalculationService.Calculate(move, _currentActor, _currentTarget);
             var executedMoveEffect = _moveExecutionService.Execute(moveEffect);

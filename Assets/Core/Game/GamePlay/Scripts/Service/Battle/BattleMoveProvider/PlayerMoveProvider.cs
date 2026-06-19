@@ -7,7 +7,7 @@ public class PlayerMoveProvider : IMoveProvider
     {
         _moveSelectionService = moveSelectionSErvice;
     }
-    public Awaitable<Move> GetMove(Combatant actor)
+    public Awaitable<Move> GetMove(BattleContext context)
     {
         return _moveSelectionService.RequestMove();
     }

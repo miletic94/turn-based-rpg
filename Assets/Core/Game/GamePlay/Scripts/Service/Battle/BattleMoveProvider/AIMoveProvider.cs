@@ -1,18 +1,91 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class AIBattleMoveSelector : IMoveProvider
+public struct MoveEvaluation
 {
-    private int[] moveQueue = new int[] { 2, 2, 2 };
-    private int moveIndex = 0;
-    public async Awaitable<Move> GetMove(
-           Combatant actor)
+    public Move Move { get; private set; }
+    public float Evaluation { get; private set; }
+    public MoveEvaluation(Move move, float evaluation)
     {
-        await Awaitable.WaitForSecondsAsync(1f);
+        Move = move;
+        Evaluation = evaluation;
+    }
+}
 
-        var moves = actor.Moves;
-        var move = moves[moveQueue[moveIndex]];
-        moveIndex = (moveIndex + 1) % moveQueue.Length;
-        return move;
-        // return moves[Random.Range(0, moves.Count)];
+public class AIMoveProvider : IMoveProvider
+{
+    MoveEffectCalculationService _calculationService;
+    // This field controls how strongly AI values health (currently both actor's and target's)
+    // It can be read from design data in the future. 
+    // In future we might want to control aggression and defensivnes independently
+    private float _healthModifierMultiplier = 2f;
+    // This field controls at which current / base health ratio AI will assume that health is critical
+    // Currently it is for both damage and heal
+    // If health is low health modifier will be valued more
+    float _criticalHealthRatio = 0.25f;
+    float _criticalHealthMultiplier = 1.5f;
+    private const int PERCENT_SCALE = 100;
+    public AIMoveProvider(MoveEffectCalculationService calculationService)
+    {
+        _calculationService = calculationService;
+    }
+    public async Awaitable<Move> GetMove(
+           BattleContext context)
+    {
+        var moves = context.CurrentActor.Moves;
+        List<MoveEvaluation> moveEvaluations = new();
+
+        var actor = context.CurrentActor;
+        var target = context.CurrentTarget;
+        foreach (var move in moves)
+        {
+            var moveEffect = _calculationService.Calculate(move, actor, target);
+            var healthModEval = EvaluateHealthModifiers(moveEffect.HealthModifierEffects);
+            var statModEval = EvaluateStatModifiers(moveEffect.StatModifierEffects, context.TurnNumber);
+            var evaluation = healthModEval + statModEval;
+            moveEvaluations.Add(new MoveEvaluation(move, evaluation));
+        }
+        var rankedMoves = moveEvaluations
+            .OrderByDescending(x => x.Evaluation)
+            .ToList();
+
+        var debuggingString = "RANKING\n";
+        foreach (var eval in rankedMoves)
+        {
+            debuggingString += $"{eval.Move.Name} : {eval.Evaluation}\n";
+        }
+        UnityEngine.Debug.Log(debuggingString);
+        return rankedMoves[0].Move;
+    }
+    private float EvaluateHealthModifiers(List<HealthModifierEffect> healthModifiers)
+    {
+        float finalEvaluation = 0f;
+        foreach (var effect in healthModifiers)
+        {
+            var currentHealth = effect.Target.Health;
+            var baseHealth = effect.Target.BaseHealth;
+            var healthRatio = currentHealth / baseHealth;
+            var evaluation =
+            Math.Abs(effect.Value) * (1 + _healthModifierMultiplier * (1 - healthRatio));
+            if (healthRatio <= _criticalHealthRatio)
+            {
+                evaluation *= _criticalHealthMultiplier;
+            }
+            finalEvaluation += evaluation;
+        }
+        return finalEvaluation;
+    }
+    private float EvaluateStatModifiers(List<StatModifierEffect> statModifiers, int turn)
+    {
+        float finalEvaluation = 0f;
+        foreach (var effect in statModifiers)
+        {
+            var duration = effect.Duration;
+            var evaluation = Math.Abs(effect.Value) * PERCENT_SCALE * duration / turn;
+            finalEvaluation += evaluation;
+        }
+        return finalEvaluation;
     }
 }

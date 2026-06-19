@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IMoveProvider
 {
-    Awaitable<Move> GetMove(Combatant actor);
+    Awaitable<Move> GetMove(BattleContext context);
 }

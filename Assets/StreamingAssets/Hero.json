@@ -1,9 +1,9 @@
 {
     "name": "Knight",
-    "health": 100,
+    "health": 200,
     "attack": 1.2,
-    "defense": 0.2,
-    "magic": 0.4,
+    "defense": 1,
+    "magic": 0.6,
     "spriteAddress": "rogues[knight]",
     "mana": 4,
     "XP": {
@@ -47,7 +47,7 @@
                     "type": "buff",
                     "target": "User",
                     "targetStat": "defense",
-                    "value": 0.2,
+                    "value": 0.5,
                     "duration": 2
                 }
             ]
@@ -64,8 +64,8 @@
                     "type": "buff",
                     "target": "User",
                     "targetStat": "attack",
-                    "value": 0.2,
-                    "duration": 2
+                    "value": 1,
+                    "duration": 3
                 }
             ]
         },
