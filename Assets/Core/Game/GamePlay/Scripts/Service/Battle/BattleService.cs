@@ -12,7 +12,6 @@ public enum BattlePhase
 public class BattleService
 {
     private readonly BattleContext _battleContext;
-    private readonly BattleTurnService _battleTurnService;
     private readonly BattleResolutionService _battleResolutionService;
     private readonly MoveEffectCalculationService _moveEffectCalculationService;
     private readonly MoveExecutionService _moveExecutionService;
@@ -20,7 +19,6 @@ public class BattleService
     private readonly IMoveProvider _enemyProvider;
 
     public BattleService(BattleContext battleContext,
-        BattleTurnService battleTurnService,
         BattleResolutionService battleResolutionService,
         MoveEffectCalculationService moveEffectCalculationService,
         MoveExecutionService moveExecutionService,
@@ -28,7 +26,6 @@ public class BattleService
         IMoveProvider enemyProvider)
     {
         _battleContext = battleContext;
-        _battleTurnService = battleTurnService;
         _battleResolutionService = battleResolutionService;
         _moveEffectCalculationService = moveEffectCalculationService;
         _moveExecutionService = moveExecutionService;
@@ -39,22 +36,22 @@ public class BattleService
     public BattlePhase Phase { get; private set; } = BattlePhase.TurnStart;
     public Combatant Winner { get; private set; }
 
-    public Combatant CurrentActor => _battleTurnService.GetCurrentCombatant(_battleContext);
-    public Combatant CurrentTarget => _battleTurnService.GetNextCombatant(_battleContext);
+    private Combatant _currentActor => _battleContext.CurrentActor;
+    private Combatant _currentTarget => _battleContext.CurrentTarget;
     public async Awaitable<BattleUpdate> Step()
     {
         if (Phase == BattlePhase.Finished)
         {
             // TODO: This is suspicious
-            var (player, enemy) = CurrentActor.Role == CombatantRole.Player
-                ? (CurrentActor, CurrentTarget)
-                : (CurrentTarget, CurrentActor);
+            var (player, enemy) = _currentActor.Role == CombatantRole.Player
+                ? (_currentActor, _currentTarget)
+                : (_currentTarget, _currentActor);
             return new BattleFinishedUpdate(player, enemy, Winner);
         }
 
         if (Phase == BattlePhase.TurnStart)
         {
-            var actor = CurrentActor;
+            var actor = _currentActor;
 
             RemoveExpiredModifiers(actor);
             TickModifiers(actor);
@@ -62,13 +59,13 @@ public class BattleService
             Phase = BattlePhase.MoveExecution;
 
             return new TurnStartedUpdate(
-                CurrentActor,
-                CurrentTarget);
+                _currentActor,
+                _currentTarget);
         }
 
         if (Phase == BattlePhase.MoveExecution)
         {
-            var actor = CurrentActor;
+            var actor = _currentActor;
 
             var provider =
                 actor.Role == CombatantRole.Player
@@ -78,12 +75,12 @@ public class BattleService
             var move =
                 await provider.GetMove(actor);
 
-            var moveEffect = _moveEffectCalculationService.Calculate(move, CurrentActor, CurrentTarget);
+            var moveEffect = _moveEffectCalculationService.Calculate(move, _currentActor, _currentTarget);
             var executedMoveEffect = _moveExecutionService.Execute(moveEffect);
 
             Phase = BattlePhase.TurnResolution;
 
-            return new MoveExecutedUpdate(CurrentActor, CurrentTarget, executedMoveEffect);
+            return new MoveExecutedUpdate(_currentActor, _currentTarget, executedMoveEffect);
         }
 
         if (Phase == BattlePhase.TurnResolution)
@@ -95,7 +92,7 @@ public class BattleService
             }
             else
             {
-                _battleTurnService.AdvanceTurn(_battleContext);
+                _battleContext.AdvanceTurn();
                 Phase = BattlePhase.TurnStart;
             }
             return new TurnEndedUpdate();

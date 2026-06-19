@@ -7,9 +7,12 @@ public class BattleContext
 
     public IReadOnlyList<Combatant> Combatants => _combatants;
 
-    public int CurrentCombatantIndex { get; private set; }
+    private int _currentCombatantIndex;
+    private int NextCombatantIndex => (_currentCombatantIndex + 1) % _combatants.Count;
 
     public int TurnNumber { get; private set; }
+    public Combatant CurrentActor => _combatants[_currentCombatantIndex];
+    public Combatant CurrentTarget => _combatants[NextCombatantIndex];
 
     public BattleContext(List<Combatant> combatants)
     {
@@ -17,17 +20,20 @@ public class BattleContext
             throw new Exception("Battle requires at least one combatant");
 
         _combatants = combatants;
-        CurrentCombatantIndex = 0;
+        _currentCombatantIndex = 0;
         TurnNumber = 1;
     }
 
-    public void SetCurrentCombatantIndex(int index)
+    public void AdvanceTurn()
     {
-        CurrentCombatantIndex = index;
-    }
+        if (_combatants.Count == 0)
+            throw new Exception("No combatants");
 
-    public void IncrementTurn()
-    {
-        TurnNumber++;
+        int nextIndex = NextCombatantIndex;
+
+        _currentCombatantIndex = nextIndex;
+
+        if (nextIndex == 0)
+            TurnNumber++;
     }
 }
