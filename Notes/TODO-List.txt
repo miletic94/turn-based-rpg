@@ -1,6 +1,3 @@
-bugs on Drain Life move telegraph shows that both player and enemy got healed for 12
-bug: on Curse by Witch, instead of knigt's Witch's attack is reduced
-
 Sometimes float values in stats can become 0.9999999999
 
 UI doesn't scale with screen on FreeAspect (specifically in battle)
