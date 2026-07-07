@@ -1,3 +1,8 @@
+AI
+    Look at web throw. Even when knight's defense is at 0 it will -2 in evaluation. 
+    It is already obvious that stat modifiers and healing are not as useful as simply attacking
+Server
+
 If I remove the first move in MoveManagement and put another move (from available) in it's place, this move goes to the end of the list. But I'd expect it to be on the begining 
 Sometimes it looks on a health bar like it's empty, but character isn't dying. Maybe show health number?
 
@@ -5,11 +10,8 @@ Sometimes float values in stats can become 0.9999999999, 8.0000001 (in magic)
 UI doesn't scale with screen on FreeAspect (specifically in battle)
 What happens when stat is reduced to 0?
 
-AI
-    Look at web throw. Even when knight's defense is at 0 it will -2 in evaluation. 
-    It is already obvious that stat modifiers and healing are not as useful as simply attacking
+
 Cost
-Server
 SceneLoader and ScreenLoader
 
 Battle must be more readable

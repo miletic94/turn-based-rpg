@@ -40,15 +40,4 @@ public class Combatant
     {
         Stats.TickModifiers();
     }
-
-    // TODO: This is debug helper. Not for final build
-    public override string ToString()
-    {
-        return $@"[{Name}]
-        health: {Health}
-        attack: {Stats.GetStat(StatType.Attack)} - modifiers: {Stats.GetActiveModifiersToString(StatType.Attack)},
-        defense: {Stats.GetStat(StatType.Defense)} - modifiers: {Stats.GetActiveModifiersToString(StatType.Defense)}
-        magic: {Stats.GetStat(StatType.Magic)} - modifiers: {Stats.GetActiveModifiersToString(StatType.Magic)}
-        ";
-    }
 }

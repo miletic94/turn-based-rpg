@@ -2,9 +2,9 @@
     {
         "id": 2,
         "name": "Witch",
-        "health": 200,
-        "attack": 0.6,
-        "defense": 0.8,
+        "health": 100,
+        "attack": 1,
+        "defense": 1,
         "magic": 1.2,
         "spriteAddress": "monsters[witch]",
         "moves": [
@@ -21,7 +21,7 @@
                         "target": "Enemy",
                         "value": {
                             "type": "scaled",
-                            "baseValue": 30
+                            "baseValue": 14
                         },
                         "isSource": false
                     }
@@ -40,7 +40,7 @@
                         "target": "Enemy",
                         "value": {
                             "type": "scaled",
-                            "baseValue": 10
+                            "baseValue": 5
                         },
                         "isSource": true
                     },
@@ -69,7 +69,7 @@
                         "type": "debuff",
                         "target": "Enemy",
                         "targetStat": "attack",
-                        "value": 0.2,
+                        "value": 0.5,
                         "duration": 2
                     }
                 ]
@@ -90,7 +90,7 @@
                         "type": "buff",
                         "target": "User",
                         "targetStat": "magic",
-                        "value": 0.2,
+                        "value": 1.25,
                         "duration": 2
                     }
                 ]

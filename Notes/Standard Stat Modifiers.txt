@@ -1,0 +1,8 @@
+Standard Stat Modifiers
+
+Attack and magic buff: 80% 5 turns / 125% 2 turns 
+Attack and magic debuff 50% 2 turns
+Defense buff 50% 3 turns
+Defense debuff 50% 4 turns 
+
+stat * (1 + statModifier)
