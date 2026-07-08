@@ -1,19 +1,23 @@
 public class ActiveModifier
 {
+    public StatModifierType Type;
     public StatType TargetStat { get; }
     public float Value { get; }
+    public int StackNumber { get; }
     public int RemainingDuration { get; private set; }
+    public bool IsExpired => RemainingDuration <= 0;
 
-    public ActiveModifier(StatType targetStat, float value, int duration)
+    public ActiveModifier(StatModifierEffect statModifierEffect)
     {
-        TargetStat = targetStat;
-        Value = value;
-        RemainingDuration = duration;
+        Type = statModifierEffect.Type;
+        TargetStat = statModifierEffect.TargetStat;
+        Value = statModifierEffect.Value;
+        StackNumber = statModifierEffect.StackNumber;
+        RemainingDuration = statModifierEffect.Duration;
     }
 
     public void SubstractRemainingDuration()
     {
         RemainingDuration--;
     }
-    public bool IsExpired => RemainingDuration <= 0;
 }

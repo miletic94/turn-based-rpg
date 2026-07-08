@@ -31,11 +31,11 @@ public class CombatantStats
         };
     }
 
-    public float GetStat(StatType statType)
+    public CombatantStatData GetStat(StatType statType)
     {
         if (!_stats.TryGetValue(statType, out var stat))
             throw new System.Exception($"Stat {statType} not found");
-        return stat.GetCurrentValue();
+        return stat;
     }
 
     public IEnumerable<CombatantStatData> GetStats()

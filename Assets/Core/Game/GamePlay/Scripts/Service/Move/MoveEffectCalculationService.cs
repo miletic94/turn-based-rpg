@@ -10,21 +10,21 @@ public class MoveEffectCalculationService
 
         return new MoveEffect(healthModifierEffects, statModifierEffects);
     }
-    private List<HealthModifierEffect> CalculateHealthModifierEffects(Move move, Combatant source, Combatant target)
+    private List<HealthModifierEffect> CalculateHealthModifierEffects(Move move, Combatant actor, Combatant target)
     {
         EffectContext context = new EffectContext();
         List<HealthModifierEffect> healthModifierEffects = new();
         foreach (var modifier in move.HealthModifiers)
         {
             var targetCombatant = modifier.Target == TargetType.User ?
-                source : target;
+                actor : target;
 
             float baseValue = ResolveHealthModifierValue(modifier, context);
 
             float scaledValue = ApplyMoveScaling(
                 baseValue,
                 move.Category,
-                source,
+                actor,
                 target);
 
             float valueSign = modifier.Type == HealthModifierType.Damage ?
@@ -63,51 +63,55 @@ public class MoveEffectCalculationService
     }
     private float ApplyMoveScaling(float baseValue,
         MoveCategory moveCategory,
-        Combatant source,
+        Combatant actor,
         Combatant target)
     {
         return moveCategory switch
         {
             MoveCategory.Physical =>
-                ApplyPhysicalScaling(baseValue, source, target),
+                ApplyPhysicalScaling(baseValue, actor, target),
 
             MoveCategory.Magic =>
-                ApplyMagicScaling(baseValue, source),
+                ApplyMagicScaling(baseValue, actor),
 
             _ => throw new Exception($"Move category {moveCategory} not recognized")
         };
     }
-    private float ApplyPhysicalScaling(float baseValue, Combatant source, Combatant target)
+    private float ApplyPhysicalScaling(float baseValue, Combatant actor, Combatant target)
     {
-        var attack = source.Stats.GetStat(StatType.Attack);
-        var defense = target.Stats.GetStat(StatType.Defense);
+        var attack = actor.Stats.GetStat(StatType.Attack).GetCurrentValue();
+        var defense = target.Stats.GetStat(StatType.Defense).GetCurrentValue();
         var doubleResult = baseValue * Math.Pow(attack, 2) / (attack + defense);
         return (float)doubleResult;
     }
-    private float ApplyMagicScaling(float baseValue, Combatant source)
+    private float ApplyMagicScaling(float baseValue, Combatant actor)
     {
-        var magic = source.Stats.GetStat(StatType.Magic);
+        var magic = actor.Stats.GetStat(StatType.Magic).GetCurrentValue();
         return baseValue * magic;
     }
-    private List<StatModifierEffect> CalculateStatModifierEffects(Move move, Combatant source, Combatant target)
+    private List<StatModifierEffect> CalculateStatModifierEffects(Move move, Combatant actor, Combatant target)
     {
         List<StatModifierEffect> statModifierEffects = new();
         foreach (var modifier in move.StatModifiers)
         {
-            var effect = CalculateStatModifierEffect(modifier, source, target);
+            var effect = CalculateStatModifierEffect(modifier, actor, target);
             statModifierEffects.Add(effect);
         }
         return statModifierEffects;
     }
 
-    private StatModifierEffect CalculateStatModifierEffect(StatModifier statModifier, Combatant source, Combatant target)
+    private StatModifierEffect CalculateStatModifierEffect(StatModifier statModifier, Combatant actor, Combatant target)
     {
-
         var targetCombatant = statModifier.Target == TargetType.User ?
-            source : target;
-        var valueSign = statModifier.Type == StatModifierType.Debuff ?
-            -1 : 1;
-        var value = valueSign * statModifier.Value;
-        return new StatModifierEffect(targetCombatant, statModifier.TargetStat, value, statModifier.Duration);
+            actor : target;
+        var targetStat = targetCombatant.Stats.GetStat(statModifier.TargetStat);
+
+        var activeModifier = targetStat.ActiveModifiers
+            .Find(modifier => modifier.Type == statModifier.Type &&
+                              modifier.Value == statModifier.Value);
+        if (activeModifier == null)
+            return new StatModifierEffect(targetCombatant, statModifier);
+        else
+            return new StatModifierEffect(targetCombatant, activeModifier);
     }
 }

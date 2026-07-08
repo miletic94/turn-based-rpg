@@ -11,10 +11,9 @@ public class MoveExecutionService
         foreach (var modifierEffect in moveEffect.StatModifierEffects)
         {
             var target = modifierEffect.Target;
-            target.AddActiveModifier(new ActiveModifier(
-                modifierEffect.TargetStat,
-                modifierEffect.Value,
-                modifierEffect.Duration));
+            var targetStat = target.Stats.GetStat(modifierEffect.TargetStat);
+
+            targetStat.AddActiveModifier(new ActiveModifier(modifierEffect));
         }
 
         return moveEffect;
