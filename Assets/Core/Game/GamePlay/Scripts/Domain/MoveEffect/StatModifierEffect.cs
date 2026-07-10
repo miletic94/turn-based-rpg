@@ -5,7 +5,6 @@ public class StatModifierEffect
     public StatType TargetStat { get; }
     public float Value { get; }
     public int Duration { get; }
-    public int StackNumber { get; }
 
     public StatModifierEffect(Combatant target, StatModifier statModifier)
     {
@@ -16,15 +15,13 @@ public class StatModifierEffect
         TargetStat = statModifier.TargetStat;
         Value = valueSign * statModifier.Value;
         Duration = statModifier.Duration;
-        StackNumber = 1;
     }
-    public StatModifierEffect(Combatant target, ActiveModifier activeModifier)
+    public StatModifierEffect(Combatant target, ActiveModifier activeModifier, StatModifier statModifier)
     {
         Target = target;
         Type = activeModifier.Type;
         TargetStat = activeModifier.TargetStat;
         Value = activeModifier.Value;
-        Duration = activeModifier.RemainingDuration;
-        StackNumber = activeModifier.StackNumber + 1;
+        Duration = activeModifier.RemainingDuration + statModifier.Duration;
     }
 }

@@ -43,7 +43,7 @@ public class AIMoveProvider : IMoveProvider
         {
             var moveEffect = _calculationService.Calculate(move, actor, target);
             var healthModEval = EvaluateHealthModifiers(moveEffect.HealthModifierEffects);
-            var statModEval = EvaluateStatModifiers(moveEffect.StatModifierEffects, context.TurnNumber);
+            var statModEval = EvaluateStatModifiers(moveEffect.StatModifierEffects, actor, target, context.TurnNumber);
             var evaluation = healthModEval + statModEval;
             moveEvaluations.Add(new MoveEvaluation(move, evaluation));
         }
@@ -77,15 +77,52 @@ public class AIMoveProvider : IMoveProvider
         }
         return finalEvaluation;
     }
-    private float EvaluateStatModifiers(List<StatModifierEffect> statModifiers, int turn)
+    private float EvaluateStatModifiers(
+        List<StatModifierEffect> statModifiers,
+        Combatant actor,
+        Combatant target,
+        int turn)
     {
         float finalEvaluation = 0f;
-        foreach (var effect in statModifiers)
+        foreach (var statModifier in statModifiers)
         {
-            var duration = effect.Duration;
-            var evaluation = Math.Abs(effect.Value) * PERCENT_SCALE * duration / turn;
+            var evaluation = EvaluateStatModifier(statModifier, actor, target);
             finalEvaluation += evaluation;
         }
         return finalEvaluation;
+    }
+    private float EvaluateStatModifier(StatModifierEffect statModifier, Combatant actor, Combatant target)
+    {
+        // TODO: Check attack buff and defense debuff stacking. 
+        // Their evaluation is done before which means that remaining duration 
+        // will be +1 relative to actual duration, since if we chose this move, that will trigger
+        // tick which will do RemainingDuration-- 
+
+        var modifierTarget = statModifier.Target;
+        var modifierOther = statModifier.Target == actor ? target : actor;
+
+        var attack = modifierTarget.Stats[StatType.Attack];
+        var defense = modifierOther.Stats[StatType.Defense];
+        attack *
+    }
+
+    private Move StrongestMoveBasedOn(StatType statType, Combatant combatant)
+    {
+        float strongestValue = 0f;
+        Move strongestMove = null;
+        foreach (var move in combatant.Moves)
+        {
+            if ((statType == StatType.Attack && move.Category == MoveCategory.Physical) ||
+            (statType == StatType.Magic && move.Category == MoveCategory.Magic))
+            {
+                var currentValue = _calculationService.CalculateHealtModifierAbsoluteBaseValue(move);
+                if (currentValue > strongestValue)
+                {
+                    strongestValue = currentValue;
+                    strongestMove = move;
+                }
+            }
+        }
+        return strongestMove;
     }
 }

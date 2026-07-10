@@ -3,12 +3,27 @@ using System.Collections.Generic;
 
 public class MoveEffectCalculationService
 {
+    private readonly CombatantStatService _combatantStatService;
+    public MoveEffectCalculationService(CombatantStatService combatantStatService)
+    {
+        _combatantStatService = combatantStatService;
+    }
     public MoveEffect Calculate(Move move, Combatant actor, Combatant target)
     {
         var healthModifierEffects = CalculateHealthModifierEffects(move, actor, target);
         var statModifierEffects = CalculateStatModifierEffects(move, actor, target);
 
         return new MoveEffect(healthModifierEffects, statModifierEffects);
+    }
+    public float CalculateHealtModifierAbsoluteBaseValue(Move move)
+    {
+        var context = new EffectContext();
+        var baseValue = 0f;
+        foreach (var modifier in move.HealthModifiers)
+        {
+            baseValue += ResolveHealthModifierValue(modifier, context);
+        }
+        return baseValue;
     }
     private List<HealthModifierEffect> CalculateHealthModifierEffects(Move move, Combatant actor, Combatant target)
     {
@@ -79,14 +94,14 @@ public class MoveEffectCalculationService
     }
     private float ApplyPhysicalScaling(float baseValue, Combatant actor, Combatant target)
     {
-        var attack = actor.Stats.GetStat(StatType.Attack).GetCurrentValue();
-        var defense = target.Stats.GetStat(StatType.Defense).GetCurrentValue();
-        var doubleResult = baseValue * Math.Pow(attack, 2) / (attack + defense);
+        var attack = _combatantStatService.GetStatValue(actor.Stats[StatType.Attack]);
+        var defense = _combatantStatService.GetStatValue(target.Stats[StatType.Defense]);
+        var doubleResult = baseValue * attack / defense;
         return (float)doubleResult;
     }
     private float ApplyMagicScaling(float baseValue, Combatant actor)
     {
-        var magic = actor.Stats.GetStat(StatType.Magic).GetCurrentValue();
+        var magic = _combatantStatService.GetStatValue(actor.Stats[StatType.Magic]);
         return baseValue * magic;
     }
     private List<StatModifierEffect> CalculateStatModifierEffects(Move move, Combatant actor, Combatant target)
@@ -104,7 +119,7 @@ public class MoveEffectCalculationService
     {
         var targetCombatant = statModifier.Target == TargetType.User ?
             actor : target;
-        var targetStat = targetCombatant.Stats.GetStat(statModifier.TargetStat);
+        var targetStat = targetCombatant.Stats[statModifier.TargetStat];
 
         var activeModifier = targetStat.ActiveModifiers
             .Find(modifier => modifier.Type == statModifier.Type &&
@@ -112,6 +127,6 @@ public class MoveEffectCalculationService
         if (activeModifier == null)
             return new StatModifierEffect(targetCombatant, statModifier);
         else
-            return new StatModifierEffect(targetCombatant, activeModifier);
+            return new StatModifierEffect(targetCombatant, activeModifier, statModifier);
     }
 }

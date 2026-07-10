@@ -27,15 +27,4 @@ public class Combatant
     {
         Health = value;
     }
-
-    // TODO: Remove the next two methods
-    public void RemoveExpiredModifiers()
-    {
-        Stats.RemoveExpiredModifiers();
-    }
-
-    public void TickModifiers()
-    {
-        Stats.TickModifiers();
-    }
 }

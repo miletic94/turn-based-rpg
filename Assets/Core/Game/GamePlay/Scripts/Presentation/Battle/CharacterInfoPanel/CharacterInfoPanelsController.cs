@@ -5,11 +5,13 @@ public class CharacterInfoPanelsController
 {
 
     private readonly CharacterInfoPanelsView _view;
+    private readonly CombatantStatService _combatantStatService;
     private Combatant _player;
     private Combatant _enemy;
-    public CharacterInfoPanelsController(CharacterInfoPanelsView view)
+    public CharacterInfoPanelsController(CharacterInfoPanelsView view, CombatantStatService combatantStatService)
     {
         _view = view;
+        _combatantStatService = combatantStatService;
     }
     public void CreatePanels(Combatant player, Combatant enemy)
     {
@@ -63,7 +65,7 @@ public class CharacterInfoPanelsController
     private List<StatItemData> CreateStatItemData(CombatantStats stats)
     {
         var statItems = new List<StatItemData>();
-        foreach (var stat in stats.GetStats())
+        foreach (var stat in stats)
         {
             statItems.Add(CreateStatItemData(stat));
         }
@@ -76,6 +78,6 @@ public class CharacterInfoPanelsController
                 (int)statData.Type,
                 statData.Type,
                 ViewUtils.ConvertToViewValue(statData.BaseValue),
-                ViewUtils.ConvertToViewValue(statData.GetCurrentValue()));
+                ViewUtils.ConvertToViewValue(_combatantStatService.GetStatValue(statData)));
     }
 }

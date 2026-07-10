@@ -1,6 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 
-public class CombatantStats
+public class CombatantStats : IEnumerable<CombatantStatData>
 {
     private readonly Dictionary<StatType, CombatantStatData> _stats;
     public CombatantStats(float attack, float defense, float magic)
@@ -31,39 +32,18 @@ public class CombatantStats
         };
     }
 
-    public CombatantStatData GetStat(StatType statType)
+    #region IEnumerable and indexer
+    public CombatantStatData this[StatType statType]
     {
-        if (!_stats.TryGetValue(statType, out var stat))
-            throw new System.Exception($"Stat {statType} not found");
-        return stat;
+        get => _stats[statType];
     }
-
-    public IEnumerable<CombatantStatData> GetStats()
+    public IEnumerator<CombatantStatData> GetEnumerator()
     {
-        return _stats.Values;
+        return _stats.Values.GetEnumerator();
     }
-
-    public void AddActiveModifier(ActiveModifier activeModifier)
+    IEnumerator IEnumerable.GetEnumerator()
     {
-        _stats[activeModifier.TargetStat].AddActiveModifier(activeModifier);
+        return GetEnumerator();
     }
-
-    public void RemoveExpiredModifiers()
-    {
-        foreach (var stat in _stats.Values)
-        {
-            stat.ActiveModifiers.RemoveAll(m => m.IsExpired);
-        }
-    }
-
-    public void TickModifiers()
-    {
-        foreach (var stat in _stats.Values)
-        {
-            foreach (var m in stat.ActiveModifiers)
-            {
-                m.SubstractRemainingDuration();
-            }
-        }
-    }
+    #endregion
 }

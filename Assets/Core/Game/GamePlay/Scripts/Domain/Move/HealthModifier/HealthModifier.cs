@@ -20,6 +20,4 @@ public class HealthModifier : IDescribable
         Value = value;
         IsSource = isSource;
     }
-
-
 }

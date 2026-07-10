@@ -15,6 +15,7 @@ public class BattleService
     private readonly BattleResolutionService _battleResolutionService;
     private readonly MoveEffectCalculationService _moveEffectCalculationService;
     private readonly MoveExecutionService _moveExecutionService;
+    private readonly CombatantStatService _combatantStatService;
     private readonly IMoveProvider _playerProvider;
     private readonly IMoveProvider _enemyProvider;
 
@@ -22,6 +23,7 @@ public class BattleService
         BattleResolutionService battleResolutionService,
         MoveEffectCalculationService moveEffectCalculationService,
         MoveExecutionService moveExecutionService,
+        CombatantStatService combatantStatService,
         IMoveProvider playerProvider,
         IMoveProvider enemyProvider)
     {
@@ -29,6 +31,7 @@ public class BattleService
         _battleResolutionService = battleResolutionService;
         _moveEffectCalculationService = moveEffectCalculationService;
         _moveExecutionService = moveExecutionService;
+        _combatantStatService = combatantStatService;
         _playerProvider = playerProvider;
         _enemyProvider = enemyProvider;
     }
@@ -53,8 +56,8 @@ public class BattleService
         {
             var actor = _currentActor;
 
-            RemoveExpiredModifiers(actor);
-            TickModifiers(actor);
+            _combatantStatService.RemoveExpiredModifiers(actor.Stats);
+            _combatantStatService.TickModifiers(actor.Stats);
 
             Phase = BattlePhase.MoveExecution;
 
@@ -99,15 +102,5 @@ public class BattleService
         }
 
         throw new InvalidOperationException();
-    }
-
-    // TODO: This shouldn't be here
-    public void RemoveExpiredModifiers(Combatant currentActor)
-    {
-        currentActor.RemoveExpiredModifiers();
-    }
-    public void TickModifiers(Combatant currentActor)
-    {
-        currentActor.TickModifiers();
     }
 }
