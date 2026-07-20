@@ -14,6 +14,7 @@ public class BattleController
     private readonly MoveExecutionService _moveExecutionService;
     private readonly BattleResolutionService _resolutionService;
     private MoveSelectionService _moveSelectionService;
+    private readonly CombatantStatService _combatantStatService;
 
 
     public BattleController(
@@ -22,7 +23,8 @@ public class BattleController
         CharacterInfoPanelsController characterInfoPanelsController,
         MoveEffectCalculationService moveEffectCalculationService,
         MoveExecutionService moveExecutionService,
-        BattleResolutionService resolutionService)
+        BattleResolutionService resolutionService,
+        CombatantStatService combatantStatService)
     {
         _movePanelController = movePanelController;
         _combatantViewController = combatantViewController;
@@ -31,6 +33,7 @@ public class BattleController
         _moveExecutionService = moveExecutionService;
         _resolutionService = resolutionService;
         _moveSelectionService = new MoveSelectionService();
+        _combatantStatService = combatantStatService;
     }
 
     public async Awaitable Initialize(Hero hero, Character enemyCharacter)
@@ -49,6 +52,7 @@ public class BattleController
             _resolutionService,
             _moveEffectCalculationService,
             _moveExecutionService,
+            _combatantStatService,
             new PlayerMoveProvider(_moveSelectionService),
             new AIMoveProvider(_moveEffectCalculationService));
     }

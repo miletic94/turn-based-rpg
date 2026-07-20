@@ -21,8 +21,9 @@ public class BattleBootstrapper : MonoBehaviour
             new BattleMovePanelController(_moveListView, uiFeedbackBus, moveDescriptionService);
 
         var combatantViewController = new CombatantViewController(_combatantViewFactory);
-        _characterInfoPanelsController = new CharacterInfoPanelsController(_characterInfoPanelsView);
-        var moveEffectCalculationService = new MoveEffectCalculationService();
+        var combatantStatService = new CombatantStatService();
+        _characterInfoPanelsController = new CharacterInfoPanelsController(_characterInfoPanelsView, combatantStatService);
+        var moveEffectCalculationService = new MoveEffectCalculationService(combatantStatService);
         var moveExecutionService = new MoveExecutionService();
         var resolutionService = new BattleResolutionService();
 
@@ -33,7 +34,8 @@ public class BattleBootstrapper : MonoBehaviour
             _characterInfoPanelsController,
             moveEffectCalculationService,
             moveExecutionService,
-            resolutionService
+            resolutionService,
+            combatantStatService
         );
         return _battleController;
     }

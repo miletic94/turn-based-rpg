@@ -56,7 +56,7 @@ namespace CoreDomain.Scripts.Editor.DefaultSceneSelector
         private static string GetSelectedFolder()
         {
             var obj = Selection.activeObject;
-            return obj == null ? "Assets" : AssetDatabase.GetAssetPath(obj.GetInstanceID()); ;
+            return obj == null ? "Assets" : AssetDatabase.GetAssetPath(obj.GetEntityId()); ;
         }
 
         private static string GetProjectRelativePath(string absolutePath)

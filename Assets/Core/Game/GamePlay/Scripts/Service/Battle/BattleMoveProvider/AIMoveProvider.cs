@@ -103,7 +103,7 @@ public class AIMoveProvider : IMoveProvider
 
         var attack = modifierTarget.Stats[StatType.Attack];
         var defense = modifierOther.Stats[StatType.Defense];
-        attack *
+        return 1f;
     }
 
     private Move StrongestMoveBasedOn(StatType statType, Combatant combatant)
