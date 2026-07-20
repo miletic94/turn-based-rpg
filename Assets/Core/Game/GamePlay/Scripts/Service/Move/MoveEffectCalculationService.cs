@@ -125,8 +125,11 @@ public class MoveEffectCalculationService
             .Find(modifier => modifier.Type == statModifier.Type &&
                               modifier.Value == statModifier.Value);
         if (activeModifier == null)
-            return new StatModifierEffect(targetCombatant, statModifier);
+            return new StatModifierEffect(targetCombatant, statModifier, StatModifierEffectType.New);
         else
-            return new StatModifierEffect(targetCombatant, activeModifier, statModifier);
+        {
+            activeModifier.Stack(statModifier.Duration);
+            return new StatModifierEffect(targetCombatant, activeModifier, StatModifierEffectType.Stacked);
+        }
     }
 }

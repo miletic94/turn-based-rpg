@@ -52,8 +52,9 @@ public class CombatantViewController
     private MoveTelegraphData CreateStathModifierTelegraph(
         StatModifierEffect effect)
     {
-        var text = $"{effect.TargetStat} {ViewUtils.ConvertToViewValue(effect.Value)}";
-        var color = GetModifierColor(effect.Value);
+        var value = effect.ActiveModifier.Value;
+        var text = $"{effect.ActiveModifier.TargetStat} {ViewUtils.ConvertToViewValue(value)}";
+        var color = GetModifierColor(value);
 
         return new MoveTelegraphData(text, color);
     }
