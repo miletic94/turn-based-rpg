@@ -9,7 +9,7 @@ public class CombatantStatService
         return GetStatValue(baseValue, activeModifiers);
     }
 
-    public float GetStatValue(float baseValue, IEnumerable<ActiveModifier> activeModifiers)
+    private float GetStatValue(float baseValue, IEnumerable<ActiveModifier> activeModifiers)
     {
         var finalModifier = 1f;
         foreach (var modifier in activeModifiers)

@@ -77,6 +77,8 @@ public class AIMoveProvider : IMoveProvider
         }
         return finalEvaluation;
     }
+
+    #region StatModifers
     private float EvaluateStatModifiers(
         List<StatModifierEffect> statModifiers,
         Combatant actor,
@@ -91,20 +93,23 @@ public class AIMoveProvider : IMoveProvider
         }
         return finalEvaluation;
     }
-    private float EvaluateStatModifier(StatModifierEffect statModifier, Combatant actor, Combatant target)
+    private float EvaluateStatModifier(StatModifierEffect modifierEffect, Combatant actor, Combatant target)
     {
-        // TODO: Check attack buff and defense debuff stacking. 
-        // Their evaluation is done before which means that remaining duration 
-        // will be +1 relative to actual duration, since if we chose this move, that will trigger
-        // tick which will do RemainingDuration-- 
+        var modifierTarget = modifierEffect.Target;
+        var modifierOther = modifierEffect.Target == actor ? target : actor;
 
-        var modifierTarget = statModifier.Target;
-        var modifierOther = statModifier.Target == actor ? target : actor;
+        var targetStat = modifierEffect.ActiveModifier.TargetStat;
+        (var attacker, var defender) = targetStat == StatType.Defense ?
+            (modifierOther, modifierTarget)
+            : (modifierTarget, modifierOther);
 
-        var attack = modifierTarget.Stats[StatType.Attack];
-        var defense = modifierOther.Stats[StatType.Defense];
+        var strongestMove = StrongestMoveBasedOn(targetStat, attacker);
+
+        var moveEffect = _calculationService.Calculate(strongestMove, attacker, defender);
+        var totalValue = moveEffect.HealthModifierEffects
         return 1f;
     }
+    #endregion
 
     private Move StrongestMoveBasedOn(StatType statType, Combatant combatant)
     {

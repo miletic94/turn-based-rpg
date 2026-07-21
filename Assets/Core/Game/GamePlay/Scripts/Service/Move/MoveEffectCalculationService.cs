@@ -15,6 +15,7 @@ public class MoveEffectCalculationService
 
         return new MoveEffect(healthModifierEffects, statModifierEffects);
     }
+    #region HealthModifierEffects
     public float CalculateHealtModifierAbsoluteBaseValue(Move move)
     {
         var context = new EffectContext();
@@ -96,14 +97,16 @@ public class MoveEffectCalculationService
     {
         var attack = _combatantStatService.GetStatValue(actor.Stats[StatType.Attack]);
         var defense = _combatantStatService.GetStatValue(target.Stats[StatType.Defense]);
-        var doubleResult = baseValue * attack / defense;
-        return (float)doubleResult;
+        return baseValue * attack / defense;
     }
     private float ApplyMagicScaling(float baseValue, Combatant actor)
     {
         var magic = _combatantStatService.GetStatValue(actor.Stats[StatType.Magic]);
         return baseValue * magic;
     }
+    #endregion
+
+    #region StatModifierEffects
     private List<StatModifierEffect> CalculateStatModifierEffects(Move move, Combatant actor, Combatant target)
     {
         List<StatModifierEffect> statModifierEffects = new();
@@ -132,4 +135,5 @@ public class MoveEffectCalculationService
             return new StatModifierEffect(targetCombatant, activeModifier, StatModifierEffectType.Stacked);
         }
     }
+    #endregion
 }

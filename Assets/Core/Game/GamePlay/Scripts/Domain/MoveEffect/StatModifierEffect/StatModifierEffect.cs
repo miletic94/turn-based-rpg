@@ -1,8 +1,3 @@
-public enum StatModifierEffectType
-{
-    New,
-    Stacked
-}
 public class StatModifierEffect
 {
     public StatModifierEffectType Type { get; }
