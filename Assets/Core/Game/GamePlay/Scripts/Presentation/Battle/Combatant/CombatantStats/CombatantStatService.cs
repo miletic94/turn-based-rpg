@@ -9,14 +9,19 @@ public class CombatantStatService
         return GetStatValue(baseValue, activeModifiers);
     }
 
-    private float GetStatValue(float baseValue, IEnumerable<ActiveModifier> activeModifiers)
+    public float GetStatValue(float startingValue, IEnumerable<ActiveModifier> activeModifiers)
+    {
+        return startingValue * GetFinalModifier(activeModifiers);
+    }
+
+    private float GetFinalModifier(IEnumerable<ActiveModifier> activeModifiers)
     {
         var finalModifier = 1f;
         foreach (var modifier in activeModifiers)
         {
             finalModifier *= 1 + modifier.Value;
         }
-        return baseValue * finalModifier;
+        return finalModifier;
     }
 
     public void RemoveExpiredModifiers(CombatantStats stats)

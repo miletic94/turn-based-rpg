@@ -59,6 +59,7 @@ public class AIMoveProvider : IMoveProvider
         UnityEngine.Debug.Log(debuggingString);
         return rankedMoves[0].Move;
     }
+    #region HealthModifiers
     private float EvaluateHealthModifiers(List<HealthModifierEffect> healthModifiers)
     {
         float finalEvaluation = 0f;
@@ -77,6 +78,7 @@ public class AIMoveProvider : IMoveProvider
         }
         return finalEvaluation;
     }
+    #endregion
 
     #region StatModifers
     private float EvaluateStatModifiers(
@@ -106,7 +108,14 @@ public class AIMoveProvider : IMoveProvider
         var strongestMove = StrongestMoveBasedOn(targetStat, attacker);
 
         var moveEffect = _calculationService.Calculate(strongestMove, attacker, defender);
-        var totalValue = moveEffect.HealthModifierEffects
+        var vadValue = moveEffect.HealthModifierEffects.Sum(
+            modifier => Math.Abs(modifier.Value));
+        if (modifierEffect.Type == StatModifierEffectType.Stacked)
+            vadValue *=
+                modifierEffect.ActiveModifier.TargetStat == StatType.Defense ?
+                    1 + modifierEffect.ActiveModifier.Value
+                    : 1 / (1 + modifierEffect.ActiveModifier.Value);
+
         return 1f;
     }
     #endregion
@@ -129,5 +138,42 @@ public class AIMoveProvider : IMoveProvider
             }
         }
         return strongestMove;
+    }
+
+    private class StatModifierEffectEvalScaleTable
+    {
+        private readonly Dictionary<(StatType Stat, StatModifierType Modifier), Func<StatModifierEffectType, ActiveModifier, float>> _statModEvalScaling = new()
+        {
+            [(StatType.Attack, StatModifierType.Buff)] = AttackOrMagicBuff,
+            [(StatType.Attack, StatModifierType.Debuff)] = AttackOrMagicDebuff,
+            [(StatType.Magic, StatModifierType.Buff)] = AttackOrMagicBuff,
+            [(StatType.Magic, StatModifierType.Debuff)] = AttackOrMagicDebuff,
+            [(StatType.Defense, StatModifierType.Buff)] = DefenseBuff,
+            [(StatType.Defense, StatModifierType.Debuff)] = DefenseDebuff
+        };
+
+        private static float AttackOrMagicBuff(StatModifierEffectType effectType, ActiveModifier activeModifier)
+        {
+            return Math.Abs(activeModifier.Duration * activeModifier.Value
+                - 1
+                - (effectType == StatModifierEffectType.New
+                    ? 0
+                    : activeModifier.Value));
+        }
+        private static float AttackOrMagicDebuff(StatModifierEffectType effectType, ActiveModifier activeModifier)
+        {
+            return Math.Abs(activeModifier.Duration * activeModifier.Value);
+        }
+        private static float DefenseBuff(StatModifierEffectType effectType, ActiveModifier activeModifier)
+        {
+            return Math.Abs(activeModifier.Duration * activeModifier.Value / (1 + activeModifier.Value));
+        }
+
+        private static float DefenseDebuff(StatModifierEffectType effectType, ActiveModifier activeModifier)
+        {
+            return Math.Abs(activeModifier.Value / (1 + activeModifier.Value)
+                + (effectType == StatModifierEffectType.New
+                    ? 1 : 1 / (1 + activeModifier.Value)));
+        }
     }
 }
